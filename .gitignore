@@ -52,3 +52,7 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+
+# Git cache
+.git/objects/
+.git/index
