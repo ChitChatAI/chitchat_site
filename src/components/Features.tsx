@@ -1,45 +1,43 @@
 import React from 'react';
-import { IonIcon } from '@ionic/react';
-import { codeSlashOutline, serverOutline, settingsOutline } from 'ionicons/icons';
+import FeatureCard from './FeatureCard';
 
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-    <div className="h-12 w-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-      <IonIcon icon={icon} className="h-6 w-6 text-primary-600" />
-    </div>
-    <h3 className="text-xl font-semibold mb-3">{title}</h3>
-    <p className="text-gray-600 mb-4">{description}</p>
-    <button className="text-primary-600 font-medium hover:text-primary-700 transition-colors">
-      Learn More →
-    </button>
-  </div>
-);
-
-const Features = () => {
+const Features: React.FC = () => {
   const features = [
     {
-      icon: codeSlashOutline,
-      title: 'Build',
-      description: 'Construct context-aware AI applications with a flexible and composable framework.',
+      title: "Contextual Reasoning",
+      description: "Build applications that reason with context from various sources including documents, APIs, and databases.",
+      iconPath: "/build-icon.svg" // Will use a fallback in FeatureCard if not found
     },
     {
-      icon: serverOutline,
-      title: 'Run',
-      description: 'Deploy your applications at scale with a purpose-built platform.',
+      title: "Composable Chains",
+      description: "Create complex chains that combine multiple models and tools for sophisticated reasoning capabilities.",
+      iconPath: "/run-icon.svg"
     },
     {
-      icon: settingsOutline,
-      title: 'Manage',
-      description: 'Monitor, evaluate, and optimize your AI applications effortlessly.',
-    },
+      title: "Observability",
+      description: "Full visibility into your application chains with logging, tracing, and evaluation capabilities.",
+      iconPath: "/manage-icon.svg"
+    }
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature) => (
-            <FeatureCard key={feature.title} {...feature} />
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-langchain-dark mb-4">Key Capabilities</h2>
+          <p className="text-center text-langchain-gray mb-12 max-w-2xl mx-auto">
+            Our framework provides everything you need to build sophisticated AI applications that can understand context and reason effectively.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {features.map((feature, index) => (
+            <FeatureCard 
+              key={index}
+              title={feature.title}
+              description={feature.description}
+              iconPath={feature.iconPath}
+            />
           ))}
         </div>
       </div>

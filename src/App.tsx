@@ -5,18 +5,21 @@ import Features from './components/Features';
 import Testimonials from './components/Testimonials';
 import Community from './components/Community';
 import Footer from './components/Footer';
+import './App.css';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="min-h-screen">
+    <div className="app">
       <Header />
-      <Hero />
-      <Features />
-      <Testimonials />
-      <Community />
+      <main>
+        <Hero />
+        <Features />
+        <Testimonials />
+        <Community />
+      </main>
       <Footer />
     </div>
   );
-}
+};
 
 export default App;
