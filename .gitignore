@@ -56,3 +56,5 @@ Thumbs.db
 # Git cache
 .git/objects/
 .git/index
+
+.vercel

@@ -5,6 +5,7 @@
 /* Additional custom styles */
 html {
   scroll-behavior: smooth;
+  font-size: 18px; /* Increased from default 16px */
 }
 
 body {
@@ -56,15 +57,18 @@ body {
 .hero-heading {
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   letter-spacing: -0.02em;
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive larger font size */
 }
 
 .hero-subheading {
   letter-spacing: 0.01em;
+  font-size: clamp(1.1rem, 2vw, 1.5rem); /* Increased */
 }
 
 .hero-description {
   letter-spacing: 0.01em;
   line-height: 1.5;
+  font-size: clamp(1rem, 1.5vw, 1.25rem); /* Increased */
 }
 
 .hero-button-primary {
