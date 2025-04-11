@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 
-const apiKey = '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';
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
 const assistantIds = {
-  samantha: 'asst_KQe0roMKz1eswZJEwfJxs6Kp',
-  arin: 'asst_WzNS3JoJOlTp5O5VNAUAHbby',
+  samantha: import.meta.env.VITE_ASSISTANT_ID_SAMANTHA,
+  arin: import.meta.env.VITE_ASSISTANT_ID_ARIN,
 };
 
 const Hero: React.FC = () => {
