@@ -1,37 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FeatureCard from './FeatureCard';
 
 const Features: React.FC = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-review');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   const features = [
+    {
+      title: "Human Augmented Intelligence",
+      description: "Enhance human decision-making with emotionally aware AI agents that collaborate, not just automate.",
+      iconPath: "/icons/brain-heart.svg"
+    },
+    {
+      title: "Multi-Persona Support",
+      description: "Seamlessly switch between AI personalities like Samantha and Arin, each with unique tone and expertise.",
+      iconPath: "/icons/multiple-users.svg"
+    },
+    {
+      title: "Real-Time Comparisons",
+      description: "Compare outputs from humanized agents vs raw models like GPT-4o to benchmark effectiveness.",
+      iconPath: "/icons/comparison-split.svg"
+    },
+    {
+      title: "Scalability",
+      description: "Easily scale your applications to handle increased loads and user demands.",
+      iconPath: "/icons/scalability.svg"
+    },
     {
       title: "Contextual Reasoning",
       description: "Build applications that reason with context from various sources including documents, APIs, and databases.",
-      iconPath: "/build-icon.svg" // Will use a fallback in FeatureCard if not found
-    },
-    {
-      title: "Composable Chains",
-      description: "Create complex chains that combine multiple models and tools for sophisticated reasoning capabilities.",
-      iconPath: "/run-icon.svg"
+      iconPath: "/build-icon.svg"
     },
     {
       title: "Observability",
       description: "Full visibility into your application chains with logging, tracing, and evaluation capabilities.",
       iconPath: "/manage-icon.svg"
-    },
-    {
-      title: "Human Augmented Intelligence",
-      description: "Enhance human decision-making with emotionally aware AI agents that collaborate, not just automate.",
-      iconPath: "/icons/brain-heart.svg" // 🧠❤️ – Symbol of empathy + intelligence
-    },
-    {
-      title: "Multi-Persona Support",
-      description: "Seamlessly switch between AI personalities like Samantha and Arin, each with unique tone and expertise.",
-      iconPath: "/icons/multiple-users.svg" // 👥 – Represents multiple personas
-    },
-    {
-      title: "Real-Time Comparisons",
-      description: "Compare outputs from humanized agents vs raw models like GPT-4o to benchmark effectiveness.",
-      iconPath: "/icons/comparison-split.svg" // ↔️ – Split/comparison icon
     }
   ];
 
@@ -47,12 +65,13 @@ const Features: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
-            <FeatureCard 
-              key={index}
-              title={feature.title}
-              description={feature.description}
-              iconPath={feature.iconPath}
-            />
+            <div key={index} className="scroll-review opacity-0 transform translate-y-10">
+              <FeatureCard 
+                title={feature.title}
+                description={feature.description}
+                iconPath={feature.iconPath}
+              />
+            </div>
           ))}
         </div>
       </div>

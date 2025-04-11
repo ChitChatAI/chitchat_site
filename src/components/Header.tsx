@@ -155,14 +155,15 @@ const Header: React.FC = () => {
             </video>
 
             {/* Enhanced video overlays - multiple layers for depth and readability */}
-            {/* Base dark overlay */}
-            <div className="absolute inset-0 bg-black/60"></div>
+            {/* Blue-purple blended overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 via-indigo-700/40 to-purple-800/60"></div>
 
-            {/* Vertical gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/70"></div>
+            {/* Subtle vertical fade for depth */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
 
-            {/* Horizontal gradient with theme colors */}
-            <div className="absolute inset-0 bg-gradient-to-r from-theme-main/30 via-transparent to-purple-900/30"></div>
+            {/* Extra color harmony using your theme color if needed */}
+            <div className="absolute inset-0 bg-gradient-to-t from-theme-main/20 via-transparent to-purple-700/10"></div>
+
 
             {/* Subtle noise texture for depth (optional) */}
             <div className="absolute inset-0 opacity-10 mix-blend-overlay"

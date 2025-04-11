@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const apiKey = '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';
 
@@ -24,6 +24,24 @@ const Hero: React.FC = () => {
     "What are the benefits of AI in customer service?",
     "Explain the difference between GPT-4 and GPT-4o.",
   ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-review');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleSend = async () => {
     if (messageCount >= 5) return;
@@ -130,7 +148,7 @@ const Hero: React.FC = () => {
           Experience how Samantha, Arin, and ChatGPT compare in real conversations — right here in your browser.
         </p>
 
-        <div className="mb-6 flex justify-center space-x-2">
+        <div className="scroll-review mb-6 flex justify-center space-x-2 opacity-0 transform translate-y-10">
           <button
             className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
               activePersona === 'samantha'
@@ -155,7 +173,7 @@ const Hero: React.FC = () => {
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 transition-all">
           {/* Samantha/Arin Panel */}
-          <div className="bg-gray-50 p-4 rounded-lg shadow border border-gray-200 text-left h-64 overflow-y-auto">
+          <div className="scroll-review bg-gray-50 p-4 rounded-lg shadow border border-gray-200 text-left h-64 overflow-y-auto opacity-0 transform translate-y-10">
             <h3 className="text-sm font-semibold text-gray-500 mb-2">
               {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
             </h3>
@@ -191,7 +209,7 @@ const Hero: React.FC = () => {
           </div>
 
           {/* ChatGPT Panel */}
-          <div className="bg-gray-50 p-4 rounded-lg shadow border border-gray-200 text-left h-64 overflow-y-auto">
+          <div className="scroll-review bg-gray-50 p-4 rounded-lg shadow border border-gray-200 text-left h-64 overflow-y-auto opacity-0 transform translate-y-10">
             <h3 className="text-sm font-semibold text-gray-500 mb-2">ChatGPT responds:</h3>
             <div className="space-y-2">
               {gptReply ? (
@@ -217,7 +235,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-10 max-w-xl mx-auto">
+        <div className="scroll-review mt-10 max-w-xl mx-auto opacity-0 transform translate-y-10">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}

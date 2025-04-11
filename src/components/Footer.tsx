@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Footer: React.FC = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-review');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <footer className="bg-gray-50 py-12 border-t border-gray-200">
       <div className="container mx-auto px-4">
@@ -65,7 +83,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="mt-10 pt-6 border-t border-gray-200 text-center">
+        <div className="scroll-review mt-10 pt-6 border-t border-gray-200 text-center opacity-0 transform translate-y-10">
           <p className="text-sm text-gray-600">&copy; {new Date().getFullYear()} ChitChat. All rights reserved.</p>
         </div>
       </div>

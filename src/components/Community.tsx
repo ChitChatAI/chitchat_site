@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Community: React.FC = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-review');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center scroll-review opacity-0 transform translate-y-10">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Join Our Community</h2>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
             Connect with thousands of developers building sophisticated AI applications.

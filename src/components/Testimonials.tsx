@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TestimonialCard from './TestimonialCard';
 import MetricCard from './MetricCard';
 
 const Testimonials: React.FC = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-review');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   const testimonials = [
     {
       quote: "ChitChat's emotionally fluent AI has transformed how we interact with customers. It's a game-changer.",
@@ -30,12 +48,13 @@ const Testimonials: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {testimonials.map((testimonial, index) => (
-            <TestimonialCard 
-              key={index}
-              quote={testimonial.quote}
-              name={testimonial.name}
-              role={testimonial.role}
-            />
+            <div key={index} className="scroll-review opacity-0 transform translate-y-10">
+              <TestimonialCard 
+                quote={testimonial.quote}
+                name={testimonial.name}
+                role={testimonial.role}
+              />
+            </div>
           ))}
         </div>
         
@@ -43,11 +62,12 @@ const Testimonials: React.FC = () => {
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {metrics.map((metric, index) => (
-            <MetricCard 
-              key={index}
-              value={metric.value}
-              label={metric.label}
-            />
+            <div key={index} className="scroll-review opacity-0 transform translate-y-10">
+              <MetricCard 
+                value={metric.value}
+                label={metric.label}
+              />
+            </div>
           ))}
         </div>
       </div>
