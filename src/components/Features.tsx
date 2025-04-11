@@ -41,11 +41,7 @@ const Features: React.FC = () => {
       description: "Easily scale your applications to handle increased loads and user demands.",
       iconPath: "/icons/scalability.svg"
     },
-    {
-      title: "Contextual Reasoning",
-      description: "Build applications that reason with context from various sources including documents, APIs, and databases.",
-      iconPath: "/build-icon.svg"
-    },
+
     {
       title: "Observability",
       description: "Full visibility into your application chains with logging, tracing, and evaluation capabilities.",

@@ -115,12 +115,12 @@ const Header: React.FC = () => {
                   <p className="hero-subheading text-base md:text-lg lg:text-xl text-white/80 font-medium font-sans pt-24">
                   </p>
                 </div>
-                <h1 className="hero-heading font-bold text-white leading-tight mb-8 font-sans text-left">
+                <h1 className="hero-heading font-bold text-white leading-tight mb-8 font-sans text-left sm:text-left text-center">
                   The Future of AI Conversations,<br className="hidden sm:block" />
                   So Real, You'll Forget It's Not.<br />
                   <span className="hero-gradient-text text-2xl md:text-3xl">Human Augmented AI by ChitChat</span>
                 </h1>
-                <p className="hero-description text-base md:text-lg text-white/80 max-w-3xl mb-10 font-sans">
+                <p className="hero-description text-base md:text-lg text-white/80 max-w-3xl mb-10 font-sans text-left sm:text-left text-center">
 
                 </p>
               </div>
