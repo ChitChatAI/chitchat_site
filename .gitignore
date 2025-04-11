@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-/.pnp
+.pnp
 .pnp.js
 
 # Testing
@@ -57,4 +57,34 @@ Thumbs.db
 .git/objects/
 .git/index
 
+# Vercel deployment
 .vercel
+
+# Tailwind JIT artifacts
+.tailwind/
+
+# ESLint cache
+.eslintcache
+
+# PostCSS cache
+.postcssrc
+
+# Coverage reports
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.lock
+*.pid
+*.seed
+*.pid.lock
+
+# Build artifacts
+*.out
+*.map
+
+# Ignore compiled files
+*.d.ts

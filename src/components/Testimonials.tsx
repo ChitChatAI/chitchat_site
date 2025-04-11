@@ -5,9 +5,9 @@ import MetricCard from './MetricCard';
 const Testimonials: React.FC = () => {
   const testimonials = [
     {
-      quote: "ChitChat has revolutionized how we develop AI applications. The speed and efficiency are unprecedented.",
-      name: "Sarah Johnson",
-      role: "CTO, TechInnovate"
+      quote: "ChitChat's emotionally fluent AI has transformed how we interact with customers. It's a game-changer.",
+      name: "Conrad Leigh",
+      role: "CEO, RAIN"
     },
     {
       quote: "We've reduced our development time by 50% since integrating ChitChat into our tech stack. Highly recommended.",

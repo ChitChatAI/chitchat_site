@@ -17,6 +17,21 @@ const Features: React.FC = () => {
       title: "Observability",
       description: "Full visibility into your application chains with logging, tracing, and evaluation capabilities.",
       iconPath: "/manage-icon.svg"
+    },
+    {
+      title: "Human Augmented Intelligence",
+      description: "Enhance human decision-making with emotionally aware AI agents that collaborate, not just automate.",
+      iconPath: "/icons/brain-heart.svg" // 🧠❤️ – Symbol of empathy + intelligence
+    },
+    {
+      title: "Multi-Persona Support",
+      description: "Seamlessly switch between AI personalities like Samantha and Arin, each with unique tone and expertise.",
+      iconPath: "/icons/multiple-users.svg" // 👥 – Represents multiple personas
+    },
+    {
+      title: "Real-Time Comparisons",
+      description: "Compare outputs from humanized agents vs raw models like GPT-4o to benchmark effectiveness.",
+      iconPath: "/icons/comparison-split.svg" // ↔️ – Split/comparison icon
     }
   ];
 
