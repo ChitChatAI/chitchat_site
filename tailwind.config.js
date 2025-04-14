@@ -36,19 +36,32 @@ export default {
         },
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'fade-in': 'fadeIn 1.2s ease-out forwards',
         'slide-up': 'slideUp 0.5s ease-in-out',
+        'zoom-slow': 'zoomSlow 15s ease-in-out infinite alternate',
+        'bounce': 'bounce 1s infinite',
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+        zoomSlow: {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.05)' },
+        },
+        bounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-25%)' },
+        },
       },
+      backgroundImage: {
+        'radial-gradient': 'radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%)',
+      }
     },
   },
   plugins: [require('daisyui')],
