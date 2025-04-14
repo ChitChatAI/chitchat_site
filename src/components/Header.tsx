@@ -75,6 +75,9 @@ const Header: React.FC = () => {
                                     <span className="block mb-4">So Real, You'll Forget It's Not.</span>
                                     <span className="hero-gradient-text block text-[clamp(1.25rem,4vw,2.25rem)] mt-6">Human Augmented AI by ChitChat</span>
                                 </h1>
+                                <p className="text-white/80 text-base sm:text-lg mt-4 max-w-3xl">
+                                    Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
+                                </p>
                                 <div className="join-us_buttons-wrapper flex flex-col sm:flex-row justify-center sm:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full mt-10 animate-fade-in delay-500">
                                     <a href="/contact-sales" className="bg-theme-main hover:bg-theme-dark text-white px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Get a demo</a>
                                     <a href="/documentation" className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Documentation</a>

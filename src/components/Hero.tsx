@@ -4,10 +4,16 @@ import React, { useEffect, useState } from 'react';
 
 const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
+console.log('[DEBUG] API key at module load:', apiKey);
+
 const assistantIds = {
   samantha: import.meta.env.VITE_ASSISTANT_ID_SAMANTHA,
   arin: import.meta.env.VITE_ASSISTANT_ID_ARIN,
 };
+
+if (!apiKey) {
+  console.error('[ERROR] API key is missing or undefined!');
+}
 
 const Hero: React.FC = () => {
   const [activePersona, setActivePersona] = useState<'samantha' | 'arin'>('samantha');
@@ -18,6 +24,7 @@ const Hero: React.FC = () => {
   const [gptReply, setGptReply] = useState('');
   const [loading, setLoading] = useState(false);
   const [messageCount, setMessageCount] = useState(Number(localStorage.getItem('msg_count') || 0));
+  const [typingIndicator, setTypingIndicator] = useState('');
 
   const suggestions = [
     "How can I improve my 5G speed?",
@@ -26,6 +33,7 @@ const Hero: React.FC = () => {
   ];
 
   useEffect(() => {
+    console.log('[DEBUG] Hero component mounted. API key:', apiKey);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -43,39 +51,55 @@ const Hero: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    // Update typing indicator based on input and active persona
+    if (input.length > 0 && !loading) {
+      setTypingIndicator('User typing...');
+    } else if (loading) {
+      setTypingIndicator(`${activePersona === 'samantha' ? 'Samantha' : 'Arin'} typing...`);
+    } else {
+      setTypingIndicator('');
+    }
+  }, [input, activePersona, loading]);
+
   const handleSend = async () => {
+    console.log('[DEBUG] API key before sending request:', apiKey);
     if (messageCount >= 5) return;
     setLoading(true);
     try {
-      const assistant_id = assistantIds[activePersona];
-
-      // Create thread and run in v2
-      const runRes = await fetch('https://api.openai.com/v1/threads/runs', {
+      console.log('[DEBUG] Using API key:', apiKey);
+      // Step 1: Create thread with the user's message
+      const threadRes = await fetch('https://api.openai.com/v1/threads', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'OpenAI-Beta': 'assistants=v2',
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
         body: JSON.stringify({
-          assistant_id,
-          thread: {
-            messages: [
-              {
-                role: 'user',
-                content: input,
-              },
-            ],
-          },
+          messages: [{ role: 'user', content: input }],
         }),
       });
+      const threadData = await threadRes.json();
+      const threadId = threadData?.id;
+      if (!threadId) throw new Error("Thread creation failed.");
 
+      // Step 2: Start the run using the thread ID and assistant id
+      const assistant_id = assistantIds[activePersona];
+      const runRes = await fetch(`https://api.openai.com/v1/threads/${threadId}/runs`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'OpenAI-Beta': 'assistants=v2',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ assistant_id }),
+      });
       const runData = await runRes.json();
       const runId = runData?.id;
-      const threadId = runData?.thread_id;
-      if (!runId || !threadId) throw new Error("Failed to create thread/run.");
+      if (!runId) throw new Error("Run creation failed.");
 
+      // Step 3: Poll until the run is completed
       let runStatus = runData.status;
       while (runStatus !== 'completed') {
         await new Promise(res => setTimeout(res, 1000));
@@ -89,6 +113,7 @@ const Hero: React.FC = () => {
         runStatus = pollData.status;
       }
 
+      // Step 4: Retrieve the thread's messages
       const messagesRes = await fetch(`https://api.openai.com/v1/threads/${threadId}/messages`, {
         headers: {
           'Authorization': `Bearer ${apiKey}`,
@@ -99,30 +124,10 @@ const Hero: React.FC = () => {
       const lastReply = messagesData?.data?.find(m => m.role === 'assistant')?.content?.[0]?.text?.value;
 
       if (activePersona === 'samantha') {
-        setSamanthaHistory((prev) => [...prev, lastReply || 'No response from Samantha.']);
+        setSamanthaHistory(prev => [...prev, lastReply || 'No response from Samantha.']);
       } else {
-        setArinHistory((prev) => [...prev, lastReply || 'No response from Arin.']);
+        setArinHistory(prev => [...prev, lastReply || 'No response from Arin.']);
       }
-
-      // Get GPT-4o reply
-      const gptRes = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-4o',
-          messages: [
-            { role: 'system', content: 'You are a helpful assistant.' },
-            { role: 'user', content: input },
-          ],
-          temperature: 0.7,
-        }),
-      });
-      const gptData = await gptRes.json();
-      const gptReplyText = gptData?.choices?.[0]?.message?.content;
-      setGptReply(gptReplyText || 'No response from GPT.');
 
       const newCount = messageCount + 1;
       setMessageCount(newCount);
@@ -145,26 +150,24 @@ const Hero: React.FC = () => {
           Human Augmented AI <span className="text-[#260a40]">in Action</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-          Experience how Samantha, Arin, and ChatGPT compare in real conversations — right here in your browser.
+          Experience how our personas compare to standard AI in real conversations - right here in your browser.
         </p>
 
         <div className="scroll-review mb-6 flex justify-center space-x-2 opacity-0 transform translate-y-10">
           <button
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-              activePersona === 'samantha'
+            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${activePersona === 'samantha'
                 ? 'bg-[#260a40] text-white'
                 : 'border-gray-300 text-gray-700 hover:border-[#260a40]'
-            }`}
+              }`}
             onClick={() => setActivePersona('samantha')}
           >
             Samantha
           </button>
           <button
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-              activePersona === 'arin'
+            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${activePersona === 'arin'
                 ? 'bg-[#260a40] text-white'
                 : 'border-gray-300 text-gray-700 hover:border-[#260a40]'
-            }`}
+              }`}
             onClick={() => setActivePersona('arin')}
           >
             Arin
@@ -181,18 +184,18 @@ const Hero: React.FC = () => {
               {(activePersona === 'samantha' ? samanthaHistory : arinHistory).map((message, index) => (
                 <div
                   key={index}
-                  className={`${
-                    index % 2 === 0
+                  className={`${index % 2 === 0
                       ? 'bg-[#260a40] text-white'
                       : 'bg-theme-light text-gray-800'
-                  } px-4 py-3 rounded-lg shadow-md border text-sm animate-fade-in`}
+                    } px-4 py-3 rounded-lg shadow-md border text-sm animate-fade-in`}
                 >
                   {message}
                 </div>
               ))}
-              {loading && (
-                <div className="text-gray-500 text-sm flex items-center">
-                  Typing<span className="animate-typing-dots ml-1">...</span>
+              {/* Show typing indicator */}
+              {typingIndicator && (
+                <div className="text-gray-500 text-sm flex items-center animate-fade-in">
+                  {typingIndicator}
                 </div>
               )}
               {!input && (
@@ -217,18 +220,21 @@ const Hero: React.FC = () => {
                   {gptReply}
                 </div>
               ) : (
-                <div className="mt-4">
-                  <p className="text-sm font-semibold text-gray-500">Suggestions:</p>
-                  <ul className="list-disc list-inside text-sm text-gray-600">
-                    {suggestions.map((suggestion, index) => (
-                      <li key={index}>{suggestion}</li>
-                    ))}
-                  </ul>
-                </div>
+                !input && ( // Hide suggestions when the user is typing
+                  <div className="mt-4">
+                    <p className="text-sm font-semibold text-gray-500">Suggestions:</p>
+                    <ul className="list-disc list-inside text-sm text-gray-600">
+                      {suggestions.map((suggestion, index) => (
+                        <li key={index}>{suggestion}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )
               )}
-              {loading && (
-                <div className="text-gray-500 text-sm flex items-center">
-                  Typing<span className="animate-typing-dots ml-1">...</span>
+              {/* Show typing indicator */}
+              {typingIndicator && (
+                <div className="text-gray-500 text-sm flex items-center animate-fade-in">
+                  {loading ? 'ChatGPT typing...' : typingIndicator}
                 </div>
               )}
             </div>
