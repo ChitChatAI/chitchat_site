@@ -10,5 +10,6 @@ export default defineConfig({
   server: {
     host: '0.0.0.0', // Allow Render to bind properly
     port: process.env.PORT ? parseInt(process.env.PORT) : 5173, // Respect Render's port
+    allowedHosts: ['chitchat-site.onrender.com'], // Add this line to allow the host
   },
 });
