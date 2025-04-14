@@ -5,35 +5,19 @@ import Features from './components/Features';
 import Testimonials from './components/Testimonials';
 import Community from './components/Community';
 import Footer from './components/Footer';
-import CookieBanner from './components/CookieBanner';
 import './App.css';
 
 const App: React.FC = () => {
   return (
     <div className="app">
-      <div className="parallax">
-        <Header />
-      </div>
+      <Header />
       <main>
-        <div className="parallax">
-          <Hero />
-        </div>
-        <div className="parallax">
-          <Features />
-        </div>
-        <div className="parallax">
-          <Testimonials />
-        </div>
-        <div className="parallax">
-          <Community />
-        </div>
+        <Hero />
+        <Features />
+        <Testimonials />
+        <Community />
       </main>
-      <div className="parallax">
-        <CookieBanner />
-      </div>
-      <div className="parallax">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

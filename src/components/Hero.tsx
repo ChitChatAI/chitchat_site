@@ -144,18 +144,18 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="pt-32 pb-20 md:pb-28 bg-white font-[Satoshi]">
-      <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+    <section className="pt-20 pb-16 md:pb-28 bg-gradient-to-b from-white via-gray-50 to-gray-100 font-[Satoshi]">
+      <div className="container mx-auto px-6 sm:px-4 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
           Human Augmented AI <span className="text-[#260a40]">in Action</span>
         </h1>
-        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-          Experience how our personas compare to standard AI in real conversations - right here in your browser.
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+          Experience how our personas compare to standard AI in real conversations — right here in your browser.
         </p>
 
-        <div className="scroll-review mb-6 flex justify-center space-x-2 opacity-0 transform translate-y-10">
+        <div className="scroll-review mb-6 flex flex-wrap justify-center gap-4 sm:gap-6 opacity-0 transform translate-y-10">
           <button
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${activePersona === 'samantha'
+            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition ${activePersona === 'samantha'
                 ? 'bg-[#260a40] text-white'
                 : 'border-gray-300 text-gray-700 hover:border-[#260a40]'
               }`}
@@ -164,7 +164,7 @@ const Hero: React.FC = () => {
             Samantha
           </button>
           <button
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${activePersona === 'arin'
+            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition ${activePersona === 'arin'
                 ? 'bg-[#260a40] text-white'
                 : 'border-gray-300 text-gray-700 hover:border-[#260a40]'
               }`}
@@ -174,10 +174,10 @@ const Hero: React.FC = () => {
           </button>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 transition-all">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 transition-all">
           {/* Samantha/Arin Panel */}
-          <div className="scroll-review bg-gray-50 p-4 rounded-lg shadow border border-gray-200 text-left h-64 overflow-y-auto opacity-0 transform translate-y-10">
-            <h3 className="text-sm font-semibold text-gray-500 mb-2">
+          <div className="scroll-review bg-gray-50 p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
+            <h3 className="text-sm sm:text-base font-semibold text-gray-500 mb-2">
               {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
             </h3>
             <div className="space-y-2">
@@ -212,8 +212,8 @@ const Hero: React.FC = () => {
           </div>
 
           {/* ChatGPT Panel */}
-          <div className="scroll-review bg-gray-50 p-4 rounded-lg shadow border border-gray-200 text-left h-64 overflow-y-auto opacity-0 transform translate-y-10">
-            <h3 className="text-sm font-semibold text-gray-500 mb-2">ChatGPT responds:</h3>
+          <div className="scroll-review bg-gray-50 p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
+            <h3 className="text-sm sm:text-base font-semibold text-gray-500 mb-2">ChatGPT responds:</h3>
             <div className="space-y-2">
               {gptReply ? (
                 <div className="bg-theme-light px-4 py-3 rounded-lg shadow-md border text-sm text-gray-800 animate-fade-in">
@@ -245,14 +245,14 @@ const Hero: React.FC = () => {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm sm:text-base"
             placeholder="Type your message here..."
             disabled={messageCount >= 5}
           />
           <button
             onClick={handleSend}
             disabled={loading || messageCount >= 5}
-            className="mt-4 w-full bg-[#260a40] hover:bg-[#3c1668] text-white py-3 rounded-lg text-sm font-medium transition"
+            className="mt-4 w-full bg-[#260a40] hover:bg-[#3c1668] text-white py-3 rounded-lg text-sm sm:text-base font-medium transition"
           >
             {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
           </button>

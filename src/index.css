@@ -317,15 +317,17 @@ body {
   animation: rotateFast 1.5s linear infinite; /* Faster rotation */
 }
 
-/* Parallax Effect for Components */
-@keyframes parallaxScroll {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-20px); }
+/* Business-Oriented Parallax Effect */
+@keyframes horizontalParallax {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
 }
 
 .parallax {
   position: relative;
-  animation: parallaxScroll 5s infinite alternate ease-in-out;
+  animation: horizontalParallax 6s infinite ease-in-out;
+  will-change: transform;
 }
 
 /* Optional: Add a subtle shadow for depth */
@@ -335,4 +337,55 @@ body {
   inset: 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
   z-index: -1;
+}
+
+/* Subtle Parallax Effect */
+@keyframes subtleParallax {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.subtle-parallax {
+  animation: subtleParallax 6s infinite ease-in-out;
+  will-change: transform;
+}
+
+/* Mobile Enhancements */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .scroll-review {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-heading {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .hero-button-primary,
+  .hero-button-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Vivid Backgrounds */
+.bg-gradient-to-b {
+  background: linear-gradient(to bottom, #ffffff, #f9fafb, #f3f4f6);
+}
+
+/* Button Hover Effects */
+button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
