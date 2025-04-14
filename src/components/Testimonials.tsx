@@ -28,23 +28,23 @@ const Testimonials: React.FC = () => {
       role: "CEO, RAIN"
     },
     {
-      quote: "We've reduced our development time by 50% since integrating ChitChat into our tech stack. Highly recommended.",
+      quote: "ChitChat's AI personas have redefined how we deliver personalized customer experiences, enabling us to scale with confidence and precision.",
       name: "Michael Chen",
       role: "Lead Developer, DataSphere"
     }
   ];
 
   const metrics = [
-    { value: "99.9%", label: "Uptime" },
-    { value: "2.5x", label: "Faster Development" },
-    { value: "10M+", label: "API Calls Daily" },
-    { value: "3,000+", label: "Active Users" }
+    { value: "99.9%", label: "System Reliability" },
+    { value: "2.5x", label: "Accelerated Development" },
+    { value: "10M+", label: "Daily API Interactions" },
+    { value: "3,000+", label: "Engaged Users" }
   ];
 
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">What Our Customers Say</h2>
+        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">What Our Clients Say</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {testimonials.map((testimonial, index) => (

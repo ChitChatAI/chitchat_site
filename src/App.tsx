@@ -11,15 +11,29 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <div className="app">
-      <Header />
+      <div className="parallax">
+        <Header />
+      </div>
       <main>
-        <Hero />
-        <Features />
-        <Testimonials />
-        <Community />
+        <div className="parallax">
+          <Hero />
+        </div>
+        <div className="parallax">
+          <Features />
+        </div>
+        <div className="parallax">
+          <Testimonials />
+        </div>
+        <div className="parallax">
+          <Community />
+        </div>
       </main>
-      <CookieBanner />
-      <Footer />
+      <div className="parallax">
+        <CookieBanner />
+      </div>
+      <div className="parallax">
+        <Footer />
+      </div>
     </div>
   );
 };

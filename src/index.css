@@ -183,6 +183,30 @@ body {
   }
 }
 
+/* Professional Bouncing Dots Animation */
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.animate-bounce.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-bounce.delay-400 {
+  animation-delay: 0.4s;
+}
+
 /* Code block styling */
 .code-block {
   @apply bg-gray-50 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-gray-200;
@@ -227,18 +251,18 @@ body {
   100% { content: '...'; }
 }
 
-/* Typing dots animation */
+/* Typing Dots Animation */
+@keyframes typing-dots {
+  0% { content: ''; opacity: 0.6; }
+  33% { content: '.'; opacity: 0.8; }
+  66% { content: '..'; opacity: 1; }
+  100% { content: '...'; opacity: 0.6; }
+}
+
 .animate-typing-dots::after {
   content: '';
   display: inline-block;
   animation: typing-dots 1.5s steps(3, end) infinite;
-}
-
-@keyframes typing-dots {
-  0% { content: ''; }
-  33% { content: '.'; }
-  66% { content: '..'; }
-  100% { content: '...'; }
 }
 
 /* Chat bubble styling */
@@ -253,4 +277,62 @@ body {
 
 .overflow-y-auto {
   overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Parallax Layer Animations */
+@keyframes parallax1 {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-15px); opacity: 0.9; }
+}
+
+@keyframes parallax2 {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(15px); opacity: 0.9; }
+}
+
+@keyframes parallax3 {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-15px); opacity: 0.9; }
+}
+
+.animate-parallax-layer-1 {
+  animation: parallax1 2.5s infinite alternate ease-in-out;
+}
+
+.animate-parallax-layer-2 {
+  animation: parallax2 2.5s infinite alternate ease-in-out;
+}
+
+.animate-parallax-layer-3 {
+  animation: parallax3 2.5s infinite alternate ease-in-out;
+}
+
+/* Faster rotation animation */
+@keyframes rotateFast {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-rotate-fast {
+  animation: rotateFast 1.5s linear infinite; /* Faster rotation */
+}
+
+/* Parallax Effect for Components */
+@keyframes parallaxScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+.parallax {
+  position: relative;
+  animation: parallaxScroll 5s infinite alternate ease-in-out;
+}
+
+/* Optional: Add a subtle shadow for depth */
+.parallax::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
+  z-index: -1;
 }

@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="scroll-review mt-10 pt-6 border-t border-gray-200 text-center opacity-0 transform translate-y-10">
-          <p className="text-sm text-gray-600">&copy; {new Date().getFullYear()} ChitChat. All rights reserved.</p>
+          <p className="text-sm text-gray-600">&copy; {new Date().getFullYear()} ChitChat AI. All rights reserved.</p>
         </div>
       </div>
     </footer>
