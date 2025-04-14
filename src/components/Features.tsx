@@ -23,29 +23,28 @@ const Features: React.FC = () => {
   const features = [
     {
       title: "Human Augmented Intelligence",
-      description: "Enhance human decision-making with emotionally aware AI agents that collaborate, not just automate.",
-      iconPath: "/icons/brain-heart.svg"
+      description: "Enhance human decision-making with emotionally aware AI agents that work alongside people, not just replace them.",
+      icon: "psychology_alt"
     },
     {
       title: "Multi-Persona Support",
-      description: "Seamlessly switch between AI personalities like Samantha and Arin, each with unique tone and expertise.",
-      iconPath: "/icons/multiple-users.svg"
+      description: "Seamlessly switch between our tailored AI personalities, each designed for specific business needs and customer experiences.",
+      icon: "switch_account"
     },
     {
       title: "Real-Time Comparisons",
-      description: "Compare outputs from humanized agents vs raw models like GPT-4o to benchmark effectiveness.",
-      iconPath: "/icons/comparison-split.svg"
+      description: "Benchmark humanized AI outputs against raw models like GPT-4 to measure tone, empathy, and accuracy in real time.",
+      icon: "insights"
     },
     {
-      title: "Scalability",
-      description: "Easily scale your applications to handle increased loads and user demands.",
-      iconPath: "/icons/scalability.svg"
+      title: "Effortless Growth",
+      description: "As your business grows, our AI personas grow with you — maintaining quality and consistency across every customer interaction.",
+      icon: "trending_up"
     },
-
     {
-      title: "Observability",
-      description: "Full visibility into your application chains with logging, tracing, and evaluation capabilities.",
-      iconPath: "/manage-icon.svg"
+      title: "Ongoing Optimisation",
+      description: "We actively update your AI personas' prompts based on real conversations — improving tone, accuracy, and helpfulness over time.",
+      icon: "auto_fix_high"
     }
   ];
 
@@ -55,17 +54,35 @@ const Features: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-langchain-dark mb-4">Key Capabilities</h2>
           <p className="text-center text-langchain-gray mb-12 max-w-2xl mx-auto">
-            Our framework provides everything you need to build sophisticated AI applications that can understand context and reason effectively.
+            Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalised, human-like customer interactions at scale.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {features.map((feature, index) => (
-            <div key={index} className="scroll-review opacity-0 transform translate-y-10">
-              <FeatureCard 
+          {features.slice(0, 3).map((feature, index) => (
+            <div
+              key={index}
+              className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg"
+            >
+              <FeatureCard
                 title={feature.title}
                 description={feature.description}
-                iconPath={feature.iconPath}
+                icon={feature.icon}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
+          {features.slice(3).map((feature, index) => (
+            <div
+              key={index}
+              className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg"
+            >
+              <FeatureCard
+                title={feature.title}
+                description={feature.description}
+                icon={feature.icon}
               />
             </div>
           ))}
