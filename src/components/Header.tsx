@@ -15,37 +15,46 @@ const Header: React.FC = () => {
     return (
         <>
             {/* Navigation Bar */}
-            <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-5' : 'bg-transparent py-7'}`}>
-                <div className="container mx-auto px-6">
+            <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'}`}>
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between">
+                        {/* Logo */}
                         <div className="flex items-center relative">
-                            <div className={`text-3xl font-bold ${isScrolled ? 'text-gray-800' : 'text-white'} drop-shadow-sm transition-colors duration-300`}>
+                            <div className={`text-2xl sm:text-3xl font-bold ${isScrolled ? 'text-gray-800' : 'text-white'} drop-shadow-sm transition-colors duration-300`}>
                                 ChitChat
                             </div>
                             <div className="w-2.5 h-2.5 rounded-full bg-theme-main absolute bottom-0.5 -right-3 animated-dot"></div>
                         </div>
-                        <div className="hidden md:flex items-center justify-center space-x-10">
-                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-base`}>Solutions</a>
-                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm`}>Prompt Library</a>
-                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm`}>Use Cases</a>
-                            <a href="#" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm`}>
+
+                        {/* Desktop Navigation */}
+                        <div className="hidden lg:flex items-center justify-center space-x-6 lg:space-x-10">
+                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Solutions</a>
+                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Prompt Library</a>
+                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Use Cases</a>
+                            <a href="#" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
                                 <span>For Businesses</span>
                                 <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </a>
-                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm`}>Pricing</a>
+                            <a href="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Pricing</a>
                         </div>
-                        <div className="hidden md:flex items-center space-x-4">
-                            <a href="#" className={`${isScrolled ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white'} px-6 py-3 rounded-full transition-all duration-200 font-medium text-base`}>Sign In</a>
-                            <a href="#" className="bg-theme-main hover:bg-theme-dark text-white px-6 py-3 rounded-full transition-all duration-200 font-medium text-base shadow-sm hover:shadow-md">Get Started</a>
+
+                        {/* Desktop Buttons */}
+                        <div className="hidden lg:flex items-center space-x-4">
+                            <a href="#" className={`${isScrolled ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white'} px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-200 font-medium text-sm lg:text-base`}>Sign In</a>
+                            <a href="#" className="bg-theme-main hover:bg-theme-dark text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-200 font-medium text-sm lg:text-base shadow-sm hover:shadow-md">Get Started</a>
                         </div>
-                        <button className={`md:hidden ${isScrolled ? 'text-gray-800' : 'text-white'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+
+                        {/* Mobile Menu Button */}
+                        <button className={`lg:hidden ${isScrolled ? 'text-gray-800' : 'text-white'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                             </svg>
                         </button>
                     </div>
+
+                    {/* Mobile Navigation */}
                     {isMenuOpen && (
-                        <div className="md:hidden mt-4 py-2 bg-white rounded-md shadow-lg animate-fade-in">
+                        <div className="lg:hidden mt-4 py-2 bg-white rounded-md shadow-lg animate-fade-in">
                             <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</a>
                             <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Prompt Library</a>
                             <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Use Cases</a>

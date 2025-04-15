@@ -46,7 +46,7 @@ const Testimonials: React.FC = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">What Our Clients Say</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {testimonials.map((testimonial, index) => (
             <div key={index} className="scroll-review opacity-0 transform translate-y-10">
               <TestimonialCard 
@@ -60,7 +60,7 @@ const Testimonials: React.FC = () => {
         
         <h3 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Impact by the Numbers</h3>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {metrics.map((metric, index) => (
             <div key={index} className="scroll-review opacity-0 transform translate-y-10">
               <MetricCard 
