@@ -156,8 +156,8 @@ const Hero: React.FC = () => {
         <div className="scroll-review mb-6 flex flex-wrap justify-center gap-4 sm:gap-6 opacity-0 transform translate-y-10">
           <button
             className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition ${activePersona === 'samantha'
-                ? 'bg-[#260a40] text-white'
-                : 'border-gray-300 text-gray-700 hover:border-[#260a40]'
+              ? 'bg-theme-main text-white'
+              : 'border-gray-300 text-gray-700 hover:bg-theme-dark'
               }`}
             onClick={() => setActivePersona('samantha')}
           >
@@ -165,13 +165,14 @@ const Hero: React.FC = () => {
           </button>
           <button
             className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition ${activePersona === 'arin'
-                ? 'bg-[#260a40] text-white'
-                : 'border-gray-300 text-gray-700 hover:border-[#260a40]'
+              ? 'bg-theme-main text-white'
+              : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
               }`}
             onClick={() => setActivePersona('arin')}
           >
             Arin
           </button>
+
         </div>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 transition-all">
@@ -185,16 +186,16 @@ const Hero: React.FC = () => {
                 <div
                   key={index}
                   className={`${index % 2 === 0
-                      ? 'bg-[#260a40] text-white'
-                      : 'bg-theme-light text-gray-800'
-                    } px-4 py-3 rounded-lg shadow-md border text-sm animate-fade-in`}
+                    ? 'bg-theme-main text-white'
+                    : 'bg-theme-light text-gray-800'
+                    } px-4 py-3 rounded-lg shadow-md border text-sm`}
                 >
                   {message}
                 </div>
               ))}
               {/* Show typing indicator */}
               {typingIndicator && (
-                <div className="text-gray-500 text-sm flex items-center animate-fade-in">
+                <div className="text-gray-500 text-sm flex items-center">
                   {typingIndicator}
                 </div>
               )}
@@ -245,14 +246,15 @@ const Hero: React.FC = () => {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm sm:text-base"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-theme-main focus:border-theme-main transition-all duration-200"
             placeholder="Type your message here..."
             disabled={messageCount >= 5}
           />
+
           <button
             onClick={handleSend}
             disabled={loading || messageCount >= 5}
-            className="mt-4 w-full bg-[#260a40] hover:bg-[#3c1668] text-white py-3 rounded-lg text-sm sm:text-base font-medium transition"
+            className="mt-4 w-full bg-theme-main hover:bg-[#3c1668] text-white py-3 rounded-lg text-sm sm:text-base font-medium transition"
           >
             {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
           </button>

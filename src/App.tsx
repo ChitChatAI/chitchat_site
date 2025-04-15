@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Features from './components/Features';
+import MeetOurCEO from './components/MeetOurCEO'; // Import the new component
 import Testimonials from './components/Testimonials';
 import Community from './components/Community';
 import Footer from './components/Footer';
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <main>
         <Hero />
         <Features />
+        <MeetOurCEO /> {/* Add the MeetOurCEO component here */}
         <Testimonials />
         <Community />
       </main>

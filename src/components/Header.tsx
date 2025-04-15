@@ -95,17 +95,15 @@ const Header: React.FC = () => {
                             loop
                             playsInline
                             id="myVideo"
-                            poster="/chitchat-poster.jpg"
-                            className="w-full h-full object-cover object-center animate-zoom-slow"
+                            className="w-full h-full object-cover object-center brightness-75"
                         >
-                            <source src="/chitchat.mp4" type="video/mp4" />
+                            <source src="/chitchat_bg.mp4" type="video/mp4" />
                         </video>
-                        <div className="absolute inset-0 backdrop-blur-md bg-white/5 z-[1]" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 via-indigo-700/40 to-purple-800/60 z-[2]" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 z-[2]" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-theme-main/20 via-transparent to-purple-700/10 z-[2]" />
-                        <div className="absolute inset-0 mix-blend-soft-light opacity-10 pointer-events-none z-[2]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/asfalt-light.png")' }} />
-                        <div className="absolute inset-0 bg-radial-gradient z-[2]" />
+
+                        {/* PURPLISH GLASS OVERLAY */}
+                        <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-20" />
+                        <div className="absolute inset-0 z-10 bg-[#260a40]/30 backdrop-blur-[6px]" />
+
                     </div>
                 </div>
             </header>
