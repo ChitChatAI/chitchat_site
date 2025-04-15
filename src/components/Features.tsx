@@ -45,6 +45,11 @@ const Features: React.FC = () => {
       title: "Ongoing Optimisation",
       description: "We actively update your AI personas' prompts based on real conversations — improving tone, accuracy, and helpfulness over time.",
       icon: "auto_fix_high"
+    },
+    {
+      title: "Seamless Integration",
+      description: "Easily integrate our AI personas into your existing tools and workflows, ensuring a smooth and efficient adoption process.",
+      icon: "integration_instructions"
     }
   ];
 
@@ -59,22 +64,7 @@ const Features: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {features.slice(0, 3).map((feature, index) => (
-            <div
-              key={index}
-              className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg"
-            >
-              <FeatureCard
-                title={feature.title}
-                description={feature.description}
-                icon={feature.icon}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-8">
-          {features.slice(3).map((feature, index) => (
+          {features.map((feature, index) => (
             <div
               key={index}
               className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg"

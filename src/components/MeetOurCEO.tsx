@@ -20,7 +20,7 @@ const MeetOurCEO: React.FC = () => {
     }, []);
 
     return (
-        <section className="bg-white py-20 px-6 sm:px-12 lg:px-20 meet-ceo-section opacity-0 transform translate-y-10">
+        <section className="bg-white py-20 px-6 sm:px-12 lg:px-20 meet-ceo-section scroll-review opacity-0 transform translate-y-10">
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10">
                 {/* Profile Image */}
                 <div className="flex-shrink-0 w-48 h-48 rounded-full overflow-hidden shadow-lg border-4 border-theme-main">
@@ -37,16 +37,16 @@ const MeetOurCEO: React.FC = () => {
                         Behind the Vision: Jess
                     </h2>
                     <h3 className="text-xl font-semibold text-gray-800">
-                        Jessica Claire Leigh
+                        Jessica-Claire Leigh
                     </h3>
                     <p className="mt-2 text-gray-600 leading-relaxed max-w-xl">
-                        Jessica is the visionary behind ChitChat AI — an advocate for Human Augmented Intelligence and next-gen customer engagement. With experience in AI and behavioral science, she’s leading our mission to create digital personalities that feel human, connect deeply, and deliver real value to businesses.
+                        Jessica-Claire is the visionary behind ChitChat AI — a specialist in psychology and behavioral science, and a leading voice in Human Augmented Intelligence. With academic training in psychology and a passion for emotionally intelligent design, she’s redefining how businesses connect with customers through AI.
                     </p>
                     <p className="mt-4 text-sm text-gray-500 italic">
-                        “At ChitChat, we’re not just building AI. We’re reimagining what it means to talk to technology.”
+                        “We’re not just building AI. We’re bringing psychology into technology - so every conversation feels real.”
                     </p>
                     <button className="mt-6 bg-theme-main hover:bg-theme-dark text-white px-6 py-3 rounded-full text-sm font-medium transition">
-                        Message Jessica
+                        Message Jess
                     </button>
                 </div>
             </div>

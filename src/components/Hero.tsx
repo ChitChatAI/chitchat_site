@@ -157,7 +157,7 @@ const Hero: React.FC = () => {
           <button
             className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition ${activePersona === 'samantha'
               ? 'bg-theme-main text-white'
-              : 'border-gray-300 text-gray-700 hover:bg-theme-dark'
+              : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
               }`}
             onClick={() => setActivePersona('samantha')}
           >
@@ -217,7 +217,7 @@ const Hero: React.FC = () => {
             <h3 className="text-sm sm:text-base font-semibold text-gray-500 mb-2">ChatGPT responds:</h3>
             <div className="space-y-2">
               {gptReply ? (
-                <div className="bg-theme-light px-4 py-3 rounded-lg shadow-md border text-sm text-gray-800 animate-fade-in">
+                <div className="scroll-review bg-theme-light px-4 py-3 rounded-lg shadow-md border text-sm text-gray-800 animate-fade-in">
                   {gptReply}
                 </div>
               ) : (

@@ -384,8 +384,3 @@ body {
   background: linear-gradient(to bottom, #ffffff, #f9fafb, #f3f4f6);
 }
 
-/* Button Hover Effects */
-button:hover {
-  transform: scale(1.05);
-  transition: transform 0.2s ease-in-out;
-}
