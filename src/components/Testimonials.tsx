@@ -23,17 +23,17 @@ const Testimonials: React.FC = () => {
 
   const testimonials = [
     {
-      quote: "ChitChat's emotionally fluent AI has transformed how we interact with customers. It's a game-changer.",
+      quote: "ChitChat's emotionally fluent AI has reshaped our customer experience — it's seamless, smart, and seriously impressive.",
       name: "Conrad Leigh",
       role: "CEO, RAIN"
     },
     {
-      quote: "ChitChat's AI personas have redefined how we deliver personalized customer experiences, enabling us to scale with confidence and precision.",
+      quote: "ChitChat's AI personas help us personalize at scale — delivering consistent, human-like support across every channel.",
       name: "Michael Chen",
       role: "Lead Developer, DataSphere"
     }
   ];
-
+  
   const metrics = [
     { value: "99.9%", label: "System Reliability" },
     { value: "2.5x", label: "Accelerated Development" },

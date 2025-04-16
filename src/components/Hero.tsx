@@ -177,7 +177,7 @@ const Hero: React.FC = () => {
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6 transition-all">
           {/* Samantha/Arin Panel */}
-          <div className="scroll-review bg-gray-50 p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
+          <div className="scroll-review bg-white p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
             <h3 className="text-sm sm:text-base font-semibold text-gray-500 mb-2">
               {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
             </h3>
@@ -213,7 +213,7 @@ const Hero: React.FC = () => {
           </div>
 
           {/* ChatGPT Panel */}
-          <div className="scroll-review bg-gray-50 p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
+          <div className="scroll-review bg-white p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
             <h3 className="text-sm sm:text-base font-semibold text-gray-500 mb-2">ChatGPT responds:</h3>
             <div className="space-y-2">
               {gptReply ? (

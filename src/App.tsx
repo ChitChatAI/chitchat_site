@@ -1,26 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Features from './components/Features';
-import MeetOurCEO from './components/MeetOurCEO'; // Import the new component
+import MeetOurCEO from './components/MeetOurCEO';
 import Testimonials from './components/Testimonials';
 import Community from './components/Community';
 import Footer from './components/Footer';
+import CookieBanner from './components/CookieBanner';
+import Solutions from './pages/Solutions';
+import CookiePolicy from './pages/CookiePolicy';
+import LoadingSpinner from './components/LoadingSpinner';
 import './App.css';
+
+const Home: React.FC = () => (
+  <>
+    <Header />
+    <main>
+      <Hero />
+      <Features />
+      <MeetOurCEO />
+      <Testimonials />
+      <Community />
+    </main>
+    <Footer />
+  </>
+);
+
+const LoadingPage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [location]);
+
+  return (
+    <>
+      {isLoading && <LoadingSpinner />}
+    </>
+  );
+};
 
 const App: React.FC = () => {
   return (
-    <div className="app">
-      <Header />
-      <main>
-        <Hero />
-        <Features />
-        <MeetOurCEO /> {/* Add the MeetOurCEO component here */}
-        <Testimonials />
-        <Community />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/loading" element={<LoadingPage />} />
+        </Routes>
+        <CookieBanner />
+      </div>
+    </Router>
   );
 };
 

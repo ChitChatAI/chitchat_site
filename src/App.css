@@ -8,3 +8,8 @@
 main {
   flex: 1;
 }
+
+/* Ensure footer sticks to the bottom */
+footer {
+  margin-top: auto;
+}

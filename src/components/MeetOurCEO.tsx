@@ -25,7 +25,7 @@ const MeetOurCEO: React.FC = () => {
                 {/* Profile Image */}
                 <div className="flex-shrink-0 w-48 h-48 rounded-full overflow-hidden shadow-lg border-4 border-theme-main">
                     <img
-                        src="/jess.jpg"
+                        src="/profiles/jess.jpg"
                         alt="Jessica Claire Leigh - CEO of ChitChat AI"
                         className="w-full h-full object-cover"
                     />
@@ -34,7 +34,7 @@ const MeetOurCEO: React.FC = () => {
                 {/* Text Content */}
                 <div className="flex-1 text-center md:text-left">
                     <h2 className="text-3xl sm:text-4xl font-bold text-theme-main mb-4">
-                        Behind the Vision: Jess
+                        Behind the Vision
                     </h2>
                     <h3 className="text-xl font-semibold text-gray-800">
                         Jessica-Claire Leigh
@@ -46,7 +46,7 @@ const MeetOurCEO: React.FC = () => {
                         “We’re not just building AI. We’re bringing psychology into technology - so every conversation feels real.”
                     </p>
                     <button className="mt-6 bg-theme-main hover:bg-theme-dark text-white px-6 py-3 rounded-full text-sm font-medium transition">
-                        Message Jess
+                        Message 
                     </button>
                 </div>
             </div>

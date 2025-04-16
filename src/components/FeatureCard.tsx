@@ -8,20 +8,24 @@ interface FeatureCardProps {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon }) => {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 transition-all duration-300 hover:shadow-md">
-      <div className="mb-4">
-        <div className="w-12 h-12 rounded-md bg-theme-light flex items-center justify-center text-theme-main">
-          <span className="material-symbols-outlined text-3xl">{icon}</span>
+    <div className="scroll-review bg-white rounded-xl p-6 border border-gray-100 opacity-0 transform translate-y-10 hover:shadow-lg transition-all duration-300">
+      <div className="flex items-center mb-4">
+        <div className="w-16 h-16 rounded-md flex items-center justify-center text-theme-main mr-4">
+          <span
+            className="material-symbols-outlined text-4xl icon-pulse"
+            style={{ fontVariationSettings: "'wght' 100, 'opsz' 24" }}
+          >
+            {icon}
+          </span>
         </div>
+        <h3 className="text-xl font-bold text-gray-800">{title}</h3>
       </div>
-      <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm mb-4">{description}</p>
+      <p className="text-gray-600 mb-5">{description}</p>
       <a
         href="#"
-        className="text-sm text-theme-main hover:text-theme-dark font-medium flex items-center"
+        className="mt-6 inline-block text-theme-main hover:text-theme-dark font-medium"
       >
-        Learn More
-        <span className="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+        Learn More →
       </a>
     </div>
   );
