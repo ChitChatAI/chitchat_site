@@ -188,26 +188,49 @@ const Solutions: React.FC = () => {
   return (
     <>
       <NavBar />
-      <main className="pt-24 md:pt-28" ref={parallaxRef}>
-        <section className="bg-white py-20 px-6 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-100 z-0"></div>
+      <main className="pt-24" ref={parallaxRef}>
+        <section className="relative py-20 px-6 overflow-hidden bg-white">
+          {/* Background image */}
+          <div 
+            className="absolute inset-0 z-0" 
+            style={{
+              backgroundImage: 'url("/solutionsPage/solutions.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          />
+          
+          {/* Overlay for readability */}
+          <div className="absolute inset-0 z-0 bg-white/80" />
 
-          <div className="max-w-6xl mx-auto text-center relative z-10">
-            <h2 ref={headerRef} className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 whitespace-pre-line">
-              {headerText}
-            </h2>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              ChitChat works for any business — from global enterprises to small startups — as long as you have access to a language model (LLM). Whether you're looking to integrate hyper-human customer support, automate sales flows, or retain users with emotionally intelligent conversations, we build AI personas that feel like real people — tailored to your goals.
-            </p>
-            <p className="mt-6 text-sm text-gray-500 italic">
-              Note: ChitChat doesn’t provide the LLM itself — we work on top of whatever model you use, whether that’s OpenAI, Claude, or another provider.
-            </p>
-          </div>
-        </section>
+          {/* Content Wrapper */}
+          <div className="relative z-10 max-w-6xl mx-auto text-center">
+            {/* Header & Intro */}
+            <div className="mb-20">
+              <div className="h-32 flex items-center justify-center mb-6"> {/* Fixed height container */}
+                <h2
+                  ref={headerRef}
+                  className="text-4xl md:text-5xl font-bold text-gray-900 whitespace-pre-line"
+                >
+                  {headerText}
+                </h2>
+              </div>
+              
+              <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                ChitChat works for any business — from global enterprises to small startups — as long as you
+                have access to a language model (LLM). Whether you're looking to integrate hyper-human customer
+                support, automate sales flows, or retain users with emotionally intelligent conversations, we
+                build AI personas that feel like real people — tailored to your goals.
+              </p>
+              <p className="mt-6 text-sm text-gray-500 italic">
+                Note: ChitChat doesn't provide the LLM itself — we work on top of whatever model you use,
+                whether that's OpenAI, Claude, or another provider.
+              </p>
+            </div>
 
-        <section className="bg-gradient-to-b from-theme-main/10 to-white py-20 px-6 relative overflow-hidden">
-          <div className="container mx-auto max-w-6xl relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative">
+            {/* Category Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 text-left">
               {solutionCategories.map((category, index) => (
                 <div
                   key={index}
@@ -262,7 +285,6 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </section>
-
       </main>
       <Footer />
     </>

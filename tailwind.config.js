@@ -1,6 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    'top-[-100px]',
+    'bottom-[-80px]',
+    'left-[20%]',
+    'right-[15%]',
+    'w-[500px]',
+    'h-[500px]',
+    'blur-3xl',
+    'blur-2xl',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -35,11 +45,16 @@ export default {
           gray: '#4A5568',
         },
       },
+      blur: {
+        '3xl': '64px',
+      },
       animation: {
         'fade-in': 'fadeIn 1.2s ease-out forwards',
         'slide-up': 'slideUp 0.5s ease-in-out',
         'zoom-slow': 'zoomSlow 15s ease-in-out infinite alternate',
         'bounce': 'bounce 1s infinite',
+        'pulse-slow': 'pulse 8s ease-in-out infinite',
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeIn: {
