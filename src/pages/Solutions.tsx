@@ -192,7 +192,7 @@ const Solutions: React.FC = () => {
         <section className="bg-white py-20 px-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-100 z-0"></div>
 
-          <div className="max-w-6xl mx-auto text-center scroll-review opacity-0 transform translate-y-10 relative z-10">
+          <div className="max-w-6xl mx-auto text-center relative z-10">
             <h2 ref={headerRef} className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 whitespace-pre-line">
               {headerText}
             </h2>

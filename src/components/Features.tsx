@@ -63,11 +63,11 @@ const Features: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg"
+              className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg h-full sm:col-span-1 md:col-span-1"
             >
               <FeatureCard
                 title={feature.title}
