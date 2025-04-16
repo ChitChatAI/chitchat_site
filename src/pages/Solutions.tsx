@@ -188,11 +188,11 @@ const Solutions: React.FC = () => {
   return (
     <>
       <NavBar />
-      <main className="pt-24" ref={parallaxRef}>
-        <section className="relative py-20 px-6 overflow-hidden bg-white">
-          {/* Background image */}
+      <main ref={parallaxRef}>
+        <section className="relative py-40 px-6 overflow-hidden bg-white">
+          {/* Background image - extended higher with negative top positioning */}
           <div 
-            className="absolute inset-0 z-0" 
+            className="absolute inset-0 z-0 -top-24" 
             style={{
               backgroundImage: 'url("/solutionsPage/solutions.jpg")',
               backgroundSize: 'cover',
@@ -201,8 +201,8 @@ const Solutions: React.FC = () => {
             }}
           />
           
-          {/* Overlay for readability */}
-          <div className="absolute inset-0 z-0 bg-white/80" />
+          {/* Overlay for readability - also extended higher */}
+          <div className="absolute inset-0 z-0 bg-white/80 -top-24" />
 
           {/* Content Wrapper */}
           <div className="relative z-10 max-w-6xl mx-auto text-center">
