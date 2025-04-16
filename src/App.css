@@ -13,3 +13,15 @@ main {
 footer {
   margin-top: auto;
 }
+
+/* Ensure footer elements are left-aligned on mobile devices */
+@media (max-width: 640px) {
+  footer .grid {
+    text-align: left;
+    place-items: start;
+  }
+
+  footer .text-center {
+    text-align: left;
+  }
+}
