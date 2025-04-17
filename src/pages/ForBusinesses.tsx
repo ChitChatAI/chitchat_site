@@ -95,13 +95,20 @@ const ForBusinesses: React.FC = () => {
       <NavBar />
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen pt-24 px-6 overflow-hidden bg-center bg-cover parallax scroll-review">
+        <section className="relative min-h-screen pt-24 px-4 sm:px-6 overflow-hidden bg-center bg-cover scroll-review">
           <video
             className="absolute inset-0 w-full h-full object-cover z-0"
             src="/businessesPage/businessVideo.mp4"
             autoPlay
             loop
             muted
+            onTimeUpdate={(e) => {
+              const video = e.target as HTMLVideoElement;
+              if (video.currentTime > 2.75) {
+                video.currentTime = 0;
+                video.play();
+              }
+            }}
           />
           <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-10" />
           <div className="absolute inset-0 bg-gradient-to-tr from-[#260a40]/70 via-black/30 to-[#260a40]/70 mix-blend-multiply z-20" />
@@ -111,12 +118,12 @@ const ForBusinesses: React.FC = () => {
               <div className="h-32 flex items-center justify-center mb-6">
                 <h2
                   ref={headerRef}
-                  className="text-4xl md:text-5xl font-extrabold text-white whitespace-pre-line drop-shadow-md animate-fade-in-slow"
+                  className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white whitespace-pre-line drop-shadow-md animate-fade-in-slow"
                 >
                   {headerText}
                 </h2>
               </div>
-              <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mt-6 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto mt-6 leading-relaxed">
                 We don't just give you an AI persona — we handle the strategy, setup, and support so your team can focus on results. 
                 Whether you need a retention agent, a setup guide, or full customer support automation, we've got you covered.
               </p>
@@ -129,16 +136,16 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 px-6 bg-white scroll-review">
+        <section className="py-16 px-4 sm:px-6 bg-white scroll-review">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
               What's Included When You Work With Us
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
               {includedFeatures.map((feature, index) => (
                 <div
                   key={index}
-                  className="scroll-review opacity-0 transform translate-y-10 bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
+                  className="scroll-review opacity-0 transform translate-y-10 bg-gray-50 rounded-xl p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
                 >
                   <span className="material-symbols-outlined text-theme-main text-3xl mb-4 animate-wiggle-slow">
                     check_circle
@@ -152,7 +159,7 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Business Values Section */}
-        <section className="py-20 px-6 bg-gray-50 parallax scroll-review">
+        <section className="py-20 px-6 bg-gray-50 scroll-review">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">
               How ChitChat Adds Value to Your Business
