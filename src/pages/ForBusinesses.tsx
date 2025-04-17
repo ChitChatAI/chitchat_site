@@ -150,8 +150,8 @@ const ForBusinesses: React.FC = () => {
                   <span className="material-symbols-outlined text-theme-main text-3xl mb-4 animate-wiggle-slow">
                     check_circle
                   </span>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -159,24 +159,24 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Business Values Section */}
-        <section className="py-20 px-6 bg-gray-50 scroll-review">
+        <section className="py-16 px-4 sm:px-6 bg-gray-50 scroll-review">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-900">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
               How ChitChat Adds Value to Your Business
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {businessValues.map((value, index) => (
                 <div
                   key={index}
                   className="scroll-review opacity-0 transform translate-y-10 flex flex-col items-center text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-theme-light flex items-center justify-center mb-4">
-                    <span className="material-symbols-outlined text-theme-main text-2xl animate-wiggle-slow">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-theme-light flex items-center justify-center mb-4">
+                    <span className="material-symbols-outlined text-theme-main text-2xl sm:text-3xl animate-wiggle-slow">
                       {value.icon}
                     </span>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3">{value.title}</h3>
-                  <p className="text-gray-600">{value.description}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{value.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">{value.description}</p>
                 </div>
               ))}
             </div>
@@ -184,9 +184,9 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section className="bg-white py-16 px-6 scroll-review">
+        <section className="bg-white py-16 px-4 sm:px-6 scroll-review">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-8">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-8">
               Trusted by forward-thinking teams
             </h2>
             <div className="flex flex-col items-center gap-6">
@@ -250,24 +250,24 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Call-to-Action Section */}
-        <section className="py-20 px-6 bg-theme-main/10 scroll-review">
-          <div className="max-w-4xl mx-auto text-center bg-white/80 backdrop-blur-md p-8 rounded-xl border-white/20">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900">
+        <section className="py-16 px-4 sm:px-6 bg-theme-main/10 scroll-review">
+          <div className="max-w-4xl mx-auto text-center bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-xl border-white/20">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 sm:mb-6 text-gray-900">
               Ready to bring ChitChat into your business?
             </h2>
-            <p className="text-lg text-gray-700 mb-8">
+            <p className="text-sm sm:text-lg text-gray-700 mb-6 sm:mb-8">
               Let us help you transform your customer experience with cutting-edge AI solutions tailored to your needs.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-8">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
               <Link
                 to="/contact-us"
-                className="bg-theme-main hover:bg-theme-dark text-white px-8 py-4 rounded-full text-base font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-theme-main hover:bg-theme-dark text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Let's Talk
               </Link>
               <Link
                 to="/book-call"
-                className="bg-white hover:bg-gray-100 text-theme-main border border-theme-main px-8 py-4 rounded-full text-base font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-white hover:bg-gray-100 text-theme-main border border-theme-main px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Book a Strategy Call
               </Link>
