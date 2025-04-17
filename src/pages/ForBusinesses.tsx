@@ -95,9 +95,17 @@ const ForBusinesses: React.FC = () => {
       <NavBar />
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen pt-24 px-4 sm:px-6 overflow-hidden bg-center bg-cover scroll-review">
+        <section className="relative min-h-screen pt-18 px-4 sm:px-6 overflow-hidden bg-center bg-cover scroll-review">
+          {/* Mobile background image (hidden on larger screens) */}
+          <img
+            className="absolute inset-0 w-full h-full object-cover z-0 block sm:hidden"
+            src="/businessesPage/BusinessBG.png"
+            alt="Business background"
+          />
+          
+          {/* Video background (hidden on mobile) */}
           <video
-            className="absolute inset-0 w-full h-full object-cover z-0"
+            className="absolute inset-0 w-full h-full object-cover z-0 hidden sm:block"
             src="/businessesPage/businessVideo.mp4"
             autoPlay
             loop
@@ -110,9 +118,13 @@ const ForBusinesses: React.FC = () => {
               }
             }}
           />
+          
+          {/* Overlays - kept the same for both mobile and desktop */}
           <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-10" />
           <div className="absolute inset-0 bg-gradient-to-tr from-[#260a40]/70 via-black/30 to-[#260a40]/70 mix-blend-multiply z-20" />
           <div className="absolute inset-0 bg-[url('/textures/dots.svg')] opacity-10 mix-blend-soft-light z-20 animate-pulse-slow" />
+          
+          {/* Content */}
           <div className="relative z-30 max-w-6xl mx-auto text-center flex flex-col justify-center items-center h-full pt-24 px-4">
             <div className="mb-16">
               <div className="h-32 flex items-center justify-center mb-6">
