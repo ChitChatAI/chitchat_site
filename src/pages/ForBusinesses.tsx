@@ -184,16 +184,16 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section className="bg-white py-16 px-4 sm:px-6 scroll-review">
+        <section className="bg-white py-12 sm:py-16 px-4 sm:px-6 scroll-review">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-8">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8">
               Trusted by forward-thinking teams
             </h2>
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex items-center justify-center bg-gray-100 rounded-full p-6 shadow-sm">
+            <div className="flex flex-col items-center gap-4 sm:gap-6">
+              <div className="flex items-center justify-center bg-gray-100 rounded-full p-4 sm:p-6 shadow-sm">
                 <svg
                   viewBox="0 0 393.8 183"
-                  className="h-16 rain-logo"
+                  className="h-10 sm:h-12 md:h-16 rain-logo"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <g fill="#BBBCBC">
@@ -205,40 +205,58 @@ const ForBusinesses: React.FC = () => {
                 </svg>
               </div>
             </div>
-            <div className="mt-12 bg-gray-50 p-8 rounded-md shadow-sm">
-              <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                <span className="block text-theme-main font-semibold text-xl mb-4">Rain's Success Story</span>
+            
+            <div className="mt-8 sm:mt-12 bg-gray-50 p-4 sm:p-6 md:p-8 rounded-md shadow-sm">
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+                <span className="block text-theme-main font-semibold text-lg sm:text-xl mb-3 sm:mb-4">Rain's Success Story</span>
                 Rain, our first major client, has seamlessly integrated our persona-based AI agent to modernize customer engagement. By leveraging emotionally intelligent interactions, Rain delivers a stylish and personalized experience that resonates with their audience, setting a new standard for customer support in the digital age.
               </p>
-              <div className="mt-10">
-                <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">What Rain's Team Says</h3>
-                <ul className="relative border-l-2 border-dotted border-theme-main pl-6 space-y-8">
-                  <li className="relative flex items-start gap-4">
-                    <img src="/profiles/teamLead.png" alt="Team Lead" className="w-16 h-16 rounded-full border-2 border-theme-main" />
+              
+              <div className="mt-8 sm:mt-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">What Rain's Team Says</h3>
+                
+                <ul className="relative border-l-0 sm:border-l-2 border-dotted border-theme-main pl-0 sm:pl-6 space-y-8">
+                  {/* Mobile-first approach with stacked layout */}
+                  <li className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+                    <img 
+                      src="/profiles/teamLead.png" 
+                      alt="Team Lead" 
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
+                    />
                     <div className="flex flex-col">
                       <h4 className="text-lg font-semibold text-gray-800">Team Lead</h4>
                       <p className="text-sm text-gray-500">Pieter van der Merwe</p>
-                      <p className="text-gray-600 mt-2 w-80">
+                      <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
                         "The persona-based AI has transformed how we engage with customers, making every interaction feel personal and meaningful."
                       </p>
                     </div>
                   </li>
-                  <li className="relative flex items-start gap-4">
-                    <img src="/profiles/promptEngineer.png" alt="Prompt Engineer" className="w-16 h-16 rounded-full border-2 border-theme-main" />
+                  
+                  <li className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+                    <img 
+                      src="/profiles/promptEngineer.png" 
+                      alt="Prompt Engineer" 
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
+                    />
                     <div className="flex flex-col">
                       <h4 className="text-lg font-semibold text-gray-800">Prompt Engineer</h4>
                       <p className="text-sm text-gray-500">Emily Carter</p>
-                      <p className="text-gray-600 mt-2 w-80">
+                      <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
                         "ChitChat's AI has been a game-changer, enabling us to fine-tune responses and deliver impactful interactions."
                       </p>
                     </div>
                   </li>
-                  <li className="relative flex items-start gap-4">
-                    <img src="/profiles/softwareEngineer.png" alt="Software Engineer" className="w-16 h-16 rounded-full border-2 border-theme-main" />
+                  
+                  <li className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+                    <img 
+                      src="/profiles/softwareEngineer.png" 
+                      alt="Software Engineer" 
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
+                    />
                     <div className="flex flex-col">
                       <h4 className="text-lg font-semibold text-gray-800">Software Engineer</h4>
                       <p className="text-sm text-gray-500">Olwethu Dlamini</p>
-                      <p className="text-gray-600 mt-2 w-80">
+                      <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
                         "Integrating ChitChat's AI was seamless, and it has elevated our customer support to a whole new level."
                       </p>
                     </div>
