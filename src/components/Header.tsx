@@ -32,7 +32,7 @@ const Header: React.FC = () => {
                             <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Solutions</Link>
                             <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Prompt Library</Link>
                             <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Use Cases</Link>
-                            <Link to="#" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
+                            <Link to="/for-businesses" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
                                 <span>For Businesses</span>
                                 <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </Link>
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
                             <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
                             <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Prompt Library</Link>
                             <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Use Cases</Link>
-                            <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/for-businesses" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
                                     <span>For Businesses</span>
                                     <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
@@ -96,24 +96,21 @@ const Header: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="header_background-video-wrapper absolute inset-0 w-full h-full z-0 flex items-center justify-center">
-                    <div className="video-wrap w-full h-full flex items-center justify-center">
-                        <video
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            id="myVideo"
-                            className="w-full h-full object-cover object-center brightness-75"
-                        >
-                            <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
-                        </video>
+                <div className="header_background-video-wrapper absolute top-0 left-0 w-full h-full z-0">
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        id="myVideo"
+                        className="w-full h-full object-cover object-center brightness-75 will-change-transform"
+                    >
+                        <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+                    </video>
 
-                        {/* PURPLISH GLASS OVERLAY */}
-                        <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-20" />
-                        <div className="absolute inset-0 z-10 bg-[#260a40]/30 backdrop-blur-[6px]" />
-
-                    </div>
+                    {/* PURPLISH GLASS OVERLAY */}
+                    <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-10" />
+                    <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[6px]" />
                 </div>
             </header>
         </>

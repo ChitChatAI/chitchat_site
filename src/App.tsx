@@ -9,8 +9,10 @@ import Community from './components/Community';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
 import Solutions from './pages/Solutions';
+import ForBusinesses from './pages/ForBusinesses';
 import CookiePolicy from './pages/CookiePolicy';
 import LoadingSpinner from './components/LoadingSpinner';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 const Home: React.FC = () => (
@@ -50,10 +52,12 @@ const LoadingPage: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div className="app">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/for-businesses" element={<ForBusinesses />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/loading" element={<LoadingPage />} />
         </Routes>
