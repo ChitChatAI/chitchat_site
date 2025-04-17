@@ -14,7 +14,7 @@ const NavBar: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const isForBusinessesPage = location.pathname === '/for-businesses';
+    const isForBusinessesPage = location.pathname === '/partnerships';
 
     const getNavLinkClass = (path: string) => {
         return `${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base ${location.pathname === path ? 'text-theme-main font-semibold' : ''}`;
@@ -36,7 +36,7 @@ const NavBar: React.FC = () => {
                     <div className="hidden lg:flex items-center justify-center space-x-6 lg:space-x-10">
                         <Link to="/solutions" className={getNavLinkClass("/solutions")}>Solutions</Link>
                         <Link to="#" className={getNavLinkClass("#")}>Use Cases</Link>
-                        <Link to="/for-businesses" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base ${location.pathname === '/for-businesses' ? 'text-theme-main font-semibold' : ''}`}>
+                        <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base ${location.pathname === '/partnerships' ? 'text-theme-main font-semibold' : ''}`}>
                             <span>For Businesses</span>
                             <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                         </Link>
@@ -64,7 +64,7 @@ const NavBar: React.FC = () => {
                         <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
                         <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                         <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Use Cases</Link>
-                        <Link to="/for-businesses" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                        <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                             <div className="flex items-center">
                                 <span>For Businesses</span>
                                 <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
