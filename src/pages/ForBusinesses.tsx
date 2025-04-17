@@ -95,7 +95,7 @@ const ForBusinesses: React.FC = () => {
       <NavBar />
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen pt-18 px-4 sm:px-6 overflow-hidden bg-center bg-cover scroll-review">
+        <section className="relative min-h-screen pt-18 px-4 sm:px-6 overflow-hidden bg-center bg-cover scroll-review pt-20">
           {/* Mobile background image (hidden on larger screens) */}
           <img
             className="absolute inset-0 w-full h-full object-cover z-0 block sm:hidden"
