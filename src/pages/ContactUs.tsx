@@ -17,6 +17,18 @@ const ContactUs: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
+  const [typedText, setTypedText] = useState('');
+  const fullText = "Let's Build Better Conversations";
+
+  useEffect(() => {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      setTypedText(fullText.substring(0, i + 1));
+      i++;
+      if (i >= fullText.length) clearInterval(typingInterval);
+    }, 100);
+    return () => clearInterval(typingInterval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,8 +84,11 @@ const ContactUs: React.FC = () => {
           className="flex flex-col justify-center px-6 sm:px-12 py-16 opacity-0 transition-opacity duration-700"
         >
           <div className="max-w-xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
-              Let's Build Better Conversations
+            <h2
+              className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6"
+              style={{ minHeight: '3.5rem' }} // Fixed height for consistent layout
+            >
+              {typedText}
             </h2>
             <p className="text-gray-600 mb-8">
               Whether you're a solo creator or part of a team, we're here to help you transform your customer support. Reach out to us, and we'll respond within 2 hours.
