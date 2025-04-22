@@ -199,16 +199,39 @@ const ContactUs: React.FC = () => {
           className="relative bg-black/80 pt-10 opacity-0 transition-opacity duration-700"
         >
           <img
-            src="/contactUsPage/jess.png"
+            src="/contactUsPage/contactUsPage.png"
             alt="Jessica Claire Leigh"
             className="absolute inset-0 w-full h-full object-cover opacity-90 object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-theme-main/80 via-transparent to-black/50 z-10" />
           <div className="relative z-20 p-10 flex flex-col justify-end h-full text-white">
-            <p className="text-lg sm:text-xl max-w-lg italic">
-              “ChitChat’s platform can streamline client support while keeping the human touch. It’s a total game-changer.”
-            </p>
-            <p className="mt-4 font-semibold">Jessica Claire Leigh<br /><span className="text-sm text-white/70">CEO of ChitChat AI</span></p>
+            <div className="space-y-6 bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-lg">
+              <div className="flex items-center gap-4">
+                <span className="material-symbols-outlined text-white text-3xl">location_on</span>
+                <p className="text-lg sm:text-xl text-white">
+                  <strong>Address:</strong> <br />
+                  123 Innovation Drive, Tech City, TX 75001
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="material-symbols-outlined text-white text-3xl">email</span>
+                <p className="text-lg sm:text-xl text-white">
+                  <strong>Email:</strong> <br />
+                  <a href="mailto:support@chitchat.ai" className="hover:underline text-white">
+                    support@chitchat.ai
+                  </a>
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="material-symbols-outlined text-white text-3xl">phone</span>
+                <p className="text-lg sm:text-xl text-white">
+                  <strong>Phone:</strong> <br />
+                  <a href="tel:+18005551234" className="hover:underline text-white">
+                    +1 (800) 555-1234
+                  </a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

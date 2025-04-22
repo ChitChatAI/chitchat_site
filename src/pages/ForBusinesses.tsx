@@ -199,7 +199,7 @@ const ForBusinesses: React.FC = () => {
               {businessValues.map((value, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center text-center scroll-review opacity-0 transform translate-y-10 transition-transform duration-500 hover:scale-105"
+                  className="flex flex-col items-center text-center scroll-review opacity-0 transform translate-y-10 transition-transform duration-700 delay-[index*100] animate-slide-up"
                 >
                   <div className="relative w-12 sm:w-16 h-40 bg-gray-200 rounded-lg overflow-hidden group">
                     <div
