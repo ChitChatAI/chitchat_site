@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import { LocationOutline, CallOutline, LogoWhatsapp, LogoLinkedin, LogoTwitter } from 'react-ionicons';
 
 const ContactUs: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +13,9 @@ const ContactUs: React.FC = () => {
     message: '',
   });
 
-  const [selectedType, setSelectedType] = useState<'solo' | 'team' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false); // State for contact modal
   const formRef = useRef<HTMLDivElement>(null);
-  const testimonialRef = useRef<HTMLDivElement>(null);
   const [typedText, setTypedText] = useState('');
   const fullText = "Let's Build Better Conversations";
 
@@ -33,21 +31,16 @@ const ContactUs: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const animateSection = (ref: React.RefObject<HTMLDivElement>, animationClass: string) => {
-        if (ref.current) {
-          const rect = ref.current.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            ref.current.classList.add(animationClass);
-            ref.current.style.opacity = '1';
-          }
+      const elements = document.querySelectorAll('.scroll-review');
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('animate-slide-up');
         }
-      };
-
-      animateSection(formRef, 'animate-slide-up');
-      animateSection(testimonialRef, 'animate-slide-in-right');
+      });
     };
 
-    handleScroll();
+    handleScroll(); // Trigger on load
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -67,7 +60,6 @@ const ContactUs: React.FC = () => {
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({ firstName: '', lastName: '', email: '', company: '', jobTitle: '', message: '' });
-        setSelectedType(null);
       }, 4000);
     }, 1500);
   };
@@ -75,22 +67,18 @@ const ContactUs: React.FC = () => {
   return (
     <>
       <NavBar />
-      <section className="min-h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden bg-gradient-to-br from-white to-gray-50 pt-24">
-        {/* Left - Form */}
-        <div ref={formRef} className="px-6 sm:px-12 py-16 opacity-0 transition-opacity w-90% duration-700">
-          <div className="max-w-xl mx-auto">
-            <div style={{ minHeight: '6rem' }} className="flex items-center relative overflow-hidden">
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 whitespace-normal w-full text-left relative leading-snug">
-                <span className="inline-block">
-                  {typedText || '\u00A0'}
-                  <span className="animate-pulse inline-block">.</span>
-                </span>
-              </h2>
-            </div>
-            <p className="text-gray-600 mb-8 pt-6">
-              Whether you're a solo creator or part of a team, we're here to help you transform your customer support. Reach out to us, and we'll respond within 2 hours.
-            </p>
+      <section
+        className="relative min-h-screen bg-cover bg-center pt-24 scroll-review opacity-0 transition-opacity duration-700"
+        style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-theme-main/80 via-transparent to-gray-50 z-10"></div>
 
+        {/* Content */}
+        <div className="relative z-20 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 sm:px-12 py-16">
+          {/* Form */}
+          <div ref={formRef} className="bg-white shadow-lg rounded-lg p-8 scroll-review opacity-0 transition-opacity duration-700">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
             {isSubmitted ? (
               <div className="bg-green-50 border border-green-100 rounded-lg p-6 text-center">
                 <h3 className="text-xl font-semibold text-green-700 mb-2">Message Sent!</h3>
@@ -119,14 +107,6 @@ const ContactUs: React.FC = () => {
                   />
                 </div>
                 <input
-                  type="text"
-                  name="jobTitle"
-                  placeholder="Job title"
-                  value={formData.jobTitle}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-theme-main"
-                />
-                <input
                   type="email"
                   name="email"
                   placeholder="Work email"
@@ -143,35 +123,6 @@ const ContactUs: React.FC = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-theme-main"
                 />
-
-                <div>
-                  <p className="text-sm font-medium text-gray-700 mb-2">Number of employees</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedType('solo')}
-                      className={`flex items-start gap-3 p-4 rounded-lg border ${selectedType === 'solo' ? 'border-theme-main bg-theme-main/5' : 'border-gray-300'} hover:border-theme-main transition`}
-                    >
-                      <span className="material-symbols-outlined text-theme-main">person</span>
-                      <div className="text-left">
-                        <p className="font-medium text-gray-800">I’m a solo developer</p>
-                        <p className="text-sm text-gray-500">I need to set up an account for myself.</p>
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedType('team')}
-                      className={`flex items-start gap-3 p-4 rounded-lg border ${selectedType === 'team' ? 'border-theme-main bg-theme-main/5' : 'border-gray-300'} hover:border-theme-main transition`}
-                    >
-                      <span className="material-symbols-outlined text-theme-main">groups</span>
-                      <div className="text-left">
-                        <p className="font-medium text-gray-800">I’m part of a team</p>
-                        <p className="text-sm text-gray-500">I need to set up an account for a team.</p>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
                 <textarea
                   name="message"
                   rows={4}
@@ -181,85 +132,80 @@ const ContactUs: React.FC = () => {
                   className="w-full px-4 py-3 border border-gray-300 rounded-md placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-theme-main"
                   required
                 />
-
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full px-6 py-3 text-white bg-theme-main hover:bg-theme-dark rounded-md font-medium transition-all duration-300 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
+                  className={`w-full px-6 py-3 text-white bg-theme-main hover:bg-theme-dark rounded-md font-medium transition-all duration-300 ${
+                    isSubmitting ? 'opacity-80 cursor-not-allowed' : ''
+                  }`}
                 >
                   {isSubmitting ? 'Sending...' : 'Get in touch'}
                 </button>
               </form>
             )}
           </div>
-        </div>
 
-        {/* Right - Visual/Testimonial Panel */}
-        <div
-          ref={testimonialRef}
-          className="relative pt-10 opacity-0 transition-opacity duration-700"
-        >
-          {/* Video for desktop */}
-          <video
-            src="/contactUsPage/contactUsPage.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hidden lg:block absolute inset-0 w-[90%] h-full object-cover opacity-90 object-top"
-          />
-          {/* Gradient overlay for desktop only */}
-          <div className="hidden lg:block absolute inset-0 w-[90%] bg-gradient-to-t from-theme-main/80 via-transparent to-black/50 z-10"></div>
-        </div>
-      </section>
-
-      {/* Contact Modal */}
-      {isContactModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="space-y-6 bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-lg max-w-lg mx-auto">
-            <div className="flex items-center gap-4">
-              <span className="material-symbols-outlined text-white text-3xl">location_on</span>
-              <p className="text-lg sm:text-xl text-white">
-                <strong>Address:</strong> <br />
-                123 Innovation Drive, Tech City, TX 75001
-              </p>
+          {/* Contact Details */}
+          <div className="bg-gradient-to-br from-theme-main/80 to-gray-800 text-white rounded-lg p-8 shadow-lg scroll-review opacity-0 transition-opacity duration-700">
+            <h2 className="text-2xl font-bold mb-6">Contact Details</h2>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="hover:scale-105 transition-transform">
+                  <LocationOutline color={'#fff'} height="28px" width="28px" />
+                </div>
+                <p>
+                  <strong>Address:</strong><br />
+                  123 Innovation Drive, Tech City, TX 75001
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="hover:scale-105 transition-transform">
+                  <CallOutline color={'#fff'} height="28px" width="28px" />
+                </div>
+                <p>
+                  <strong>Phone:</strong><br />
+                  <a href="tel:+18005551234" className="hover:underline">
+                    +1 (800) 555-1234
+                  </a>
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="hover:scale-105 transition-transform">
+                  <LogoWhatsapp color={'#fff'} height="28px" width="28px" />
+                </div>
+                <p>
+                  <strong>WhatsApp:</strong><br />
+                  <a href="https://wa.me/18005551234" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    Chat with us on WhatsApp
+                  </a>
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="hover:scale-105 transition-transform">
+                  <LogoLinkedin color={'#fff'} height="28px" width="28px" />
+                </div>
+                <p>
+                  <strong>LinkedIn:</strong><br />
+                  <a href="https://linkedin.com/company/chitchat-ai" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    Follow us on LinkedIn
+                  </a>
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="hover:scale-105 transition-transform">
+                  <LogoTwitter color={'#fff'} height="28px" width="28px" />
+                </div>
+                <p>
+                  <strong>Twitter:</strong><br />
+                  <a href="https://twitter.com/chitchat_ai" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    Follow us on Twitter
+                  </a>
+                </p>
+              </div>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="material-symbols-outlined text-white text-3xl">email</span>
-              <p className="text-lg sm:text-xl text-white">
-                <strong>Email:</strong> <br />
-                <a href="mailto:support@chitchat.ai" className="hover:underline text-white">
-                  support@chitchat.ai
-                </a>
-              </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="material-symbols-outlined text-white text-3xl">phone</span>
-              <p className="text-lg sm:text-xl text-white">
-                <strong>Phone:</strong> <br />
-                <a href="tel:+18005551234" className="hover:underline text-white">
-                  +1 (800) 555-1234
-                </a>
-              </p>
-            </div>
-            <button
-              onClick={() => setIsContactModalOpen(false)}
-              className="mt-6 w-full bg-theme-main hover:bg-theme-dark text-white py-2 px-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
-            >
-              Close
-            </button>
           </div>
         </div>
-      )}
-
-      {/* Floating Button */}
-      <button
-        onClick={() => setIsContactModalOpen(true)}
-        className="fixed bottom-6 right-6 bg-theme-main hover:bg-theme-dark text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50"
-      >
-        <span className="material-symbols-outlined text-2xl">contact_support</span>
-      </button>
-
+      </section>
       <Footer />
     </>
   );
