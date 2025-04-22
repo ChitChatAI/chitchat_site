@@ -208,8 +208,8 @@ const ContactUs: React.FC = () => {
             playsInline
             className="hidden lg:block absolute inset-0 w-[90%] h-full object-cover opacity-90 object-top"
           />
-          {/* Remove image for tablets and mobile */}
-          <div className="absolute inset-0 w-[90%] bg-gradient-to-t from-theme-main/80 via-transparent to-black/50 z-10" />
+          {/* Gradient overlay for desktop only */}
+          <div className="hidden lg:block absolute inset-0 w-[90%] bg-gradient-to-t from-theme-main/80 via-transparent to-black/50 z-10"></div>
         </div>
       </section>
 
