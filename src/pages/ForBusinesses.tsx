@@ -67,27 +67,32 @@ const ForBusinesses: React.FC = () => {
       title: 'Reduce Support Costs',
       description: 'Replace call center agents or scale your operations without new hires.',
       icon: 'savings',
-    },
-    {
-      title: 'Improve Customer Experience',
-      description: 'Create human-like interactions that feel personal and emotionally intelligent.',
-      icon: 'sentiment_satisfied',
+      metric: 'Up to 40% cost reduction',
     },
     {
       title: 'Boost Retention & Upsells',
       description: 'Drive revenue through nuanced conversations, not generic sales scripts.',
       icon: 'trending_up',
+      metric: '20% increase in customer retention',
     },
     {
       title: 'Save Valuable Time',
       description: 'No writing prompts or managing AI yourself - we handle everything.',
       icon: 'schedule',
+      metric: '30% faster response times',
     },
     {
       title: 'Gain Competitive Edge',
       description: 'Stand out by offering truly believable AI support before your competitors.',
       icon: 'workspace_premium',
-    }
+      metric: '15% higher customer satisfaction',
+    },
+    {
+      title: 'Improve Customer Experience',
+      description: 'Create human-like interactions that feel personal and emotionally intelligent.',
+      icon: 'sentiment_satisfied',
+      metric: '95% positive feedback from users',
+    },
   ];
 
   return (
@@ -148,47 +153,68 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 px-4 sm:px-6 bg-white scroll-review">
+        <section className="py-20 px-6 sm:px-10 bg-white scroll-review"> {/* Increased padding */}
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
               What's Included When You Work With Us
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
-              {includedFeatures.map((feature, index) => (
-                <div
-                  key={index}
-                  className="scroll-review opacity-0 transform translate-y-10 bg-gray-50 rounded-xl p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
-                >
-                  <span className="material-symbols-outlined text-theme-main text-3xl mb-4 animate-wiggle-slow">
-                    check_circle
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-600">{feature.description}</p>
-                </div>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-gray-200 text-left text-sm sm:text-base">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="px-6 py-4 font-semibold text-gray-800">Feature</th>
+                    <th className="px-6 py-4 font-semibold text-gray-800">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {includedFeatures.map((feature, index) => (
+                    <tr
+                      key={index}
+                      className={`border-t border-gray-200 ${
+                        index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                      } hover:bg-gray-100 transition-colors`}
+                    >
+                      <td className="px-6 py-4 font-medium text-gray-800 flex items-center gap-3">
+                        <span className="material-symbols-outlined text-theme-main text-2xl">
+                          check_circle
+                        </span>
+                        {feature.title}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600">{feature.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
 
         {/* Business Values Section */}
-        <section className="py-16 px-4 sm:px-6 bg-gray-50 scroll-review">
+        <section className="py-20 px-6 sm:px-10 bg-gray-50 scroll-review"> {/* Increased padding */}
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
               How ChitChat Adds Value to Your Business
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="space-y-6">
               {businessValues.map((value, index) => (
                 <div
                   key={index}
-                  className="scroll-review opacity-0 transform translate-y-10 flex flex-col items-center text-center"
+                  className="scroll-review opacity-0 transform translate-y-10 transition-transform duration-500 hover:scale-105"
                 >
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-theme-light flex items-center justify-center mb-4">
-                    <span className="material-symbols-outlined text-theme-main text-2xl sm:text-3xl animate-wiggle-slow">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{value.title}</h3>
+                    <span className="material-symbols-outlined text-theme-main text-2xl sm:text-3xl">
                       {value.icon}
                     </span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">{value.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-600">{value.description}</p>
+                  <div className="relative w-full h-6 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className={`absolute top-0 left-0 h-full bg-theme-main rounded-full transition-all duration-500`}
+                      style={{ width: `${(index + 1) * 20}%` }} // Example dynamic width
+                    ></div>
+                  </div>
+                  <p className="text-sm sm:text-base text-gray-600 mt-2">{value.description}</p>
+                  <p className="text-sm sm:text-base text-theme-main font-semibold mt-1">{value.metric}</p>
                 </div>
               ))}
             </div>
@@ -202,7 +228,7 @@ const ForBusinesses: React.FC = () => {
               Trusted by forward-thinking teams
             </h2>
             <div className="flex flex-col items-center gap-4 sm:gap-6">
-              <div className="flex items-center justify-center bg-gray-100 rounded-full p-4 sm:p-6 shadow-sm">
+              <div className="flex items-center justify-center rounded-full p-4 sm:p-6 hover:shadow-lg transition-shadow duration-300">
                 <svg
                   viewBox="0 0 393.8 183"
                   className="h-10 sm:h-12 md:h-16 rain-logo"
@@ -217,62 +243,62 @@ const ForBusinesses: React.FC = () => {
                 </svg>
               </div>
             </div>
-            
-            <div className="mt-8 sm:mt-12 bg-gray-50 p-4 sm:p-6 md:p-8 rounded-md shadow-sm">
+
+            <div className="mt-8 sm:mt-12 bg-gray-50 p-4 sm:p-6 md:p-8 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300">
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                <span className="block text-theme-main font-semibold text-lg sm:text-xl mb-3 sm:mb-4">Rain's Success Story</span>
+                <span className="block text-theme-main font-semibold text-lg sm:text-xl mb-3 sm:mb-4">
+                  Rain's Success Story
+                </span>
                 Rain, our first major client, has seamlessly integrated our persona-based AI agent to modernize customer engagement. By leveraging emotionally intelligent interactions, Rain delivers a stylish and personalized experience that resonates with their audience, setting a new standard for customer support in the digital age.
               </p>
-              
+
               <div className="mt-8 sm:mt-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">What Rain's Team Says</h3>
-                
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
+                  What Rain's Team Says
+                </h3>
+
                 <ul className="relative border-l-0 sm:border-l-2 border-dotted border-theme-main pl-0 sm:pl-6 space-y-8">
-                  {/* Mobile-first approach with stacked layout */}
-                  <li className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                    <img 
-                      src="/profiles/teamLead.png" 
-                      alt="Team Lead" 
-                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
-                    />
-                    <div className="flex flex-col">
-                      <h4 className="text-lg font-semibold text-gray-800">Team Lead</h4>
-                      <p className="text-sm text-gray-500">Pieter van der Merwe</p>
-                      <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
-                        "The persona-based AI has transformed how we engage with customers, making every interaction feel personal and meaningful."
-                      </p>
-                    </div>
-                  </li>
-                  
-                  <li className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                    <img 
-                      src="/profiles/promptEngineer.png" 
-                      alt="Prompt Engineer" 
-                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
-                    />
-                    <div className="flex flex-col">
-                      <h4 className="text-lg font-semibold text-gray-800">Prompt Engineer</h4>
-                      <p className="text-sm text-gray-500">Emily Carter</p>
-                      <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
-                        "ChitChat's AI has been a game-changer, enabling us to fine-tune responses and deliver impactful interactions."
-                      </p>
-                    </div>
-                  </li>
-                  
-                  <li className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-                    <img 
-                      src="/profiles/softwareEngineer.png" 
-                      alt="Software Engineer" 
-                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
-                    />
-                    <div className="flex flex-col">
-                      <h4 className="text-lg font-semibold text-gray-800">Software Engineer</h4>
-                      <p className="text-sm text-gray-500">Olwethu Dlamini</p>
-                      <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
-                        "Integrating ChitChat's AI was seamless, and it has elevated our customer support to a whole new level."
-                      </p>
-                    </div>
-                  </li>
+                  {[
+                    {
+                      name: 'Team Lead',
+                      person: 'Pieter van der Merwe',
+                      image: '/profiles/teamLead.png',
+                      quote:
+                        'The persona-based AI has transformed how we engage with customers, making every interaction feel personal and meaningful.',
+                    },
+                    {
+                      name: 'Prompt Engineer',
+                      person: 'Emily Carter',
+                      image: '/profiles/promptEngineer.png',
+                      quote:
+                        "ChitChat's AI has been a game-changer, enabling us to fine-tune responses and deliver impactful interactions.",
+                    },
+                    {
+                      name: 'Software Engineer',
+                      person: 'Olwethu Dlamini',
+                      image: '/profiles/softwareEngineer.png',
+                      quote:
+                        "Integrating ChitChat's AI was seamless, and it has elevated our customer support to a whole new level.",
+                    },
+                  ].map((testimonial, index) => (
+                    <li
+                      key={index}
+                      className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left hover:bg-gray-100 p-4 rounded-md transition-colors duration-300"
+                    >
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
+                      />
+                      <div className="flex flex-col">
+                        <h4 className="text-lg font-semibold text-gray-800">{testimonial.name}</h4>
+                        <p className="text-sm text-gray-500">{testimonial.person}</p>
+                        <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
+                          "{testimonial.quote}"
+                        </p>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
