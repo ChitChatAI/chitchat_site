@@ -32,7 +32,7 @@ const Header: React.FC = () => {
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center justify-center space-x-6 lg:space-x-10">
                             <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Solutions</Link>
-                            <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Use Cases</Link>
+                            <Link to="/use-cases" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Use Cases</Link>
                             <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
                                 <span>For Businesses</span>
                                 <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
@@ -69,8 +69,8 @@ const Header: React.FC = () => {
                     {isMenuOpen && (
                         <div className="lg:hidden mt-4 py-2 bg-white rounded-md shadow-lg animate-fade-in">
                             <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
+                            <Link to="/use-cases" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Use Cases</Link>
                             <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
-                            <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Use Cases</Link>
                             <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
                                     <span>For Businesses</span>
@@ -208,6 +208,7 @@ const Header: React.FC = () => {
                                 </p>
                                 <div className="join-us_buttons-wrapper flex flex-col sm:flex-row justify-center sm:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full mt-10 animate-fade-in delay-500">
                                     <Link to="/contact-sales" className="bg-theme-main hover:bg-theme-dark text-white px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Get a demo</Link>
+                                    <Link to="/use-cases" className="bg-white hover:bg-gray-100 text-theme-main border border-theme-main px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Explore Use Cases</Link>
                                 </div>
                             </div>
                         </div>

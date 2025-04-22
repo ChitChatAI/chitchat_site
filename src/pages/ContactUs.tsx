@@ -198,9 +198,12 @@ const ContactUs: React.FC = () => {
           ref={testimonialRef}
           className="relative bg-black/80 pt-10 opacity-0 transition-opacity duration-700"
         >
-          <img
-            src="/contactUsPage/contactUsPage.png"
-            alt="Jessica Claire Leigh"
+          <video
+            src="/contactUsPage/contactUsPage.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-90 object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-theme-main/80 via-transparent to-black/50 z-10" />
