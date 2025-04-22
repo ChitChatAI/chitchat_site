@@ -76,7 +76,7 @@ const ContactUs: React.FC = () => {
       <NavBar />
       <section className="min-h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden bg-gradient-to-br from-white to-gray-50 pt-24">
         {/* Left - Form */}
-        <div ref={formRef} className="px-6 pt-6 sm:px-12 py-16 opacity-0 transition-opacity duration-700">
+        <div ref={formRef} className="px-6 sm:px-12 py-16 opacity-0 transition-opacity duration-700">
           <div className="max-w-xl mx-auto">
             <div style={{ minHeight: '6rem' }} className="flex items-center relative overflow-hidden">
               <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 whitespace-normal w-full text-left relative leading-snug">
@@ -86,7 +86,7 @@ const ContactUs: React.FC = () => {
                 </span>
               </h2>
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 mb-8 pt-6">
               Whether you're a solo creator or part of a team, we're here to help you transform your customer support. Reach out to us, and we'll respond within 2 hours.
             </p>
 
