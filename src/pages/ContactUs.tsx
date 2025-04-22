@@ -15,6 +15,7 @@ const ContactUs: React.FC = () => {
   const [selectedType, setSelectedType] = useState<'solo' | 'team' | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false); // State for contact modal
   const formRef = useRef<HTMLDivElement>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
   const [typedText, setTypedText] = useState('');
@@ -76,7 +77,7 @@ const ContactUs: React.FC = () => {
       <NavBar />
       <section className="min-h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden bg-gradient-to-br from-white to-gray-50 pt-24">
         {/* Left - Form */}
-        <div ref={formRef} className="px-6 sm:px-12 py-16 opacity-0 transition-opacity duration-700">
+        <div ref={formRef} className="px-6 sm:px-12 py-16 opacity-0 transition-opacity w-90% duration-700">
           <div className="max-w-xl mx-auto">
             <div style={{ minHeight: '6rem' }} className="flex items-center relative overflow-hidden">
               <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 whitespace-normal w-full text-left relative leading-snug">
@@ -196,48 +197,69 @@ const ContactUs: React.FC = () => {
         {/* Right - Visual/Testimonial Panel */}
         <div
           ref={testimonialRef}
-          className="relative bg-black/80 pt-10 opacity-0 transition-opacity duration-700"
+          className="relative pt-10 opacity-0 transition-opacity duration-700"
         >
+          {/* Video for desktop */}
           <video
             src="/contactUsPage/contactUsPage.mp4"
             autoPlay
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-90 object-top"
+            className="hidden lg:block absolute inset-0 w-[90%] h-full object-cover opacity-90 object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-theme-main/80 via-transparent to-black/50 z-10" />
-          <div className="relative z-20 p-10 flex flex-col justify-end h-full text-white">
-            <div className="space-y-6 bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-lg">
-              <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined text-white text-3xl">location_on</span>
-                <p className="text-lg sm:text-xl text-white">
-                  <strong>Address:</strong> <br />
-                  123 Innovation Drive, Tech City, TX 75001
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined text-white text-3xl">email</span>
-                <p className="text-lg sm:text-xl text-white">
-                  <strong>Email:</strong> <br />
-                  <a href="mailto:support@chitchat.ai" className="hover:underline text-white">
-                    support@chitchat.ai
-                  </a>
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <span className="material-symbols-outlined text-white text-3xl">phone</span>
-                <p className="text-lg sm:text-xl text-white">
-                  <strong>Phone:</strong> <br />
-                  <a href="tel:+18005551234" className="hover:underline text-white">
-                    +1 (800) 555-1234
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
+          {/* Remove image for tablets and mobile */}
+          <div className="absolute inset-0 w-[90%] bg-gradient-to-t from-theme-main/80 via-transparent to-black/50 z-10" />
         </div>
       </section>
+
+      {/* Contact Modal */}
+      {isContactModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="space-y-6 bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+            <div className="flex items-center gap-4">
+              <span className="material-symbols-outlined text-white text-3xl">location_on</span>
+              <p className="text-lg sm:text-xl text-white">
+                <strong>Address:</strong> <br />
+                123 Innovation Drive, Tech City, TX 75001
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="material-symbols-outlined text-white text-3xl">email</span>
+              <p className="text-lg sm:text-xl text-white">
+                <strong>Email:</strong> <br />
+                <a href="mailto:support@chitchat.ai" className="hover:underline text-white">
+                  support@chitchat.ai
+                </a>
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="material-symbols-outlined text-white text-3xl">phone</span>
+              <p className="text-lg sm:text-xl text-white">
+                <strong>Phone:</strong> <br />
+                <a href="tel:+18005551234" className="hover:underline text-white">
+                  +1 (800) 555-1234
+                </a>
+              </p>
+            </div>
+            <button
+              onClick={() => setIsContactModalOpen(false)}
+              className="mt-6 w-full bg-theme-main hover:bg-theme-dark text-white py-2 px-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Button */}
+      <button
+        onClick={() => setIsContactModalOpen(true)}
+        className="fixed bottom-6 right-6 bg-theme-main hover:bg-theme-dark text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50"
+      >
+        <span className="material-symbols-outlined text-2xl">contact_support</span>
+      </button>
+
       <Footer />
     </>
   );
