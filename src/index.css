@@ -117,7 +117,7 @@ body {
 @keyframes slideUp {
   0% {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
@@ -125,8 +125,25 @@ body {
   }
 }
 
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .animate-slide-up {
-  animation: slideUp 0.6s ease-out forwards;
+  animation: slideUp 0.7s ease-out forwards;
+  opacity: 1 !important; /* Ensure visibility */
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.7s ease-out forwards;
+  opacity: 1 !important; /* Ensure visibility */
 }
 
 /* Scroll animations */
@@ -138,28 +155,6 @@ body {
   to {
     opacity: 1;
     transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -187,14 +182,6 @@ body {
 
 .animate-slide-in-left {
   animation: slideInLeft 0.7s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.7s ease-out forwards;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.7s ease-out forwards;
 }
 
 .animate-slide-up-left {
@@ -285,6 +272,23 @@ body {
 
 .animate-bounce.delay-400 {
   animation-delay: 0.4s;
+}
+
+/* Bounce Once Animation */
+@keyframes bounceOnce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-once {
+  animation: bounceOnce 1s ease;
 }
 
 /* Code block styling */
@@ -461,6 +465,39 @@ section.relative.overflow-hidden {
 
 .icon-pulse {
   animation: pulse-icon 2s ease-in-out infinite;
+}
+
+/* Zoom Bounce Animation */
+@keyframes zoomBounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-zoom-bounce {
+  animation: zoomBounce 1.5s ease-in-out;
+}
+
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 1.5s infinite ease-in-out;
 }
 
 /* Mobile Enhancements */
