@@ -195,15 +195,15 @@ const ForBusinesses: React.FC = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
               How ChitChat Adds Value to Your Business
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 pt-18">
               {businessValues.map((value, index) => (
                 <div
                   key={index}
                   className="flex flex-col items-center text-center scroll-review opacity-0 transform translate-y-10 transition-transform duration-500 hover:scale-105"
                 >
-                  <div className="relative w-12 sm:w-16 h-40 bg-gray-200 rounded-lg overflow-hidden">
+                  <div className="relative w-12 sm:w-16 h-40 bg-gray-200 rounded-lg overflow-hidden group">
                     <div
-                      className="absolute bottom-0 left-0 w-full bg-theme-main rounded-lg transition-all duration-500"
+                      className="absolute bottom-0 left-0 w-full bg-theme-main rounded-lg transition-all duration-500 ease-out group-hover:h-full"
                       style={{ height: `${(index + 1) * 20}%` }} // Example dynamic height
                     ></div>
                   </div>
@@ -221,7 +221,7 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section className="bg-white py-12 sm:py-16 px-4 sm:px-6 scroll-review">
+        <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-12 sm:py-16 px-4 sm:px-6 scroll-review">
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 sm:mb-8">
               Trusted by forward-thinking teams
@@ -243,7 +243,7 @@ const ForBusinesses: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-8 sm:mt-12 bg-gray-50 p-4 sm:p-6 md:p-8 rounded-md shadow-md hover:shadow-lg transition-shadow duration-300">
+            <div className="mt-8 sm:mt-12 bg-white/80 p-6 sm:p-8 md:p-10 rounded-xl transition-shadow duration-300">
               <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
                 <span className="block text-theme-main font-semibold text-lg sm:text-xl mb-3 sm:mb-4">
                   Rain's Success Story
@@ -256,7 +256,7 @@ const ForBusinesses: React.FC = () => {
                   What Rain's Team Says
                 </h3>
 
-                <ul className="relative border-l-0 sm:border-l-2 border-dotted border-theme-main pl-0 sm:pl-6 space-y-8">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {[
                     {
                       name: 'Team Lead',
@@ -282,20 +282,18 @@ const ForBusinesses: React.FC = () => {
                   ].map((testimonial, index) => (
                     <li
                       key={index}
-                      className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left hover:bg-gray-100 p-4 rounded-md transition-colors duration-300"
+                      className="relative flex flex-col items-center text-center border border-gray-300 p-6 rounded-lg"
                     >
                       <img
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-theme-main"
+                        className="w-16 h-16 rounded-full border-4 border-theme-main mb-4"
                       />
-                      <div className="flex flex-col">
-                        <h4 className="text-lg font-semibold text-gray-800">{testimonial.name}</h4>
-                        <p className="text-sm text-gray-500">{testimonial.person}</p>
-                        <p className="text-gray-600 mt-2 w-full sm:w-auto max-w-xs sm:max-w-md md:max-w-lg mx-auto sm:mx-0">
-                          "{testimonial.quote}"
-                        </p>
-                      </div>
+                      <h4 className="text-lg font-semibold text-gray-800">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-500">{testimonial.person}</p>
+                      <p className="text-gray-600 mt-4 text-sm leading-relaxed">
+                        "{testimonial.quote}"
+                      </p>
                     </li>
                   ))}
                 </ul>
