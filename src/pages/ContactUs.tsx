@@ -51,11 +51,33 @@ const ContactUs: React.FC = () => {
     <>
       <NavBar />
       <main>
-        <section className="relative pt-24 pb-20 px-4 sm:px-6 overflow-hidden bg-center bg-cover">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#260a40] via-[#371a5e] to-[#260a40] z-0"></div>
-          <div className="absolute inset-0 bg-[url('/textures/dots.svg')] opacity-10 mix-blend-soft-light z-10"></div>
-          <div className="relative z-20 max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 animate-fade-in">Get in Touch</h1>
+        <section className="relative min-h-screen px-4 sm:px-6 overflow-hidden bg-center bg-cover scroll-review flex items-center">
+          {/* Mobile background image */}
+          <img
+            className="absolute inset-0 w-full h-full object-cover z-0 block sm:hidden"
+            src="/contactUsPage/contactUsPage.png"
+            alt="Contact Us background"
+          />
+
+          {/* Video background */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover z-0 hidden sm:block"
+            src="/contactUsPage/contactUsPage.mp4"
+            autoPlay
+            loop
+            muted
+          />
+
+          {/* Overlays */}
+          <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#260a40]/70 via-[#371a5e]/50 to-[#260a40]/70 mix-blend-multiply z-20" />
+          <div className="absolute inset-0 bg-[url('/textures/dots.svg')] opacity-10 mix-blend-soft-light z-20 animate-pulse-slow" />
+
+          {/* Content */}
+          <div className="relative z-30 w-full max-w-6xl mx-auto text-center flex flex-col justify-center items-center px-4">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 animate-fade-in">
+              Get in Touch
+            </h1>
             <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto animate-fade-in delay-150">
               Have questions about our services? Ready to transform your customer support? We're here to help.
             </p>
@@ -64,6 +86,7 @@ const ContactUs: React.FC = () => {
             </div>
           </div>
         </section>
+
 
         <section className="py-16 px-4 sm:px-6 bg-white relative">
           <div className="absolute inset-0 bg-[url('/textures/dots.svg')] opacity-5 pointer-events-none"></div>
