@@ -82,7 +82,7 @@ const ContactUs: React.FC = () => {
               <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 whitespace-normal w-full text-left relative leading-snug">
                 <span className="inline-block">
                   {typedText || '\u00A0'}
-                  <span className="animate-pulse inline-block">|</span>
+                  <span className="animate-pulse inline-block">.</span>
                 </span>
               </h2>
             </div>

@@ -190,31 +190,30 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Business Values Section */}
-        <section className="py-20 px-6 sm:px-10 bg-gray-50 scroll-review"> {/* Increased padding */}
+        <section className="py-20 px-6 sm:px-10 bg-gray-50 scroll-review">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
               How ChitChat Adds Value to Your Business
             </h2>
-            <div className="space-y-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
               {businessValues.map((value, index) => (
                 <div
                   key={index}
-                  className="scroll-review opacity-0 transform translate-y-10 transition-transform duration-500 hover:scale-105"
+                  className="flex flex-col items-center text-center scroll-review opacity-0 transform translate-y-10 transition-transform duration-500 hover:scale-105"
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{value.title}</h3>
-                    <span className="material-symbols-outlined text-theme-main text-2xl sm:text-3xl">
-                      {value.icon}
-                    </span>
-                  </div>
-                  <div className="relative w-full h-6 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="relative w-12 sm:w-16 h-40 bg-gray-200 rounded-lg overflow-hidden">
                     <div
-                      className={`absolute top-0 left-0 h-full bg-theme-main rounded-full transition-all duration-500`}
-                      style={{ width: `${(index + 1) * 20}%` }} // Example dynamic width
+                      className="absolute bottom-0 left-0 w-full bg-theme-main rounded-lg transition-all duration-500"
+                      style={{ height: `${(index + 1) * 20}%` }} // Example dynamic height
                     ></div>
                   </div>
-                  <p className="text-sm sm:text-base text-gray-600 mt-2">{value.description}</p>
-                  <p className="text-sm sm:text-base text-theme-main font-semibold mt-1">{value.metric}</p>
+                  <span className="material-symbols-outlined text-theme-main text-3xl sm:text-4xl mt-4">
+                    {value.icon}
+                  </span>
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-800 mt-2">
+                    {value.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-1">{value.metric}</p>
                 </div>
               ))}
             </div>
