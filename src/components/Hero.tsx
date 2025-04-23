@@ -301,20 +301,15 @@ const Hero: React.FC = () => {
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-theme-main/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
           </div>
 
-          <button
+            <button
             onClick={handleSend}
             disabled={loading || messageCount >= 5 || !input.trim()}
-            className={`mt-4 w-full bg-gradient-to-r from-theme-main to-purple-600 text-white py-3.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 relative overflow-hidden ${
-              loading || messageCount >= 5 || !input.trim() ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg hover:shadow-theme-main/20 hover:-translate-y-0.5'
+            className={`mt-4 w-full bg-theme-main text-white py-3.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${
+              loading || messageCount >= 5 || !input.trim() ? 'opacity-70 cursor-not-allowed' : 'hover:bg-theme-light hover:text-theme-main'
             }`}
-          >
-            <span className="relative z-10">
-              {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
-            </span>
-            {!(loading || messageCount >= 5 || !input.trim()) && (
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-theme-main opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
-            )}
-          </button>
+            >
+            {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
+            </button>
           
           {messageCount > 0 && (
             <p className="mt-2 text-xs text-gray-500 text-center">

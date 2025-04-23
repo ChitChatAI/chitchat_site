@@ -25,8 +25,8 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 place-items-center">
           <div className="text-center">
             <div className="flex items-center space-x-2 mb-4 justify-center">
-              <div className="w-8 h-8 bg-theme-main rounded-md flex items-center justify-center">
-                <span className="text-white font-bold text-lg">CC</span>
+              <div className="flex items-center justify-center">
+                <img src="/branding/chitchatAI.png" alt="ChitChat Logo" className="w-14 h-14" />
               </div>
               <div className="text-xl font-bold text-gray-800">ChitChat</div>
             </div>

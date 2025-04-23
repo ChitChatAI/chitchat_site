@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
@@ -98,12 +99,16 @@ const ForBusinesses: React.FC = () => {
           <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-20"></div>
           {/* Content */}
           <div className="relative z-30 text-center px-6">
-            <h1
+          <div className="h-32 flex items-center justify-center mb-6">
+            <h2
               ref={headerRef}
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg min-h-[4rem]"
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg min-h-[4rem]"
             >
-              {headerText || "AI That Fits Seamlessly\nInto Your Operations"}
-            </h1>
+              {headerText && headerText.split('\n').map((line, index) => (
+                <span key={index} className="block">{line}</span>
+              ))}
+            </h2>
+            </div>
             <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto">
               We provide AI solutions that seamlessly integrate into your business operations, enhancing customer engagement and driving results.
             </p>
@@ -115,28 +120,25 @@ const ForBusinesses: React.FC = () => {
 
         {/* Features and Business Values Section */}
         <section
-          className="relative py-20 px-6 sm:px-10 bg-cover bg-center bg-fixed scroll-review opacity-0 transition-opacity duration-700"
-          style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
+          className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
         >
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50 z-10"></div>
-          <div className="relative z-20 max-w-6xl mx-auto">
+          <div className="relative z-20 max-w-7xl mx-auto">
             {/* Features Section */}
             <div className="mb-20 scroll-review opacity-0 transition-opacity duration-700">
-              <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
                 What's Included When You Work With Us
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                 {includedFeatures.map((feature, index) => (
                   <div
                     key={index}
-                    className="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300"
+                    className="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     <h3 className="text-xl font-semibold text-gray-800 mb-4">{feature.title}</h3>
-                    <p className="text-gray-600">{feature.description}</p>
+                    <p className="text-gray-600 mb-4">{feature.description}</p>
                     <Link
                       to={`/features/${index}`}
-                      className="text-theme-main font-medium mt-4 inline-flex items-center hover:underline"
+                      className="text-theme-main font-medium inline-flex items-center hover:underline"
                     >
                       <ChevronDown size={16} className="mr-2 -rotate-90" /> Learn More
                     </Link>
@@ -147,21 +149,21 @@ const ForBusinesses: React.FC = () => {
 
             {/* Business Values Section */}
             <div className="scroll-review opacity-0 transition-opacity duration-700">
-              <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
                 How ChitChat Adds Value to Your Business
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                 {businessValues.map((value, index) => (
                   <div
                     key={index}
-                    className="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 text-center"
+                    className="bg-gradient-to-r from-white to-gray-50 border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 text-center"
                   >
-                    <span className="material-symbols-outlined text-theme-main text-4xl mb-4">
-                      {value.icon}
-                    </span>
-                    <h3 className="text-xl font-semibold text-gray-800">{value.title}</h3>
-                    <p className="text-gray-600 mt-2">{value.description}</p>
-                    <p className="text-theme-main font-bold mt-4">{value.metric}</p>
+                    <div className="flex items-center justify-center w-16 h-16 bg-theme-main text-white rounded-full mx-auto mb-4">
+                      <span className="material-symbols-outlined text-3xl">{value.icon}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{value.title}</h3>
+                    <p className="text-gray-600 mb-4">{value.description}</p>
+                    <p className="text-theme-main font-bold text-lg">{value.metric}</p>
                   </div>
                 ))}
               </div>
@@ -170,29 +172,40 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Call-to-Action Section */}
-        <section className="py-16 px-6 sm:px-10 bg-theme-main text-white scroll-review opacity-0 transition-opacity duration-700">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-extrabold mb-6">
-              Ready to bring ChitChat into your business?
+        <section
+          className="relative py-16 px-6 sm:px-10 text-white bg-cover bg-center scroll-review"
+          style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/60 z-10"></div>
+          <motion.div
+            className="relative z-20 max-w-3xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              Ready to Elevate Your Business?
             </h2>
-            <p className="text-lg mb-8">
-              Let us help you transform your customer experience with cutting-edge AI solutions tailored to your needs.
+            <p className="text-lg sm:text-xl mb-8">
+              Discover how ChitChat can transform your customer experience with tailored AI solutions.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex justify-center gap-4">
               <Link
                 to="/contact-us"
-                className="bg-white text-theme-main px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-white text-black px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg hover:bg-gray-100 hover:text-theme-main transition-all"
               >
-                Let's Talk
+                Contact Us
               </Link>
               <Link
                 to="/book-call"
-                className="bg-theme-dark text-white px-6 py-3 rounded-full font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-theme-main text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg hover:bg-theme-dark transition-all"
               >
-                Book a Strategy Call
+                Book a Call
               </Link>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
       <Footer />

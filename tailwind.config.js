@@ -32,10 +32,10 @@ export default {
           950: '#2e1065',
         },
         theme: {
-          main: 'hsl(269, 36%, 49%)',      // Our new main theme color
-          dark: 'hsl(269, 36%, 39%)',       // Darker version for hover states
-          light: 'hsl(269, 36%, 95%)',      // Lighter version for backgrounds
-          gray: 'hsl(270, 5%, 40%)',        // Gray that complements our theme
+          main: '#4b236b',
+          dark: '#3a1b54',
+          light: '#5c2f7e',
+          gray: 'hsl(270, 5%, 40%)',
         },
         langchain: {
           green: '#10A37F',

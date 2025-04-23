@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import { LocationOutline, CallOutline, LogoWhatsapp, LogoLinkedin, LogoTwitter } from 'react-ionicons';
+import { LocationOutline, MailOutline, CallOutline, LogoLinkedin, LogoTwitter } from 'react-ionicons';
 
 const ContactUs: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -16,12 +16,16 @@ const ContactUs: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+  const videoPanelRef = useRef<HTMLDivElement>(null);
   const [typedText, setTypedText] = useState('');
   const fullText = "Let's Build Better Conversations";
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen((prev) => !prev);
+    if (!isModalOpen && videoPanelRef.current) {
+      videoPanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   useEffect(() => {
@@ -40,7 +44,7 @@ const ContactUs: React.FC = () => {
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add(el.classList.contains('slide-left') ? 'animate-slide-in-left' : 'animate-slide-in-right');
+          el.classList.add('animate-slide-up');
         }
       });
     };
@@ -48,8 +52,8 @@ const ContactUs: React.FC = () => {
     const handleLoadAnimations = () => {
       document.querySelectorAll('.load-animation').forEach((el, index) => {
         setTimeout(() => {
-          el.classList.add(el.classList.contains('slide-left') ? 'animate-slide-in-left' : 'animate-slide-in-right');
-        }, index * 200);
+          el.classList.add('animate-slide-up');
+        }, index * 150);
       });
     };
 
@@ -89,21 +93,21 @@ const ContactUs: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-theme-main/80 via-transparent to-gray-50 z-10"></div>
 
         {/* Content */}
-        <div className="relative z-20 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 sm:px-12 py-16">
+        <div className="relative z-20 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 px-4 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
           {/* Form */}
           <div
             ref={formRef}
-            className="bg-white shadow-lg rounded-lg p-8 scroll-review slide-left opacity-0 transition-opacity duration-700 load-animation"
+            className="bg-white shadow-xl rounded-lg p-6 sm:p-8 lg:p-10 scroll-review opacity-0 transition-transform duration-700 load-animation transform translate-y-10"
           >
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Get in Touch</h2>
             {isSubmitted ? (
               <div className="bg-green-50 border border-green-100 rounded-lg p-6 text-center">
-                <h3 className="text-xl font-semibold text-green-700 mb-2">Message Sent!</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-green-700 mb-2">Message Sent!</h3>
                 <p className="text-green-600">Thanks for reaching out. We'll get back to you soon.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <input
                     type="text"
                     name="firstName"
@@ -163,14 +167,55 @@ const ContactUs: React.FC = () => {
           </div>
 
           {/* Contact Video Background */}
-          <div className="relative bg-black rounded-lg overflow-hidden shadow-lg scroll-review slide-right opacity-0 transition-opacity duration-700 load-animation">
+          <div
+            ref={videoPanelRef}
+            className="relative bg-black rounded-lg overflow-hidden shadow-xl scroll-review opacity-0 transition-transform duration-700 load-animation transform translate-y-10"
+          >
             <video
               className="absolute inset-0 w-full h-full object-cover"
-              src="/public/contactUsPage/contactUsPage.mp4"
+              src="/contactUsPage/contactUsPage.mp4"
               autoPlay
               loop
               muted
             ></video>
+            {isModalOpen && (
+              <div className="absolute inset-0 bg-black/70 flex flex-col items-start justify-center text-white p-6 sm:p-8 animate-fade-in space-y-4 sm:space-y-6">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 animate-slide-up border-b-2 border-theme-main pb-2 w-full text-center">
+                  Contact Details
+                </h2>
+                <div className="space-y-3 sm:space-y-4 w-full">
+                  <div className="flex items-center space-x-3 animate-slide-up">
+                    <LocationOutline color="#fff" height="20px" width="20px" />
+                    <p className="text-sm sm:text-base">123 Business Lane, Suite 456, Tech City, TX 78901</p>
+                  </div>
+                  <div className="flex items-center space-x-3 animate-slide-up">
+                    <CallOutline color="#fff" height="20px" width="20px" />
+                    <p className="text-sm sm:text-base">+1 (123) 456-7890</p>
+                  </div>
+                  <div className="flex items-center space-x-3 animate-slide-up">
+                    <MailOutline color="#fff" height="20px" width="20px" />
+                    <p className="text-sm sm:text-base">contact@chitchat.com</p>
+                  </div>
+                  <div className="flex items-center space-x-3 animate-slide-up">
+                    <LogoLinkedin color="#fff" height="20px" width="20px" />
+                    <a
+                      href="https://www.linkedin.com/company/chitchat"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm sm:text-base text-theme-main hover:underline"
+                    >
+                      linkedin.com/company/chitchat
+                    </a>
+                  </div>
+                </div>
+                <button
+                  onClick={toggleModal}
+                  className="mt-4 sm:mt-6 bg-theme-main text-white py-2 px-4 rounded-md hover:bg-theme-dark transition-all animate-slide-up self-center"
+                >
+                  Close
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -183,44 +228,6 @@ const ContactUs: React.FC = () => {
         <LocationOutline color="#fff" height="24px" width="24px" />
       </button>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center animate-fade-in">
-          <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full relative transform transition-transform duration-300 scale-95">
-            <button
-              onClick={toggleModal}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-            >
-              ✕
-            </button>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Contact Details</h2>
-            <div className="space-y-4">
-              <p className="text-gray-700">
-                <strong>Address:</strong> 123 Business Lane, Suite 456, Tech City, TX 78901
-              </p>
-              <p className="text-gray-700">
-                <strong>LinkedIn:</strong>{' '}
-                <a
-                  href="https://www.linkedin.com/company/chitchat"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-theme-main hover:underline"
-                >
-                  linkedin.com/company/chitchat
-                </a>
-              </p>
-            </div>
-            <div className="mt-6">
-              <button
-                onClick={toggleModal}
-                className="w-full bg-theme-main text-white py-3 rounded-md font-medium hover:bg-theme-dark transition-all"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       <Footer />
     </>
   );
