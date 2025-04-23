@@ -32,7 +32,6 @@ const Header: React.FC = () => {
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center justify-center space-x-6 lg:space-x-10">
                             <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Solutions</Link>
-                            <Link to="/use-cases" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Use Cases</Link>
                             <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
                                 <span>For Businesses</span>
                                 <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
@@ -69,7 +68,6 @@ const Header: React.FC = () => {
                     {isMenuOpen && (
                         <div className="lg:hidden mt-4 py-2 bg-white rounded-md shadow-lg animate-fade-in">
                             <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
-                            <Link to="/use-cases" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Use Cases</Link>
                             <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                             <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
@@ -208,7 +206,27 @@ const Header: React.FC = () => {
                                 </p>
                                 <div className="join-us_buttons-wrapper flex flex-col sm:flex-row justify-center sm:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full mt-10 animate-fade-in delay-500">
                                     <Link to="/contact-sales" className="bg-theme-main hover:bg-theme-dark text-white px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Get a demo</Link>
-                                    <Link to="/use-cases" className="bg-white hover:bg-gray-100 text-theme-main border border-theme-main px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Explore Use Cases</Link>
+                                    
+                                    {/* Modernized Futuristic Button with Purple Theme */}
+                                    <Link 
+                                        to="/use-cases" 
+                                        className="group relative overflow-hidden bg-transparent backdrop-blur-sm border border-white/20 text-white px-8 py-3 text-sm sm:px-10 sm:py-4 sm:text-base rounded-xl font-medium transition-all duration-300 ease-out hover:border-purple-400/50 hover:text-purple-50 font-sans"
+                                    >
+                                        {/* Animated gradient background with purple emphasis */}
+                                        <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/20 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
+                                        
+                                        {/* Glow effect - changed to purple */}
+                                        <span className="absolute inset-0 w-full h-full bg-transparent border-2 border-transparent rounded-xl group-hover:border-purple-400/30 group-hover:shadow-[0_0_15px_rgba(147,51,234,0.5)] transition-all duration-300"></span>
+                                        
+                                        {/* Top light reflection - changed to purple */}
+                                        <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400/50 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+                                        
+                                        {/* Content with icon */}
+                                        <span className="relative flex items-center justify-center gap-2">
+                                            <span>Explore Use Cases</span>
+                                            <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                                        </span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

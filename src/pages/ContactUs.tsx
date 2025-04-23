@@ -18,6 +18,11 @@ const ContactUs: React.FC = () => {
   const formRef = useRef<HTMLDivElement>(null);
   const [typedText, setTypedText] = useState('');
   const fullText = "Let's Build Better Conversations";
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     let i = 0;
@@ -35,12 +40,21 @@ const ContactUs: React.FC = () => {
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add('animate-slide-up');
+          el.classList.add(el.classList.contains('slide-left') ? 'animate-slide-in-left' : 'animate-slide-in-right');
         }
       });
     };
 
+    const handleLoadAnimations = () => {
+      document.querySelectorAll('.load-animation').forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add(el.classList.contains('slide-left') ? 'animate-slide-in-left' : 'animate-slide-in-right');
+        }, index * 200);
+      });
+    };
+
     handleScroll(); // Trigger on load
+    handleLoadAnimations();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -77,7 +91,10 @@ const ContactUs: React.FC = () => {
         {/* Content */}
         <div className="relative z-20 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 px-6 sm:px-12 py-16">
           {/* Form */}
-          <div ref={formRef} className="bg-white shadow-lg rounded-lg p-8 scroll-review opacity-0 transition-opacity duration-700">
+          <div
+            ref={formRef}
+            className="bg-white shadow-lg rounded-lg p-8 scroll-review slide-left opacity-0 transition-opacity duration-700 load-animation"
+          >
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
             {isSubmitted ? (
               <div className="bg-green-50 border border-green-100 rounded-lg p-6 text-center">
@@ -145,67 +162,65 @@ const ContactUs: React.FC = () => {
             )}
           </div>
 
-          {/* Contact Details */}
-          <div className="bg-gradient-to-br from-theme-main/80 to-gray-800 text-white rounded-lg p-8 shadow-lg scroll-review opacity-0 transition-opacity duration-700">
-            <h2 className="text-2xl font-bold mb-6">Contact Details</h2>
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="hover:scale-105 transition-transform">
-                  <LocationOutline color={'#fff'} height="28px" width="28px" />
-                </div>
-                <p>
-                  <strong>Address:</strong><br />
-                  123 Innovation Drive, Tech City, TX 75001
-                </p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="hover:scale-105 transition-transform">
-                  <CallOutline color={'#fff'} height="28px" width="28px" />
-                </div>
-                <p>
-                  <strong>Phone:</strong><br />
-                  <a href="tel:+18005551234" className="hover:underline">
-                    +1 (800) 555-1234
-                  </a>
-                </p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="hover:scale-105 transition-transform">
-                  <LogoWhatsapp color={'#fff'} height="28px" width="28px" />
-                </div>
-                <p>
-                  <strong>WhatsApp:</strong><br />
-                  <a href="https://wa.me/18005551234" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                    Chat with us on WhatsApp
-                  </a>
-                </p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="hover:scale-105 transition-transform">
-                  <LogoLinkedin color={'#fff'} height="28px" width="28px" />
-                </div>
-                <p>
-                  <strong>LinkedIn:</strong><br />
-                  <a href="https://linkedin.com/company/chitchat-ai" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                    Follow us on LinkedIn
-                  </a>
-                </p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="hover:scale-105 transition-transform">
-                  <LogoTwitter color={'#fff'} height="28px" width="28px" />
-                </div>
-                <p>
-                  <strong>Twitter:</strong><br />
-                  <a href="https://twitter.com/chitchat_ai" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                    Follow us on Twitter
-                  </a>
-                </p>
-              </div>
-            </div>
+          {/* Contact Video Background */}
+          <div className="relative bg-black rounded-lg overflow-hidden shadow-lg scroll-review slide-right opacity-0 transition-opacity duration-700 load-animation">
+            <video
+              className="absolute inset-0 w-full h-full object-cover"
+              src="/public/contactUsPage/contactUsPage.mp4"
+              autoPlay
+              loop
+              muted
+            ></video>
           </div>
         </div>
       </section>
+
+      {/* Floating Button */}
+      <button
+        onClick={toggleModal}
+        className="fixed bottom-6 right-6 bg-theme-main text-white p-4 rounded-full shadow-lg hover:bg-theme-dark transition-all transform hover:scale-105 z-50"
+      >
+        <LocationOutline color="#fff" height="24px" width="24px" />
+      </button>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center animate-fade-in">
+          <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full relative transform transition-transform duration-300 scale-95">
+            <button
+              onClick={toggleModal}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Contact Details</h2>
+            <div className="space-y-4">
+              <p className="text-gray-700">
+                <strong>Address:</strong> 123 Business Lane, Suite 456, Tech City, TX 78901
+              </p>
+              <p className="text-gray-700">
+                <strong>LinkedIn:</strong>{' '}
+                <a
+                  href="https://www.linkedin.com/company/chitchat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-theme-main hover:underline"
+                >
+                  linkedin.com/company/chitchat
+                </a>
+              </p>
+            </div>
+            <div className="mt-6">
+              <button
+                onClick={toggleModal}
+                className="w-full bg-theme-main text-white py-3 rounded-md font-medium hover:bg-theme-dark transition-all"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <Footer />
     </>
   );

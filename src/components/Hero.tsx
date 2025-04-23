@@ -155,8 +155,8 @@ const Hero: React.FC = () => {
 
         <div className="scroll-review mb-6 flex flex-wrap justify-center gap-4 sm:gap-6 opacity-0 transform translate-y-10">
           <button
-            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition ${activePersona === 'samantha'
-              ? 'bg-theme-main text-white'
+            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition-all duration-300 ${activePersona === 'samantha'
+              ? 'bg-theme-main text-white shadow-md shadow-theme-main/20'
               : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
               }`}
             onClick={() => setActivePersona('samantha')}
@@ -164,100 +164,163 @@ const Hero: React.FC = () => {
             Samantha
           </button>
           <button
-            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition ${activePersona === 'arin'
-              ? 'bg-theme-main text-white'
+            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition-all duration-300 ${activePersona === 'arin'
+              ? 'bg-theme-main text-white shadow-md shadow-theme-main/20'
               : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
               }`}
             onClick={() => setActivePersona('arin')}
           >
             Arin
           </button>
-
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6 transition-all">
-          {/* Samantha/Arin Panel */}
-          <div className="scroll-review bg-white p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
-            <h3 className="text-sm sm:text-base font-semibold text-gray-500 mb-2">
-              {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
-            </h3>
-            <div className="space-y-2">
-              {(activePersona === 'samantha' ? samanthaHistory : arinHistory).map((message, index) => (
-                <div
-                  key={index}
-                  className={`${index % 2 === 0
-                    ? 'bg-theme-main text-white'
-                    : 'bg-theme-light text-gray-800'
-                    } px-4 py-3 rounded-lg shadow-md border text-sm`}
-                >
-                  {message}
-                </div>
-              ))}
-              {/* Show typing indicator */}
-              {typingIndicator && (
-                <div className="text-gray-500 text-sm flex items-center">
-                  {typingIndicator}
-                </div>
-              )}
-              {!input && (
-                <div className="mt-4">
-                  <p className="text-sm font-semibold text-gray-500">Suggestions:</p>
-                  <ul className="list-disc list-inside text-sm text-gray-600">
-                    {suggestions.map((suggestion, index) => (
-                      <li key={index}>{suggestion}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 transition-all">
+          {/* Samantha/Arin Panel - Without Top Border */}
+          <div className="scroll-review opacity-0 transform translate-y-10 group">
+            <div className="bg-white p-6 rounded-2xl border border-gray-300 text-left h-[320px] sm:h-[360px] overflow-y-auto backdrop-blur-sm transition-all duration-500 relative">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm sm:text-base font-semibold text-gray-700 flex items-center">
+                  <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                  {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
+                </h3>
+                <span className="text-xs text-gray-400 italic">ChitChat AI</span>
+              </div>
+              
+              <div className="space-y-3 pb-2">
+                {(activePersona === 'samantha' ? samanthaHistory : arinHistory).map((message, index) => (
+                  <div
+                    key={index}
+                    className="transform transition-all duration-300 hover:scale-[1.01] hover:-translate-y-0.5"
+                  >
+                    <div
+                      className={`px-4 py-3 rounded-xl border border-gray-300 text-sm transition-all ${
+                        index % 2 === 0
+                          ? 'bg-gradient-to-br from-theme-main to-theme-main/90 text-white'
+                          : 'bg-gradient-to-br from-theme-light to-theme-light/90 text-gray-800'
+                      }`}
+                    >
+                      {message}
+                    </div>
+                  </div>
+                ))}
 
-          {/* ChatGPT Panel */}
-          <div className="scroll-review bg-white p-4 sm:p-6 rounded-lg shadow border border-gray-200 text-left h-64 sm:h-72 overflow-y-auto opacity-0 transform translate-y-10">
-            <h3 className="text-sm sm:text-base font-semibold text-gray-500 mb-2">ChatGPT responds:</h3>
-            <div className="space-y-2">
-              {gptReply ? (
-                <div className="scroll-review bg-theme-light px-4 py-3 rounded-lg shadow-md border text-sm text-gray-800 animate-fade-in">
-                  {gptReply}
-                </div>
-              ) : (
-                !input && ( // Hide suggestions when the user is typing
-                  <div className="mt-4">
-                    <p className="text-sm font-semibold text-gray-500">Suggestions:</p>
-                    <ul className="list-disc list-inside text-sm text-gray-600">
+                {/* Enhanced typing indicator */}
+                {typingIndicator && (
+                  <div className="flex items-center gap-2 text-gray-500 text-sm px-2 animate-fade-in">
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-theme-main rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-theme-main rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-theme-main rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    </div>
+                    <span>{typingIndicator}</span>
+                  </div>
+                )}
+                
+                {/* Improved suggestions */}
+                {!input && (
+                  <div className="mt-5 bg-gray-50 rounded-lg p-3 border border-gray-100">
+                    <p className="text-sm font-medium text-gray-600 mb-2">Try asking about:</p>
+                    <ul className="space-y-1.5">
                       {suggestions.map((suggestion, index) => (
-                        <li key={index}>{suggestion}</li>
+                        <li 
+                          key={index} 
+                          className="text-sm text-gray-600 hover:text-theme-main cursor-pointer transition-colors pl-3 border-l-2 border-gray-200 hover:border-theme-main"
+                          onClick={() => setInput(suggestion)}
+                        >
+                          {suggestion}
+                        </li>
                       ))}
                     </ul>
                   </div>
-                )
-              )}
-              {/* Show typing indicator */}
-              {typingIndicator && (
-                <div className="text-gray-500 text-sm flex items-center animate-fade-in">
-                  {loading ? 'ChatGPT typing...' : typingIndicator}
-                </div>
-              )}
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* ChatGPT Panel - Without Top Border */}
+          <div className="scroll-review opacity-0 transform translate-y-10 group">
+            <div className="bg-white p-6 rounded-2xl border border-gray-300 text-left h-[320px] sm:h-[360px] overflow-y-auto backdrop-blur-sm transition-all duration-500 relative">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm sm:text-base font-semibold text-gray-700 flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
+                  ChatGPT responds:
+                </h3>
+                <span className="text-xs text-gray-400 italic">Standard AI</span>
+              </div>
+              
+              <div className="space-y-3 pb-2">
+                {gptReply ? (
+                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 px-4 py-3 rounded-xl border border-gray-300 text-sm text-gray-800">
+                    {gptReply}
+                  </div>
+                ) : (
+                  !input && (
+                    <div className="mt-5 bg-gray-50 rounded-lg p-3 border border-gray-100">
+                      <p className="text-sm font-medium text-gray-600 mb-2">Try asking about:</p>
+                      <ul className="space-y-1.5">
+                        {suggestions.map((suggestion, index) => (
+                          <li 
+                            key={index} 
+                            className="text-sm text-gray-600 hover:text-blue-500 cursor-pointer transition-colors pl-3 border-l-2 border-gray-200 hover:border-blue-500"
+                            onClick={() => setInput(suggestion)}
+                          >
+                            {suggestion}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                )}
+                
+                {/* Enhanced typing indicator */}
+                {typingIndicator && (
+                  <div className="flex items-center gap-2 text-gray-500 text-sm px-2 animate-fade-in">
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                    </div>
+                    <span>{loading ? 'ChatGPT typing...' : typingIndicator}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>  
 
+        {/* Beautified Input Area */}
         <div className="scroll-review mt-10 max-w-xl mx-auto opacity-0 transform translate-y-10">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-theme-main focus:border-theme-main transition-all duration-200"
-            placeholder="Type your message here..."
-            disabled={messageCount >= 5}
-          />
+          <div className="relative group">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="w-full px-5 py-4 border border-gray-200 rounded-xl shadow-sm text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 bg-white/80 backdrop-blur-sm"
+              placeholder="Type your message here..."
+              disabled={messageCount >= 5}
+            />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-theme-main/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+          </div>
 
           <button
             onClick={handleSend}
-            disabled={loading || messageCount >= 5}
-            className="mt-4 w-full bg-theme-main hover:bg-[#3c1668] text-white py-3 rounded-lg text-sm sm:text-base font-medium transition"
+            disabled={loading || messageCount >= 5 || !input.trim()}
+            className={`mt-4 w-full bg-gradient-to-r from-theme-main to-purple-600 text-white py-3.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 relative overflow-hidden ${
+              loading || messageCount >= 5 || !input.trim() ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg hover:shadow-theme-main/20 hover:-translate-y-0.5'
+            }`}
           >
-            {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
+            <span className="relative z-10">
+              {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
+            </span>
+            {!(loading || messageCount >= 5 || !input.trim()) && (
+              <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-theme-main opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
+            )}
           </button>
+          
+          {messageCount > 0 && (
+            <p className="mt-2 text-xs text-gray-500 text-center">
+              {5 - messageCount} message{5 - messageCount !== 1 ? 's' : ''} remaining
+            </p>
+          )}
         </div>
       </div>
     </section>

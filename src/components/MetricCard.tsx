@@ -7,9 +7,10 @@ interface MetricCardProps {
 
 const MetricCard: React.FC<MetricCardProps> = ({ value, label }) => {
   return (
-    <div className="flex flex-col items-center bg-gradient-to-b from-theme-main/10 to-white rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl">
-      <span className="text-4xl font-extrabold text-theme-main mb-2">{value}</span>
-      <span className="text-base text-gray-600 text-center">{label}</span>
+    <div className="flex flex-col items-center bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1">
+      <span className="text-5xl font-extrabold text-theme-main mb-3">{value}</span>
+      <span className="text-sm sm:text-base text-gray-500 text-center">{label}</span>
+      <div className="mt-4 w-12 h-1 bg-theme-main rounded-full"></div>
     </div>
   );
 };

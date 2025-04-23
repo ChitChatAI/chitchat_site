@@ -67,7 +67,7 @@ const Features: React.FC = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg h-full flex"
+              className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out h-full flex"
             >
               <FeatureCard
                 title={feature.title}
