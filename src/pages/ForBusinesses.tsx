@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion'; // Added useAnimation
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
@@ -9,6 +9,7 @@ const ForBusinesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
   const headerRef = useRef<HTMLHeadingElement>(null);
+  const controls = useAnimation(); // Animation controls for parallax
 
   useEffect(() => {
     let i = 0;
@@ -35,6 +36,10 @@ const ForBusinesses: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    controls.start({ opacity: 1, y: 0 }); // Trigger parallax animation on load
+  }, [controls]);
 
   const includedFeatures = [
     { title: 'Custom Persona Design', description: 'Psychology-driven personas that understand emotional nuance.' },
@@ -84,7 +89,12 @@ const ForBusinesses: React.FC = () => {
       <NavBar />
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center text-white scroll-review opacity-0 transition-opacity duration-700">
+        <motion.section
+          className="relative min-h-screen flex items-center justify-center text-white scroll-review opacity-0 transition-opacity duration-700"
+          initial={{ opacity: 0, y: 50 }} // Parallax animation starts here
+          animate={controls} // Controlled by framer-motion
+          transition={{ duration: 1, ease: 'easeOut' }}
+        >
           {/* Video background */}
           <video
             className="absolute inset-0 w-full h-full object-cover z-0"
@@ -99,15 +109,15 @@ const ForBusinesses: React.FC = () => {
           <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-20"></div>
           {/* Content */}
           <div className="relative z-30 text-center px-6">
-          <div className="h-32 flex items-center justify-center mb-6">
-            <h2
-              ref={headerRef}
-              className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg min-h-[4rem]"
-            >
-              {headerText && headerText.split('\n').map((line, index) => (
-                <span key={index} className="block">{line}</span>
-              ))}
-            </h2>
+            <div className="h-32 flex items-center justify-center mb-6">
+              <h2
+                ref={headerRef}
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg min-h-[4rem]"
+              >
+                {headerText && headerText.split('\n').map((line, index) => (
+                  <span key={index} className="block">{line}</span>
+                ))}
+              </h2>
             </div>
             <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto">
               We provide AI solutions that seamlessly integrate into your business operations, enhancing customer engagement and driving results.
@@ -116,7 +126,7 @@ const ForBusinesses: React.FC = () => {
               <ChevronDown size={32} className="animate-bounce mx-auto" />
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Features and Business Values Section */}
         <section
