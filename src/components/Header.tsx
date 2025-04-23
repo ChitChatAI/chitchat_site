@@ -211,25 +211,6 @@ const Header: React.FC = () => {
                                     <Link to="/contact-sales" className="bg-theme-main hover:bg-theme-dark text-white px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Get a demo</Link>
 
                                     {/* Modernized Futuristic Button with Purple Theme */}
-                                    <Link
-                                        to="/use-cases"
-                                        className="group relative overflow-hidden bg-transparent backdrop-blur-sm border border-white/20 text-white px-8 py-3 text-sm sm:px-10 sm:py-4 sm:text-base rounded-xl font-medium transition-all duration-300 ease-out hover:border-purple-400/50 hover:text-purple-50 font-sans"
-                                    >
-                                        {/* Animated gradient background with purple emphasis */}
-                                        <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-purple-500/20 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></span>
-
-                                        {/* Glow effect - changed to purple */}
-                                        <span className="absolute inset-0 w-full h-full bg-transparent border-2 border-transparent rounded-xl group-hover:border-purple-400/30 group-hover:shadow-[0_0_15px_rgba(147,51,234,0.5)] transition-all duration-300"></span>
-
-                                        {/* Top light reflection - changed to purple */}
-                                        <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400/50 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-
-                                        {/* Content with icon */}
-                                        <span className="relative flex items-center justify-center gap-2">
-                                            <span>Explore Use Cases</span>
-                                            <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
-                                        </span>
-                                    </Link>
                                 </div>
                             </div>
                         </div>
