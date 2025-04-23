@@ -42,7 +42,6 @@ const NavBar: React.FC = () => {
                         <Link to="/solutions" className={getNavLinkClass("/solutions")}>Solutions</Link>
                         <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-green'} transition-colors duration-200 text-sm md:text-base ${location.pathname === '/partnerships' ? 'text-theme-main font-semibold' : ''}`}>
                             <span>For Businesses</span>
-                            <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                         </Link>
                         <Link to="/blog" className={`flex items-center ${getNavLinkClass("/blog")}`}>
                             <span>Blog</span>
@@ -74,7 +73,6 @@ const NavBar: React.FC = () => {
                         <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                             <div className="flex items-center">
                                 <span>For Businesses</span>
-    
                             </div>
                         </Link>
                         <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
