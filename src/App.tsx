@@ -14,6 +14,7 @@ import CookiePolicy from './pages/CookiePolicy';
 import LoadingSpinner from './components/LoadingSpinner';
 import ScrollToTop from './components/ScrollToTop';
 import ContactUs from './pages/ContactUs'; 
+import UseCases from './pages/UseCases'; // Import UseCases page
 import './App.css';
 
 const Home: React.FC = () => (
@@ -61,7 +62,8 @@ const App: React.FC = () => {
           <Route path="/partnerships" element={<ForBusinesses />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/loading" element={<LoadingPage />} />
-          <Route path="/contact-us" element={<ContactUs />} /> {/* New route */}
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/use-cases" element={<UseCases />} /> 
         </Routes>
         <CookieBanner />
       </div>
