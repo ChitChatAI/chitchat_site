@@ -74,7 +74,7 @@ const NavBar: React.FC = () => {
                         <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                             <div className="flex items-center">
                                 <span>For Businesses</span>
-                                <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
+    
                             </div>
                         </Link>
                         <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
