@@ -29,7 +29,7 @@ const Header: React.FC = () => {
                                     className="w-10 h-10 w-auto"
                                 />
                             <Link to="/" className={`text-2xl sm:text-3xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'} transition duration-300 ml-2`}>ChitChat</Link>
-                            <div className="w-2.5 h-2.5 rounded-full bg-theme-main absolute bottom-0.5 -right-3 animated-dot"></div>
+                            
                         </div>
 
                         {/* Desktop Navigation */}
