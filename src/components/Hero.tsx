@@ -15,7 +15,7 @@ if (!apiKey) {
   console.error('[ERROR] API key is missing or undefined!');
 }
 
-const Hero: React.FC = () => {
+const Hero: React.FC<{ id?: string }> = ({ id }) => {
   const [activePersona, setActivePersona] = useState<'samantha' | 'arin'>('samantha');
   const [input, setInput] = useState('');
   const [showReplies, setShowReplies] = useState(false);
@@ -144,7 +144,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="pt-20 pb-16 md:pb-28 bg-gradient-to-b from-white via-gray-50 to-gray-100 font-[Satoshi]">
+    <section id={id} className="pt-20 pb-16 md:pb-28 bg-gradient-to-b from-white via-gray-50 to-gray-100 font-[Satoshi]">
       <div className="container mx-auto px-6 sm:px-4 text-center">
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
           Human Augmented AI <span className="text-[#260a40]">in Action</span>
@@ -183,7 +183,6 @@ const Hero: React.FC = () => {
                   <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                   {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
                 </h3>
-                <span className="text-xs text-gray-400 italic">ChitChat AI</span>
               </div>
               
               <div className="space-y-3 pb-2">
@@ -245,7 +244,6 @@ const Hero: React.FC = () => {
                   <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
                   ChatGPT responds:
                 </h3>
-                <span className="text-xs text-gray-400 italic">Standard AI</span>
               </div>
               
               <div className="space-y-3 pb-2">

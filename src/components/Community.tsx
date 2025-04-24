@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const Community: React.FC = () => {
+const Community: React.FC<{ id?: string }> = ({ id }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -20,7 +20,7 @@ const Community: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-white">
+    <section id={id} className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center scroll-review opacity-0 transform translate-y-10">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Be Part of Our AI Revolution</h2>

@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, X, Menu } from 'lucide-react';
 import { motion, useAnimation } from 'framer-motion';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
 const ForBusinesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
   const headerRef = useRef<HTMLHeadingElement>(null);
   const controls = useAnimation();
@@ -113,12 +114,21 @@ const ForBusinesses: React.FC = () => {
     },
   ];
 
+  const handleScrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setMenuOpen(false); // Close the menu after clicking
+    }
+  };
+
   return (
     <>
       <NavBar />
-      <main>
+      <main className="font-satoshi">
         {/* Hero Section */}
         <motion.section
+          id="hero"
           className="relative min-h-screen flex items-center justify-center text-white scroll-review opacity-0 transition-opacity duration-700"
           initial="hidden"
           animate="visible"
@@ -159,7 +169,10 @@ const ForBusinesses: React.FC = () => {
         </motion.section>
 
         {/* Use Cases Section */}
-        <section className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700">
+        <section
+          id="use-cases"
+          className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
+        >
           <motion.div
             className="relative z-20 max-w-7xl mx-auto"
             initial="hidden"
@@ -171,7 +184,7 @@ const ForBusinesses: React.FC = () => {
             }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
+            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-gray-800">
               Use Cases
             </h2>
             <div className="relative">
@@ -247,22 +260,21 @@ const ForBusinesses: React.FC = () => {
 
         {/* Features and Business Values Section */}
         <section
+          id="features"
           className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
         >
           <motion.div
             className="relative z-20 max-w-7xl mx-auto"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={scrollAnimation}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             {/* Features Section */}
-            <section
-              className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
-            >
+            <section className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100">
               <div className="relative z-20 max-w-7xl mx-auto">
-                <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
+                <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-gray-800">
                   What's Included When You Work With Us
                 </h2>
                 <div className="relative">
@@ -273,10 +285,10 @@ const ForBusinesses: React.FC = () => {
                         key={index}
                         className={`relative flex items-center ${
                           index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                        } scroll-review`}
+                        }`}
                         initial="hidden"
-                        animate="visible"
-                        exit="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
                         variants={{
                           hidden: { opacity: 0, y: 50 },
                           visible: { opacity: 1, y: 0 },
@@ -310,19 +322,57 @@ const ForBusinesses: React.FC = () => {
               variants={scrollAnimation}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
+              <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-gray-800">
                 How ChitChat Adds Value to Your Business
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                {businessValues.map((value, index) => (
+              <div className="relative grid grid-cols-12 gap-12">
+                {/* Top Row */}
+                {businessValues.slice(0, 2).map((value, index) => (
                   <motion.div
                     key={index}
-                    className="bg-gradient-to-r from-white to-gray-50 border border-gray-100 rounded-lg p-6 hover:shadow-sm transition-all duration-300 text-center"
+                    className="col-span-6 text-center p-6 relative"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={scrollAnimation}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
+                  >
+                    <div className="flex items-center justify-center w-16 h-16 bg-theme-main text-white rounded-full mx-auto mb-4">
+                      <span className="material-symbols-outlined text-3xl">{value.icon}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{value.title}</h3>
+                    <p className="text-gray-600 mb-4">{value.description}</p>
+                    <p className="text-theme-main font-bold text-lg">{value.metric}</p>
+                  </motion.div>
+                ))}
+
+                {/* Middle Row */}
+                <motion.div
+                  className="col-span-12 text-center p-6 relative"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={scrollAnimation}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <div className="flex items-center justify-center w-16 h-16 bg-theme-main text-white rounded-full mx-auto mb-4">
+                    <span className="material-symbols-outlined text-3xl">{businessValues[2].icon}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{businessValues[2].title}</h3>
+                  <p className="text-gray-600 mb-4">{businessValues[2].description}</p>
+                  <p className="text-theme-main font-bold text-lg">{businessValues[2].metric}</p>
+                </motion.div>
+
+                {/* Bottom Row */}
+                {businessValues.slice(3).map((value, index) => (
+                  <motion.div
+                    key={index + 3}
+                    className="col-span-6 text-center p-6 relative"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={scrollAnimation}
+                    transition={{ duration: 0.6, delay: (index + 2) * 0.2 }}
                   >
                     <div className="flex items-center justify-center w-16 h-16 bg-theme-main text-white rounded-full mx-auto mb-4">
                       <span className="material-symbols-outlined text-3xl">{value.icon}</span>
@@ -339,11 +389,12 @@ const ForBusinesses: React.FC = () => {
 
         {/* Call-to-Action Section */}
         <section
+          id="cta"
           className="relative py-16 px-6 sm:px-10 text-white bg-cover bg-center scroll-review"
           style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
         >
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/60 z-10"></div>
+          <div className="absolute inset-0 bg-black/30 z-10"></div> {/* Lighter overlay */}
           <motion.div
             className="relative z-20 max-w-3xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -360,13 +411,13 @@ const ForBusinesses: React.FC = () => {
             <div className="flex justify-center gap-4">
               <Link
                 to="/contact-us"
-                className="bg-white text-black px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg hover:bg-gray-100 hover:text-theme-main transition-all"
+                className="bg-white text-black px-6 py-3 rounded-lg font-medium shadow-md transition-all hover:shadow-xl hover:scale-105 hover:bg-gray-100 hover:text-theme-main"
               >
                 Contact Us
               </Link>
               <Link
                 to="/book-call"
-                className="bg-theme-main text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg hover:bg-theme-dark transition-all"
+                className="bg-theme-main text-white px-6 py-3 rounded-lg font-medium shadow-md transition-all hover:shadow-xl hover:scale-105 hover:bg-theme-dark"
               >
                 Book a Call
               </Link>
@@ -374,7 +425,65 @@ const ForBusinesses: React.FC = () => {
           </motion.div>
         </section>
 
-       
+        {/* Floating Button */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="bg-theme-main text-white p-4 rounded-full shadow-lg hover:bg-theme-dark transition-all flex items-center justify-center"
+          >
+            <div
+              className={`transform transition-transform duration-300 ${
+                menuOpen ? 'rotate-90 scale-110' : 'rotate-0 scale-100'
+              }`}
+            >
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </div>
+          </button>
+
+          {/* Mini Menu Modal */}
+          {menuOpen && (
+            <div className="absolute right-0 bottom-16 bg-white shadow-lg rounded-lg p-4 w-56 animate-slide-up">
+              <ul className="space-y-4">
+                <li>
+                  <button
+                    onClick={() => handleScrollToSection('hero')}
+                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all"
+                  >
+                    <ChevronDown size={16} />
+                   Businesses
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleScrollToSection('use-cases')}
+                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all"
+                  >
+                    <ChevronDown size={16} />
+                    Use Cases
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleScrollToSection('features')}
+                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all"
+                  >
+                    <ChevronDown size={16} />
+                    Features
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleScrollToSection('cta')}
+                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all"
+                  >
+                    <ChevronDown size={16} />
+                    Call-to-Action
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </main>
       <Footer />
     </>

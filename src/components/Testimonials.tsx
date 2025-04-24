@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import TestimonialCard from './TestimonialCard';
 import MetricCard from './MetricCard';
 
-const Testimonials: React.FC = () => {
+const Testimonials: React.FC<{ id?: string }> = ({ id }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -42,7 +42,7 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section id={id} className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">What Our Clients Say</h2>
         

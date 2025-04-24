@@ -41,8 +41,8 @@ const Header: React.FC = () => {
                             </Link>
                             <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Pricing</Link>
                             <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
-                                <span>For Businesses</span>
-                                <span className="ml-1 px-2 py-0.5 text-xs bg-gray-100 text-blue-500 rounded-full">Info</span> {/* Info flag with subtle grey background */}
+                                <span>Businesses</span>
+                               
                             </Link>
                             <Link to="/contact-us" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Contact Us</Link>
                         </div>
@@ -78,7 +78,7 @@ const Header: React.FC = () => {
                             <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                             <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
-                                    <span>For Businesses</span>
+                                    <span>Businesses</span>
                                 </div>
                             </Link>
                             <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">

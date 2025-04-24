@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Lottie from 'lottie-react';
+import { ChevronDown, X, Menu } from 'lucide-react'; // Import modern icons
 
 import customerService from '../assets/lottie/customerService.json';
 import sales from '../assets/lottie/sales.json';
@@ -15,6 +16,7 @@ const Solutions: React.FC = () => {
   const fullText = "Built for Every Business.\nDesigned to Feel Human.";
   const [isVisible, setIsVisible] = useState(false);
   const headerRef = useRef<HTMLHeadingElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -185,11 +187,19 @@ const Solutions: React.FC = () => {
     }
   ];
 
+  const handleScrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setMenuOpen(false); // Close the menu after clicking
+    }
+  };
+
   return (
     <>
       <NavBar />
       <main ref={parallaxRef}>
-        <section className="relative py-40 px-6 overflow-hidden bg-white">
+        <section id="hero" className="relative py-40 px-6 overflow-hidden bg-white">
           {/* Background image - extended higher with negative top positioning */}
           <div 
             className="absolute inset-0 z-0 -top-24" 
@@ -230,7 +240,7 @@ const Solutions: React.FC = () => {
             </div>
 
             {/* Category Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 text-left">
+            <div id="categories" className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 text-left">
               {solutionCategories.map((category, index) => (
                 <div
                   key={index}
@@ -271,7 +281,7 @@ const Solutions: React.FC = () => {
         </section>
 
         {/* Neural Dot Timeline Style Section */}
-        <section className="relative bg-white py-32 px-6 border-t border-gray-100">
+        <section id="industries" className="relative bg-white py-32 px-6 border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
             <h3 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">More Industries We Serve</h3>
             <div className="relative border-l-2 border-dotted border-purple-500 pl-12 space-y-20">
@@ -285,6 +295,57 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Floating Button */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="bg-theme-main text-white p-4 rounded-full shadow-lg hover:bg-theme-dark transition-all flex items-center justify-center"
+          >
+            <div
+              className={`transform transition-transform duration-300 ${
+                menuOpen ? 'rotate-90 scale-110' : 'rotate-0 scale-100'
+              }`}
+            >
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </div>
+          </button>
+
+          {/* Mini Menu Modal */}
+          {menuOpen && (
+            <div className="absolute right-0 bottom-16 bg-white shadow-lg rounded-lg p-4 w-56 animate-slide-up">
+              <ul className="space-y-4">
+                <li>
+                  <button
+                    onClick={() => handleScrollToSection('hero')}
+                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all"
+                  >
+                    <ChevronDown size={16} />
+                    Solutions
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleScrollToSection('categories')}
+                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all"
+                  >
+                    <ChevronDown size={16} />
+                    Categories
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleScrollToSection('industries')}
+                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all"
+                  >
+                    <ChevronDown size={16} />
+                    Industries
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </main>
       <Footer />
     </>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import FeatureCard from './FeatureCard';
 
-const Features: React.FC = () => {
+const Features: React.FC<{ id?: string }> = ({ id }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -54,7 +54,7 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section id={id} className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-langchain-dark mb-4">Key Capabilities</h2>

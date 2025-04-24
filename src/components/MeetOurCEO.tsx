@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const MeetOurCEO: React.FC = () => {
+const MeetOurCEO: React.FC<{ id?: string }> = ({ id }) => {
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -20,7 +20,7 @@ const MeetOurCEO: React.FC = () => {
     }, []);
 
     return (
-        <section className="bg-white py-20 px-6 sm:px-12 lg:px-20 meet-ceo-section scroll-review opacity-0 transform translate-y-10">
+        <section id={id} className="bg-white py-20 px-6 sm:px-12 lg:px-20 meet-ceo-section scroll-review opacity-0 transform translate-y-10">
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10">
                 {/* Profile Image */}
                 <div className="flex-shrink-0 w-48 h-48 rounded-full overflow-hidden shadow-lg border-4 border-theme-main">
