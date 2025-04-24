@@ -146,9 +146,12 @@ const ForBusinesses: React.FC = () => {
             className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
             style={{ backgroundImage: "url('/businessesPage/boardroom.jpg')" }}
           ></div>
-          {/* Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 z-10"></div>
-          <div className="absolute inset-0 bg-white/5 backdrop-blur-sm z-20"></div>
+
+          {/* More subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/80 z-10"></div>
+          {/* Softer glass-like blur overlay */}
+          <div className="absolute inset-0 bg-white/9 backdrop-blur-[3px] z-20"></div>
+
           {/* Content */}
           <div className="relative z-30 text-center px-6">
             <div className="h-32 flex items-center justify-center mb-6">
@@ -171,90 +174,90 @@ const ForBusinesses: React.FC = () => {
         </motion.section>
 
         <section
-  id="use-cases"
-  className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
->
-  <motion.div
-    className="relative z-20 max-w-7xl mx-auto"
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: false, amount: 0.2 }}
-    variants={{
-      hidden: { opacity: 0, y: 50 },
-      visible: { opacity: 1, y: 0 },
-    }}
-    transition={{ duration: 0.8, ease: 'easeOut' }}
-  >
-    <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-gray-800">
-      Use Cases
-    </h2>
-
-    <div className="hidden sm:grid grid-cols-12 gap-12">
-      {/* Top Row (2 cols) */}
-      {useCases.slice(0, 2).map((useCase, index) => (
-        <motion.div
-          key={index}
-          className="col-span-6 text-center p-6 relative"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-          transition={{ duration: 0.6, delay: index * 0.2 }}
+          id="use-cases"
+          className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
         >
-          <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
-          <p className="text-gray-600">{useCase.description}</p>
-        </motion.div>
-      ))}
+          <motion.div
+            className="relative z-20 max-w-7xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-gray-800">
+              Use Cases
+            </h2>
 
-      {/* Middle (1 col full) */}
-      <motion.div
-        className="col-span-12 text-center p-6 relative"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
-        variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-      >
-        <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCases[2].title}</h3>
-        <p className="text-gray-600">{useCases[2].description}</p>
-      </motion.div>
+            <div className="hidden sm:grid grid-cols-12 gap-12">
+              {/* Top Row (2 cols) */}
+              {useCases.slice(0, 2).map((useCase, index) => (
+                <motion.div
+                  key={index}
+                  className="col-span-6 text-center p-6 relative"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                  variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                >
+                  <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
+                  <p className="text-gray-600">{useCase.description}</p>
+                </motion.div>
+              ))}
 
-      {/* Bottom Row (2 cols) */}
-      {useCases.slice(3).map((useCase, index) => (
-        <motion.div
-          key={index + 3}
-          className="col-span-6 text-center p-6 relative"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-          transition={{ duration: 0.6, delay: (index + 3) * 0.15 }}
-        >
-          <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
-          <p className="text-gray-600">{useCase.description}</p>
-        </motion.div>
-      ))}
-    </div>
+              {/* Middle (1 col full) */}
+              <motion.div
+                className="col-span-12 text-center p-6 relative"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.2 }}
+                variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCases[2].title}</h3>
+                <p className="text-gray-600">{useCases[2].description}</p>
+              </motion.div>
 
-    {/* Mobile Stack (below sm breakpoint) */}
-    <div className="sm:hidden flex flex-col gap-12">
-      {useCases.map((useCase, index) => (
-        <motion.div
-          key={index}
-          className="text-center p-2"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-        >
-          <h3 className="text-2xl font-semibold text-theme-main mb-3">{useCase.title}</h3>
-          <p className="text-gray-600">{useCase.description}</p>
-        </motion.div>
-      ))}
-    </div>
-  </motion.div>
-</section>
+              {/* Bottom Row (2 cols) */}
+              {useCases.slice(3).map((useCase, index) => (
+                <motion.div
+                  key={index + 3}
+                  className="col-span-6 text-center p-6 relative"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                  variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                  transition={{ duration: 0.6, delay: (index + 3) * 0.15 }}
+                >
+                  <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
+                  <p className="text-gray-600">{useCase.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Mobile Stack (below sm breakpoint) */}
+            <div className="sm:hidden flex flex-col gap-12">
+              {useCases.map((useCase, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center p-2"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                  variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <h3 className="text-2xl font-semibold text-theme-main mb-3">{useCase.title}</h3>
+                  <p className="text-gray-600">{useCase.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
 
 
         {/* Features  Section */}
@@ -390,7 +393,7 @@ const ForBusinesses: React.FC = () => {
           style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
         >
           {/* Overlay for readability - also extended higher */}
-          <div className="absolute inset-0 z-0 bg-white/80 -top-24" />
+          <div className="absolute inset-0 z-0 bg-white/90 -top-24" />
 
           <motion.div
             className="relative z-20 max-w-3xl mx-auto text-center"
