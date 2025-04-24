@@ -158,6 +158,93 @@ const ForBusinesses: React.FC = () => {
           </div>
         </motion.section>
 
+        {/* Use Cases Section */}
+        <section className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700">
+          <motion.div
+            className="relative z-20 max-w-7xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
+              Use Cases
+            </h2>
+            <div className="relative">
+              <div className="absolute inset-0 pointer-events-none">
+                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                  {/* Top Row to Middle Row */}
+                  <line x1="25%" y1="20%" x2="50%" y2="50%" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4" />
+                  <line x1="75%" y1="20%" x2="50%" y2="50%" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4" />
+                  {/* Bottom Row to Middle Row */}
+                  <line x1="25%" y1="80%" x2="50%" y2="50%" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4" />
+                  <line x1="75%" y1="80%" x2="50%" y2="50%" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4" />
+                </svg>
+              </div>
+
+              <div className="relative grid grid-cols-12 gap-12">
+                {/* Top Row */}
+                {useCases.slice(0, 2).map((useCase, index) => (
+                  <motion.div
+                    key={index}
+                    className="col-span-6 text-center p-6 relative"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.9 },
+                      visible: { opacity: 1, scale: 1 },
+                    }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                  >
+                    <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
+                    <p className="text-gray-600">{useCase.description}</p>
+                  </motion.div>
+                ))}
+
+                {/* Middle Row */}
+                <motion.div
+                  className="col-span-12 text-center p-6 relative"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.2 }}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.9 },
+                    visible: { opacity: 1, scale: 1 },
+                  }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCases[2].title}</h3>
+                  <p className="text-gray-600">{useCases[2].description}</p>
+                </motion.div>
+
+                {/* Bottom Row */}
+                {useCases.slice(3).map((useCase, index) => (
+                  <motion.div
+                    key={index + 3}
+                    className="col-span-6 text-center p-6 relative"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.9 },
+                      visible: { opacity: 1, scale: 1 },
+                    }}
+                    transition={{ duration: 0.6, delay: (index + 2) * 0.2 }}
+                  >
+                    <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
+                    <p className="text-gray-600">{useCase.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
         {/* Features and Business Values Section */}
         <section
           className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
@@ -247,78 +334,6 @@ const ForBusinesses: React.FC = () => {
                 ))}
               </div>
             </motion.div>
-          </motion.div>
-        </section>
-
-        {/* Use Cases Section */}
-        <section className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700">
-          <motion.div
-            className="relative z-20 max-w-7xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={scrollAnimation}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
-              Use Cases
-            </h2>
-            <div className="relative">
-              <div className="absolute inset-0 pointer-events-none">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="25%" y1="20%" x2="50%" y2="40%" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4" />
-                  <line x1="50%" y1="40%" x2="75%" y2="20%" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4" />
-                  <line x1="50%" y1="40%" x2="50%" y2="70%" stroke="#d1d5db" strokeWidth="2" strokeDasharray="4" />
-                </svg>
-              </div>
-
-              <div className="relative grid grid-cols-12 gap-12">
-                {/* Top Row */}
-                {useCases.slice(0, 2).map((useCase, index) => (
-                  <motion.div
-                    key={index}
-                    className="col-span-6 text-center p-6 relative"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={scrollAnimation}
-                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                  >
-                    <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
-                    <p className="text-gray-600">{useCase.description}</p>
-                  </motion.div>
-                ))}
-
-                {/* Middle Row */}
-                <motion.div
-                  className="col-span-12 text-center p-6 relative"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={scrollAnimation}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCases[2].title}</h3>
-                  <p className="text-gray-600">{useCases[2].description}</p>
-                </motion.div>
-
-                {/* Bottom Row */}
-                {useCases.slice(3).map((useCase, index) => (
-                  <motion.div
-                    key={index + 3}
-                    className="col-span-6 text-center p-6 relative"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={scrollAnimation}
-                    transition={{ duration: 0.6, delay: (index + 2) * 0.2 }}
-                  >
-                    <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
-                    <p className="text-gray-600">{useCase.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
           </motion.div>
         </section>
 
