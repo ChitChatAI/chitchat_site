@@ -35,14 +35,15 @@ const Header: React.FC = () => {
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center justify-center space-x-6 lg:space-x-10">
                             <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Solutions</Link>
-                            <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
-                                <span>For Businesses</span>
-                            </Link>
                             <Link to="/blog" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
                                 <span>Blog</span>
                                 <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span> {/* New flag */}
                             </Link>
                             <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Pricing</Link>
+                            <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
+                                <span>About Us</span>
+                                <span className="ml-1 px-2 py-0.5 text-xs bg-gray-100 text-blue-500 rounded-full">Info</span> {/* Info flag with subtle grey background */}
+                            </Link>
                             <Link to="/contact-us" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Contact Us</Link>
                         </div>
 
@@ -77,7 +78,7 @@ const Header: React.FC = () => {
                             <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                             <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
-                                    <span>For Businesses</span>
+                                    <span>About Us</span>
                                 </div>
                             </Link>
                             <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
