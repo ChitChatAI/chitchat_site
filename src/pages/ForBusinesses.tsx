@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { motion, useAnimation } from 'framer-motion'; // Added useAnimation
+import { motion, useAnimation } from 'framer-motion';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
@@ -9,7 +9,7 @@ const ForBusinesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
   const headerRef = useRef<HTMLHeadingElement>(null);
-  const controls = useAnimation(); // Animation controls for parallax
+  const controls = useAnimation();
 
   useEffect(() => {
     let i = 0;
@@ -32,14 +32,15 @@ const ForBusinesses: React.FC = () => {
       });
     };
 
-    handleScroll(); // Trigger on load
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    controls.start({ opacity: 1, y: 0 }); // Trigger parallax animation on load
-  }, [controls]);
+  const scrollAnimation = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   const includedFeatures = [
     { title: 'Custom Persona Design', description: 'Psychology-driven personas that understand emotional nuance.' },
@@ -91,8 +92,9 @@ const ForBusinesses: React.FC = () => {
         {/* Hero Section */}
         <motion.section
           className="relative min-h-screen flex items-center justify-center text-white scroll-review opacity-0 transition-opacity duration-700"
-          initial={{ opacity: 0, y: 50 }} // Parallax animation starts here
-          animate={controls} // Controlled by framer-motion
+          initial="hidden"
+          animate="visible"
+          variants={scrollAnimation}
           transition={{ duration: 1, ease: 'easeOut' }}
         >
           {/* Video background */}
@@ -132,41 +134,80 @@ const ForBusinesses: React.FC = () => {
         <section
           className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
         >
-          <div className="relative z-20 max-w-7xl mx-auto">
+          <motion.div
+            className="relative z-20 max-w-7xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={scrollAnimation}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
             {/* Features Section */}
-            <div className="mb-20 scroll-review opacity-0 transition-opacity duration-700">
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
-                What's Included When You Work With Us
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                {includedFeatures.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300"
-                  >
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">{feature.title}</h3>
-                    <p className="text-gray-600 mb-4">{feature.description}</p>
-                    <Link
-                      to={`/features/${index}`}
-                      className="text-theme-main font-medium inline-flex items-center hover:underline"
-                    >
-                      <ChevronDown size={16} className="mr-2 -rotate-90" /> Learn More
-                    </Link>
+            <section
+              className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
+            >
+              <div className="relative z-20 max-w-7xl mx-auto">
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
+                  What's Included When You Work With Us
+                </h2>
+                <div className="relative">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-theme-main"></div>
+                  <div className="space-y-12">
+                    {includedFeatures.map((feature, index) => (
+                      <motion.div
+                        key={index}
+                        className={`relative flex items-center ${
+                          index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                        } scroll-review`}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        variants={{
+                          hidden: { opacity: 0, y: 50 },
+                          visible: { opacity: 1, y: 0 },
+                        }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                      >
+                        <div className="flex-1 px-6 text-right">
+                          <h3 className="text-2xl font-semibold text-gray-800 mb-4">{feature.title}</h3>
+                          <p className="text-gray-600">{feature.description}</p>
+                        </div>
+                        <div className="w-10 h-10 bg-theme-main text-white flex items-center justify-center rounded-full shadow-lg mx-6">
+                          <span className="text-lg font-bold">{index + 1}</span>
+                        </div>
+                        <div className="flex-1 px-6 text-left">
+                          <h3 className="text-2xl font-semibold text-gray-800 mb-4">{feature.title}</h3>
+                          <p className="text-gray-600">{feature.description}</p>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            </section>
 
             {/* Business Values Section */}
-            <div className="scroll-review opacity-0 transition-opacity duration-700">
+            <motion.div
+              className="scroll-review opacity-0 transition-opacity duration-700"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={scrollAnimation}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
               <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-800">
                 How ChitChat Adds Value to Your Business
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                 {businessValues.map((value, index) => (
-                  <div
+                  <motion.div
                     key={index}
                     className="bg-gradient-to-r from-white to-gray-50 border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 text-center"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={scrollAnimation}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
                   >
                     <div className="flex items-center justify-center w-16 h-16 bg-theme-main text-white rounded-full mx-auto mb-4">
                       <span className="material-symbols-outlined text-3xl">{value.icon}</span>
@@ -174,11 +215,11 @@ const ForBusinesses: React.FC = () => {
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">{value.title}</h3>
                     <p className="text-gray-600 mb-4">{value.description}</p>
                     <p className="text-theme-main font-bold text-lg">{value.metric}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Call-to-Action Section */}
