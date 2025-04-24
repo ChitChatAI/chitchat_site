@@ -34,7 +34,7 @@ const NavBar: React.FC = () => {
                         />
                         <Link to="/" className={`text-xl sm:text-2xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'} transition duration-300 ml-2`}>ChitChat</Link>
 
-                        <div className={`w-2.5 h-2.5 rounded-full absolute bottom-0.5 -right-3 animated-dot transition-colors duration-300 ${isScrolled ? 'bg-theme-main' : 'bg-white'}`}></div>
+                       
                     </div>
 
                     {/* Desktop Navigation */}
