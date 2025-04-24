@@ -140,7 +140,7 @@ const ContactUs: React.FC = () => {
                   <p className="text-green-600">Thank you for reaching out. We’ll get back to you shortly.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 scroll-review opacity-0 transition-opacity duration-700">
                   {currentStep === 1 && (
                     <>
                       <input
@@ -324,6 +324,47 @@ const ContactUs: React.FC = () => {
               </div>
             </div>
           </div>
+
+            {/* Personalized Follow-up Options */}
+            <div className="mt-16 bg-white/10 backdrop-blur-md shadow-lg rounded-lg p-10 border border-white/20 scroll-review opacity-0 transition-opacity duration-700">
+            <h2 className="text-3xl font-bold text-white mb-6">Personalized Follow-up Options</h2>
+            <p className="text-gray-300 mb-6">Let us know how you'd like to proceed:</p>
+            <div className="space-y-6">
+              {/* Book a Meeting */}
+              <a
+              href="https://calendly.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full block bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-4 px-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-center transform hover:scale-105 scroll-review opacity-0 transition-opacity duration-700"
+              >
+              Book a Meeting Now
+              </a>
+
+              {/* Send Info */}
+              <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                alert('We will send you the requested information.');
+              }}
+              className="w-full block bg-white/20 hover:bg-white/30 text-white py-4 px-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-center transform hover:scale-105 scroll-review opacity-0 transition-opacity duration-700"
+              >
+              Just Send Info — I’ll Review It First
+              </a>
+
+              {/* Demo Video */}
+              <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                alert('A demo video link will be sent to your email.');
+              }}
+              className="w-full block bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-4 px-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-center transform hover:scale-105 scroll-review opacity-0 transition-opacity duration-700"
+              >
+              Want to See a Demo Video
+              </a>
+            </div>
+            </div>
         </div>
       </section>
       <Footer />
