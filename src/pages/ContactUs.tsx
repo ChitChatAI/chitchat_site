@@ -81,7 +81,18 @@ const ContactUs: React.FC = () => {
     }));
   };
 
-  const handleNextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 3));
+  const handleNextStep = () => {
+    if (currentStep === 1 && (!formData.name || !formData.email)) {
+      alert('Please fill out all required fields before proceeding.');
+      return;
+    }
+    if (currentStep === 2 && (!formData.companySize || !formData.industry || !formData.goals)) {
+      alert('Please fill out all required fields before proceeding.');
+      return;
+    }
+    setCurrentStep((prev) => Math.min(prev + 1, 3));
+  };
+
   const handlePrevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -113,7 +124,7 @@ const ContactUs: React.FC = () => {
     <>
       <NavBar className="navbar fixed top-0 left-0 w-full bg-transparent transition-all duration-300 z-50" />
       <section
-        className="relative bg-cover bg-center bg-fixed py-24 px-4 sm:px-8 lg:px-12"
+        className="relative bg-cover bg-center bg-fixed py-40 px-4 sm:px-8 lg:px-12"
         style={{ backgroundImage: "url('solutionsPage/solutions.jpg')" }}
       >
         {/* Overlays */}
@@ -123,7 +134,7 @@ const ContactUs: React.FC = () => {
           {/* Hero Section */}
           <div className="text-center mb-16 py-6 scroll-review opacity-0 transition-opacity duration-700">
             <h1 className="text-5xl font-extrabold text-gray-900 drop-shadow-lg tracking-wide">{typedText}</h1>
-            <p className="mt-6 text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed pt-6">
               Have questions or need help? <br /> Reach out to us, and we’ll get back to you as soon as possible.
             </p>
           </div>
@@ -271,7 +282,7 @@ const ContactUs: React.FC = () => {
                       <button
                         type="button"
                         onClick={handlePrevStep}
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-all duration-300"
+                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 transition-all duration-300 flex items-center gap-2"
                       >
                         ←
                       </button>
@@ -280,7 +291,7 @@ const ContactUs: React.FC = () => {
                       <button
                         type="button"
                         onClick={handleNextStep}
-                        className="px-4 py-2 bg-theme-main text-white rounded-full shadow-md hover:bg-theme-main transition-all duration-300 transform hover:scale-110"
+                        className="px-4 py-2 bg-theme-main text-white rounded-full shadow-md hover:bg-theme-main transition-all duration-300 transform hover:scale-110 flex items-center gap-2"
                       >
                         →
                       </button>
@@ -288,8 +299,9 @@ const ContactUs: React.FC = () => {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className={`px-6 py-3 text-white bg-theme-main hover:bg-theme-main rounded-md font-medium transition-all duration-300 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''
-                          }`}
+                        className={`px-6 py-3 text-white bg-theme-main hover:bg-theme-main rounded-full font-medium transition-all duration-300 ${
+                          isSubmitting ? 'opacity-80 cursor-not-allowed' : ''
+                        }`}
                       >
                         {isSubmitting ? 'Sending...' : 'Submit'}
                       </button>

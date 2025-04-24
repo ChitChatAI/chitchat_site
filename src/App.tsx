@@ -24,7 +24,18 @@ const LoadingPage: React.FC = () => {
     return () => clearTimeout(timer);
   }, [location]);
 
-  return <>{isLoading && <LoadingSpinner />}</>;
+  return (
+    <>
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-fade-in">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <LoadingSpinner />
+            <p className="mt-4 text-gray-700 font-medium">Loading, please wait...</p>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };
 
 const App: React.FC = () => {

@@ -18,7 +18,7 @@ const Header: React.FC = () => {
     return (
         <>
             {/* Navigation Bar */}
-            <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'}`}>
+            <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-7' : 'bg-transparent py-6'}`}>
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
