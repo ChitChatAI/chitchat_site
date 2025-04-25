@@ -128,14 +128,14 @@ const ContactUs: React.FC = () => {
       <section className="relative bg-white py-32 px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">
-            Let’s Start the Conversation
+            Let's Start the Conversation
           </h2>
 
-          <div className="relative border-l-2 border-dotted border-purple-500 pl-12 space-y-20">
+          <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
             {currentStep === 1 && (
               <div className="relative scroll-review opacity-0 transform translate-y-10 pl-14 pr-32">
-                <span className="absolute -left-[14px] top-1 w-4 h-4 bg-purple-600 border-4 border-white rounded-full shadow-md"></span>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-4">Step 1: Your Contact Details</h3>
+                <span className="absolute -left-[14px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                <h3 className="text-2xl font-semibold text-theme-main mb-4">Step 1: Your Contact Details</h3>
                 <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                   <input
                     type="text"
@@ -169,8 +169,8 @@ const ContactUs: React.FC = () => {
 
             {currentStep === 2 && (
               <div className="relative scroll-review opacity-0 transform translate-y-10">
-                <span className="absolute -left-[14px] top-1 w-4 h-4 bg-purple-600 border-4 border-white rounded-full shadow-md"></span>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-4">Step 2: Company & Goals</h3>
+                <span className="absolute -left-[14px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                <h3 className="text-2xl font-semibold text-theme-main mb-4">Step 2: Company & Goals</h3>
                 <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                   <select
                     name="companySize"
@@ -210,8 +210,8 @@ const ContactUs: React.FC = () => {
 
             {currentStep === 3 && (
               <div className="relative scroll-review opacity-0 transform translate-y-10">
-                <span className="absolute -left-[14px] top-1 w-4 h-4 bg-purple-600 border-4 border-white rounded-full shadow-md"></span>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-4">Step 3: Additional Info</h3>
+                <span className="absolute -left-[14px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                <h3 className="text-2xl font-semibold text-theme-main mb-4">Step 3: Additional Info</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-4">
                     <label className="block text-gray-700 font-medium">Interested in:</label>
@@ -263,7 +263,7 @@ const ContactUs: React.FC = () => {
               {currentStep < 3 ? (
                 <button
                   onClick={handleNextStep}
-                  className="px-6 py-3 bg-theme-main text-white rounded-full hover:bg-theme-main transition transform hover:scale-105"
+                  className="px-6 py-3 bg-theme-main text-gray-100 rounded-full hover:bg-theme-dark transition transform hover:scale-105"
                 >
                   Next →
                 </button>
@@ -272,8 +272,8 @@ const ContactUs: React.FC = () => {
                   type="submit"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className={`px-6 py-3 text-white bg-theme-main rounded-full font-medium transition-all duration-300 ${
-                    isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:bg-theme-main'
+                  className={`px-6 py-3 text-gray-100 bg-theme-main rounded-full font-medium transition-all duration-300 ${
+                    isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:bg-theme-dark'
                   }`}
                 >
                   {isSubmitting ? 'Sending...' : 'Submit'}

@@ -141,16 +141,34 @@ const ForBusinesses: React.FC = () => {
           variants={scrollAnimation}
           transition={{ duration: 1, ease: 'easeOut' }}
         >
-          {/* Image background */}
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
-            style={{ backgroundImage: "url('/businessesPage/boardroom.jpg')" }}
-          ></div>
+          {/* Video background - enhanced for mobile */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover z-0"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture="true"
+            disableRemotePlayback="true"
+            controlsList="nodownload nofullscreen noremoteplayback"
+            style={{ 
+              objectFit: 'cover',
+              width: '100%',
+              height: '100%',
+              WebkitAppearance: 'none',
+              WebkitMediaControls: 'none',
+            }}
+            poster="/businessesPage/BusinessBG.png" // Fallback image
+            src="/businessesPage/businessVideo.mp4"
+          ></video>
 
-          {/* More subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/80 z-10"></div>
-          {/* Softer glass-like blur overlay */}
-          <div className="absolute inset-0 bg-white/9 backdrop-blur-[3px] z-20"></div>
+          {/* PURPLISH GLASS OVERLAY */}
+          <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-10" />
+          <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[5px]" />
+         {/* Purple fog overlay from bottom to top */}
+         <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
+
 
           {/* Content */}
           <div className="relative z-30 text-center px-6">
@@ -167,7 +185,7 @@ const ForBusinesses: React.FC = () => {
             <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16">
               We provide AI solutions that seamlessly integrate into your business operations, enhancing customer engagement and driving results.
             </p>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+            <div className="absolute bottom- left-1/2 transform -translate-x-1/2 animate-bounce z-20">
               <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
             </div>
           </div>
@@ -408,18 +426,24 @@ const ForBusinesses: React.FC = () => {
             <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed p-6">
               Discover how ChitChat can transform your customer experience with tailored AI solutions.
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-6 mt-8">
               <Link
                 to="/contact-us"
-                className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg transition-all duration-200 font-medium text-sm md:text-base hover:scale-105 shadow-sm hover:shadow-md text-theme-main bg-white/100 backdrop-blur-sm hover:bg-white/20"
+                className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
+                  font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
+                  hover:transform hover:scale-105 hover:bg-white/100 flex items-center gap-2 group"
               >
-                Contact Us
+                <span className="opacity-80 group-hover:opacity-100">Contact Us</span>
+               
               </Link>
               <Link
                 to="/book-call"
-                className="bg-theme-main text-white px-6 py-3 rounded-lg font-medium shadow-md transition-all hover:shadow-xl hover:scale-105 hover:bg-theme-dark"
+                className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 text-white 
+                  font-medium text-base shadow-md shadow-purple-300/30 transition-all duration-300 hover:shadow-xl hover:shadow-purple-400/40
+                  hover:transform hover:scale-105 flex items-center gap-2 group"
               >
-                Book a Call
+                
+                <span>Book a Call</span>
               </Link>
             </div>
           </motion.div>

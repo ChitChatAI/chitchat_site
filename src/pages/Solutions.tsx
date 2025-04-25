@@ -290,11 +290,11 @@ const Solutions: React.FC = () => {
         <section id="industries" className="relative bg-white py-32 px-6 border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
             <h3 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">More Industries We Serve</h3>
-            <div className="relative border-l-2 border-dotted border-purple-500 pl-12 space-y-20">
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
               {additionalSolutions.map((item, index) => (
                 <div key={index} className="relative scroll-review opacity-0 transform translate-y-10">
-                  <span className="absolute -left-[14px] top-1 w-4 h-4 bg-purple-600 border-4 border-white rounded-full shadow-md"></span>
-                  <h4 className="text-2xl font-semibold text-gray-800 mb-2 ml-4">{item.title}</h4>
+                  <span className="absolute -left-[14px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                  <h4 className="text-2xl font-semibold text-theme-main mb-2 ml-4">{item.title}</h4>
                   <p className="text-base text-gray-600 max-w-2xl leading-relaxed">{item.text}</p>
                 </div>
               ))}
