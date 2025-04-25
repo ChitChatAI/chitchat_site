@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import { LocationOutline, MailOutline, CallOutline } from 'react-ionicons';
 
-const inputBase = "w-full px-4 py-3 bg-white/20 border border-gray-300 rounded-md placeholder-gray-400 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500";
+const inputBase = "w-full px-4 py-3 bg-white/20 border border-gray-300 rounded-md placeholder-gray-400 text-gray-700 font-medium focus:outline-none focus:ring-2 focus:ring-purple-500";
 
 const ContactUs: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -124,7 +124,7 @@ const ContactUs: React.FC = () => {
 
   return (
     <>
-      <NavBar className="navbar fixed top-0 left-0 w-full bg-transparent transition-all duration-300 z-50" />
+      <NavBar />
       <section className="relative bg-white py-32 px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">

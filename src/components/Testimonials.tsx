@@ -25,7 +25,7 @@ const Testimonials: React.FC<{ id?: string }> = ({ id }) => {
     {
       quote: "ChitChat's emotionally fluent AI has reshaped our customer experience — it's seamless, smart, and seriously impressive.",
       name: "Conrad Leigh",
-      role: "CEO, RAIN"
+      role: "CEO, rain"
     },
     {
       quote: "ChitChat's AI personas help us personalize at scale — delivering consistent, human-like support across every channel.",

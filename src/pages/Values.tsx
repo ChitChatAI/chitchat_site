@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
-import { motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const values = [
     {
@@ -49,6 +49,17 @@ const Values: React.FC = () => {
         window.addEventListener('scroll', handleScroll);
         handleScroll(); // Initial state
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Add smooth scrolling effect
+    useEffect(() => {
+        // Apply smooth scroll behavior to the document
+        document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Clean up function
+        return () => {
+            document.documentElement.style.scrollBehavior = '';
+        };
     }, []);
 
     const getNavLinkClass = (path: string) =>
@@ -125,13 +136,21 @@ const Values: React.FC = () => {
 
             {/* Hero Section */}
             <section
-                className="relative bg-cover bg-center bg-fixed animate-fade-in"
+                className="relative bg-cover bg-center animate-fade-in"
                 style={{
                     backgroundImage: "url('/valuesPage/valuesBg.png')",
+                    backgroundAttachment: "fixed",
                     minHeight: 'calc(100vh + 300px)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                 }}
             >
+                {/* Dark semi-transparent black overlay for contrast */}
                 <div className="absolute inset-0 bg-black/40 z-0" />
+
+                {/* Purple fog overlay from bottom to top */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
+
                 <div className="relative z-10 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
                     <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
                         We're climbers
@@ -160,7 +179,7 @@ const Values: React.FC = () => {
                 >
                     <div className="max-w-6xl mx-auto">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 mb-12">
-                            
+
                             {values.slice(0, 2).map((value, index) => (
                                 <motion.div
                                     key={index}
@@ -243,6 +262,166 @@ const Values: React.FC = () => {
                     </div>
                 </motion.div>
             </section>
+
+            {/* Additional Section with Scientists Image */}
+            <section
+                className="relative bg-cover bg-center animate-fade-in overflow-hidden"
+                style={{
+                    backgroundImage: "url('/valuesPage/scientists.png')",
+                    backgroundAttachment: "fixed",
+                    minHeight: 'calc(100vh + 300px)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                {/* Dark semi-transparent black overlay for contrast */}
+                <div className="absolute inset-0 bg-black/40 z-0" />
+
+                {/* Purple fog overlay from bottom to top */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
+
+                <div className="relative z-20 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
+                    <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 text-transparent bg-clip-text scroll-review">
+                        We’re scientists
+                    </h1>
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 text-transparent bg-clip-text font-mono scroll-review">
+                        {`At ChitChat, we embrace the scientific mindset to explore, discover, and innovate.`}
+                    </p>
+                </div>
+                <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+                    <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
+                </div>
+            </section>
+
+
+            {/* Scientists Values Section */}
+            <section className="py-16 px-6 bg-gray-50">
+                <motion.div
+                    className="relative z-20 max-w-7xl mx-auto"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={{
+                        hidden: { opacity: 0, y: 50 },
+                        visible: { opacity: 1, y: 0 },
+                    }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
+                    <div className="max-w-6xl mx-auto space-y-12">
+                        {/* Row 1 – 2 columns */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                            {[
+
+                                { title: 'Accuracy', description: 'Telling the truth, and being explicit about what’s a fact and what’s a hypothesis.' },
+                                { title: 'Curiosity', description: 'Seeking an understanding of the whats, hows, and whys of the world.' },
+                            ].map((value, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="text-center p-4 sm:p-6"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: false, amount: 0.2 }}
+                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                >
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-4">{value.title}</h3>
+                                    <p className="text-gray-600">{value.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Row 2 – 1 column */}
+                        <div className="grid grid-cols-1">
+                            <motion.div
+                                className="text-center p-4 sm:p-6"
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: false, amount: 0.2 }}
+                                variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                <h3 className="text-2xl font-semibold text-theme-main mb-4">Imagination</h3>
+                                <p className="text-gray-600">Envisioning how things could be, unencumbered by how they currently are.</p>
+                            </motion.div>
+                        </div>
+
+                        {/* Row 3 – 2 columns */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                            {[
+
+                                { title: 'Logic', description: 'Reasoning from first principles, and structuring ideas sharply.' },
+                                { title: 'Meritocracy', description: 'Assigning responsibilities solely based on people’s ability to carry them out, and evaluating ideas regardless of where or whom they came from.' },
+                            ].map((value, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="text-center p-4 sm:p-6"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: false, amount: 0.2 }}
+                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                >
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-4">{value.title}</h3>
+                                    <p className="text-gray-600">{value.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Row 4 – 1 column */}
+                        <div className="grid grid-cols-1">
+                            <motion.div
+                                className="text-center p-4 sm:p-6"
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: false, amount: 0.2 }}
+                                variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                <h3 className="text-2xl font-semibold text-theme-main mb-4">Pragmatism</h3>
+                                <p className="text-gray-600">Optimizing for impact, finding the right scope—and the ideal balance between speed and sophistication—at all times.</p>
+                            </motion.div>
+                        </div>
+
+                        {/* Row 5 – 2 columns */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                            {[
+
+                                { title: 'Precision', description: 'Identifying and taking care of the details that matter.' },
+                                { title: 'Rationality', description: 'Resisting the influence of biases.' },
+                            ].map((value, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="text-center p-4 sm:p-6"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: false, amount: 0.2 }}
+                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                >
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-4">{value.title}</h3>
+                                    <p className="text-gray-600">{value.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Row 6 – 1 column */}
+                        <div className="grid grid-cols-1">
+                            <motion.div
+                                className="text-center p-4 sm:p-6"
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: false, amount: 0.2 }}
+                                variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                <h3 className="text-2xl font-semibold text-theme-main mb-4">Research</h3>
+                                <p className="text-gray-600">Gathering all relevant information, and rigorously testing hypotheses.</p>
+                            </motion.div>
+                        </div>
+                    </div>
+                </motion.div>
+            </section>
+
 
             <Footer />
         </>
