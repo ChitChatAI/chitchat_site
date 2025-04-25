@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
+import { ChevronDown, X, Menu } from 'lucide-react';
 
 const values = [
     {
@@ -42,6 +43,7 @@ const values = [
 const Values: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
@@ -64,6 +66,15 @@ const Values: React.FC = () => {
 
     const getNavLinkClass = (path: string) =>
         `${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-gray-300'} transition-colors duration-200 text-sm md:text-base ${location.pathname === path ? 'text-theme-main font-semibold' : ''}`;
+
+    // Function to handle scrolling to sections
+    const handleScrollToSection = (id: string) => {
+        const section = document.getElementById(id);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+            setFloatingMenuOpen(false); // Close the floating menu after clicking
+        }
+    };
 
     return (
         <>
@@ -136,6 +147,7 @@ const Values: React.FC = () => {
 
             {/* Hero Section */}
             <section
+                id="climbers"
                 className="relative bg-cover bg-center animate-fade-in"
                 style={{
                     backgroundImage: "url('/valuesPage/valuesBg.png')",
@@ -168,7 +180,7 @@ const Values: React.FC = () => {
             </section>
 
             {/* Values Section */}
-            <section className="py-16 px-6 bg-gray-50">
+            <section id="climber-values" className="py-16 px-6 bg-gray-50">
                 <motion.div
                     className="relative z-20 max-w-7xl mx-auto"
                     initial="hidden"
@@ -197,6 +209,7 @@ const Values: React.FC = () => {
                                     <p className="text-gray-600 relative z-30">{value.description}</p>
                                 </motion.div>
                             ))}
+
                         </div>
                         <div className="grid grid-cols-1 gap-6 sm:gap-8 mb-12">
                             {values.slice(2, 3).map((value, index) => (
@@ -213,6 +226,7 @@ const Values: React.FC = () => {
                                     <p className="text-gray-600">{value.description}</p>
                                 </motion.div>
                             ))}
+
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 mb-12">
                             {values.slice(3, 5).map((value, index) => (
@@ -229,6 +243,7 @@ const Values: React.FC = () => {
                                     <p className="text-gray-600">{value.description}</p>
                                 </motion.div>
                             ))}
+
                         </div>
                         <div className="grid grid-cols-1 gap-6 sm:gap-8 mb-12">
                             {values.slice(5, 6).map((value, index) => (
@@ -245,6 +260,7 @@ const Values: React.FC = () => {
                                     <p className="text-gray-600">{value.description}</p>
                                 </motion.div>
                             ))}
+
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
                             {values.slice(6).map((value, index) => (
@@ -261,6 +277,7 @@ const Values: React.FC = () => {
                                     <p className="text-gray-600">{value.description}</p>
                                 </motion.div>
                             ))}
+
                         </div>
                     </div>
                 </motion.div>
@@ -268,6 +285,7 @@ const Values: React.FC = () => {
 
             {/* Additional Section with Scientists Image */}
             <section
+                id="scientists"
                 className="relative bg-cover bg-center animate-fade-in overflow-hidden"
                 style={{
                     backgroundImage: "url('/valuesPage/scientists.png')",
@@ -298,7 +316,7 @@ const Values: React.FC = () => {
             </section>
 
             {/* Scientists Values Section */}
-            <section className="py-16 px-6 bg-gray-50">
+            <section id="scientist-values" className="py-16 px-6 bg-gray-50">
                 <motion.div
                     className="relative z-20 max-w-7xl mx-auto"
                     initial="hidden"
@@ -318,6 +336,7 @@ const Values: React.FC = () => {
                         {/* Neural Dot Timeline Style Format */}
                         <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
                             {[
+
                                 { title: 'Accuracy', description: 'Telling the truth, and being explicit about what\'s a fact and what\'s a hypothesis.' },
                                 { title: 'Curiosity', description: 'Seeking an understanding of the whats, hows, and whys of the world.' },
                                 { title: 'Imagination', description: 'Envisioning how things could be, unencumbered by how they currently are.' },
@@ -352,6 +371,7 @@ const Values: React.FC = () => {
 
             {/* Tribe Section with Image */}
             <section
+                id="tribe"
                 className="relative bg-cover bg-center animate-fade-in overflow-hidden"
                 style={{
                     backgroundImage: "url('/valuesPage/tribe.png')",
@@ -382,7 +402,7 @@ const Values: React.FC = () => {
             </section>
 
             {/* Tribe Values Section */}
-            <section className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50">
+            <section id="tribe-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50">
                 <motion.div
                     className="relative z-20 max-w-7xl mx-auto"
                     initial="hidden"
@@ -397,6 +417,7 @@ const Values: React.FC = () => {
                     <div className="max-w-6xl mx-auto">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-16 mb-12">
                             {[
+
                                 { title: 'Altruism', description: 'Giving generously and without the expectation of receiving in return.' },
                                 { title: 'Authenticity', description: 'Interacting informally and bringing your true self wherever you go.' },
                                 { title: 'Bonding', description: 'Investing in creating rich, lasting relationships.' },
@@ -427,8 +448,9 @@ const Values: React.FC = () => {
                 </motion.div>
             </section>
 
-             {/* Tribe Section with Image */}
-             <section
+            {/* Globe Section with Image */}
+            <section
+                id="globe"
                 className="relative bg-cover bg-center animate-fade-in overflow-hidden"
                 style={{
                     backgroundImage: "url('/valuesPage/globe.png')",
@@ -464,6 +486,92 @@ affords us, and strive to improve things for others.`}
                 <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
                 </div>
             </section>
+
+            {/* Floating Button */}
+            <div className="fixed bottom-6 right-6 z-50">
+                <button
+                    onClick={() => setFloatingMenuOpen(!floatingMenuOpen)}
+                    className="bg-theme-main text-white p-4 rounded-full shadow-lg hover:bg-theme-dark transition-all flex items-center justify-center"
+                    aria-label="Toggle page navigation"
+                >
+                    <div
+                        className={`transform transition-transform duration-300 ${floatingMenuOpen ? 'rotate-90 scale-110' : 'rotate-0 scale-100'}`}
+                    >
+                        {floatingMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </div>
+                </button>
+
+                {/* Mini Menu Modal */}
+                {floatingMenuOpen && (
+                    <div className="absolute right-0 bottom-16 bg-white shadow-lg rounded-lg p-4 w-56 animate-slide-up">
+                        <ul className="space-y-4">
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('climbers')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    We're Climbers
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('climber-values')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    Climber Values
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('scientists')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    We're Scientists
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('scientist-values')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    Scientific Values
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('tribe')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    We're a Tribe
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('tribe-values')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    Tribe Values
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('globe')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    It's Not All About Us
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+            </div>
 
             <Footer />
         </>

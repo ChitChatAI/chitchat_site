@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSignInOpen, setIsSignInOpen] = useState(false);
     const [isGetStartedOpen, setIsGetStartedOpen] = useState(false);
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,7 +36,7 @@ const Header: React.FC = () => {
 
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center justify-center space-x-6 lg:space-x-10">
-                            <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>About Us</Link>
+                            <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base ${isHomePage ? 'font-bold' : ''}`}>About Us</Link>
                             <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Values</Link> {/* Added Values link */}
                             <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Solutions</Link>
                             <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
@@ -59,6 +61,8 @@ const Header: React.FC = () => {
                     {/* Mobile Navigation */}
                     {isMenuOpen && (
                         <div className="lg:hidden mt-4 py-2 bg-white rounded-md shadow-lg animate-fade-in">
+                            <Link to="/" className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${isHomePage ? 'font-bold' : ''}`}>About Us</Link>
+                            <Link to="/values" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
                             <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
                             <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
