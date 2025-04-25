@@ -164,11 +164,11 @@ const ForBusinesses: React.FC = () => {
                 ))}
               </h2>
             </div>
-            <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto">
+            <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16">
               We provide AI solutions that seamlessly integrate into your business operations, enhancing customer engagement and driving results.
             </p>
-            <div className="mt-10">
-              <ChevronDown size={32} className="animate-bounce mx-auto" />
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+              <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
             </div>
           </div>
         </motion.section>

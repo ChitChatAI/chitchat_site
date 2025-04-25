@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Lottie from 'lottie-react';
 import { ChevronDown, X, Menu } from 'lucide-react'; // Import modern icons
+import { motion } from 'framer-motion';
 
 import customerService from '../assets/lottie/customerService.json';
 import sales from '../assets/lottie/sales.json';
@@ -202,7 +203,7 @@ const Solutions: React.FC = () => {
         <section id="hero" className="relative py-40 px-6 overflow-hidden bg-white">
           {/* Background image - extended higher with negative top positioning */}
           <div 
-            className="absolute inset-0 z-0 -top-24" 
+            className="absolute inset-0 z-0 -top-24 bg-fixed animate-fade-in" 
             style={{
               backgroundImage: 'url("/solutionsPage/solutions.jpg")',
               backgroundSize: 'cover',
@@ -215,7 +216,12 @@ const Solutions: React.FC = () => {
           <div className="absolute inset-0 z-0 bg-white/80 -top-24" />
 
           {/* Content Wrapper */}
-          <div className="relative z-10 max-w-6xl mx-auto text-center">
+          <motion.div
+            className="relative z-10 max-w-6xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+          >
             {/* Header & Intro */}
             <div className="mb-20">
               <div className="h-32 flex items-center justify-center mb-6"> {/* Fixed height container */}
@@ -277,7 +283,7 @@ const Solutions: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Neural Dot Timeline Style Section */}

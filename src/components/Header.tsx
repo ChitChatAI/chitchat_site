@@ -12,7 +12,7 @@ const Header: React.FC = () => {
             setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll); // Fixed the unterminated string
     }, []);
 
     return (
@@ -34,33 +34,18 @@ const Header: React.FC = () => {
 
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center justify-center space-x-6 lg:space-x-10">
+                            <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>About Us</Link>
+                            <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Values</Link> {/* Added Values link */}
                             <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Solutions</Link>
-                            <Link to="/blog" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
-                                <span>Blog</span>
-                                <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span> {/* New flag */}
-                            </Link>
-                            <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Pricing</Link>
                             <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
                                 <span>Businesses</span>
-                               
                             </Link>
+                            <Link to="/blog" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
+                                <span>Blog</span>
+                                <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
+                            </Link>
+                            <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Pricing</Link>
                             <Link to="/contact-us" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Contact Us</Link>
-                        </div>
-
-                        {/* Desktop Buttons */}
-                        <div className="hidden lg:flex items-center space-x-4">
-                            <button
-                                onClick={() => setIsSignInOpen(true)}
-                                className={`${isScrolled ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' : 'bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white'} px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-200 font-medium text-sm lg:text-base`}
-                            >
-                                Sign In
-                            </button>
-                            <button
-                                onClick={() => setIsGetStartedOpen(true)}
-                                className="bg-theme-main hover:bg-theme-dark text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-200 font-medium text-sm lg:text-base shadow-sm hover:shadow-md"
-                            >
-                                Get Started
-                            </button>
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -75,7 +60,6 @@ const Header: React.FC = () => {
                     {isMenuOpen && (
                         <div className="lg:hidden mt-4 py-2 bg-white rounded-md shadow-lg animate-fade-in">
                             <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
-                            <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                             <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
                                     <span>Businesses</span>
@@ -84,23 +68,12 @@ const Header: React.FC = () => {
                             <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
                                     <span>Blog</span>
-                                    <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span> {/* New flag */}
+                                    <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                                 </div>
                             </Link>
                             <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
+                            <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                             <div className="px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
-                                <button
-                                    onClick={() => setIsSignInOpen(true)}
-                                    className="w-full bg-gray-100 text-gray-800 hover:bg-gray-200 px-4 py-2 rounded-full text-center"
-                                >
-                                    Sign In
-                                </button>
-                                <button
-                                    onClick={() => setIsGetStartedOpen(true)}
-                                    className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2 rounded-full text-center"
-                                >
-                                    Get Started
-                                </button>
                             </div>
                         </div>
                     )}

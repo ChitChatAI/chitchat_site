@@ -9,6 +9,7 @@ import ScrollToTop from './components/ScrollToTop';
 import ContactUs from './pages/ContactUs';
 import UseCases from './pages/UseCases';
 import HomePage from './pages/HomePage';
+import Values from './pages/Values'; // Import the Values page
 import './App.css';
 
 const LoadingPage: React.FC = () => {
@@ -51,6 +52,7 @@ const App: React.FC = () => {
           <Route path="/loading" element={<LoadingPage />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/use-cases" element={<UseCases />} />
+          <Route path="/values" element={<Values />} /> 
         </Routes>
         <CookieBanner />
       </div>
