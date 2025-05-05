@@ -43,8 +43,8 @@ const NavBar: React.FC = () => {
                         <Link to="/partnerships" className={`flex items-center ${getNavLinkClass("/partnerships")}`}>
                             <span>Businesses</span>
                         </Link>
-                        <Link to="/blog" className={`flex items-center ${getNavLinkClass("/blog")}`}>
-                            <span>Blog</span>
+                        <Link to="/Vision Board" className={`flex items-center ${getNavLinkClass("/Vision Board")}`}>
+                            <span>Vision Board</span>
                             <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                         </Link>
                         <Link to="#" className={getNavLinkClass("/pricing")}>Pricing</Link>
@@ -66,9 +66,9 @@ const NavBar: React.FC = () => {
                         <Link to="/values" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link> {/* Added Values link */}
                         <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
                         <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
-                        <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                        <Link to="/Vision Board" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                             <div className="flex items-center">
-                                <span>Blog</span>
+                                <span>Vision Board</span>
                                 <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </div>
                         </Link>

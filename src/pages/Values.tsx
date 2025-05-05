@@ -105,8 +105,8 @@ const Values: React.FC = () => {
                             <Link to="/partnerships" className={`flex items-center ${getNavLinkClass("/partnerships")}`}>
                                 <span>Businesses</span>
                             </Link>
-                            <Link to="/blog" className={`flex items-center ${getNavLinkClass("/blog")}`}>
-                                <span>Blog</span>
+                            <Link to="/Vision Board" className={`flex items-center ${getNavLinkClass("/Vision Board")}`}>
+                                <span>Vision Board</span>
                                 <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </Link>
                             <Link to="#" className={getNavLinkClass("/pricing")}>Pricing</Link>
@@ -131,8 +131,8 @@ const Values: React.FC = () => {
                             <Link to="/values" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
                             <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
                             <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
-                            <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors flex items-center justify-between">
-                                <span>Blog</span>
+                            <Link to="/Vision Board" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors flex items-center justify-between">
+                                <span>Vision Board</span>
                                 <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </Link>
                             <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
@@ -367,8 +367,100 @@ const Values: React.FC = () => {
                         </div>
                     </div>
                 </motion.div>
+            </section>{/* Open Section with Silhouette Image */}
+            <section
+                id="open"
+                className="relative bg-cover bg-center animate-fade-in overflow-hidden"
+                style={{
+                    backgroundImage: "url('/valuesPage/silhoutte.png')",
+                    backgroundAttachment: "fixed",
+                    minHeight: 'calc(100vh + 300px)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                {/* Dark semi-transparent black overlay for contrast */}
+                <div className="absolute inset-0 bg-black/40 z-0" />
+
+                {/* Purple fog overlay from bottom to top */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
+
+                {/* Content */}
+                <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
+                    <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
+                        We're open
+                    </h1>
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono scroll-review">
+                        {`At ChitChat, we believe in openness and transparency in everything we do.`}
+                    </p>
+                </div>
+                <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+                    <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
+                </div>
             </section>
 
+
+            {/* Open Values Section */}
+            <section id="open-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50">
+                <motion.div
+                    className="relative z-20 max-w-7xl mx-auto"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                    variants={{
+                        hidden: { opacity: 0, y: 50 },
+                        visible: { opacity: 1, y: 0 },
+                    }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                >
+                    <div className="max-w-6xl mx-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 mb-12">
+                            {[
+                                {
+                                    title: 'Diversity',
+                                    description: 'Seeking to be exposed to a variety of people, perspectives, and experiences, and assessing them with an open mind.'
+                                },
+                                {
+                                    title: 'Freedom',
+                                    description: 'Affording others considerable latitude of action, and providing them with ample opportunity to prove themselves.'
+                                },
+                                {
+                                    title: 'Inclusivity',
+                                    description: 'Treating all others in the same respectful and caring way, no matter their individual characteristics and preferences.'
+                                },
+                                {
+                                    title: 'Self-criticism',
+                                    description: 'Soliciting and receiving feedback with a grateful attitude.'
+                                },
+                                {
+                                    title: 'Tolerance',
+                                    description: 'Respecting others and their opinions, particularly when you don\'t see eye to eye with them.'
+                                },
+                                {
+                                    title: 'Transparency',
+                                    description: 'Making relevant information as accessible as possible—even when it feels uncomfortable to do so.'
+                                }
+                            ].map((value, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="relative"
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: false, amount: 0.2 }}
+                                    variants={{
+                                        hidden: { opacity: 0, y: 20 },
+                                        visible: { opacity: 1, y: 0 }
+                                    }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                >
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-3">{value.title}</h3>
+                                    <p className="text-base text-gray-600">{value.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            </section>
             {/* Tribe Section with Image */}
             <section
                 id="tribe"
@@ -486,6 +578,7 @@ affords us, and strive to improve things for others.`}
                 <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
                 </div>
             </section>
+            
 
             {/* Floating Button */}
             <div className="fixed bottom-6 right-6 z-50">
@@ -566,6 +659,24 @@ affords us, and strive to improve things for others.`}
                                 >
                                     <ChevronDown size={16} />
                                     It's Not All About Us
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('open')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    We're Open
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => handleScrollToSection('open-values')}
+                                    className="flex items-center gap-2 text-theme-main hover:text-theme-dark transition-all w-full text-left"
+                                >
+                                    <ChevronDown size={16} />
+                                    Open Values
                                 </button>
                             </li>
                         </ul>

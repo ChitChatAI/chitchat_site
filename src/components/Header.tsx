@@ -42,8 +42,8 @@ const Header: React.FC = () => {
                             <Link to="/partnerships" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
                                 <span>Businesses</span>
                             </Link>
-                            <Link to="/blog" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
-                                <span>Blog</span>
+                            <Link to="/Vision Board" className={`flex items-center ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>
+                                <span>Vision Board</span>
                                 <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </Link>
                             <Link to="#" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-sm lg:text-base`}>Pricing</Link>
@@ -69,9 +69,9 @@ const Header: React.FC = () => {
                                     <span>Businesses</span>
                                 </div>
                             </Link>
-                            <Link to="/blog" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/Vision Board" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
-                                    <span>Blog</span>
+                                    <span>Vision Board</span>
                                     <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                                 </div>
                             </Link>
@@ -211,6 +211,8 @@ const Header: React.FC = () => {
                         playsInline
                         id="myVideo"
                         className="w-full h-full object-cover object-center brightness-75 will-change-transform"
+                        disablePictureInPicture={true}
+                        disableRemotePlayback={true}
                     >
                         <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
                     </video>

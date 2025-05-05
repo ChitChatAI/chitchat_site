@@ -135,7 +135,7 @@ const ForBusinesses: React.FC = () => {
         {/* Hero Section */}
         <motion.section
           id="hero"
-          className="relative min-h-screen flex items-center justify-center text-white scroll-review opacity-0 transition-opacity duration-700"
+          className="relative min-h-screen flex items-center justify-center text-white opacity-0 transition-opacity duration-700 overflow-x-hidden"
           initial="hidden"
           animate="visible"
           variants={scrollAnimation}
@@ -149,15 +149,14 @@ const ForBusinesses: React.FC = () => {
             muted
             playsInline
             preload="auto"
-            disablePictureInPicture="true"
-            disableRemotePlayback="true"
+            disablePictureInPicture={true}
+            disableRemotePlayback={true}
             controlsList="nodownload nofullscreen noremoteplayback"
             style={{ 
               objectFit: 'cover',
               width: '100%',
               height: '100%',
               WebkitAppearance: 'none',
-              WebkitMediaControls: 'none',
             }}
             poster="/businessesPage/BusinessBG.png" // Fallback image
             src="/businessesPage/businessVideo.mp4"

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import CookieBanner from './components/CookieBanner';
 import Solutions from './pages/Solutions';
 import ForBusinesses from './pages/ForBusinesses';
-import CookiePolicy from './pages/CookiePolicy';
 import LoadingSpinner from './components/LoadingSpinner';
 import ScrollToTop from './components/ScrollToTop';
 import ContactUs from './pages/ContactUs';
 import UseCases from './pages/UseCases';
 import HomePage from './pages/HomePage';
-import Values from './pages/Values'; // Import the Values page
+import Values from './pages/Values'; 
+import VisionBoard from './pages/VisionBoard'; 
 import './App.css';
 
 const LoadingPage: React.FC = () => {
@@ -48,13 +47,12 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/partnerships" element={<ForBusinesses />} />
-          <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/loading" element={<LoadingPage />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/use-cases" element={<UseCases />} />
           <Route path="/values" element={<Values />} /> 
+          <Route path="/Vision Board" element={<VisionBoard />} />
         </Routes>
-        <CookieBanner />
       </div>
     </Router>
   );
