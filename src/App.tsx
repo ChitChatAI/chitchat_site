@@ -5,10 +5,10 @@ import ForBusinesses from './pages/ForBusinesses';
 import LoadingSpinner from './components/LoadingSpinner';
 import ScrollToTop from './components/ScrollToTop';
 import ContactUs from './pages/ContactUs';
-import UseCases from './pages/UseCases';
 import HomePage from './pages/HomePage';
 import Values from './pages/Values'; 
 import VisionBoard from './pages/VisionBoard'; 
+import Pricing from './pages/Pricing';
 import './App.css';
 
 const LoadingPage: React.FC = () => {
@@ -49,7 +49,7 @@ const App: React.FC = () => {
           <Route path="/partnerships" element={<ForBusinesses />} />
           <Route path="/loading" element={<LoadingPage />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/use-cases" element={<UseCases />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/values" element={<Values />} /> 
           <Route path="/Vision Board" element={<VisionBoard />} />
         </Routes>

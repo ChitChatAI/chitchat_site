@@ -47,7 +47,7 @@ const NavBar: React.FC = () => {
                             <span>Vision Board</span>
                             <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                         </Link>
-                        <Link to="#" className={getNavLinkClass("/pricing")}>Pricing</Link>
+                        <Link to="/pricing" className={getNavLinkClass("/pricing")}>Pricing</Link>
                         <Link to="/contact-us" className={getNavLinkClass("/contact-us")}>Contact Us</Link>
                     </div>
 
@@ -72,7 +72,7 @@ const NavBar: React.FC = () => {
                                 <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </div>
                         </Link>
-                        <Link to="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
+                        <Link to="/pricing" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
                         <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                         <div className="px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
                             <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2 rounded-full text-center">Sign In</Link>

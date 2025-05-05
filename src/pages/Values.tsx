@@ -602,16 +602,16 @@ affords us, and strive to improve things for others.`}
                     </div>
                 </button>
 
-                {/* Cookie Policy Modal positioned on the right side */}
+                {/* Modal positioned on the bottom with improved enter/exit animations */}
                 {cookiePolicyOpen && (
                     <div 
-                        className="fixed top-0 bottom-0 right-0 bg-white shadow-lg rounded-l-lg p-6 w-full max-w-sm max-h-screen overflow-y-auto z-50 transform transition-transform duration-300 ease-in-out"
+                        className={`fixed inset-x-0 mx-auto bottom-0 bg-white shadow-lg rounded-t-lg p-6 w-full sm:w-[500px] max-h-[90vh] overflow-y-auto z-50 transform transition-transform duration-300 ease-in-out`}
                         style={{ 
-                            transform: isModalExiting ? 'translateX(100%)' : 'translateX(0)',
-                            animation: isModalExiting ? 'slideRight 0.3s ease-out forwards' : 'slideLeft 0.3s ease-out forwards'
+                            transform: isModalExiting ? 'translateY(100%)' : 'translateY(0)',
+                            animation: isModalExiting ? 'slideDown 0.3s ease-out forwards' : 'slideUp 0.3s ease-out forwards'
                         }}
                     >
-                        {/* ChitChat logo */}
+                        {/* Added ChitChat logo at the top of the modal */}
                         <div className="flex justify-center mb-4">
                             <img 
                                 src="/branding/chitchatAI.png"
@@ -688,16 +688,6 @@ affords us, and strive to improve things for others.`}
             {/* Replace jsx style tag with regular style tag */}
             <style>
                 {`
-                @keyframes slideUp {
-                    from { transform: translateY(100%); }
-                    to { transform: translateY(0); }
-                }
-                
-                @keyframes slideDown {
-                    from { transform: translateY(0); }
-                    to { transform: translateY(100%); }
-                }
-
                 @keyframes slideLeft {
                     from { transform: translateX(100%); }
                     to { transform: translateX(0); }
