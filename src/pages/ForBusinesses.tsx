@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, X, Cookie } from 'lucide-react'; // Removed Menu icon import
+import { ChevronDown, X, Cookie } from 'lucide-react'; 
 import { motion, useAnimation } from 'framer-motion';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
