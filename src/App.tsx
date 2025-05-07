@@ -48,10 +48,10 @@ const App: React.FC = () => {
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/partnerships" element={<ForBusinesses />} />
           <Route path="/loading" element={<LoadingPage />} />
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/contact us" element={<ContactUs />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/values" element={<Values />} /> 
-          <Route path="/Vision Board" element={<VisionBoard />} />
+          <Route path="/vision board" element={<VisionBoard />} />
         </Routes>
       </div>
     </Router>

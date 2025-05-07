@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import { LocationOutline, MailOutline, CallOutline } from 'react-ionicons';
 
 // Update the base input styling with improved focus and hover states and Satoshi font
 const inputBase = "w-full px-5 py-4 bg-white/10 border border-gray-200 rounded-lg font-satoshi font-medium text-gray-700 placeholder:text-gray-400 placeholder:font-satoshi placeholder:font-normal placeholder:text-sm transition-all duration-200 hover:border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm tracking-wide";
@@ -10,7 +9,7 @@ const inputError = "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red
 const ContactUs: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
-    surname: '', // Added surname field
+    surname: '', 
     email: '',
     subject: '',
     message: '',
@@ -22,22 +21,11 @@ const ContactUs: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1); // Track form step
-  const [typedText, setTypedText] = useState('');
+  const [currentStep, setCurrentStep] = useState(1);
   const fullText = 'Contact Us';
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-
-  useEffect(() => {
-    let i = 0;
-    const typingInterval = setInterval(() => {
-      setTypedText(fullText.substring(0, i + 1));
-      i++;
-      if (i > fullText.length) clearInterval(typingInterval);
-    }, 100);
-    return () => clearInterval(typingInterval);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -244,9 +232,9 @@ const ContactUs: React.FC = () => {
         </div>
       )}
       
-      <section className="relative bg-white py-32 px-6 border-t border-gray-100">
+      <section className="relative bg-white py-40 px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold font-satoshi text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">
+          <h2 className="text-4xl font-bold font-satoshi text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10 py-4">
             <span className="bg-gradient-to-r from-theme-main to-theme-dark bg-clip-text text-transparent">Let's Build Your AI Solution</span>
           </h2>
 

@@ -4,8 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isSignInOpen, setIsSignInOpen] = useState(false);
-    const [isGetStartedOpen, setIsGetStartedOpen] = useState(false);
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
@@ -78,7 +76,7 @@ const Header: React.FC = () => {
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
                                 Pricing
                             </Link>
-                            <Link to="/contact-us" className={`${
+                            <Link to="/contact us" className={`${
                                 isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
                                 Contact Us
@@ -127,7 +125,7 @@ const Header: React.FC = () => {
                             <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Pricing
                             </Link>
-                            <Link to="/contact-us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Contact Us
                             </Link>
                             <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
@@ -137,102 +135,6 @@ const Header: React.FC = () => {
                     )}
                 </div>
             </nav>
-
-            {/* Sign In Modal */}
-            {isSignInOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-                    <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg max-w-md w-full">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6">Sign In</h2>
-                        <form className="space-y-4">
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-theme-main focus:border-theme-main"
-                                    placeholder="you@example.com"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-theme-main focus:border-theme-main"
-                                    placeholder="••••••••"
-                                    required
-                                />
-                            </div>
-                            <button
-                                type="submit"
-                                className="w-full bg-theme-main hover:bg-theme-dark text-white py-2 px-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
-                            >
-                                Sign In
-                            </button>
-                        </form>
-                        <button
-                            onClick={() => setIsSignInOpen(false)}
-                            className="mt-4 w-full text-sm text-gray-500 hover:text-gray-700 text-center"
-                        >
-                            Close
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* Get Started Modal */}
-            {isGetStartedOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-                    <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg max-w-md w-full">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6">Get Started</h2>
-                        <form className="space-y-4">
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-theme-main focus:border-theme-main"
-                                    placeholder="John Doe"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-theme-main focus:border-theme-main"
-                                    placeholder="you@example.com"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-theme-main focus:border-theme-main"
-                                    placeholder="••••••••"
-                                    required
-                                />
-                            </div>
-                            <button
-                                type="submit"
-                                className="w-full bg-theme-main hover:bg-theme-dark text-white py-2 px-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
-                            >
-                                Get Started
-                            </button>
-                        </form>
-                        <button
-                            onClick={() => setIsGetStartedOpen(false)}
-                            className="mt-4 w-full text-sm text-gray-500 hover:text-gray-700 text-center"
-                        >
-                            Close
-                        </button>
-                    </div>
-                </div>
-            )}
 
             <header className="section_header relative overflow-hidden min-h-screen flex items-center justify-center font-sans">
                 <div className="padding-global py-24 w-full">

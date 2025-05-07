@@ -6,9 +6,7 @@ import { Cookie, X } from 'lucide-react';
 
 const Pricing: React.FC = () => {
   const location = useLocation();
-  const headerRef = useRef<HTMLHeadingElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [headerText, setHeaderText] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
@@ -29,13 +27,7 @@ const Pricing: React.FC = () => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
 
-  const getNavLinkClass = (path: string) =>
-    `transition-colors duration-200 text-sm lg:text-base ${location.pathname === path
-      ? 'text-theme-main font-semibold'
-      : isScrolled
-        ? 'text-gray-700 hover:text-theme-main'
-        : 'text-white hover:text-theme-light'
-    }`;
+  const isPricingPage = location.pathname === '/pricing';
 
   const plans = [
     {
@@ -104,79 +96,108 @@ const Pricing: React.FC = () => {
 
   return (
     <>
-      {/* Embedded NavBar */}
-      <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-4'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
-            <img
-              src={isScrolled ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
-              alt="ChitChat AI Logo"
-              className="w-8 sm:w-10 h-auto"
-            />
-            <Link
-              to="/"
-              className={`ml-2 text-xl sm:text-2xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'
-                } transition duration-300`}
-            >
-              ChitChat
-            </Link>
-          </div>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
-            <Link to="/" className={getNavLinkClass('/')}>About Us</Link>
-            <Link to="/values" className={getNavLinkClass('/values')}>Values</Link>
-            <Link to="/solutions" className={getNavLinkClass('/solutions')}>Solutions</Link>
-            <Link to="/partnerships" className={getNavLinkClass('/partnerships')}>Businesses</Link>
-            <Link to="/Vision Board" className={getNavLinkClass('/Vision Board')}>
-              Vision Board <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
-            </Link>
-            <Link to="/pricing" className={getNavLinkClass('/pricing')}>Pricing</Link>
-            <Link to="/contact-us" className={getNavLinkClass('/contact-us')}>Contact Us</Link>
-          </div>
-
-          {/* Mobile Menu */}
-          <button
-            className={`md:hidden ${isScrolled ? 'text-gray-800' : 'text-white'}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
-
-        {isMenuOpen && (
-          <div className="md:hidden mt-2 py-2 bg-white rounded-md shadow-lg animate-fade-in">
-            {[
-              { to: '/', label: 'About Us' },
-              { to: '/values', label: 'Values' },
-              { to: '/solutions', label: 'Solutions' },
-              { to: '/partnerships', label: 'Businesses' },
-              { to: '/Vision Board', label: 'Vision Board', badge: true },
-              { to: '/pricing', label: 'Pricing' },
-              { to: '/contact-us', label: 'Contact Us' }
-            ].map(({ to, label, badge }) => (
-              <Link key={to} to={to} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-theme-main transition-colors">
-                <div className="flex items-center">
-                  <span>{label}</span>
-                  {badge && (
-                    <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
-                  )}
-                </div>
-              </Link>
-            ))}
-            <div className="px-4 py-2 border-t border-gray-100">
-              <Link to="#" className="w-full block bg-theme-main hover:bg-theme-dark text-white text-center px-4 py-2 rounded-full">
-                Sign In
+      {/* Navigation Bar */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4 xs:py-5 sm:py-6 md:py-7' : 'bg-transparent py-4 xs:py-5 sm:py-6'
+        }`}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center relative py-1 xs:py-1.5 sm:py-2">
+              <img
+                src={isScrolled ? "/branding/chitchatAI.png" : "/branding/chitchatAILite.png"}
+                alt="ChitChat AI Logo"
+                className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 object-contain transition-all duration-300"
+              />
+              <Link
+                to="/"
+                className={`text-lg xs:text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'
+                  } transition-all duration-300 ml-1.5 xs:ml-2 sm:ml-2.5 md:ml-3 lg:ml-3.5 xl:ml-4`}
+              >
+                ChitChat
               </Link>
             </div>
+
+            {/* Desktop Navigation - Hidden on screens below 992px (lg) */}
+            <div className="hidden lg:flex items-center justify-center space-x-4 lg:space-x-5 xl:space-x-8 2xl:space-x-12">
+              <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                About Us
+              </Link>
+
+              <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                Values
+              </Link>
+              <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                Solutions
+              </Link>
+              <Link to="/partnerships" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center`}>
+                <span>Businesses</span>
+              </Link>
+              <Link to="/Vision Board" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center`}>
+                <span>Vision Board</span>
+                <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full">New</span>
+              </Link>
+              <Link to="/pricing" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 ${isPricingPage ? 'font-bold text-theme-main' : ''}`}>
+                Pricing
+              </Link>
+              <Link to="/contact us" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                Contact Us
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button - Visible only on screens below 992px (lg) */}
+            <button
+              className={`lg:hidden ${isScrolled ? 'text-gray-800' : 'text-white'
+                } p-2 rounded-md hover:bg-white/10 transition-colors`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 xs:h-6 xs:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
           </div>
-        )}
+
+          {/* Mobile Navigation - Optimized for all smaller screens */}
+          {isMenuOpen && (
+            <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
+              <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${isPricingPage ? 'font-bold text-theme-main' : ''}`}>
+                About Us
+              </Link>
+              <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                Values
+              </Link>
+              <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                Solutions
+              </Link>
+              <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                <div className="flex items-center">
+                  <span>Businesses</span>
+                </div>
+              </Link>
+              <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                <div className="flex items-center justify-between">
+                  <span>Vision Board</span>
+                  <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
+                </div>
+              </Link>
+              <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                Pricing
+              </Link>
+              <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                Contact Us
+              </Link>
+              <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
+                {/* You can add additional menu items for small screens here if needed */}
+              </div>
+            </div>
+          )}
+        </div>
       </nav>
 
       {/* Hero Section with Overlay */}
@@ -277,8 +298,8 @@ const Pricing: React.FC = () => {
               <div className="mt-10">
                 <button
                   className={`w-full py-3 px-6 rounded-xl text-sm font-medium tracking-wide transition-all duration-200 ${plan.name === 'Maintenance'
-                      ? 'bg-gray-900 text-white hover:bg-gray-800'
-                      : 'bg-theme-main text-white hover:bg-theme-dark'
+                    ? 'bg-gray-900 text-white hover:bg-gray-800'
+                    : 'bg-theme-main text-white hover:bg-theme-dark'
                     }`}
                 >
                   {plan.button}
@@ -359,7 +380,7 @@ const Pricing: React.FC = () => {
           </p>
           <div className="flex justify-center gap-6 mt-8">
             <Link
-              to="/contact-us"
+              to="/contact us"
               className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
                         font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
                         hover:transform hover:scale-105 hover:bg-white/100 flex items-center gap-2 group"

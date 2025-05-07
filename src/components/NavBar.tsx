@@ -5,76 +5,94 @@ const NavBar: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+    const isPurpleNavPage = location.pathname === '/solutions' || location.pathname === '/contact us';
 
-    // Add responsive scroll behavior
     useEffect(() => {
         const handleScroll = () => {
-            const scrollThreshold = window.innerWidth < 640 ? 5 : 10;
-            setIsScrolled(window.scrollY > scrollThreshold);
+            setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initialize state on component mount
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll); // Fixed the unterminated string
     }, []);
 
-    const isForBusinessesPage = location.pathname === '/partnerships';
-
-    // Reduced font size to match header component
-    const getNavLinkClass = (path: string) => {
-        const isActive = location.pathname === path;
-        return `
-            ${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-gray-300'} 
-            transition-colors duration-200 
-            text-[10px] xs:text-xs sm:text-xs md:text-sm lg:text-sm xl:text-base
-            ${isActive ? 'text-theme-main font-medium' : ''}
-            tracking-normal
-        `.trim();
-    };
-
     return (
-        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-            isForBusinessesPage 
-            ? (isScrolled ? 'bg-white shadow-md py-4 xs:py-5 sm:py-6 md:py-7' : 'bg-transparent py-4 xs:py-5 sm:py-6 md:py-6') 
-            : (isScrolled ? 'bg-white shadow-md py-4 xs:py-5 sm:py-6 md:py-7' : 'bg-theme-main/95 py-4 xs:py-5 sm:py-6 md:py-6')
-        }`}>
-            <div className="container mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4 xs:py-5 sm:py-6 md:py-7' : 'bg-theme-main py-4 xs:py-5 sm:py-6'}`}>
+            {/* Navigation Bar */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
                 <div className="flex items-center justify-between">
-                    {/* Logo - smaller sizes */}
-                    <div className="flex items-center relative py-0.5 xs:py-1 sm:py-1.5">
+                    {/* Logo */}
+                    <div className="flex items-center relative py-1 xs:py-1.5 sm:py-2">
                         <img
                             src={isScrolled ? "/branding/chitchatAI.png" : "/branding/chitchatAILite.png"}
                             alt="ChitChat AI Logo"
-                            className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 object-contain transition-all duration-300"
+                            className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 object-contain transition-all duration-300"
                         />
-                        <Link 
-                            to="/" 
-                            className={`text-base xs:text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold ${
-                                isScrolled ? 'text-gray-800' : 'text-white'
-                            } transition-all duration-300 ml-1 xs:ml-1.5 sm:ml-2 md:ml-2.5 lg:ml-3`}
+                        <Link
+                            to="/"
+                            className={`text-lg xs:text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'
+                                } transition-all duration-300 ml-1.5 xs:ml-2 sm:ml-2.5 md:ml-3 lg:ml-3.5 xl:ml-4`}
                         >
                             ChitChat
                         </Link>
                     </div>
 
-                    {/* Desktop Navigation - standardized spacing between items */}
-                    <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4 lg:space-x-5 xl:space-x-6 2xl:space-x-8">
-                        <Link to="/" className={`${getNavLinkClass("/")} px-2 py-1 hover:opacity-90`}>About Us</Link>
-                        <Link to="/values" className={`${getNavLinkClass("/values")} px-2 py-1 hover:opacity-90`}>Values</Link>
-                        <Link to="/solutions" className={`${getNavLinkClass("/solutions")} px-2 py-1 hover:opacity-90`}>Solutions</Link>
-                        <Link to="/partnerships" className={`flex items-center ${getNavLinkClass("/partnerships")} px-2 py-1 hover:opacity-90`}>
+                    {/* Desktop Navigation - Hidden on screens below 992px (lg) */}
+                    <div className="hidden lg:flex items-center justify-center space-x-4 lg:space-x-5 xl:space-x-8 2xl:space-x-12">
+                        <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                            } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90${location.pathname === '/' ? ' font-bold' : ''}`}>
+                            About Us
+                        </Link>
+                        <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                            } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90${location.pathname === '/values' ? ' font-bold' : ''}`}>
+                            Values
+                        </Link>
+                        <Link
+                            to="/solutions"
+                            className={`transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90
+                                ${location.pathname === '/solutions'
+                                    ? isScrolled
+                                        ? 'text-theme-main font-bold'
+                                        : 'text-white font-bold'
+                                    : isScrolled
+                                        ? 'text-gray-700 hover:text-theme-main'
+                                        : 'text-white hover:text-theme-light'
+                                }`
+                            }
+                        >
+                            Solutions
+                        </Link>
+                        <Link to="/partnerships" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                            } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center${location.pathname === '/partnerships' ? ' font-bold' : ''}`}>
                             <span>Businesses</span>
                         </Link>
-                        <Link to="/Vision Board" className={`flex items-center ${getNavLinkClass("/Vision Board")} px-2 py-1 hover:opacity-90`}>
+                        <Link to="/Vision Board" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                            } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center${location.pathname === '/Vision Board' ? ' font-bold' : ''}`}>
                             <span>Vision Board</span>
                             <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full">New</span>
                         </Link>
-                        <Link to="/pricing" className={`${getNavLinkClass("/pricing")} px-2 py-1 hover:opacity-90`}>Pricing</Link>
-                        <Link to="/contact-us" className={`${getNavLinkClass("/contact-us")} px-2 py-1 hover:opacity-90`}>Contact Us</Link>
+                        <Link to="/pricing" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                            } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90${location.pathname === '/pricing' ? ' font-bold' : ''}`}>
+                            Pricing
+                        </Link>
+                        <Link
+                            to="/contact us"
+                            className={`transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90
+                                ${location.pathname.toLowerCase() === '/contact us'
+                                    ? 'text-white font-bold'
+                                    : isScrolled
+                                        ? 'text-gray-700 hover:text-theme-main'
+                                        : 'text-white hover:text-theme-light'
+                                }`
+                            }
+                        >
+                            Contact Us
+                        </Link>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <button 
-                        className={`md:hidden ${isScrolled ? 'text-gray-800' : 'text-white'} p-2 rounded-md hover:bg-white/10 transition-colors`} 
+                    {/* Mobile Menu Button - Visible only on screens below 992px (lg) */}
+                    <button
+                        className={`lg:hidden ${isScrolled ? 'text-gray-800' : 'text-white'
+                            } p-2 rounded-md hover:bg-white/10 transition-colors`}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         aria-label="Toggle menu"
                     >
@@ -84,23 +102,55 @@ const NavBar: React.FC = () => {
                     </button>
                 </div>
 
-                {/* Mobile Navigation */}
+                {/* Mobile Navigation - Optimized for all smaller screens */}
                 {isMenuOpen && (
-                    <div className="md:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-                        <Link to="/" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">About Us</Link>
-                        <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
-                        <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
-                        <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
-                        <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                    <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
+                        <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/' ? ' font-bold' : ''}`}>
+                            About Us
+                        </Link>
+                        <Link to="/values" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/values' ? ' font-bold' : ''}`}>
+                            Values
+                        </Link>
+                        <Link
+                            to="/solutions"
+                            className={`block px-4 py-2.5 my-1 text-xs xs:text-sm transition-colors
+                                ${location.pathname === '/solutions'
+                                    ? isScrolled
+                                        ? 'text-theme-main font-bold'
+                                        : 'text-white font-bold'
+                                    : 'text-gray-700 hover:bg-gray-50 hover:text-theme-main'
+                                }`
+                            }
+                        >
+                            Solutions
+                        </Link>
+                        <Link to="/partnerships" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/partnerships' ? ' font-bold' : ''}`}>
+                            <div className="flex items-center">
+                                <span>Businesses</span>
+                            </div>
+                        </Link>
+                        <Link to="/Vision Board" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/Vision Board' ? ' font-bold' : ''}`}>
                             <div className="flex items-center justify-between">
                                 <span>Vision Board</span>
                                 <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
                             </div>
                         </Link>
-                        <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
-                        <Link to="/contact-us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
-                        <div className="px-4 py-2.5 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
-                            <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2.5 rounded-full text-center text-xs xs:text-sm transition-colors">Sign In</Link>
+                        <Link to="/pricing" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/pricing' ? ' font-bold' : ''}`}>
+                            Pricing
+                        </Link>
+                        <Link
+                            to="/contact us"
+                            className={`block px-4 py-2.5 my-1 text-xs xs:text-sm transition-colors
+                                ${['/contact-us', '/contactus'].includes(location.pathname.toLowerCase())
+                                    ? 'text-white font-bold'
+                                    : 'text-gray-700 hover:bg-gray-50 hover:text-theme-main'
+                                }`
+                            }
+                        >
+                            Contact Us
+                        </Link>
+                        <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
+                            {/* You can add additional menu items for small screens here if needed */}
                         </div>
                     </div>
                 )}

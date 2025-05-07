@@ -189,13 +189,6 @@ const Solutions: React.FC = () => {
     }
   ];
 
-  const handleScrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   // Handle modal closing with animation
   const handleCloseModal = () => {
     setIsModalExiting(true);

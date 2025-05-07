@@ -128,7 +128,7 @@ const Values: React.FC = () => {
                                 <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </Link>
                             <Link to="/pricing" className={`${getNavLinkClass("/pricing")} text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>Pricing</Link>
-                            <Link to="/contact-us" className={`${getNavLinkClass("/contact-us")} text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>Contact Us</Link>
+                            <Link to="/contact us" className={`${getNavLinkClass("/contact us")} text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>Contact Us</Link>
                         </div>
 
                         {/* Mobile Menu Toggle */}
@@ -157,7 +157,7 @@ const Values: React.FC = () => {
                                 </div>
                             </Link>
                             <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
-                            <Link to="/contact-us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
+                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                             <div className="px-4 py-2.5 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
                                 <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2.5 rounded-full text-center text-xs xs:text-sm transition-colors">Sign In</Link>
                             </div>

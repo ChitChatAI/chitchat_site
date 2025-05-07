@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
-import { motion, useScroll } from 'framer-motion'; 
+import { motion, useScroll } from 'framer-motion';
 import { ChevronDown, X, Menu, Cookie } from 'lucide-react'; // Added Cookie icon import
 
 const VisionBoard: React.FC = () => {
@@ -9,8 +9,43 @@ const VisionBoard: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false); // Added cookie policy state
     const [isModalExiting, setIsModalExiting] = useState(false); // Added state for animation
+    const [navbarSpaceState, setNavbarSpaceState] = useState<'normal' | 'tight' | 'very-tight' | 'collapse'>('normal');
     const location = useLocation();
     const { scrollYProgress } = useScroll();
+    const isHomePage = location.pathname === '/Vision Board';
+    
+
+
+    // Refs for measuring navbar elements
+    const navContainerRef = useRef<HTMLDivElement>(null);
+    const navLinksRef = useRef<HTMLDivElement>(null);
+
+    // Function to check navbar space and determine text size or collapse
+    const checkNavbarOverflow = () => {
+        if (navContainerRef.current && navLinksRef.current) {
+            const containerWidth = navContainerRef.current.offsetWidth;
+            const logoWidth = navContainerRef.current.querySelector('.logo-container')?.clientWidth || 0;
+            const linksWidth = navLinksRef.current.scrollWidth;
+            const availableSpace = containerWidth - logoWidth - 40; // 40px buffer
+
+            // Calculate ratio of needed space vs available space
+            const spaceRatio = linksWidth / availableSpace;
+
+            if (spaceRatio > 1.1) {
+                // When severely constrained, collapse to hamburger
+                setNavbarSpaceState('collapse');
+            } else if (spaceRatio > 0.95) {
+                // When very tight, use smallest font
+                setNavbarSpaceState('very-tight');
+            } else if (spaceRatio > 0.85) {
+                // When somewhat tight, use smaller font
+                setNavbarSpaceState('tight');
+            } else {
+                // When plenty of space, use normal font
+                setNavbarSpaceState('normal');
+            }
+        }
+    };
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -19,13 +54,25 @@ const VisionBoard: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Check navbar overflow on mount and window resize
+    useEffect(() => {
+        checkNavbarOverflow();
+
+        const handleResize = () => {
+            checkNavbarOverflow();
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     // Fixed function to correctly detect Vision Board page
     const getNavLinkClass = (path: string) => {
         // Special case for Vision Board - directly check current component
         if (path === "/Vision Board") {
             return `${isScrolled ? 'text-gray-700' : 'text-white'} font-semibold text-theme-main transition-colors duration-200 text-sm md:text-base`;
         }
-        
+
         // Regular path handling for other links
         return `${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-gray-300'} transition-colors duration-200 text-sm md:text-base ${location.pathname === path ? 'text-theme-main font-semibold' : ''}`;
     };
@@ -39,74 +86,185 @@ const VisionBoard: React.FC = () => {
         }, 300); // Match this with the animation duration
     };
 
+    // Add CSS variable for navbar height
+    useEffect(() => {
+        // Set the navbar height CSS variable
+        const updateNavbarHeight = () => {
+            const navbar = document.querySelector('nav');
+            if (navbar) {
+                const navbarHeight = navbar.offsetHeight;
+                document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);
+            }
+        };
+
+        // Initial setup and listen for resize events
+        updateNavbarHeight();
+        window.addEventListener('resize', updateNavbarHeight);
+
+        return () => window.removeEventListener('resize', updateNavbarHeight);
+    }, [isScrolled]); // Re-run when scroll state changes
+
+    // Helper function to get font size class based on space state
+    const getNavFontSize = () => {
+        switch (navbarSpaceState) {
+            case 'tight': return 'text-[11px]';
+            case 'very-tight': return 'text-[10px]';
+            default: return 'text-xs sm:text-sm lg:text-base';
+        }
+    };
+
+    // Get badge size class based on space state
+    const getBadgeSize = () => {
+        switch (navbarSpaceState) {
+            case 'tight': return 'ml-0.5 px-1 py-0 text-[8px]';
+            case 'very-tight': return 'ml-0.5 px-0.5 py-0 text-[8px]';
+            default: return 'ml-0.5 md:ml-1 px-1 md:px-2 py-0.5 text-[10px] md:text-xs';
+        }
+    };
+
     return (
         <>
-            {/* Embedded Responsive NavBar */}
-            <nav
-                className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-7' : 'bg-transparent py-6'
-                    }`}
-            >
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Navigation Bar */}
+            <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4 xs:py-5 sm:py-6 md:py-7' : 'bg-transparent py-4 xs:py-5 sm:py-6'
+                }`}>
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
-                        <div className="flex items-center relative">
+                        <div className="flex items-center relative py-1 xs:py-1.5 sm:py-2">
                             <img
                                 src={isScrolled ? "/branding/chitchatAI.png" : "/branding/chitchatAILite.png"}
                                 alt="ChitChat AI Logo"
-                                className="w-8 sm:w-10 h-auto"
+                                className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 object-contain transition-all duration-300"
                             />
-                            <Link to="/" className={`text-xl sm:text-2xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'} transition duration-300 ml-2`}>
+                            <Link
+                                to="/"
+                                className={`text-lg xs:text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'
+                                    } transition-all duration-300 ml-1.5 xs:ml-2 sm:ml-2.5 md:ml-3 lg:ml-3.5 xl:ml-4`}
+                            >
                                 ChitChat
                             </Link>
                         </div>
 
-                        {/* Desktop Navigation */}
-                        <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-10">
-                            <Link to="/" className={getNavLinkClass("/")}>About Us</Link>
-                            <Link to="/values" className={getNavLinkClass("/values")}>Values</Link>
-                            <Link to="/solutions" className={getNavLinkClass("/solutions")}>Solutions</Link>
-                            <Link to="/partnerships" className={`flex items-center ${getNavLinkClass("/partnerships")}`}>
+                        {/* Desktop Navigation - Hidden on screens below 992px (lg) */}
+                        <div className="hidden lg:flex items-center justify-center space-x-4 lg:space-x-5 xl:space-x-8 2xl:space-x-12">
+                            <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 ${isHomePage ? 'font-bold' : ''
+                                }`}>
+                                About Us
+                            </Link>
+
+                            <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                                Values
+                            </Link>
+                            <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                                Solutions
+                            </Link>
+                            <Link to="/partnerships" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center`}>
                                 <span>Businesses</span>
                             </Link>
-                            <Link to="/Vision Board" className={`flex items-center ${getNavLinkClass("/Vision Board")}`}>
+                            <Link 
+                                to="/Vision Board" 
+                                className={`${getNavLinkClass("/Vision Board")} flex items-center px-1 py-1.5 hover:opacity-90`}
+                            >
                                 <span>Vision Board</span>
-                                <span className="ml-1 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
+                                <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full">New</span>
                             </Link>
-                            <Link to="/pricing" className={getNavLinkClass("/pricing")}>Pricing</Link>
-                            <Link to="/contact-us" className={getNavLinkClass("/contact-us")}>Contact Us</Link>
+                            <Link to="/pricing" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                                Pricing
+                            </Link>
+                            <Link to="/contact us" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
+                                Contact Us
+                            </Link>
                         </div>
 
-                        {/* Mobile Menu Toggle */}
+                        {/* Mobile Menu Button - Visible only on screens below 992px (lg) */}
                         <button
-                            className={`md:hidden ${isScrolled ? 'text-gray-800' : 'text-white'}`}
+                            className={`lg:hidden ${isScrolled ? 'text-gray-800' : 'text-white'
+                                } p-2 rounded-md hover:bg-white/10 transition-colors`}
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label="Toggle menu"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 xs:h-6 xs:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                             </svg>
                         </button>
                     </div>
 
-                    {/* Mobile Navigation */}
+                    {/* Mobile Navigation - Optimized for all smaller screens */}
                     {isMenuOpen && (
-                        <div className="md:hidden mt-4 py-2 bg-white rounded-md shadow-lg animate-fade-in">
-                            <Link to="/" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">About Us</Link>
-                            <Link to="/values" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
-                            <Link to="/solutions" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
-                            <Link to="/partnerships" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
-                            <Link to="/Vision Board" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors flex items-center">
-                                <span className="text-theme-main font-semibold">Vision Board</span>
-                                <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
+                        <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
+                            <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${isHomePage ? 'font-bold' : ''
+                                }`}>
+                                About Us
                             </Link>
-                            <Link to="/pricing" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
-                            <Link to="/contact-us" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
-                            <div className="px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
-                                <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2 rounded-full text-center">Sign In</Link>
+                            <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                Values
+                            </Link>
+                            <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                Solutions
+                            </Link>
+                            <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                <div className="flex items-center">
+                                    <span>Businesses</span>
+                                </div>
+                            </Link>
+                            <Link 
+                                to="/Vision Board" 
+                                className={`block px-4 py-2.5 my-1 ${getNavLinkClass("/Vision Board")}`}
+                            >
+                                <div className="flex items-center justify-between">
+                                    <span>Vision Board</span>
+                                    <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
+                                </div>
+                            </Link>
+                            <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                Pricing
+                            </Link>
+                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                Contact Us
+                            </Link>
+                            <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
+                                {/* You can add additional menu items for small screens here if needed */}
                             </div>
                         </div>
                     )}
                 </div>
             </nav>
+            {/* Scroll Progress Bar - Positioned directly under navbar */}
+            <motion.div
+                className="fixed left-0 right-0 h-1 bg-gradient-to-r from-theme-main via-purple-500 to-theme-light z-40"
+                style={{
+                    top: "var(--navbar-height, 0px)",
+                    transformOrigin: "0%",
+                    scaleX: scrollYProgress,
+                    opacity: isScrolled ? 1 : 0,
+                    transition: "opacity 0.3s ease"
+                }}
+            />
+
+            {/* Mobile Navigation - Show whenever menu is open */}
+            {isMenuOpen && (
+                <div className="py-2 bg-white rounded-md shadow-lg animate-fade-in fixed top-[var(--navbar-height)] left-0 right-0 mx-4 z-40">
+                    <Link to="/" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">About Us</Link>
+                    <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
+                    <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
+                    <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
+                    <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors flex items-center">
+                        <span className="text-theme-main font-semibold">Vision Board</span>
+                        <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
+                    </Link>
+                    <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
+                    <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
+                    <div className="px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
+                        <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2 rounded-full text-center">Sign In</Link>
+                    </div>
+                </div>
+            )}
 
             {/* Vision Board Header Hero Section with Parallax Effect */}
             <motion.section
@@ -178,12 +336,14 @@ const VisionBoard: React.FC = () => {
             <section className="py-12 md:py-16 bg-white">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto">
-                        {/* Reading Progress Bar - Fixed implementation */}
+                        {/* Reading Progress Bar - Improved positioning and visibility */}
                         <motion.div
-                            className="fixed top-0 left-0 right-0 h-1 bg-theme-main z-50"
+                            className="fixed left-0 right-0 h-1.5 bg-gradient-to-r from-theme-main via-purple-500 to-theme-light z-40"
                             style={{
+                                top: "var(--navbar-height, 70px)",
                                 transformOrigin: "0%",
-                                scaleX: scrollYProgress
+                                scaleX: scrollYProgress,
+                                opacity: 0.9
                             }}
                         />
 
@@ -454,7 +614,7 @@ const VisionBoard: React.FC = () => {
                     </p>
                     <div className="flex justify-center gap-6 mt-8">
                         <Link
-                            to="/contact-us"
+                            to="/contact us"
                             className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
                              font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
                              hover:transform hover:scale-105 hover:bg-white/100 flex items-center gap-2 group"
@@ -489,47 +649,47 @@ const VisionBoard: React.FC = () => {
 
                 {/* Cookie Policy Modal */}
                 {cookiePolicyOpen && (
-                    <div 
+                    <div
                         className="fixed top-0 bottom-0 right-0 bg-white shadow-lg rounded-l-lg p-6 w-full max-w-sm max-h-screen overflow-y-auto z-50 transform transition-transform duration-300 ease-in-out"
-                        style={{ 
+                        style={{
                             transform: isModalExiting ? 'translateX(100%)' : 'translateX(0)',
                             animation: isModalExiting ? 'slideRight 0.3s ease-out forwards' : 'slideLeft 0.3s ease-out forwards'
                         }}
                     >
                         {/* ChitChat logo */}
                         <div className="flex justify-center mb-4">
-                            <img 
+                            <img
                                 src="/branding/chitchatAI.png"
                                 alt="ChitChat AI Logo"
                                 className="w-12 h-auto"
                             />
                         </div>
-                        
+
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-semibold text-gray-800">Your cookie preferences</h3>
-                            <button 
+                            <button
                                 onClick={handleCloseModal}
                                 className="text-gray-500 hover:text-gray-700"
                             >
                                 <X size={18} />
                             </button>
                         </div>
-                        
+
                         <p className="text-sm text-gray-600 mb-5">
                             We use cookies to keep our site secure and user-friendly, and to carry out the activities stated below.
                         </p>
-                        
+
                         <p className="text-sm text-gray-600 mb-5">
                             You can customize your cookie preferences at any time by toggling the options on or off.
                         </p>
-                        
+
                         <p className="text-sm text-gray-600 mb-6">
                             For more information, have a look at our <a href="#" className="text-theme-main underline hover:text-theme-dark">Privacy and Cookie Policy</a>
                         </p>
-                        
+
                         <div className="border-t border-gray-200 pt-4 mb-5">
                             <h4 className="text-sm font-semibold mb-4">Manage consent preferences</h4>
-                            
+
                             {/* Technical cookies toggle - always active */}
                             <div className="flex justify-between items-center mb-4">
                                 <div>
@@ -540,7 +700,7 @@ const VisionBoard: React.FC = () => {
                                     <div className="bg-white rounded-full w-4 h-4 ml-auto shadow-sm"></div>
                                 </div>
                             </div>
-                            
+
                             {/* Analytics cookies toggle */}
                             <div className="flex justify-between items-center mb-6">
                                 <div>
@@ -551,15 +711,15 @@ const VisionBoard: React.FC = () => {
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div className="flex justify-between space-x-3 pt-3 border-t border-gray-200">
-                            <button 
+                            <button
                                 onClick={handleCloseModal}
                                 className="flex-1 py-2 border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors"
                             >
                                 Reject all
                             </button>
-                            <button 
+                            <button
                                 onClick={handleCloseModal}
                                 className="flex-1 bg-theme-main text-white py-2 rounded font-medium hover:bg-theme-dark transition-colors"
                             >
