@@ -37,20 +37,7 @@ const HomePage: React.FC = () => {
       <Header />
       <main>
         <Hero id="hero" />
-        <section
-          id="features"
-          className="py-16 bg-gray-50"
-        >
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl font-bold text-center text-gray-900 mb-8 drop-shadow-md">
-              Features
-            </h2>
-            <p className="text-lg text-center text-gray-600 mb-12 drop-shadow-sm">
-              Explore the key features that make ChitChat AI the perfect solution for your business.
-            </p>
-            {/* ...existing content... */}
-          </div>
-        </section>
+        <Features id="features" />
         <MeetOurCEO id="meet-our-ceo" />
         <Testimonials id="testimonials" />
         <Community id="community" />
