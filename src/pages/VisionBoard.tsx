@@ -122,6 +122,18 @@ const VisionBoard: React.FC = () => {
         }
     };
 
+    // Smooth scrolling function
+    const handleScrollToSection = (id: string) => {
+        const section = document.getElementById(id);
+        if (section) {
+            const offset = section.getBoundingClientRect().top + window.scrollY - 70; // Adjust for navbar height
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth',
+            });
+        }
+    };
+
     return (
         <>
             {/* Navigation Bar */}
@@ -198,38 +210,34 @@ const VisionBoard: React.FC = () => {
                     {/* Mobile Navigation - Optimized for all smaller screens */}
                     {isMenuOpen && (
                         <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-                            <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${isHomePage ? 'font-bold' : ''
-                                }`}>
+                            <Link to="/" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 About Us
                             </Link>
-                            <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/values" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Values
                             </Link>
-                            <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/solutions" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Solutions
                             </Link>
-                            <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                                <div className="flex items-center">
-                                    <span>Businesses</span>
-                                </div>
+                            <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                Businesses
                             </Link>
-                            <Link 
-                                to="/Vision Board" 
-                                className={`block px-4 py-2.5 my-1 ${getNavLinkClass("/Vision Board")}`}
-                            >
+                            <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center justify-between">
                                     <span>Vision Board</span>
                                     <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
                                 </div>
                             </Link>
-                            <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/pricing" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Pricing
                             </Link>
-                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Contact Us
                             </Link>
-                            <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
-                                {/* You can add additional menu items for small screens here if needed */}
+                            <div className="px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
+                                <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2 rounded-full text-center text-base transition-colors">
+                                    Sign In
+                                </Link>
                             </div>
                         </div>
                     )}
@@ -246,25 +254,6 @@ const VisionBoard: React.FC = () => {
                     transition: "opacity 0.3s ease"
                 }}
             />
-
-            {/* Mobile Navigation - Show whenever menu is open */}
-            {isMenuOpen && (
-                <div className="py-2 bg-white rounded-md shadow-lg animate-fade-in fixed top-[var(--navbar-height)] left-0 right-0 mx-4 z-40">
-                    <Link to="/" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">About Us</Link>
-                    <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
-                    <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
-                    <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
-                    <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors flex items-center">
-                        <span className="text-theme-main font-semibold">Vision Board</span>
-                        <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">New</span>
-                    </Link>
-                    <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
-                    <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
-                    <div className="px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
-                        <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2 rounded-full text-center">Sign In</Link>
-                    </div>
-                </div>
-            )}
 
             {/* Vision Board Header Hero Section with Parallax Effect */}
             <motion.section

@@ -136,6 +136,15 @@ body {
   }
 }
 
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 .animate-slide-up {
   animation: slideUp 0.7s ease-out forwards;
   opacity: 1 !important; /* Ensure visibility */

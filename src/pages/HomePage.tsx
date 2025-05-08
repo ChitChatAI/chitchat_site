@@ -15,7 +15,11 @@ const HomePage: React.FC = () => {
   const handleScrollToSection = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      const offset = section.getBoundingClientRect().top + window.scrollY - 70; // Adjust for navbar height
+      window.scrollTo({
+        top: offset,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -33,7 +37,20 @@ const HomePage: React.FC = () => {
       <Header />
       <main>
         <Hero id="hero" />
-        <Features id="features" />
+        <section
+          id="features"
+          className="py-16 bg-gray-50"
+        >
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center text-gray-900 mb-8 drop-shadow-md">
+              Features
+            </h2>
+            <p className="text-lg text-center text-gray-600 mb-12 drop-shadow-sm">
+              Explore the key features that make ChitChat AI the perfect solution for your business.
+            </p>
+            {/* ...existing content... */}
+          </div>
+        </section>
         <MeetOurCEO id="meet-our-ceo" />
         <Testimonials id="testimonials" />
         <Community id="community" />
@@ -71,7 +88,7 @@ const HomePage: React.FC = () => {
             </div>
             
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-800">Your cookie preferences</h3>
+              <h3 className="text-lg font-semibold text-gray-800 drop-shadow-md">Your cookie preferences</h3> {/* Added drop shadow */}
               <button 
                 onClick={handleCloseModal}
                 className="text-gray-500 hover:text-gray-700"
@@ -80,26 +97,26 @@ const HomePage: React.FC = () => {
               </button>
             </div>
             
-            <p className="text-sm text-gray-600 mb-5">
+            <p className="text-sm text-gray-600 mb-5 drop-shadow-sm">
               We use cookies to keep our site secure and user-friendly, and to carry out the activities stated below.
             </p>
             
-            <p className="text-sm text-gray-600 mb-5">
+            <p className="text-sm text-gray-600 mb-5 drop-shadow-sm">
               You can customize your cookie preferences at any time by toggling the options on or off.
             </p>
             
-            <p className="text-sm text-gray-600 mb-6">
+            <p className="text-sm text-gray-600 mb-6 drop-shadow-sm">
               For more information, have a look at our <a href="#" className="text-theme-main underline hover:text-theme-dark">Privacy and Cookie Policy</a>
             </p>
             
             <div className="border-t border-gray-200 pt-4 mb-5">
-              <h4 className="text-sm font-semibold mb-4">Manage consent preferences</h4>
+              <h4 className="text-sm font-semibold mb-4 drop-shadow-md">Manage consent preferences</h4> {/* Added drop shadow */}
               
               {/* Technical cookies toggle - always active */}
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-800">Technical cookies</p>
-                  <p className="text-xs text-gray-500">Always active</p>
+                  <p className="text-sm font-medium text-gray-800 drop-shadow-sm">Technical cookies</p> {/* Added drop shadow */}
+                  <p className="text-xs text-gray-500 drop-shadow-sm">Always active</p> {/* Added drop shadow */}
                 </div>
                 <div className="bg-theme-main rounded-full w-10 h-5 flex items-center px-0.5">
                   <div className="bg-white rounded-full w-4 h-4 ml-auto shadow-sm"></div>
@@ -109,7 +126,7 @@ const HomePage: React.FC = () => {
               {/* Analytics cookies toggle */}
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <p className="text-sm font-medium text-gray-800">Analytics cookies</p>
+                  <p className="text-sm font-medium text-gray-800 drop-shadow-sm">Analytics cookies</p> {/* Added drop shadow */}
                 </div>
                 <button className="bg-gray-200 rounded-full w-10 h-5 flex items-center px-0.5 hover:bg-gray-300 transition-colors">
                   <div className="bg-white rounded-full w-4 h-4 shadow-sm"></div>
@@ -120,13 +137,13 @@ const HomePage: React.FC = () => {
             <div className="flex justify-between space-x-3 pt-3 border-t border-gray-200">
               <button 
                 onClick={handleCloseModal}
-                className="flex-1 py-2 border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors"
+                className="flex-1 py-2 border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors drop-shadow-sm"
               >
                 Reject all
               </button>
               <button 
                 onClick={handleCloseModal}
-                className="flex-1 bg-theme-main text-white py-2 rounded font-medium hover:bg-theme-dark transition-colors"
+                className="flex-1 bg-theme-main text-white py-2 rounded font-medium hover:bg-theme-dark transition-colors drop-shadow-sm"
               >
                 Confirm my choices
               </button>

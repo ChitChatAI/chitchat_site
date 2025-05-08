@@ -72,7 +72,11 @@ const Values: React.FC = () => {
     const handleScrollToSection = (id: string) => {
         const section = document.getElementById(id);
         if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
+            const offset = section.getBoundingClientRect().top + window.scrollY - 70; // Adjust for navbar height
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth',
+            });
             setCookiePolicyOpen(false); // Close the floating menu after clicking
         }
     };
@@ -146,20 +150,20 @@ const Values: React.FC = () => {
                     {/* Mobile Navigation */}
                     {isMenuOpen && (
                         <div className="md:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-                            <Link to="/" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">About Us</Link>
-                            <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
-                            <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
-                            <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
-                            <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">About Us</Link>
+                            <Link to="/values" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Values</Link>
+                            <Link to="/solutions" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Solutions</Link>
+                            <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Businesses</Link>
+                            <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center justify-between">
                                     <span>Vision Board</span>
                                     <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
                                 </div>
                             </Link>
-                            <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
-                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
+                            <Link to="/pricing" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Pricing</Link>
+                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">Contact Us</Link>
                             <div className="px-4 py-2.5 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
-                                <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2.5 rounded-full text-center text-xs xs:text-sm transition-colors">Sign In</Link>
+                                <Link to="#" className="w-full bg-theme-main hover:bg-theme-dark text-white px-4 py-2.5 rounded-full text-center text-base transition-colors">Sign In</Link>
                             </div>
                         </div>
                     )}
@@ -169,7 +173,7 @@ const Values: React.FC = () => {
             {/* Hero Section */}
             <section
                 id="climbers"
-                className="relative bg-cover bg-center animate-fade-in"
+                className="relative bg-cover bg-center animate-fade-in transform perspective-1000"
                 style={{
                     backgroundImage: "url('/valuesPage/valuesBg.png')",
                     backgroundAttachment: "fixed",
@@ -178,30 +182,23 @@ const Values: React.FC = () => {
                     backgroundPosition: 'center',
                 }}
             >
-                {/* Dark semi-transparent black overlay for contrast */}
                 <div className="absolute inset-0 bg-black/40 z-0" />
-
-                {/* Purple fog overlay from bottom to top */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
-
-                {/* Removing blending gradient at the bottom */}
-
-                {/* Content */}
                 <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
-                    <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
+                    <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-lg">
                         We're climbers
                     </h1>
-                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono scroll-review">
-                        {`At ChitChat, our values define who we are and guide us in everything we do.`}
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 text-white/90 leading-relaxed drop-shadow-sm">
+                        At ChitChat, our values define who we are and guide us in everything we do.
                     </p>
-                    <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-                        <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
-                    </div>
                 </div>
             </section>
 
             {/* Values Section */}
-            <section id="climber-values" className="py-16 px-6 bg-gray-50">
+            <section
+                id="climber-values"
+                className="py-16 px-6 bg-gray-50"
+                
+            >
                 <motion.div
                     className="relative z-20 max-w-7xl mx-auto"
                     initial="hidden"
@@ -214,91 +211,24 @@ const Values: React.FC = () => {
                     transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
                     <div className="max-w-6xl mx-auto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 mb-12">
-
-                            {values.slice(0, 2).map((value, index) => (
+                        <h3 className="text-4xl font-bold text-center text-gray-900 mb-20">
+                            Our Core Values
+                        </h3>
+                        <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
+                            {values.map((value, index) => (
                                 <motion.div
                                     key={index}
-                                    className="text-center p-4 sm:p-6"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                                    className="relative"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
                                 >
-                                    <h2 className="text-2xl font-semibold text-theme-main mb-4 relative z-30">{value.title}</h2>
-                                    <p className="text-gray-600 relative z-30">{value.description}</p>
+                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
+                                    <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
                                 </motion.div>
                             ))}
-
-                        </div>
-                        <div className="grid grid-cols-1 gap-6 sm:gap-8 mb-12">
-                            {values.slice(2, 3).map((value, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="text-center p-4 sm:p-6"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                                >
-                                    <h2 className="text-2xl font-semibold text-theme-main mb-4">{value.title}</h2>
-                                    <p className="text-gray-600">{value.description}</p>
-                                </motion.div>
-                            ))}
-
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 mb-12">
-                            {values.slice(3, 5).map((value, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="text-center p-4 sm:p-6"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                                >
-                                    <h2 className="text-2xl font-semibold text-theme-main mb-4">{value.title}</h2>
-                                    <p className="text-gray-600">{value.description}</p>
-                                </motion.div>
-                            ))}
-
-                        </div>
-                        <div className="grid grid-cols-1 gap-6 sm:gap-8 mb-12">
-                            {values.slice(5, 6).map((value, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="text-center p-4 sm:p-6"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                                >
-                                    <h2 className="text-2xl font-semibold text-theme-main mb-4">{value.title}</h2>
-                                    <p className="text-gray-600">{value.description}</p>
-                                </motion.div>
-                            ))}
-
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
-                            {values.slice(6).map((value, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="text-center p-4 sm:p-6"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                                >
-                                    <h2 className="text-2xl font-semibold text-theme-main mb-4">{value.title}</h2>
-                                    <p className="text-gray-600">{value.description}</p>
-                                </motion.div>
-                            ))}
-
                         </div>
                     </div>
                 </motion.div>
@@ -307,22 +237,24 @@ const Values: React.FC = () => {
             {/* Additional Section with Scientists Image */}
             <section
                 id="scientists"
-                className="relative bg-cover bg-center animate-fade-in overflow-hidden"
+                className="relative bg-cover bg-center animate-fade-in overflow-hidden transform perspective-1000"
                 style={{
                     backgroundImage: "url('/valuesPage/scientists.png')",
                     backgroundAttachment: "fixed",
                     minHeight: 'calc(100vh + 300px)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
+                    border: "2px solid transparent", // Transparent border for futuristic effect
+                    borderRadius: "30px", // Smooth futuristic border radius
+                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)", // Futuristic glow effect
+                    backgroundClip: "padding-box, border-box",
+                    backgroundOrigin: "border-box",
+                    transform: "translateZ(50px) scale(1.05)", // 3D jumping effect
                 }}
             >
-                {/* Dark semi-transparent black overlay for contrast */}
-                <div className="absolute inset-0 bg-black/40 z-0" />
-
-                {/* Purple fog overlay from bottom to top - matching the climbers section */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
-
-                {/* Content */}
+                <div className="absolute inset-0 bg-black/40 z-0 rounded-[30px]" /> {/* Match border radius */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none rounded-[30px]" /> {/* Match border radius */}
                 <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
                     <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
                         We're scientists
@@ -391,22 +323,24 @@ const Values: React.FC = () => {
             </section>{/* Open Section with Silhouette Image */}
             <section
                 id="open"
-                className="relative bg-cover bg-center animate-fade-in overflow-hidden"
+                className="relative bg-cover bg-center animate-fade-in overflow-hidden transform perspective-1000"
                 style={{
                     backgroundImage: "url('/valuesPage/silhoutte.png')",
                     backgroundAttachment: "fixed",
                     minHeight: 'calc(100vh + 300px)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
+                    border: "2px solid transparent", // Transparent border for futuristic effect
+                    borderRadius: "30px", // Smooth futuristic border radius
+                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)", // Futuristic glow effect
+                    backgroundClip: "padding-box, border-box",
+                    backgroundOrigin: "border-box",
+                    transform: "translateZ(50px) scale(1.05)", // 3D jumping effect
                 }}
             >
-                {/* Dark semi-transparent black overlay for contrast */}
-                <div className="absolute inset-0 bg-black/40 z-0" />
-
-                {/* Purple fog overlay from bottom to top */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
-
-                {/* Content */}
+                <div className="absolute inset-0 bg-black/40 z-0 rounded-[30px]" /> {/* Match border radius */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none rounded-[30px]" /> {/* Match border radius */}
                 <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
                     <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
                         We're open
@@ -435,47 +369,47 @@ const Values: React.FC = () => {
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                 >
                     <div className="max-w-6xl mx-auto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16 mb-12">
+                        <h3 className="text-4xl font-bold text-center text-gray-900 mb-20">
+                            Our Open Values
+                        </h3>
+                        <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
                             {[
                                 {
                                     title: 'Diversity',
-                                    description: 'Seeking to be exposed to a variety of people, perspectives, and experiences, and assessing them with an open mind.'
+                                    description: 'Seeking to be exposed to a variety of people, perspectives, and experiences, and assessing them with an open mind.',
                                 },
                                 {
                                     title: 'Freedom',
-                                    description: 'Affording others considerable latitude of action, and providing them with ample opportunity to prove themselves.'
+                                    description: 'Affording others considerable latitude of action, and providing them with ample opportunity to prove themselves.',
                                 },
                                 {
                                     title: 'Inclusivity',
-                                    description: 'Treating all others in the same respectful and caring way, no matter their individual characteristics and preferences.'
+                                    description: 'Treating all others in the same respectful and caring way, no matter their individual characteristics and preferences.',
                                 },
                                 {
                                     title: 'Self-criticism',
-                                    description: 'Soliciting and receiving feedback with a grateful attitude.'
+                                    description: 'Soliciting and receiving feedback with a grateful attitude.',
                                 },
                                 {
                                     title: 'Tolerance',
-                                    description: 'Respecting others and their opinions, particularly when you don\'t see eye to eye with them.'
+                                    description: 'Respecting others and their opinions, particularly when you don\'t see eye to eye with them.',
                                 },
                                 {
                                     title: 'Transparency',
-                                    description: 'Making relevant information as accessible as possible—even when it feels uncomfortable to do so.'
-                                }
+                                    description: 'Making relevant information as accessible as possible—even when it feels uncomfortable to do so.',
+                                },
                             ].map((value, index) => (
                                 <motion.div
                                     key={index}
                                     className="relative"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{
-                                        hidden: { opacity: 0, y: 20 },
-                                        visible: { opacity: 1, y: 0 }
-                                    }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
                                 >
-                                    <h3 className="text-2xl font-semibold text-theme-main mb-3">{value.title}</h3>
-                                    <p className="text-base text-gray-600">{value.description}</p>
+                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
+                                    <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -485,22 +419,24 @@ const Values: React.FC = () => {
             {/* Tribe Section with Image */}
             <section
                 id="tribe"
-                className="relative bg-cover bg-center animate-fade-in overflow-hidden"
+                className="relative bg-cover bg-center animate-fade-in overflow-hidden transform perspective-1000"
                 style={{
                     backgroundImage: "url('/valuesPage/tribe.png')",
                     backgroundAttachment: "fixed",
                     minHeight: 'calc(100vh + 300px)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
+                    border: "2px solid transparent", // Transparent border for futuristic effect
+                    borderRadius: "30px", // Smooth futuristic border radius
+                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)", // Futuristic glow effect
+                    backgroundClip: "padding-box, border-box",
+                    backgroundOrigin: "border-box",
+                    transform: "translateZ(50px) scale(1.05)", // 3D jumping effect
                 }}
             >
-                {/* Dark semi-transparent black overlay for contrast */}
-                <div className="absolute inset-0 bg-black/40 z-0" />
-
-                {/* Purple fog overlay from bottom to top - matching the climbers section */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
-
-                {/* Content */}
+                <div className="absolute inset-0 bg-black/40 z-0 rounded-[30px]" /> {/* Match border radius */}
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none rounded-[30px]" /> {/* Match border radius */}
                 <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
                     <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
                         We're a tribe
@@ -508,9 +444,6 @@ const Values: React.FC = () => {
                     <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono scroll-review">
                         {`At ChitChat, our community values strengthen the bonds that help us grow together.`}
                     </p>
-                </div>
-                <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
-                    <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
                 </div>
             </section>
 
@@ -542,7 +475,10 @@ const Values: React.FC = () => {
                             ].map((value, index) => (
                                 <motion.div
                                     key={index}
-                                    className="relative"
+                                    className="relative bg-white border border-theme-main p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                                    style={{
+                                        clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
+                                    }}
                                     initial="hidden"
                                     whileInView="visible"
                                     viewport={{ once: false, amount: 0.2 }}
@@ -552,8 +488,8 @@ const Values: React.FC = () => {
                                     }}
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
                                 >
-                                    <h3 className="text-2xl font-semibold text-theme-main mb-3">{value.title}</h3>
-                                    <p className="text-base text-gray-600">{value.description}</p>
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-3 drop-shadow-md">{value.title}</h3> {/* Added drop shadow */}
+                                    <p className="text-base text-gray-600 drop-shadow-sm">{value.description}</p> {/* Added drop shadow */}
                                 </motion.div>
                             ))}
                         </div>

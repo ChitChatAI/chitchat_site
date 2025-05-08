@@ -197,6 +197,17 @@ const ContactUs: React.FC = () => {
     }, 1500);
   };
 
+  const handleScrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const offset = section.getBoundingClientRect().top + window.scrollY - 70; // Adjust for navbar height
+      window.scrollTo({
+        top: offset,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <>
       <NavBar />

@@ -146,10 +146,10 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section id={id} className="pt-20 pb-16 md:pb-28 bg-gradient-to-b from-white via-gray-50 to-gray-100 font-[Satoshi]">
       <div className="container mx-auto px-6 sm:px-4 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight drop-shadow-lg">
           Human Augmented AI <span className="text-[#260a40]">in Action</span>
         </h1>
-        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-sm">
           Experience how our personas compare to standard AI in real conversations — right here in your browser.
         </p>
 
@@ -158,7 +158,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
             className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition-all duration-300 ${activePersona === 'samantha'
               ? 'bg-theme-main text-white shadow-md shadow-theme-main/20'
               : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
-              }`}
+              } drop-shadow-lg`}
             onClick={() => setActivePersona('samantha')}
           >
             Samantha
@@ -167,7 +167,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
             className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition-all duration-300 ${activePersona === 'arin'
               ? 'bg-theme-main text-white shadow-md shadow-theme-main/20'
               : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
-              }`}
+              } drop-shadow-lg`}
             onClick={() => setActivePersona('arin')}
           >
             Arin
@@ -300,13 +300,13 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           </div>
 
             <button
-            onClick={handleSend}
-            disabled={loading || messageCount >= 5 || !input.trim()}
-            className={`mt-4 w-full bg-theme-main text-white py-3.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${
-              loading || messageCount >= 5 || !input.trim() ? 'opacity-70 cursor-not-allowed' : 'hover:bg-theme-light hover:text-theme-main'
-            }`}
+              onClick={handleSend}
+              disabled={loading || messageCount >= 5 || !input.trim()}
+              className={`mt-4 w-full bg-theme-main text-white py-3.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${
+                loading || messageCount >= 5 || !input.trim() ? 'opacity-70 cursor-not-allowed' : 'hover:bg-theme-dark'
+              }`}
             >
-            {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
+              {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
             </button>
           
           {messageCount > 0 && (

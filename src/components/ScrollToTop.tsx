@@ -5,7 +5,7 @@ const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0); // Automatically scroll to the top
   }, [pathname]);
 
   return null;

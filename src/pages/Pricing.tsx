@@ -5,13 +5,16 @@ import Footer from '../components/Footer';
 import { Cookie, X } from 'lucide-react';
 
 const Pricing: React.FC = () => {
+  const [headerText, setHeaderText] = useState("");
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLHeadingElement>(null);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
   const controls = useAnimation();
+  const fullText = "Transparent Pricing\nPrices that Scale with You";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +29,16 @@ const Pricing: React.FC = () => {
   const toggleFAQ = (index: number) => {
     setOpenFAQ(openFAQ === index ? null : index);
   };
+
+  useEffect(() => {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      setHeaderText(fullText.substring(0, i + 1));
+      i++;
+      if (i > fullText.length) clearInterval(typingInterval);
+    }, 50);
+    return () => clearInterval(typingInterval);
+  }, [fullText]);
 
   const isPricingPage = location.pathname === '/pricing';
 
@@ -83,6 +96,42 @@ const Pricing: React.FC = () => {
     {
       question: 'Can we bring our own model or infrastructure?',
       answer: 'Yes, our personas work with any LLM — you can use your own OpenAI key or infra.',
+    },
+    {
+      question: 'What industries do you specialize in?',
+      answer: 'We specialize in industries like healthcare, finance, e-commerce, and telecoms, but our solutions are adaptable to any sector.',
+    },
+    {
+      question: 'How long does it take to develop a persona?',
+      answer: 'Persona development typically takes 4-6 weeks, depending on the complexity and requirements.',
+    },
+    {
+      question: 'Do you provide ongoing support after deployment?',
+      answer: 'Yes, we offer maintenance plans that include updates, performance monitoring, and optimization.',
+    },
+    {
+      question: 'Can we integrate the AI persona with our existing systems?',
+      answer: 'Absolutely. Our integration process ensures seamless compatibility with your existing tech stack.',
+    },
+    {
+      question: 'What is the cost of additional integrations?',
+      answer: 'Additional integrations are priced based on complexity. Contact us for a custom quote.',
+    },
+    {
+      question: 'Can we customize the persona’s tone and style?',
+      answer: 'Yes, we work closely with your team to ensure the persona reflects your brand’s tone and style.',
+    },
+    {
+      question: 'Do you offer training for our team?',
+      answer: 'Yes, we provide training sessions to help your team manage and optimize the AI persona.',
+    },
+    {
+      question: 'What happens if we need to scale quickly?',
+      answer: 'Our solutions are designed to scale seamlessly. We can support rapid scaling with minimal downtime.',
+    },
+    {
+      question: 'Is there a trial period for your services?',
+      answer: 'We do not offer trials, but we provide detailed demos and consultations to ensure our solution meets your needs.',
     },
   ];
 
@@ -166,30 +215,30 @@ const Pricing: React.FC = () => {
           {/* Mobile Navigation - Optimized for all smaller screens */}
           {isMenuOpen && (
             <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-              <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${isPricingPage ? 'font-bold text-theme-main' : ''}`}>
+              <Link to="/" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                 About Us
               </Link>
-              <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+              <Link to="/values" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                 Values
               </Link>
-              <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+              <Link to="/solutions" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                 Solutions
               </Link>
-              <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+              <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                 <div className="flex items-center">
                   <span>Businesses</span>
                 </div>
               </Link>
-              <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+              <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                 <div className="flex items-center justify-between">
                   <span>Vision Board</span>
                   <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
                 </div>
               </Link>
-              <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+              <Link to="/pricing" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                 Pricing
               </Link>
-              <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+              <Link to="/contact us" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                 Contact Us
               </Link>
               <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
@@ -211,7 +260,7 @@ const Pricing: React.FC = () => {
         }}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Purplish Glass Overlay */}
         <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-10" />
@@ -224,15 +273,20 @@ const Pricing: React.FC = () => {
           className="relative z-20 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2 className="text-3xl sm:text-4xl text-white md:text-5xl font-extrabold leading-tight drop-shadow-lg min-h-[4rem] ">
-            Transparent Pricing.<br />Prices that Scale with You.
+          <h2
+            ref={headerRef}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white drop-shadow-lg min-h-[4rem]"
+          >
+            {headerText && headerText.split('\n').map((line, index) => (
+              <span key={index} className="block">{line}</span>
+            ))}
           </h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
             className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16 text-white/90 leading-relaxed drop-shadow-lg"
           >
             Choose the plan that fits your needs and scale your business with confidence.
@@ -243,6 +297,22 @@ const Pricing: React.FC = () => {
         </motion.div>
       </motion.section>
 
+      {/* Pricing Hero Section */}
+      <section
+        id="pricing"
+        className="relative bg-cover bg-center py-20 px-6 sm:px-10"
+        style={{
+          backgroundImage: "url('/pricingPage/pricingBg.png')",
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
+          {/* Removed the heading and description */}
+        </div>
+      </section>
+
       {/* Pricing Cards */}
       <section className="bg-gray-50 py-20 px-4 sm:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto text-center mb-16">
@@ -251,7 +321,7 @@ const Pricing: React.FC = () => {
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             Our Plans
           </motion.h2>
@@ -260,7 +330,7 @@ const Pricing: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
           >
             Clear, phase-based pricing with no surprises.
           </motion.p>
@@ -270,11 +340,14 @@ const Pricing: React.FC = () => {
           {plans.map((plan, idx) => (
             <motion.div
               key={idx}
-              className="bg-white border border-gray-200 rounded-md p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[580px]"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="bg-white border border-theme-main p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between min-h-[580px]"
+              style={{
+                clipPath: "polygon(45px 0%, 100% 0%, 100% calc(100% - 45px), calc(100% - 45px) 100%, 0% 100%, 0% 45px)",
+              }}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.2 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
             >
               <div>
                 <div className="flex items-center mb-6 space-x-4">
@@ -311,14 +384,14 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-white py-20 px-4 sm:px-10 lg:px-20 border-t border-gray-200">
+      <section className="bg-gray-50 py-20 px-4 sm:px-10 lg:px-20 border-t border-gray-200">
         <div className="max-w-4xl mx-auto">
           <motion.h2
-            className="text-3xl font-bold text-gray-900 text-center mb-12"
+            className="text-4xl font-bold text-gray-900 text-center mb-12"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             Frequently Asked Questions
           </motion.h2>
@@ -326,28 +399,40 @@ const Pricing: React.FC = () => {
             {faqs.map((faq, idx) => (
               <motion.div
                 key={idx}
-                className="rounded-xl border border-gray-200 p-6 bg-gray-50 shadow-sm"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="relative bg-white border border-theme-main p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                style={{
+                  clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: idx * 0.2 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
                   className="w-full text-left flex justify-between items-center text-gray-800 font-medium text-lg focus:outline-none"
                 >
                   <span>{faq.question}</span>
-                  <span className="text-theme-main text-2xl">{openFAQ === idx ? '−' : '+'}</span>
+                  <span
+                    className={`text-theme-main text-2xl transform transition-transform duration-300 ${
+                      openFAQ === idx ? "rotate-180" : ""
+                    }`}
+                  >
+                    {openFAQ === idx ? "−" : "+"}
+                  </span>
                 </button>
                 {openFAQ === idx && (
-                  <motion.p
+                  <motion.div
                     className="mt-4 text-gray-600 text-base leading-relaxed"
                     initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {faq.answer}
-                  </motion.p>
+                    <p className="p-4 bg-gray-50 rounded-lg border-l-4 border-theme-main shadow-inner">
+                      {faq.answer}
+                    </p>
+                  </motion.div>
                 )}
               </motion.div>
             ))}

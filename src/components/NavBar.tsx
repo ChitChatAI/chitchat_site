@@ -15,6 +15,17 @@ const NavBar: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll); // Fixed the unterminated string
     }, []);
 
+    const handleScrollToSection = (id: string) => {
+        const section = document.getElementById(id);
+        if (section) {
+            const offset = section.getBoundingClientRect().top + window.scrollY - 70; // Adjust for navbar height
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth',
+            });
+        }
+    };
+
     return (
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4 xs:py-5 sm:py-6 md:py-7' : 'bg-theme-main py-4 xs:py-5 sm:py-6'}`}>
             {/* Navigation Bar */}
@@ -38,17 +49,17 @@ const NavBar: React.FC = () => {
 
                     {/* Desktop Navigation - Hidden on screens below 992px (lg) */}
                     <div className="hidden lg:flex items-center justify-center space-x-4 lg:space-x-5 xl:space-x-8 2xl:space-x-12">
-                        <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                        <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90${location.pathname === '/' ? ' font-bold' : ''}`}>
                             About Us
                         </Link>
-                        <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                        <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90${location.pathname === '/values' ? ' font-bold' : ''}`}>
                             Values
                         </Link>
                         <Link
                             to="/solutions"
-                            className={`transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90
+                            className={`transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 drop-shadow-lg
                                 ${location.pathname === '/solutions'
                                     ? isScrolled
                                         ? 'text-theme-main font-bold'
@@ -61,22 +72,22 @@ const NavBar: React.FC = () => {
                         >
                             Solutions
                         </Link>
-                        <Link to="/partnerships" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                        <Link to="/partnerships" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center${location.pathname === '/partnerships' ? ' font-bold' : ''}`}>
                             <span>Businesses</span>
                         </Link>
-                        <Link to="/Vision Board" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                        <Link to="/Vision Board" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center${location.pathname === '/Vision Board' ? ' font-bold' : ''}`}>
                             <span>Vision Board</span>
                             <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full">New</span>
                         </Link>
-                        <Link to="/pricing" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                        <Link to="/pricing" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90${location.pathname === '/pricing' ? ' font-bold' : ''}`}>
                             Pricing
                         </Link>
                         <Link
                             to="/contact us"
-                            className={`transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90
+                            className={`transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 drop-shadow-lg
                                 ${location.pathname.toLowerCase() === '/contact us'
                                     ? 'text-white font-bold'
                                     : isScrolled
@@ -105,42 +116,39 @@ const NavBar: React.FC = () => {
                 {/* Mobile Navigation - Optimized for all smaller screens */}
                 {isMenuOpen && (
                     <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-                        <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/' ? ' font-bold' : ''}`}>
+                        <Link to="/" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/' ? ' font-bold' : ''}`}>
                             About Us
                         </Link>
-                        <Link to="/values" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/values' ? ' font-bold' : ''}`}>
+                        <Link to="/values" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/values' ? ' font-bold' : ''}`}>
                             Values
                         </Link>
                         <Link
                             to="/solutions"
-                            className={`block px-4 py-2.5 my-1 text-xs xs:text-sm transition-colors
-                                ${location.pathname === '/solutions'
-                                    ? isScrolled
-                                        ? 'text-theme-main font-bold'
-                                        : 'text-white font-bold'
+                            className={`block px-4 py-2.5 my-1 text-base transition-colors ${
+                                location.pathname === '/solutions'
+                                    ? 'text-theme-main font-bold'
                                     : 'text-gray-700 hover:bg-gray-50 hover:text-theme-main'
-                                }`
-                            }
+                            }`}
                         >
                             Solutions
                         </Link>
-                        <Link to="/partnerships" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/partnerships' ? ' font-bold' : ''}`}>
+                        <Link to="/partnerships" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/partnerships' ? ' font-bold' : ''}`}>
                             <div className="flex items-center">
                                 <span>Businesses</span>
                             </div>
                         </Link>
-                        <Link to="/Vision Board" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/Vision Board' ? ' font-bold' : ''}`}>
+                        <Link to="/Vision Board" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/Vision Board' ? ' font-bold' : ''}`}>
                             <div className="flex items-center justify-between">
                                 <span>Vision Board</span>
                                 <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
                             </div>
                         </Link>
-                        <Link to="/pricing" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/pricing' ? ' font-bold' : ''}`}>
+                        <Link to="/pricing" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/pricing' ? ' font-bold' : ''}`}>
                             Pricing
                         </Link>
                         <Link
                             to="/contact us"
-                            className={`block px-4 py-2.5 my-1 text-xs xs:text-sm transition-colors
+                            className={`block px-4 py-2.5 my-1 text-base transition-colors
                                 ${['/contact-us', '/contactus'].includes(location.pathname.toLowerCase())
                                     ? 'text-white font-bold'
                                     : 'text-gray-700 hover:bg-gray-50 hover:text-theme-main'

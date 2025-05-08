@@ -239,32 +239,32 @@ const ForBusinesses: React.FC = () => {
                           {/* Mobile Navigation - Optimized for all smaller screens */}
                           {isMenuOpen && (
                               <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-                                  <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${
+                                  <Link to="/" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${
                                       isHomePage ? 'font-bold' : ''
                                   }`}>
                                       About Us
                                   </Link>
-                                  <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                  <Link to="/values" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                       Values
                                   </Link>
-                                  <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                  <Link to="/solutions" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                       Solutions
                                   </Link>
-                                  <Link to="/partnerships" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors${location.pathname === '/partnerships' ? ' font-bold underline' : ''}`}>
+                                  <Link to="/partnerships" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors`}>
                                       <div className="flex items-center">
                                           <span>Businesses</span>
                                       </div>
                                   </Link>
-                                  <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                  <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                       <div className="flex items-center justify-between">
                                           <span>Vision Board</span>
                                           <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
                                       </div>
                                   </Link>
-                                  <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                  <Link to="/pricing" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                       Pricing
                                   </Link>
-                                  <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                                  <Link to="/contact us" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                       Contact Us
                                   </Link>
                                   <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
@@ -357,12 +357,14 @@ const ForBusinesses: React.FC = () => {
               {useCases.slice(0, 2).map((useCase, index) => (
                 <motion.div
                   key={index}
-                  className="col-span-6 text-center p-6 relative"
-                  initial="hidden"
-                  whileInView="visible"
+                  className="col-span-6 relative bg-white border border-theme-main p-6"
+                  style={{
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.2 }}
-                  variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
                 >
                   <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
                   <p className="text-gray-600">{useCase.description}</p>
@@ -371,12 +373,14 @@ const ForBusinesses: React.FC = () => {
 
               {/* Middle (1 col full) */}
               <motion.div
-                className="col-span-12 text-center p-6 relative"
-                initial="hidden"
-                whileInView="visible"
+                className="col-span-12 relative bg-white border border-theme-main p-6"
+                style={{
+                  clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.2 }}
-                variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                transition={{ duration: 0.6, delay: 0.5 }}
+                transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
               >
                 <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCases[2].title}</h3>
                 <p className="text-gray-600">{useCases[2].description}</p>
@@ -386,12 +390,14 @@ const ForBusinesses: React.FC = () => {
               {useCases.slice(3).map((useCase, index) => (
                 <motion.div
                   key={index + 3}
-                  className="col-span-6 text-center p-6 relative"
-                  initial="hidden"
-                  whileInView="visible"
+                  className="col-span-6 relative bg-white border border-theme-main p-6"
+                  style={{
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.2 }}
-                  variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
-                  transition={{ duration: 0.6, delay: (index + 3) * 0.15 }}
+                  transition={{ duration: 0.4, ease: 'easeOut', delay: (index + 3) * 0.1 }}
                 >
                   <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
                   <p className="text-gray-600">{useCase.description}</p>
@@ -404,12 +410,14 @@ const ForBusinesses: React.FC = () => {
               {useCases.map((useCase, index) => (
                 <motion.div
                   key={index}
-                  className="text-center p-2"
-                  initial="hidden"
-                  whileInView="visible"
+                  className="relative bg-white border border-theme-main p-6"
+                  style={{
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.2 }}
-                  variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
                 >
                   <h3 className="text-2xl font-semibold text-theme-main mb-3">{useCase.title}</h3>
                   <p className="text-gray-600">{useCase.description}</p>

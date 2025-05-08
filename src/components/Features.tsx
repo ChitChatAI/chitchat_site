@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import FeatureCard from './FeatureCard';
 
 const Features: React.FC<{ id?: string }> = ({ id }) => {
@@ -65,16 +66,41 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
               className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out h-full flex"
+              style={{
+                clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+              }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
             >
-              <FeatureCard
-                title={feature.title}
-                description={feature.description}
-                icon={feature.icon}
-              />
-            </div>
+              <div className="bg-white border border-theme-main p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="flex items-center mb-4">
+                  <span className="material-symbols-outlined text-theme-main text-4xl mr-4">{feature.icon}</span>
+                  <h3 className="text-xl font-semibold text-gray-800 drop-shadow-lg">{feature.title}</h3> {/* Added drop shadow */}
+                </div>
+                <p className="text-gray-600 mb-4 drop-shadow-sm">{feature.description}</p> {/* Added drop shadow */}
+                <a 
+                  href="#"
+                  className="text-theme-main font-medium hover:underline transition-colors duration-200 flex items-center"
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

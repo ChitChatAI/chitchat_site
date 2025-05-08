@@ -33,7 +33,7 @@ const Header: React.FC = () => {
                             <Link 
                                 to="/" 
                                 className={`text-lg xs:text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-semibold ${
-                                    isScrolled ? 'text-gray-800' : 'text-white'
+                                    isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'
                                 } transition-all duration-300 ml-1.5 xs:ml-2 sm:ml-2.5 md:ml-3 lg:ml-3.5 xl:ml-4`}
                             >
                                 ChitChat
@@ -43,41 +43,40 @@ const Header: React.FC = () => {
                         {/* Desktop Navigation - Hidden on screens below 992px (lg) */}
                         <div className="hidden lg:flex items-center justify-center space-x-4 lg:space-x-5 xl:space-x-8 2xl:space-x-12">
                             <Link to="/" className={`${
-                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 ${
                                 isHomePage ? 'font-bold' : ''
                             }`}>
                                 About Us
                             </Link>
-                            
                             <Link to="/values" className={`${
-                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
                                 Values
                             </Link>
                             <Link to="/solutions" className={`${
-                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
                                 Solutions
                             </Link>
                             <Link to="/partnerships" className={`${
-                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center`}>
                                 <span>Businesses</span>
                             </Link>
                             <Link to="/Vision Board" className={`${
-                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center`}>
                                 <span>Vision Board</span>
-                                <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full">New</span>
+                                <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full drop-shadow-lg">New</span>
                             </Link>
                             <Link to="/pricing" className={`${
-                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
                                 Pricing
                             </Link>
                             <Link to="/contact us" className={`${
-                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
+                                isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light drop-shadow-lg'
                             } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
                                 Contact Us
                             </Link>
@@ -100,32 +99,32 @@ const Header: React.FC = () => {
                     {/* Mobile Navigation - Optimized for all smaller screens */}
                     {isMenuOpen && (
                         <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-                            <Link to="/" className={`block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${
+                            <Link to="/" className={`block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors ${
                                 isHomePage ? 'font-bold' : ''
                             }`}>
                                 About Us
                             </Link>
-                            <Link to="/values" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/values" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Values
                             </Link>
-                            <Link to="/solutions" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/solutions" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Solutions
                             </Link>
-                            <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center">
                                     <span>Businesses</span>
                                 </div>
                             </Link>
-                            <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 <div className="flex items-center justify-between">
                                     <span>Vision Board</span>
                                     <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
                                 </div>
                             </Link>
-                            <Link to="/pricing" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/pricing" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Pricing
                             </Link>
-                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-xs xs:text-sm text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
+                            <Link to="/contact us" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
                                 Contact Us
                             </Link>
                             <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
@@ -141,12 +140,12 @@ const Header: React.FC = () => {
                     <div className="container-large mx-auto px-6 py-10 text-left relative z-10">
                         <div className="header_content flex flex-col items-center sm:items-start justify-center w-full text-center sm:text-left animate-fade-in">
                             <div className="header_title-wrap is-home max-w-4xl">
-                                <h1 className="text-white font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-snug tracking-tight sm:leading-[1.4] animate-fade-in delay-100">
+                                <h1 className="text-white font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-snug tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg">
                                     <span className="block mb-4">The Future of AI Conversations,</span>
                                     <span className="block mb-4">So Real, You'll Forget It's Not.</span>
-                                    <span className="hero-gradient-text block text-[clamp(1.25rem,4vw,2.25rem)] mt-6">Human Augmented AI by ChitChat</span>
+                                    <span className="hero-gradient-text block text-[clamp(1.25rem,4vw,2.25rem)] mt-6 drop-shadow-lg">Human Augmented AI by ChitChat</span>
                                 </h1>
-                                <p className="text-white/80 text-base sm:text-lg mt-4 max-w-3xl">
+                                <p className="text-white/80 text-base sm:text-lg mt-4 max-w-3xl drop-shadow-sm">
                                     Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
                                 </p>
                                 <div className="join-us_buttons-wrapper flex flex-col sm:flex-row justify-center sm:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full mt-10 animate-fade-in delay-500">

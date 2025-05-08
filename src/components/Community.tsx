@@ -32,7 +32,7 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
               href="#" 
               className="bg-theme-main hover:bg-theme-dark text-white px-6 py-3 rounded-md transition-colors duration-200 font-medium"
             >
-              Discord Community
+              LinkedIn Community
             </a>
             <a 
               href="#" 

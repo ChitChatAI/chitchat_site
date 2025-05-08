@@ -53,43 +53,83 @@ const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider">Documentation</h3>
+            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md">
+              Documentation
+            </h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Get Started</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">API Reference</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Examples</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Concepts</a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Get Started
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                API Reference
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Examples
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Concepts
+              </a></li>
             </ul>
           </div>
           
-          
           <div>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider">Resources</h3>
+            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md">
+              Resources
+            </h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Community</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">GitHub</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Discord</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Twitter</a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Community
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                GitHub
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Discord
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Twitter
+              </a></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider">Legal</h3>
+            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md">
+              Legal
+            </h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Privacy</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Terms</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">License</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm">Cookie Policy</a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Privacy
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Terms
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                License
+              </a></li>
+              <li><a href="#" className="text-gray-600 hover:text-theme-main transition-colors duration-200 text-sm drop-shadow-sm">
+                Cookie Policy
+              </a></li>
             </ul>
           </div>
         </div>
         
         <div className="scroll-review mt-10 pt-6 border-t border-gray-200 opacity-0 transform translate-y-10">
-          <p className="text-sm text-gray-600">&copy; {new Date().getFullYear()} ChitChat AI. All rights reserved.</p>
+          <p className="text-sm text-gray-600 drop-shadow-sm">
+            &copy; {new Date().getFullYear()} ChitChat AI. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
   );
+};
+
+const someFunction = (n: any) => {
+  if (typeof n === 'string' || Array.isArray(n)) {
+      return n.indexOf('someValue');
+  } else {
+      console.error('Unexpected type for n:', typeof n, n);
+      return -1; // Default value
+  }
 };
 
 export default Footer;
