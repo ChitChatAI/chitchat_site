@@ -660,3 +660,40 @@ section.relative.overflow-hidden {
   75% { transform: rotate(-3deg); }
 }
 
+/* Remove dramatic scroll animations by neutralizing the classes */
+.animate-slide-up,
+.animate-slide-in-left,
+.animate-slide-in-right,
+.animate-slide-up-left,
+.animate-slide-up-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Optionally, you can also remove the animation keyframes if you want: */
+/*
+@keyframes slideUp {}
+@keyframes slideInLeft {}
+@keyframes slideInRight {}
+@keyframes slideUpLeft {}
+@keyframes slideUpRight {}
+*/
+
+.group:hover .group-hover\:after\:w-full::after,
+.group:focus-visible .group-focus-visible\:after\:w-full::after {
+  width: 100% !important;
+}
+a.relative::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background: var(--theme-main, #5024ff);
+  border-radius: 2px;
+  transition: width 0.2s;
+}
+

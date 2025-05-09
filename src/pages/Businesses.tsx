@@ -4,6 +4,7 @@ import { ChevronDown, X, Cookie } from 'lucide-react';
 import { motion} from 'framer-motion';
 import Navbar from '../components/NavBar';  
 import Footer from '../components/Footer';
+import CallToAction from '../components/CallToAction';
 
 const ForBusinesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
@@ -37,15 +38,7 @@ const ForBusinesses: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const elements = document.querySelectorAll('.scroll-review');
-      elements.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add('animate-slide-up');
-        } else {
-          el.classList.remove('animate-slide-up'); // Reapply animation when scrolling back
-        }
-      });
+      // Remove scroll animation logic
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -198,14 +191,14 @@ const ForBusinesses: React.FC = () => {
             <div className="h-32 flex items-center justify-center mb-6">
               <h2
                 ref={headerRef}
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg min-h-[4rem]"
+                className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg min-h-[4rem] transition-all duration-700"
               >
                 {headerText && headerText.split('\n').map((line, index) => (
                   <span key={index} className="block">{line}</span>
                 ))}
               </h2>
             </div>
-            <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16">
+            <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16 font-satoshi text-white/90">
               We provide AI solutions that seamlessly integrate into your business operations, enhancing customer engagement and driving results.
             </p>
             <div className="absolute bottom- left-1/2 transform -translate-x-1/2 animate-bounce z-20">
@@ -214,100 +207,27 @@ const ForBusinesses: React.FC = () => {
           </div>
         </motion.section>
 
+        {/* Use Cases Section - Neural Dot Timeline Style */}
         <section
           id="use-cases"
-          className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
+          className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100"
         >
-          <motion.div
-            className="relative z-20 max-w-7xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            variants={{
-              hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-gray-800">
+          <div className="relative z-20 max-w-7xl mx-auto">
+            <h2 className="scroll-review opacity-0 transform translate-y-6 text-gray-900 font-header font-extrabold text-[clamp(2rem,5vw,2.5rem)] leading-[140%] tracking-tight text-center mb-12 transition-all duration-700">
               Use Cases
             </h2>
-
-            <div className="hidden sm:grid grid-cols-12 gap-12">
-              {/* Top Row (2 cols) */}
-              {useCases.slice(0, 2).map((useCase, index) => (
-                <motion.div
-                  key={index}
-                  className="col-span-6 relative bg-white border border-theme-main p-6"
-                  style={{
-                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
-                >
-                  <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
-                  <p className="text-gray-600">{useCase.description}</p>
-                </motion.div>
-              ))}
-
-              {/* Middle (1 col full) */}
-              <motion.div
-                className="col-span-12 relative bg-white border border-theme-main p-6"
-                style={{
-                  clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
-              >
-                <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCases[2].title}</h3>
-                <p className="text-gray-600">{useCases[2].description}</p>
-              </motion.div>
-
-              {/* Bottom Row (2 cols) */}
-              {useCases.slice(3).map((useCase, index) => (
-                <motion.div
-                  key={index + 3}
-                  className="col-span-6 relative bg-white border border-theme-main p-6"
-                  style={{
-                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 0.4, ease: 'easeOut', delay: (index + 3) * 0.1 }}
-                >
-                  <h3 className="text-2xl font-semibold text-theme-main mb-4">{useCase.title}</h3>
-                  <p className="text-gray-600">{useCase.description}</p>
-                </motion.div>
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
+              {useCases.map((useCase, index, arr) => (
+                <div key={index} className="relative">
+                  {/* Main neural dot */}
+                  <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                  <h3 className="font-header text-2xl font-bold text-theme-main mb-3">{useCase.title}</h3>
+                  <p className="text-base text-gray-700 font-satoshi leading-relaxed mb-2">{useCase.description}</p>
+                </div>
               ))}
             </div>
-
-            {/* Mobile Stack (below sm breakpoint) */}
-            <div className="sm:hidden flex flex-col gap-12">
-              {useCases.map((useCase, index) => (
-                <motion.div
-                  key={index}
-                  className="relative bg-white border border-theme-main p-6"
-                  style={{
-                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
-                >
-                  <h3 className="text-2xl font-semibold text-theme-main mb-3">{useCase.title}</h3>
-                  <p className="text-gray-600">{useCase.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          </div>
         </section>
-
 
         {/* Features  Section */}
         <section
@@ -336,7 +256,7 @@ const ForBusinesses: React.FC = () => {
             variants={scrollAnimation}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h3 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">
+            <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
               How ChitChat Adds Value to Your Business
             </h3>
 
@@ -391,7 +311,7 @@ const ForBusinesses: React.FC = () => {
         {/* What's Included Section */}
         <section id="whats-included" className="relative bg-white py-32 px-6 border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">
+            <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
               What’s Included in Every ChitChat Package
             </h3>
 
@@ -436,49 +356,7 @@ const ForBusinesses: React.FC = () => {
         </section>
 
         {/* Call-to-Action Section */}
-        <section
-          id="cta"
-          className="relative py-16 px-6 sm:px-10 text-white bg-cover bg-center scroll-review"
-          style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
-        >
-          {/* Overlay for readability - also extended higher */}
-          <div className="absolute inset-0 z-0 bg-white/90 -top-24" />
-
-          <motion.div
-            className="relative z-20 max-w-3xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 whitespace-pre-line">
-              Ready to Elevate Your Business?
-            </h2>
-            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed p-6">
-              Discover how ChitChat can transform your customer experience with tailored AI solutions.
-            </p>
-            <div className="flex justify-center gap-6 mt-8">
-              <Link
-                to="/contact us"
-                className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
-                  font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
-                  hover:transform hover:scale-105 hover:bg-white/100 flex items-center gap-2 group"
-              >
-                <span className="opacity-80 group-hover:opacity-100">Contact Us</span>
-               
-              </Link>
-              <Link
-                to="/book-call"
-                className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 text-white 
-                  font-medium text-base shadow-md shadow-purple-300/30 transition-all duration-300 hover:shadow-xl hover:shadow-purple-400/40
-                  hover:transform hover:scale-105 flex items-center gap-2 group"
-              >
-                
-                <span>Book a Call</span>
-              </Link>
-            </div>
-          </motion.div>
-        </section>
+        <CallToAction bgImage="/solutionsPage/solutions.jpg" />
 
         {/* Cookie Policy Floating Button - Left Side */}
         <div className="fixed bottom-6 left-6 z-50">

@@ -8,6 +8,7 @@ import customerService from '../assets/lottie/customerService.json';
 import sales from '../assets/lottie/sales.json';
 import healthcare from '../assets/lottie/healthCare.json';
 import education from '../assets/lottie/education.json';
+import CallToAction from '../components/CallToAction';
 
 const Solutions: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -38,25 +39,6 @@ const Solutions: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-slide-up');
-          } else {
-            entry.target.classList.remove('animate-slide-up');
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    const elements = document.querySelectorAll('.scroll-review');
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -228,7 +210,7 @@ const Solutions: React.FC = () => {
               <div className="h-32 flex items-center justify-center mb-6"> {/* Fixed height container */}
                 <h2
                   ref={headerRef}
-                  className="text-4xl md:text-5xl font-bold text-gray-900 whitespace-pre-line"
+                  className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-bold text-gray-900 whitespace-pre-line transition-all duration-700"
                 >
                   {headerText}
                 </h2>
@@ -283,7 +265,7 @@ const Solutions: React.FC = () => {
         {/* Neural Dot Timeline Style Section */}
         <section id="industries" className="relative bg-white py-32 px-6 border-t border-gray-100">
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">More Industries We Serve</h3>
+            <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">More Industries We Serve</h3>
             <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
               {additionalSolutions.map((item, index) => (
                 <div key={index} className="relative scroll-review opacity-0 transform translate-y-10">
@@ -295,6 +277,9 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Ready to Elevate Your Business Section */}
+        <CallToAction bgImage="/solutionsPage/solutions.jpg" />
 
         {/* Cookie Policy Floating Button - Left Side */}
         <div className="fixed bottom-6 left-6 z-50">

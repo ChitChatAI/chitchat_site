@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
-import { ChevronDown, X, Menu, Cookie } from 'lucide-react'; 
+import { ChevronDown, X, Menu, Cookie } from 'lucide-react';
 import NavBar from '../components/NavBar';
 
 const values = [
@@ -67,7 +67,13 @@ const Values: React.FC = () => {
     }, []);
 
     const getNavLinkClass = (path: string) =>
-        `${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-gray-300'} transition-colors duration-200 text-sm md:text-base ${location.pathname === path ? 'text-theme-main font-semibold' : ''}`;
+        `relative inline-block px-3 py-2 text-sm font-medium transition-all duration-200
+        ${isScrolled ? 'text-gray-700' : 'text-white'}
+        hover:text-theme-main hover:scale-105 active:scale-95 active:opacity-80
+        focus-visible:ring-2 focus-visible:ring-theme-main focus:outline-none rounded
+        after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px]
+        after:w-0 after:bg-theme-main after:transition-all after:duration-300 hover:after:w-full
+        ${location.pathname === path ? 'text-theme-main font-semibold' : ''}`;
 
     // Function to handle scrolling to sections
     const handleScrollToSection = (id: string) => {
@@ -93,14 +99,15 @@ const Values: React.FC = () => {
 
     return (
         <>
-            
+
+
             <NavBar />
 
             {/* Cookie Policy Floating Button */}
             {/* Hero Section */}
             <section
                 id="climbers"
-                className="relative bg-cover bg-center animate-fade-in transform perspective-1000 font-sans"
+                className="relative bg-cover bg-center font-sans"
                 style={{
                     backgroundImage: "url('/valuesPage/valuesBg.png')",
                     backgroundAttachment: "fixed",
@@ -110,13 +117,18 @@ const Values: React.FC = () => {
                 }}
             >
                 <div className="absolute inset-0 bg-black/40 z-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-black/40 z-0" />
                 <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
-                    <h1 className="text-5xl sm:text-6xl font-header font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-lg leading-[150%]">
+                    <h1 className="scroll-review opacity-0 transform translate-y-6 text-5xl sm:text-6xl font-header font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-md leading-[150%] transition-all duration-700">
                         We're climbers
                     </h1>
-                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 text-white/90 leading-[150%] drop-shadow-sm">
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono drop-shadow-sm">
                         At ChitChat, our values define who we are and guide us in everything we do.
                     </p>
+                </div>
+                <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+                    <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
                 </div>
             </section>
 
@@ -124,69 +136,55 @@ const Values: React.FC = () => {
             <section
                 id="climber-values"
                 className="py-16 px-6 bg-gray-50"
-                
             >
-                <motion.div
+                <div
                     className="relative z-20 max-w-7xl mx-auto"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.2 }}
-                    variants={{
-                        hidden: { opacity: 0, y: 50 },
-                        visible: { opacity: 1, y: 0 },
-                    }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
                     <div className="max-w-6xl mx-auto">
-                        <h3 className="text-4xl font-bold text-center text-gray-900 mb-20">
+                        <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
                             Our Core Values
                         </h3>
                         <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
                             {values.map((value, index) => (
-                                <motion.div
+                                <div
                                     key={index}
                                     className="relative"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, amount: 0.2 }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
                                 >
                                     <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
                                     <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
                                     <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </section>
 
             {/* Additional Section with Scientists Image */}
             <section
                 id="scientists"
-                className="relative bg-cover bg-center animate-fade-in overflow-hidden transform perspective-1000"
+                className="relative bg-cover bg-center overflow-hidden group"
                 style={{
                     backgroundImage: "url('/valuesPage/scientists.png')",
                     backgroundAttachment: "fixed",
                     minHeight: 'calc(100vh + 300px)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
-                    border: "2px solid transparent", // Transparent border for futuristic effect
-                    borderRadius: "30px", // Smooth futuristic border radius
-                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)", // Futuristic glow effect
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                    border: "2px solid transparent",
+                    borderRadius: "30px",
+                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
                     backgroundClip: "padding-box, border-box",
                     backgroundOrigin: "border-box",
-                    transform: "translateZ(50px) scale(1.05)", // 3D jumping effect
                 }}
             >
                 <div className="absolute inset-0 bg-black/40 z-0 rounded-[30px]" /> {/* Match border radius */}
                 <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none rounded-[30px]" /> {/* Match border radius */}
-                <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
-                    <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
+                <div className="relative z-40 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
+                    <h1 className="scroll-review opacity-0 transform translate-y-6 text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-md transition-all duration-700">
                         We're scientists
                     </h1>
-                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono scroll-review">
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono drop-shadow-sm">
                         {`At ChitChat, we embrace the scientific mindset to explore, discover, and innovate.`}
                     </p>
                 </div>
@@ -197,19 +195,11 @@ const Values: React.FC = () => {
 
             {/* Scientists Values Section */}
             <section id="scientist-values" className="py-16 px-6 bg-gray-50">
-                <motion.div
+                <div
                     className="relative z-20 max-w-7xl mx-auto"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.2 }}
-                    variants={{
-                        hidden: { opacity: 0, y: 50 },
-                        visible: { opacity: 1, y: 0 },
-                    }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
                 >
                     <div className="max-w-6xl mx-auto">
-                        <h3 className="text-4xl font-bold text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10">
+                        <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
                             Our Scientific Values
                         </h3>
 
@@ -227,52 +217,44 @@ const Values: React.FC = () => {
                                 { title: 'Rationality', description: 'Resisting the influence of biases.' },
                                 { title: 'Research', description: 'Gathering all relevant information, and rigorously testing hypotheses.' }
                             ].map((value, index) => (
-                                <motion.div
+                                <div
                                     key={index}
-                                    className="relative scroll-review opacity-0 transform translate-y-10"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{
-                                        hidden: { opacity: 0, x: -10 },
-                                        visible: { opacity: 1, x: 0 }
-                                    }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                    className="relative"
                                 >
                                     <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
                                     <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
                                     <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>
-                </motion.div>
-            </section>{/* Open Section with Silhouette Image */}
+                </div>
+            </section>
+            {/* Open Section with Silhouette Image */}
             <section
                 id="open"
-                className="relative bg-cover bg-center animate-fade-in overflow-hidden transform perspective-1000"
+                className="relative bg-cover bg-center overflow-hidden group"
                 style={{
                     backgroundImage: "url('/valuesPage/silhoutte.png')",
                     backgroundAttachment: "fixed",
                     minHeight: 'calc(100vh + 300px)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
-                    border: "2px solid transparent", // Transparent border for futuristic effect
-                    borderRadius: "30px", // Smooth futuristic border radius
-                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)", // Futuristic glow effect
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                    border: "2px solid transparent",
+                    borderRadius: "30px",
+                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
                     backgroundClip: "padding-box, border-box",
                     backgroundOrigin: "border-box",
-                    transform: "translateZ(50px) scale(1.05)", // 3D jumping effect
                 }}
             >
                 <div className="absolute inset-0 bg-black/40 z-0 rounded-[30px]" /> {/* Match border radius */}
                 <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none rounded-[30px]" /> {/* Match border radius */}
-                <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
-                    <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
+                <div className="relative z-40 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
+                    <h1 className="scroll-review opacity-0 transform translate-y-6 text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-md transition-all duration-700">
                         We're open
                     </h1>
-                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono scroll-review">
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono drop-shadow-sm">
                         {`At ChitChat, we believe in openness and transparency in everything we do.`}
                     </p>
                 </div>
@@ -284,19 +266,11 @@ const Values: React.FC = () => {
 
             {/* Open Values Section */}
             <section id="open-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50">
-                <motion.div
+                <div
                     className="relative z-20 max-w-7xl mx-auto"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.2 }}
-                    variants={{
-                        hidden: { opacity: 0, y: 50 },
-                        visible: { opacity: 1, y: 0 },
-                    }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
                 >
                     <div className="max-w-6xl mx-auto">
-                        <h3 className="text-4xl font-bold text-center text-gray-900 mb-20">
+                        <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
                             Our Open Values
                         </h3>
                         <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
@@ -315,82 +289,73 @@ const Values: React.FC = () => {
                                 },
                                 {
                                     title: 'Self-criticism',
-                                    description: 'Soliciting and receiving feedback with a grateful attitude.',
+                                    description: 'Soliciting and receiving feedback with a grateful attitude.'
                                 },
                                 {
                                     title: 'Tolerance',
-                                    description: 'Respecting others and their opinions, particularly when you don\'t see eye to eye with them.',
+                                    description: 'Respecting others and their opinions, particularly when you don\'t see eye to eye with them.'
                                 },
                                 {
                                     title: 'Transparency',
-                                    description: 'Making relevant information as accessible as possible—even when it feels uncomfortable to do so.',
+                                    description: 'Making relevant information as accessible as possible—even when it feels uncomfortable to do so.'
                                 },
                             ].map((value, index) => (
-                                <motion.div
+                                <div
                                     key={index}
                                     className="relative"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, amount: 0.2 }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
                                 >
                                     <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
                                     <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
                                     <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </section>
             {/* Tribe Section with Image */}
             <section
                 id="tribe"
-                className="relative bg-cover bg-center animate-fade-in overflow-hidden transform perspective-1000"
+                className="relative bg-cover bg-center overflow-hidden"
                 style={{
                     backgroundImage: "url('/valuesPage/tribe.png')",
                     backgroundAttachment: "fixed",
                     minHeight: 'calc(100vh + 300px)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
-                    border: "2px solid transparent", // Transparent border for futuristic effect
-                    borderRadius: "30px", // Smooth futuristic border radius
-                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)", // Futuristic glow effect
+                    clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                    border: "2px solid transparent",
+                    borderRadius: "30px",
+                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
                     backgroundClip: "padding-box, border-box",
                     backgroundOrigin: "border-box",
-                    transform: "translateZ(50px) scale(1.05)", // 3D jumping effect
                 }}
             >
                 <div className="absolute inset-0 bg-black/40 z-0 rounded-[30px]" /> {/* Match border radius */}
                 <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none rounded-[30px]" /> {/* Match border radius */}
                 <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
-                    <h1 className="text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review">
+                    <h1 className="scroll-review opacity-0 transform translate-y-6 text-5xl sm:text-6xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-md transition-all duration-700">
                         We're a tribe
                     </h1>
-                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono scroll-review">
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono drop-shadow-sm">
                         {`At ChitChat, our community values strengthen the bonds that help us grow together.`}
                     </p>
+                </div>
+                <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+                    <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
                 </div>
             </section>
 
             {/* Tribe Values Section */}
             <section id="tribe-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50">
-                <motion.div
-                    className="relative z-20 max-w-7xl mx-auto"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: false, amount: 0.2 }}
-                    variants={{
-                        hidden: { opacity: 0, y: 50 },
-                        visible: { opacity: 1, y: 0 },
-                    }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                >
+                <div className="relative z-20 max-w-7xl mx-auto">
                     <div className="max-w-6xl mx-auto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-16 mb-12">
+                        <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
+                            Our Tribe Values
+                        </h3>
+                        {/* Neural Dot Timeline Style Format */}
+                        <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
                             {[
-
                                 { title: 'Altruism', description: 'Giving generously and without the expectation of receiving in return.' },
                                 { title: 'Authenticity', description: 'Interacting informally and bringing your true self wherever you go.' },
                                 { title: 'Bonding', description: 'Investing in creating rich, lasting relationships.' },
@@ -399,35 +364,23 @@ const Values: React.FC = () => {
                                 { title: 'Humility', description: 'Behaving without arrogance or entitlement, regardless of position or past achievements.' },
                                 { title: 'Positivity', description: 'Uplifting others by having fun and highlighting the bright side of challenges.' },
                                 { title: 'Trust', description: 'Meaning well in all you do, and assuming others mean well unless proven otherwise.' }
-                            ].map((value, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="relative bg-white border border-theme-main p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-                                    style={{
-                                        clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)", // Added clip-path
-                                    }}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false, amount: 0.2 }}
-                                    variants={{
-                                        hidden: { opacity: 0, y: 20 },
-                                        visible: { opacity: 1, y: 0 }
-                                    }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                                >
-                                    <h3 className="text-2xl font-semibold text-theme-main mb-3 drop-shadow-md">{value.title}</h3> {/* Added drop shadow */}
-                                    <p className="text-base text-gray-600 drop-shadow-sm">{value.description}</p> {/* Added drop shadow */}
-                                </motion.div>
+                            ].map((value, index, arr) => (
+                                <div key={index} className="relative">
+                                    {/* Main neural dot */}
+                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md z-10"></span>
+                                    <h3 className="text-2xl font-semibold text-theme-main mb-3 drop-shadow-md">{value.title}</h3>
+                                    <p className="text-base text-gray-600 drop-shadow-sm">{value.description}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </section>
 
             {/* Globe Section with Image */}
             <section
                 id="globe"
-                className="relative bg-cover bg-center animate-fade-in overflow-hidden"
+                className="relative bg-cover bg-center overflow-hidden"
                 style={{
                     backgroundImage: "url('/valuesPage/globe.png')",
                     backgroundAttachment: "fixed",
@@ -444,17 +397,13 @@ const Values: React.FC = () => {
 
                 {/* Content */}
                 <div className="relative z-30 max-w-6xl mx-auto text-center text-white px-6 pt-[40%] pb-[10%]">
-                    <motion.h1
-                        className="text-7xl sm:text-8xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text scroll-review"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                    <h1
+                        className="scroll-review opacity-0 transform translate-y-6 text-7xl sm:text-8xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-md transition-all duration-700"
                     >
                         It’s not all<br />
                         about us
-                    </motion.h1>
-                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono scroll-review">
+                    </h1>
+                    <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text font-mono drop-shadow-sm">
                         {`We’re thankful for the opportunities the world 
 affords us, and strive to improve things for others.`}
                     </p>
@@ -462,7 +411,7 @@ affords us, and strive to improve things for others.`}
                 <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
                 </div>
             </section>
-            
+
 
             {/* Cookie Policy Floating Button - moved to left side */}
             <div className="fixed bottom-6 left-6 z-50">
@@ -478,47 +427,47 @@ affords us, and strive to improve things for others.`}
 
                 {/* Modal positioned on the bottom with improved enter/exit animations */}
                 {cookiePolicyOpen && (
-                    <div 
+                    <div
                         className={`fixed inset-x-0 mx-auto bottom-0 bg-white shadow-lg rounded-t-lg p-6 w-full sm:w-[500px] max-h-[90vh] overflow-y-auto z-50 transform transition-transform duration-300 ease-in-out`}
-                        style={{ 
+                        style={{
                             transform: isModalExiting ? 'translateY(100%)' : 'translateY(0)',
                             animation: isModalExiting ? 'slideDown 0.3s ease-out forwards' : 'slideUp 0.3s ease-out forwards'
                         }}
                     >
                         {/* Added ChitChat logo at the top of the modal */}
                         <div className="flex justify-center mb-4">
-                            <img 
+                            <img
                                 src="/branding/chitchatAI.png"
                                 alt="ChitChat AI Logo"
                                 className="w-12 h-auto"
                             />
                         </div>
-                        
+
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-semibold text-gray-800">Your cookie preferences</h3>
-                            <button 
+                            <button
                                 onClick={handleCloseModal}
                                 className="text-gray-500 hover:text-gray-700"
                             >
                                 <X size={18} />
                             </button>
                         </div>
-                        
+
                         <p className="text-sm text-gray-600 mb-5">
                             We use cookies to keep our site secure and user-friendly, and to carry out the activities stated below.
                         </p>
-                        
+
                         <p className="text-sm text-gray-600 mb-5">
                             You can customize your cookie preferences at any time by toggling the options on or off.
                         </p>
-                        
+
                         <p className="text-sm text-gray-600 mb-6">
                             For more information, have a look at our <a href="#" className="text-theme-main underline hover:text-theme-dark">Privacy and Cookie Policy</a>
                         </p>
-                        
+
                         <div className="border-t border-gray-200 pt-4 mb-5">
                             <h4 className="text-sm font-semibold mb-4">Manage consent preferences</h4>
-                            
+
                             {/* Technical cookies toggle - always active */}
                             <div className="flex justify-between items-center mb-4">
                                 <div>
@@ -529,7 +478,7 @@ affords us, and strive to improve things for others.`}
                                     <div className="bg-white rounded-full w-4 h-4 ml-auto shadow-sm"></div>
                                 </div>
                             </div>
-                            
+
                             {/* Analytics cookies toggle */}
                             <div className="flex justify-between items-center mb-6">
                                 <div>
@@ -540,15 +489,15 @@ affords us, and strive to improve things for others.`}
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div className="flex justify-between space-x-3 pt-3 border-t border-gray-200">
-                            <button 
+                            <button
                                 onClick={handleCloseModal}
                                 className="flex-1 py-2 border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors"
                             >
                                 Reject all
                             </button>
-                            <button 
+                            <button
                                 onClick={handleCloseModal}
                                 className="flex-1 bg-theme-main text-white py-2 rounded font-medium hover:bg-theme-dark transition-colors"
                             >

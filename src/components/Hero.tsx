@@ -34,21 +34,8 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
 
   useEffect(() => {
     console.log('[DEBUG] Hero component mounted. API key:', apiKey);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-slide-up');
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    const elements = document.querySelectorAll('.scroll-review');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
+    // Remove scroll animation observer
+    return () => { };
   }, []);
 
   useEffect(() => {
@@ -144,66 +131,64 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   };
 
   return (
-    <section id={id} className="pt-20 pb-16 md:pb-28 bg-gradient-to-b from-white via-gray-50 to-gray-100 font-[Satoshi]">
-      <div className="container mx-auto px-6 sm:px-4 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight drop-shadow-lg">
+    <section
+      id={id}
+      className="pt-28 pb-28 md:pt-36 md:pb-36 bg-gradient-to-b from-white via-gray-50 to-gray-100 font-[Satoshi]"
+    >
+      <div className="container mx-auto px-6 sm:px-10 text-center">
+        <h1 className="scroll-review opacity-0 transform translate-y-6 text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight transition-all duration-700">
           Human Augmented AI <span className="text-[#260a40]">in Action</span>
         </h1>
-        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-sm">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-14 leading-relaxed">
           Experience how our personas compare to standard AI in real conversations — right here in your browser.
         </p>
 
-        <div className="scroll-review mb-6 flex flex-wrap justify-center gap-4 sm:gap-6 opacity-0 transform translate-y-10">
+        <div className="flex justify-center items-center space-x-8 w-full mb-14">
           <button
-            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition-all duration-300 ${activePersona === 'samantha'
-              ? 'bg-theme-main text-white shadow-md shadow-theme-main/20'
-              : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
-              } drop-shadow-lg`}
+            className={`px-8 py-4 rounded-lg text-base font-medium transition-all duration-300 ${
+              activePersona === 'samantha'
+                ? 'bg-theme-main text-white shadow-md hover:shadow-lg hover:bg-theme-dark'
+                : 'border border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
+            }`}
             onClick={() => setActivePersona('samantha')}
           >
             Samantha
           </button>
           <button
-            className={`px-6 py-3 rounded-full text-sm sm:text-base font-medium border transition-all duration-300 ${activePersona === 'arin'
-              ? 'bg-theme-main text-white shadow-md shadow-theme-main/20'
-              : 'border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
-              } drop-shadow-lg`}
+            className={`px-8 py-4 rounded-lg text-base font-medium transition-all duration-300 ${
+              activePersona === 'arin'
+                ? 'bg-theme-main text-white shadow-md hover:shadow-lg hover:bg-theme-dark'
+                : 'border border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
+            }`}
             onClick={() => setActivePersona('arin')}
           >
             Arin
           </button>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 transition-all">
-          {/* Samantha/Arin Panel - Without Top Border */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 transition-all">
+          {/* Samantha/Arin Panel */}
           <div className="scroll-review opacity-0 transform translate-y-10 group">
-            <div className="bg-white p-6 rounded-2xl border border-gray-300 text-left h-[320px] sm:h-[360px] overflow-y-auto backdrop-blur-sm transition-all duration-500 relative">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm sm:text-base font-semibold text-gray-700 flex items-center">
-                  <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+            <div className="bg-white/95 rounded-2xl border border-gray-200 shadow-lg p-8 min-h-[340px] flex flex-col justify-between transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <span className="w-2.5 h-2.5 bg-green-500 rounded-full mr-3 animate-pulse"></span>
+                <h3 className="scroll-review opacity-0 transform translate-y-4 text-base font-semibold text-gray-700 transition-all duration-700">
                   {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
                 </h3>
               </div>
-              
               <div className="space-y-3 pb-2">
                 {(activePersona === 'samantha' ? samanthaHistory : arinHistory).map((message, index) => (
                   <div
                     key={index}
-                    className="transform transition-all duration-300 hover:scale-[1.01] hover:-translate-y-0.5"
+                    className={`px-4 py-3 rounded-xl border border-gray-100 text-base transition-all ${
+                      index % 2 === 0
+                        ? 'bg-gradient-to-br from-theme-main/90 to-theme-main/70 text-white'
+                        : 'bg-gradient-to-br from-theme-light/80 to-theme-light/60 text-gray-800'
+                    }`}
                   >
-                    <div
-                      className={`px-4 py-3 rounded-xl border border-gray-300 text-sm transition-all ${
-                        index % 2 === 0
-                          ? 'bg-gradient-to-br from-theme-main to-theme-main/90 text-white'
-                          : 'bg-gradient-to-br from-theme-light to-theme-light/90 text-gray-800'
-                      }`}
-                    >
-                      {message}
-                    </div>
+                    {message}
                   </div>
                 ))}
-
-                {/* Enhanced typing indicator */}
                 {typingIndicator && (
                   <div className="flex items-center gap-2 text-gray-500 text-sm px-2 animate-fade-in">
                     <div className="flex space-x-1">
@@ -214,15 +199,13 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
                     <span>{typingIndicator}</span>
                   </div>
                 )}
-                
-                {/* Improved suggestions */}
                 {!input && (
                   <div className="mt-5 bg-gray-50 rounded-lg p-3 border border-gray-100">
                     <p className="text-sm font-medium text-gray-600 mb-2">Try asking about:</p>
                     <ul className="space-y-1.5">
                       {suggestions.map((suggestion, index) => (
-                        <li 
-                          key={index} 
+                        <li
+                          key={index}
                           className="text-sm text-gray-600 hover:text-theme-main cursor-pointer transition-colors pl-3 border-l-2 border-gray-200 hover:border-theme-main"
                           onClick={() => setInput(suggestion)}
                         >
@@ -236,19 +219,16 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
             </div>
           </div>
 
-          {/* ChatGPT Panel - Without Top Border */}
+          {/* ChatGPT Panel */}
           <div className="scroll-review opacity-0 transform translate-y-10 group">
-            <div className="bg-white p-6 rounded-2xl border border-gray-300 text-left h-[320px] sm:h-[360px] overflow-y-auto backdrop-blur-sm transition-all duration-500 relative">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm sm:text-base font-semibold text-gray-700 flex items-center">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
-                  ChatGPT responds:
-                </h3>
+            <div className="bg-white/95 rounded-2xl border border-gray-200 shadow-lg p-8 min-h-[340px] flex flex-col justify-between transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <span className="w-2.5 h-2.5 bg-blue-500 rounded-full mr-3 animate-pulse"></span>
+                <h3 className="scroll-review opacity-0 transform translate-y-4 text-base font-semibold text-gray-700 transition-all duration-700">ChatGPT responds:</h3>
               </div>
-              
               <div className="space-y-3 pb-2">
                 {gptReply ? (
-                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 px-4 py-3 rounded-xl border border-gray-300 text-sm text-gray-800">
+                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 px-4 py-3 rounded-xl border border-gray-100 text-base text-gray-800">
                     {gptReply}
                   </div>
                 ) : (
@@ -257,8 +237,8 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
                       <p className="text-sm font-medium text-gray-600 mb-2">Try asking about:</p>
                       <ul className="space-y-1.5">
                         {suggestions.map((suggestion, index) => (
-                          <li 
-                            key={index} 
+                          <li
+                            key={index}
                             className="text-sm text-gray-600 hover:text-blue-500 cursor-pointer transition-colors pl-3 border-l-2 border-gray-200 hover:border-blue-500"
                             onClick={() => setInput(suggestion)}
                           >
@@ -269,8 +249,6 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
                     </div>
                   )
                 )}
-                
-                {/* Enhanced typing indicator */}
                 {typingIndicator && (
                   <div className="flex items-center gap-2 text-gray-500 text-sm px-2 animate-fade-in">
                     <div className="flex space-x-1">
@@ -284,33 +262,33 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
               </div>
             </div>
           </div>
-        </div>  
+        </div>
 
-        {/* Beautified Input Area */}
-        <div className="scroll-review mt-10 max-w-xl mx-auto opacity-0 transform translate-y-10">
+        {/* Input Area */}
+        <div className="scroll-review mt-14 max-w-2xl mx-auto opacity-0 transform translate-y-10">
           <div className="relative group">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="w-full px-5 py-4 border border-gray-200 rounded-xl shadow-sm text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 bg-white/80 backdrop-blur-sm"
+              className="w-full px-5 py-4 border border-gray-200 rounded-xl shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 bg-white/80 backdrop-blur-sm"
               placeholder="Type your message here..."
               disabled={messageCount >= 5}
             />
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-theme-main/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
           </div>
-
-            <button
-              onClick={handleSend}
-              disabled={loading || messageCount >= 5 || !input.trim()}
-              className={`mt-4 w-full bg-theme-main text-white py-3.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${
-                loading || messageCount >= 5 || !input.trim() ? 'opacity-70 cursor-not-allowed' : 'hover:bg-theme-dark'
+          <button
+            onClick={handleSend}
+            disabled={loading || messageCount >= 5 || !input.trim()}
+            className={`mt-5 w-full font-satoshi px-5 py-3 rounded-lg font-medium transition-all duration-300
+              ${loading || messageCount >= 5 || !input.trim()
+                ? 'opacity-70 cursor-not-allowed bg-gray-200 text-gray-500'
+                : 'bg-theme-main hover:bg-theme-dark text-white hover:scale-105 shadow-md'
               }`}
-            >
-              {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
-            </button>
-          
+          >
+            {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
+          </button>
           {messageCount > 0 && (
-            <p className="mt-2 text-xs text-gray-500 text-center">
+            <p className="mt-3 text-xs text-gray-500 text-center">
               {5 - messageCount} message{5 - messageCount !== 1 ? 's' : ''} remaining
             </p>
           )}

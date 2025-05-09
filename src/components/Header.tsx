@@ -15,7 +15,7 @@ const Header: React.FC = () => {
                     <div className="container-large mx-auto px-6 py-10 text-left relative z-10">
                         <div className="header_content flex flex-col items-center sm:items-start justify-center w-full text-center sm:text-left animate-fade-in">
                             <div className="header_title-wrap is-home max-w-4xl">
-                                <h1 className="text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg">
+                                <h1 className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg">
                                     <span className="block mb-4">The Future of AI Conversations,</span>
                                     <span className="block mb-4">So Real, You'll Forget It's Not.</span>
                                     <span className="hero-gradient-text block text-[clamp(1.25rem,4vw,2.25rem)] mt-6 drop-shadow-lg">Human Augmented AI by ChitChat</span>
@@ -24,7 +24,12 @@ const Header: React.FC = () => {
                                     Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
                                 </p>
                                 <div className="join-us_buttons-wrapper flex flex-col sm:flex-row justify-center sm:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full mt-10 animate-fade-in delay-500">
-                                    <Link to="/contact-sales" className="bg-theme-main hover:bg-theme-dark text-white px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transform transition-transform duration-300 ease-in-out font-sans">Get a demo</Link>
+                                    <Link
+                                      to="/contact-sales"
+                                      className="font-satoshi bg-theme-main hover:bg-theme-dark text-white px-5 py-3 rounded-md font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                                    >
+                                      Get a demo
+                                    </Link>
 
                                     {/* Modernized Futuristic Button with Purple Theme */}
                                 </div>

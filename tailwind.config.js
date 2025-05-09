@@ -18,6 +18,18 @@ export default {
         header: ['Be Vietnam Pro', 'sans-serif'], // Add Be Vietnam Pro for headers
         mono: ['JetBrains Mono', 'monospace'],
       },
+      fontSize: {
+        'body': '1rem', // 16px
+        'small': '0.875rem', // 14px
+        'large': '1.125rem', // 18px
+        'nav': '0.9375rem', // 15px
+        'h1': '3rem', // 48px
+        'h2': '2rem', // 32px
+        'h3': '1.5rem', // 24px
+        'h4': '1.25rem', // 20px
+        'btn': '0.9375rem', // 15px
+        'footer': '0.8125rem', // 13px
+      },
       colors: {
         primary: {
           50: '#f5f3ff',

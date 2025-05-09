@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { Cookie, X } from 'lucide-react';
 import NavBar from '../components/NavBar';
+import CallToAction from '../components/CallToAction';
 
 const Pricing: React.FC = () => {
   const [headerText, setHeaderText] = useState("");
@@ -150,7 +151,7 @@ const Pricing: React.FC = () => {
       <NavBar />
 
       {/* Hero Section with Overlay */}
-      <motion.section
+      <section
         className="relative min-h-screen px-8 sm:px-12 lg:px-20 flex items-center justify-center text-center"
         style={{
           backgroundImage: "url('/businessesPage/BusinessBG.png')",
@@ -158,35 +159,25 @@ const Pricing: React.FC = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Purplish Glass Overlay */}
         <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-10" />
         <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[5px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
-
-
+        <div className="absolute inset-0 bg-gradient-to-t from-theme-main/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
         {/* Hero Content */}
-        <motion.div
-          className="relative z-20 max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-          <h1 className="text-white font-header text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-md">
-            Transparent Pricing<br />Prices that Scale with You
+        <div className="relative z-20 max-w-4xl mx-auto">
+          <h1 className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[140%] tracking-tight sm:leading-[1.3] drop-shadow-lg mb-8 transition-all duration-700">
+            <span className="block mb-4">Transparent Pricing</span>
+            <span className="block mb-4">Prices that Scale with You</span>
+            <span className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16 font-satoshi text-white/90">
+              Choose the plan that fits your business needs and scale effortlessly.
+            </span>
           </h1>
-          <p className="text-lg text-white sm:text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-[150%]">
-            Choose the plan that fits your business needs and scale effortlessly.
-          </p>
           <div className="absolute bottom- left-1/2 transform -translate-x-1/2 animate-bounce z-20">
             <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
           </div>
-        </motion.div>
-      </motion.section>
-
+        </div>
+      </section>
       {/* Pricing Hero Section */}
       <section
         id="pricing"
@@ -202,49 +193,31 @@ const Pricing: React.FC = () => {
           {/* Removed the heading and description */}
         </div>
       </section>
-
       {/* Pricing Cards */}
       <section className="bg-gray-50 py-20 px-4 sm:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto text-center mb-16">
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
+          <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-header font-extrabold text-gray-900 mb-4 tracking-tight transition-all duration-700">
             Our Plans
-          </motion.h2>
-          <motion.p
-            className="text-gray-600 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-          >
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto font-satoshi text-lg">
             Clear, phase-based pricing with no surprises.
-          </motion.p>
+          </p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {plans.map((plan, idx) => (
-            <motion.div
+            <div
               key={idx}
-              className="bg-white border border-theme-main p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between min-h-[580px]"
+              className="bg-white border border-theme-main/15 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between min-h-[520px]"
               style={{
-                clipPath: "polygon(45px 0%, 100% 0%, 100% calc(100% - 45px), calc(100% - 45px) 100%, 0% 100%, 0% 45px)",
+                clipPath: "polygon(32px 0%, 100% 0%, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0% 100%, 0% 32px)",
               }}
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
             >
               <div>
                 <div className="flex items-center mb-6 space-x-4">
-                  <span className="material-symbols-outlined text-theme-main text-4xl">{plan.icon}</span>
-                  <h3 className="text-xl font-semibold text-gray-800 whitespace-nowrap overflow-hidden text-ellipsis">{plan.name}</h3>
+                  <span className="material-symbols-outlined text-theme-main text-3xl">{plan.icon}</span>
+                  <h3 className="text-xl font-header font-semibold text-gray-800 whitespace-nowrap overflow-hidden text-ellipsis">{plan.name}</h3>
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">{plan.description}</p>
+                <p className="text-gray-600 mb-6 leading-relaxed font-satoshi">{plan.description}</p>
                 <div className="mb-6">
                   <span className="text-3xl font-bold text-gray-900">{plan.price}</span>
                   <span className="text-base text-gray-500 ml-1">{plan.frequency}</span>
@@ -260,43 +233,33 @@ const Pricing: React.FC = () => {
               </div>
               <div className="mt-10">
                 <button
-                  className={`w-full py-3 px-6 rounded-xl text-sm font-medium tracking-wide transition-all duration-200 ${plan.name === 'Maintenance'
-                    ? 'bg-gray-900 text-white hover:bg-gray-800'
-                    : 'bg-theme-main text-white hover:bg-theme-dark'
+                  className={`font-satoshi w-full px-5 py-3 rounded-lg font-medium transition-all duration-200
+    ${plan.name === 'Maintenance'
+                    ? 'bg-gray-900 hover:bg-gray-800 text-white'
+                    : 'bg-theme-main hover:bg-theme-dark text-white'
                     }`}
                 >
                   {plan.button}
                 </button>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
-
       {/* FAQ Section */}
       <section className="bg-gray-50 py-20 px-4 sm:px-10 lg:px-20 border-t border-gray-200">
         <div className="max-w-4xl mx-auto">
-          <motion.h2
-            className="text-4xl font-bold text-gray-900 text-center mb-12"
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
+          <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-header font-extrabold text-gray-900 text-center mb-12 tracking-tight transition-all duration-700">
             Frequently Asked Questions
-          </motion.h2>
+          </h2>
           <div className="space-y-6">
             {faqs.map((faq, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                className="relative bg-white border border-theme-main p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                className="relative bg-white border border-theme-main/15 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
                 style={{
                   clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
                 }}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
@@ -304,7 +267,7 @@ const Pricing: React.FC = () => {
                 >
                   <span>{faq.question}</span>
                   <span
-                    className={`text-theme-main text-2xl transform transition-transform duration-300 ${
+                    className={`text-theme-main text-2xl transform transition-transform duration-200 ${
                       openFAQ === idx ? "rotate-180" : ""
                     }`}
                   >
@@ -312,69 +275,20 @@ const Pricing: React.FC = () => {
                   </span>
                 </button>
                 {openFAQ === idx && (
-                  <motion.div
-                    className="mt-4 text-gray-600 text-base leading-relaxed"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <p className="p-4 bg-gray-50 rounded-lg border-l-4 border-theme-main shadow-inner">
+                  <div className="mt-4 text-gray-600 text-base leading-relaxed">
+                    <p className="p-4 bg-gray-50 rounded-lg border-l-4 border-theme-main/50 shadow-inner">
                       {faq.answer}
                     </p>
-                  </motion.div>
+                  </div>
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-
       {/* Call-to-Action Section */}
-      <section
-        id="cta"
-        className="relative py-16 px-6 sm:px-10 text-white bg-cover bg-center scroll-review mt-5"
-        style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
-      >
-        {/* Overlay for readability - also extended higher */}
-        <div className="absolute inset-0 z-0 bg-white/90 -top-24" />
-
-        <motion.div
-          className="relative z-20 max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 whitespace-pre-line">
-            Ready to Elevate Your Business?
-          </h2>
-          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed p-6">
-            Discover how ChitChat can transform your customer experience with tailored AI solutions.
-          </p>
-          <div className="flex justify-center gap-6 mt-8">
-            <Link
-              to="/contact us"
-              className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
-                        font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
-                        hover:transform hover:scale-105 hover:bg-white/100 flex items-center gap-2 group"
-            >
-              <span className="opacity-80 group-hover:opacity-100">Contact Us</span>
-
-            </Link>
-            <Link
-              to="/book-call"
-              className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 text-white 
-                        font-medium text-base shadow-md shadow-purple-300/30 transition-all duration-300 hover:shadow-xl hover:shadow-purple-400/40
-                        hover:transform hover:scale-105 flex items-center gap-2 group"
-            >
-
-              <span>Book a Call</span>
-            </Link>
-          </div>
-        </motion.div>
-      </section>
+      <CallToAction className="mt-5" bgImage="/solutionsPage/solutions.jpg" />
 
       <Footer />
 

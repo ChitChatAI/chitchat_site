@@ -47,7 +47,7 @@ const GetStarted: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-theme-main hover:bg-theme-dark text-white py-2 px-4 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300"
+            className="font-satoshi w-full bg-theme-main hover:bg-theme-dark text-white px-5 py-3 rounded-lg font-medium shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
             Get Started
           </button>

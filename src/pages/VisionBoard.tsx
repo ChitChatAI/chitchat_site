@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import { motion, useScroll } from 'framer-motion';
 import { ChevronDown, X, Menu, Cookie } from 'lucide-react'; // Added Cookie icon import
 import NavBar from '../components/NavBar';
+import CallToAction from '../components/CallToAction';
 
 const VisionBoard: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -197,7 +198,7 @@ const VisionBoard: React.FC = () => {
                 >
                     <div className="max-w-4xl mx-auto text-center">
                         <motion.h1
-                            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight"
+                            className="scroll-review opacity-0 transform translate-y-6 text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight transition-all duration-700"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.7 }}
@@ -249,7 +250,7 @@ const VisionBoard: React.FC = () => {
 
                                 {/* Section with styled heading */}
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         What Is a Persona?
                                     </h2>
@@ -264,7 +265,7 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Our Prebuilt Set
                                     </h2>
@@ -288,7 +289,7 @@ const VisionBoard: React.FC = () => {
 
                                 {/* Continue with more styled sections */}
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Why Prebuilt?
                                     </h2>
@@ -306,7 +307,7 @@ const VisionBoard: React.FC = () => {
 
                                 {/* Continue with existing content but with enhanced formatting */}
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Custom Personas for Any Industry
                                     </h2>
@@ -315,7 +316,7 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Tone Changes Outcomes
                                     </h2>
@@ -324,7 +325,7 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Designed for Real Conversations
                                     </h2>
@@ -333,7 +334,7 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Simulated Results: What Happens When AI Talks Like a Human?
                                     </h2>
@@ -395,7 +396,7 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         What is Human-Augmented AI? (And Why Should You Care?)
                                     </h2>
@@ -424,7 +425,7 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-800 mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         How Our Personas Integrate With Your Existing Systems
                                     </h2>
@@ -476,49 +477,7 @@ const VisionBoard: React.FC = () => {
             </section>
 
             {/* Call-to-Action Section */}
-            <section
-                id="cta"
-                className="relative py-16 px-6 sm:px-10 text-white bg-cover bg-center scroll-review"
-                style={{ backgroundImage: "url('/solutionsPage/solutions.jpg')" }}
-            >
-                {/* Overlay for readability - also extended higher */}
-                <div className="absolute inset-0 z-0 bg-white/90 -top-24" />
-
-                <motion.div
-                    className="relative z-20 max-w-3xl mx-auto text-center"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                >
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 whitespace-pre-line">
-                        Ready to Elevate Your Business?
-                    </h2>
-                    <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed p-6">
-                        Discover how ChitChat can transform your customer experience with tailored AI solutions.
-                    </p>
-                    <div className="flex justify-center gap-6 mt-8">
-                        <Link
-                            to="/contact us"
-                            className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
-                             font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
-                             hover:transform hover:scale-105 hover:bg-white/100 flex items-center gap-2 group"
-                        >
-                            <span className="opacity-80 group-hover:opacity-100">Contact Us</span>
-
-                        </Link>
-                        <Link
-                            to="/book-call"
-                            className="px-6 py-3.5 rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 text-white 
-                             font-medium text-base shadow-md shadow-purple-300/30 transition-all duration-300 hover:shadow-xl hover:shadow-purple-400/40
-                             hover:transform hover:scale-105 flex items-center gap-2 group"
-                        >
-
-                            <span>Book a Call</span>
-                        </Link>
-                    </div>
-                </motion.div>
-            </section>
+            <CallToAction bgImage="/solutionsPage/solutions.jpg" />
 
             {/* Cookie Policy Floating Button */}
             <div className="fixed bottom-6 left-6 z-50">

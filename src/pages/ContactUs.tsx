@@ -245,7 +245,7 @@ const ContactUs: React.FC = () => {
       
       <section className="relative bg-white py-40 px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-header font-extrabold text-center text-gray-900 mb-20 leading-[150%]">
+          <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-header font-extrabold text-center text-gray-900 mb-20 leading-[150%] transition-all duration-700">
             Let's Build Your AI Solution
           </h2>
           <p className="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-[150%]">
@@ -518,7 +518,7 @@ const ContactUs: React.FC = () => {
               {currentStep > 1 ? (
                 <button
                   onClick={handlePrevStep}
-                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-all active:scale-95 flex items-center gap-1 font-satoshi"
+                  className="font-satoshi px-5 py-3 rounded-lg font-medium transition-all duration-300 bg-gray-200 text-gray-700 hover:bg-gray-300 active:scale-95"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -530,7 +530,7 @@ const ContactUs: React.FC = () => {
               {currentStep < 3 ? (
                 <button
                   onClick={handleNextStep}
-                  className="px-6 py-3 bg-theme-main text-white rounded-full hover:bg-theme-dark transition-all active:scale-95 transform hover:scale-105 flex items-center gap-2 font-satoshi"
+                  className="font-satoshi px-5 py-3 rounded-lg font-medium transition-all duration-300 bg-theme-main text-white hover:bg-theme-dark active:scale-95 hover:scale-105"
                 >
                   Next
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
@@ -542,9 +542,11 @@ const ContactUs: React.FC = () => {
                   type="submit"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className={`px-6 py-3 text-white bg-theme-main rounded-full font-satoshi font-medium transition-all duration-300 flex items-center gap-2 active:scale-95 ${
-                    isSubmitting ? 'opacity-80 cursor-not-allowed' : 'hover:bg-theme-dark hover:scale-105'
-                  }`}
+                  className={`font-satoshi px-5 py-3 rounded-lg font-medium transition-all duration-300 text-white
+    ${isSubmitting
+      ? 'opacity-70 cursor-not-allowed bg-gray-500'
+      : 'bg-theme-main hover:bg-theme-dark hover:scale-105'
+    }`}
                 >
                   {isSubmitting ? (
                     <>

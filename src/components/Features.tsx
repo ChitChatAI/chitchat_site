@@ -58,40 +58,55 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
     <section id={id} className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-header font-bold text-center text-langchain-dark mb-4 leading-[150%]">
+          <h2 className="text-3xl font-header font-bold text-center text-langchain-dark mb-4 leading-[150%] font-sans">
             Key Capabilities
           </h2>
-          <p className="text-center font-sans text-langchain-gray mb-12 max-w-2xl mx-auto leading-[150%]">
+          <p
+            className="text-center font-sans text-langchain-gray mb-12 max-w-2xl mx-auto"
+            style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+          >
             Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalised, human-like customer interactions at scale.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="flex flex-col gap-8 max-w-3xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={index}
               className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out h-full flex"
               style={{
-                clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                clipPath: "polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px)",
               }}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+              whileHover={{ scale: 1.025, boxShadow: "0 8px 32px 0 rgba(80, 36, 255, 0.10)" }}
+              whileTap={{ scale: 0.97, opacity: 0.85 }}
             >
-              <div className="bg-white border border-theme-main p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div
+                className="bg-white border border-theme-main p-6 rounded-lg shadow-lg hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group"
+                tabIndex={0}
+              >
                 <div className="flex items-center mb-4">
-                  <span className="material-symbols-outlined text-theme-main text-4xl mr-4">{feature.icon}</span>
-                  <h3 className="text-xl font-header font-semibold text-gray-800 drop-shadow-lg leading-[150%]">
+                  {/* Add back the icon */}
+                  <span className="material-symbols-outlined text-theme-main text-4xl mr-4 transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main">
+                    {feature.icon}
+                  </span>
+                  <h3 className="text-xl font-semibold text-gray-800 leading-[150%] font-sans" style={{ maxWidth: '100ch' }}>
                     {feature.title}
-                  </h3> {/* Added drop shadow */}
+                  </h3>
                 </div>
-                <p className="text-gray-600 font-sans mb-4 drop-shadow-sm leading-[150%]">
+                <p
+                  className="text-gray-600 font-sans mb-4"
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
                   {feature.description}
-                </p> {/* Added drop shadow */}
+                </p>
                 <a 
                   href="#"
-                  className="text-theme-main font-medium hover:underline transition-colors duration-200 flex items-center"
+                  className="text-theme-main font-medium flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
                 >
                   Learn More
                   <svg

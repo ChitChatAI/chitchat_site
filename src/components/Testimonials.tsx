@@ -43,7 +43,7 @@ const Testimonials: React.FC<{ id?: string }> = ({ id }) => {
 
   return (
     <section id={id} className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-8 md:px-16">
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">What Our Clients Say</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 mb-16">

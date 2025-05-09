@@ -33,19 +33,19 @@ const MeetOurCEO: React.FC<{ id?: string }> = ({ id }) => {
 
                 {/* Text Content */}
                 <div className="flex-1 text-center md:text-left">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-theme-main mb-4 drop-shadow-lg">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-theme-main mb-4 drop-shadow-md">
                         Behind the Vision
                     </h2>
-                    <h3 className="text-xl font-semibold text-gray-800 drop-shadow-md">
+                    <h3 className="text-xl font-semibold text-gray-800 drop-shadow-sm">
                         Jessica-Claire Leigh
                     </h3>
-                    <p className="mt-2 text-gray-600 leading-relaxed max-w-xl drop-shadow-sm">
+                    <p className="mt-2 text-gray-600 leading-relaxed max-w-xl">
                         Jessica-Claire is the visionary behind ChitChat AI — a specialist in psychology and behavioral science, and a leading voice in Human Augmented Intelligence. With academic training in psychology and a passion for emotionally intelligent design, she’s redefining how businesses connect with customers through AI.
                     </p>
-                    <p className="mt-4 text-sm text-gray-500 italic drop-shadow-sm">
+                    <p className="mt-4 text-sm text-gray-500 italic">
                         “We’re not just building AI. We’re bringing psychology into technology - so every conversation feels real.”
                     </p>
-                    <button className="mt-6 bg-theme-main hover:bg-theme-dark text-white px-6 py-3 rounded-full text-sm font-medium transition">
+                    <button className="mt-6 bg-theme-main hover:bg-theme-dark text-white px-6 py-3 rounded-full text-sm font-medium transition drop-shadow-sm">
                         Message 
                     </button>
                 </div>

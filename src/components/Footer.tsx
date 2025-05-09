@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md">
+            <h3 className="scroll-review opacity-0 transform translate-y-4 text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md transition-all duration-700">
               Documentation
             </h3>
             <ul className="space-y-2">
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md">
+            <h3 className="scroll-review opacity-0 transform translate-y-4 text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md transition-all duration-700">
               Resources
             </h3>
             <ul className="space-y-2">
@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md">
+            <h3 className="scroll-review opacity-0 transform translate-y-4 text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider drop-shadow-md transition-all duration-700">
               Legal
             </h3>
             <ul className="space-y-2">
