@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/purpleNavBar';
 import Footer from '../components/Footer';
 import Lottie from 'lottie-react';
 import { ChevronDown, X, Cookie } from 'lucide-react'; // Added Cookie and X icons
 import { motion } from 'framer-motion';
-
 import customerService from '../assets/lottie/customerService.json';
 import sales from '../assets/lottie/sales.json';
 import healthcare from '../assets/lottie/healthCare.json';
@@ -235,15 +234,8 @@ const Solutions: React.FC = () => {
                 </h2>
               </div>
               
-              <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                ChitChat works for any business — from global enterprises to small startups — as long as you
-                have access to a language model (LLM). Whether you're looking to integrate hyper-human customer
-                support, automate sales flows, or retain users with emotionally intelligent conversations, we
-                build AI personas that feel like real people — tailored to your goals.
-              </p>
-              <p className="mt-6 text-sm text-gray-500 italic">
-                Note: ChitChat doesn't provide the LLM itself — we work on top of whatever model you use,
-                whether that's OpenAI, Claude, or another provider.
+              <p className="text-lg sm:text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-[150%]">
+                Discover how our AI solutions can transform your business with human-like interactions.
               </p>
             </div>
 

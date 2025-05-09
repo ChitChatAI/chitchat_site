@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Satoshi', 'sans-serif'],
+        header: ['Be Vietnam Pro', 'sans-serif'], // Add Be Vietnam Pro for headers
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {

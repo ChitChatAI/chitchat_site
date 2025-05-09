@@ -58,8 +58,10 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
     <section id={id} className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-langchain-dark mb-4">Key Capabilities</h2>
-          <p className="text-center text-langchain-gray mb-12 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-header font-bold text-center text-langchain-dark mb-4 leading-[150%]">
+            Key Capabilities
+          </h2>
+          <p className="text-center font-sans text-langchain-gray mb-12 max-w-2xl mx-auto leading-[150%]">
             Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalised, human-like customer interactions at scale.
           </p>
         </div>
@@ -80,9 +82,13 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
               <div className="bg-white border border-theme-main p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="flex items-center mb-4">
                   <span className="material-symbols-outlined text-theme-main text-4xl mr-4">{feature.icon}</span>
-                  <h3 className="text-xl font-semibold text-gray-800 drop-shadow-lg">{feature.title}</h3> {/* Added drop shadow */}
+                  <h3 className="text-xl font-header font-semibold text-gray-800 drop-shadow-lg leading-[150%]">
+                    {feature.title}
+                  </h3> {/* Added drop shadow */}
                 </div>
-                <p className="text-gray-600 mb-4 drop-shadow-sm">{feature.description}</p> {/* Added drop shadow */}
+                <p className="text-gray-600 font-sans mb-4 drop-shadow-sm leading-[150%]">
+                  {feature.description}
+                </p> {/* Added drop shadow */}
                 <a 
                   href="#"
                   className="text-theme-main font-medium hover:underline transition-colors duration-200 flex items-center"

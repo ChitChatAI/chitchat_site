@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+        isScrolled ? 'bg-white shadow-md' : 'bg-theme-main'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,9 +75,7 @@ const NavBar: React.FC = () => {
                 to={path}
                 className={`font-satoshi text-sm font-medium tracking-tight ${
                   location.pathname === path
-                    ? isScrolled
-                      ? 'text-theme-main font-bold'
-                      : 'text-white font-bold'
+                    ? 'text-theme-main font-bold'
                     : isScrolled
                     ? 'text-gray-700 hover:text-theme-main'
                     : 'text-white hover:text-theme-main'

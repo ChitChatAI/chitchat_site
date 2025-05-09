@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="scroll-review mt-10 pt-6 border-t border-gray-200 opacity-0 transform translate-y-10">
-          <p className="text-sm text-gray-600 drop-shadow-sm">
+          <p className="text-sm font-sans text-gray-600 drop-shadow-sm leading-[150%]">
             &copy; {new Date().getFullYear()} ChitChat AI. All rights reserved.
           </p>
         </div>

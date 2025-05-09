@@ -3,6 +3,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { Cookie, X } from 'lucide-react';
+import NavBar from '../components/NavBar';
 
 const Pricing: React.FC = () => {
   const [headerText, setHeaderText] = useState("");
@@ -146,108 +147,7 @@ const Pricing: React.FC = () => {
   return (
     <>
       {/* Navigation Bar */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4 xs:py-5 sm:py-6 md:py-7' : 'bg-transparent py-4 xs:py-5 sm:py-6'
-        }`}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center relative py-1 xs:py-1.5 sm:py-2">
-              <img
-                src={isScrolled ? "/branding/chitchatAI.png" : "/branding/chitchatAILite.png"}
-                alt="ChitChat AI Logo"
-                className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14 object-contain transition-all duration-300"
-              />
-              <Link
-                to="/"
-                className={`text-lg xs:text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl font-semibold ${isScrolled ? 'text-gray-800' : 'text-white'
-                  } transition-all duration-300 ml-1.5 xs:ml-2 sm:ml-2.5 md:ml-3 lg:ml-3.5 xl:ml-4`}
-              >
-                ChitChat
-              </Link>
-            </div>
-
-            {/* Desktop Navigation - Hidden on screens below 992px (lg) */}
-            <div className="hidden lg:flex items-center justify-center space-x-4 lg:space-x-5 xl:space-x-8 2xl:space-x-12">
-              <Link to="/" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
-                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
-                About Us
-              </Link>
-
-              <Link to="/values" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
-                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
-                Values
-              </Link>
-              <Link to="/solutions" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
-                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
-                Solutions
-              </Link>
-              <Link to="/partnerships" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
-                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center`}>
-                <span>Businesses</span>
-              </Link>
-              <Link to="/Vision Board" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
-                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 flex items-center`}>
-                <span>Vision Board</span>
-                <span className="ml-1 px-1.5 py-0.5 text-[10px] lg:text-xs bg-theme-light text-theme-main rounded-full">New</span>
-              </Link>
-              <Link to="/pricing" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'} transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90 ${isPricingPage ? 'font-bold text-theme-main' : ''}`}>
-                Pricing
-              </Link>
-              <Link to="/contact us" className={`${isScrolled ? 'text-gray-700 hover:text-theme-main' : 'text-white hover:text-theme-light'
-                } transition-colors duration-200 text-xs lg:text-sm xl:text-base px-1 py-1.5 hover:opacity-90`}>
-                Contact Us
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button - Visible only on screens below 992px (lg) */}
-            <button
-              className={`lg:hidden ${isScrolled ? 'text-gray-800' : 'text-white'
-                } p-2 rounded-md hover:bg-white/10 transition-colors`}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 xs:h-6 xs:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile Navigation - Optimized for all smaller screens */}
-          {isMenuOpen && (
-            <div className="lg:hidden mt-3 py-3 bg-white rounded-md shadow-lg animate-fade-in">
-              <Link to="/" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                About Us
-              </Link>
-              <Link to="/values" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                Values
-              </Link>
-              <Link to="/solutions" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                Solutions
-              </Link>
-              <Link to="/partnerships" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                <div className="flex items-center">
-                  <span>Businesses</span>
-                </div>
-              </Link>
-              <Link to="/Vision Board" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                <div className="flex items-center justify-between">
-                  <span>Vision Board</span>
-                  <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-theme-light text-theme-main rounded-full">New</span>
-                </div>
-              </Link>
-              <Link to="/pricing" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                Pricing
-              </Link>
-              <Link to="/contact us" className="block px-4 py-2.5 my-1 text-base text-gray-700 hover:bg-gray-50 hover:text-theme-main transition-colors">
-                Contact Us
-              </Link>
-              <div className="px-3 xs:px-4 py-2 flex flex-col space-y-2 border-t border-gray-100 mt-2 pt-2">
-                {/* You can add additional menu items for small screens here if needed */}
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
+      <NavBar />
 
       {/* Hero Section with Overlay */}
       <motion.section
@@ -275,22 +175,12 @@ const Pricing: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2
-            ref={headerRef}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white drop-shadow-lg min-h-[4rem]"
-          >
-            {headerText && headerText.split('\n').map((line, index) => (
-              <span key={index} className="block">{line}</span>
-            ))}
-          </h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16 text-white/90 leading-relaxed drop-shadow-lg"
-          >
-            Choose the plan that fits your needs and scale your business with confidence.
-          </motion.p>
+          <h1 className="text-white font-header text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-md">
+            Transparent Pricing<br />Prices that Scale with You
+          </h1>
+          <p className="text-lg text-white sm:text-xl text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-[150%]">
+            Choose the plan that fits your business needs and scale effortlessly.
+          </p>
           <div className="absolute bottom- left-1/2 transform -translate-x-1/2 animate-bounce z-20">
             <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
           </div>

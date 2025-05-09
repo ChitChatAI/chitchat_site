@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Solutions from './pages/Solutions';
-import ForBusinesses from './pages/ForBusinesses';
+import ForBusinesses from './pages/Businesses';
 import LoadingSpinner from './components/LoadingSpinner';
 import ScrollToTop from './components/ScrollToTop';
 import ContactUs from './pages/ContactUs';

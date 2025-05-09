@@ -10,14 +10,41 @@ html {
 
 body {
   @apply font-sans text-gray-800 antialiased bg-white;
+  line-height: 150%; /* Set line height to 150% for better spacing */
 }
 
-@layer base {
-  @font-face {
-    font-family: 'Satoshi';
-    src: url('https://api.fontshare.com/v2/css?f[]=satoshi@1,900,700,500,301,701,300,501,401,901,400,2&display=swap');
-    font-display: swap;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Be Vietnam Pro', sans-serif; /* Use Be Vietnam Pro for headers */
+  font-weight: 700; /* Bold headers for hierarchy */
+}
+
+p, span, li, a {
+  font-family: 'Satoshi', sans-serif; /* Use Satoshi for paragraph text */
+  font-weight: 400; /* Regular weight for readability */
+  max-width: 100ch; /* Limit line length to 100 characters */
+}
+
+/* Adjust font sizes with noticeable contrast */
+h1 {
+  font-size: 2.5rem; /* 40px */
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+}
+
+p {
+  font-size: 1rem; /* 16px */
+}
+
+/* Ensure consistent spacing and alignment */
+.section_header {
+  line-height: 150%; /* Apply spacious line height */
+  text-align: left; /* Align text for readability */
 }
 
 /* LangChain style components */

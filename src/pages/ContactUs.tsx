@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/purpleNavBar';
 import Footer from '../components/Footer';
 
 // Update the base input styling with improved focus and hover states and Satoshi font
@@ -245,9 +245,12 @@ const ContactUs: React.FC = () => {
       
       <section className="relative bg-white py-40 px-6 border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold font-satoshi text-center text-gray-900 mb-20 scroll-review opacity-0 transform translate-y-10 py-4">
-            <span className="bg-gradient-to-r from-theme-main to-theme-dark bg-clip-text text-transparent">Let's Build Your AI Solution</span>
+          <h2 className="text-4xl font-header font-extrabold text-center text-gray-900 mb-20 leading-[150%]">
+            Let's Build Your AI Solution
           </h2>
+          <p className="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-12 leading-[150%]">
+            Fill out the form below to get started with ChitChat AI.
+          </p>
 
           {/* Form Progress Indicator */}
           <div className="mb-12 max-w-2xl mx-auto">
