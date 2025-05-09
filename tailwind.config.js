@@ -15,20 +15,34 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Satoshi', 'sans-serif'],
-        header: ['Be Vietnam Pro', 'sans-serif'], // Add Be Vietnam Pro for headers
+        header: ['Be Vietnam Pro', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
-        'body': '1rem', // 16px
-        'small': '0.875rem', // 14px
-        'large': '1.125rem', // 18px
-        'nav': '0.9375rem', // 15px
-        'h1': '3rem', // 48px
-        'h2': '2rem', // 32px
-        'h3': '1.5rem', // 24px
-        'h4': '1.25rem', // 20px
-        'btn': '0.9375rem', // 15px
-        'footer': '0.8125rem', // 13px
+        'body': '1rem',
+        'small': '0.875rem',
+        'large': '1.125rem',
+        'nav': '0.9375rem',
+        'h1': '3rem',
+        'h2': '2rem',
+        'h3': '1.5rem',
+        'h4': '1.25rem',
+        'btn': '0.9375rem',
+        'footer': '0.8125rem',
+        'fs-1': '24px',
+        'fs-2': '18px',
+        'fs-3': '17px',
+        'fs-4': '16px',
+        'fs-5': '15px',
+        'fs-6': '14px',
+        'fs-7': '13px',
+        'fs-8': '11px',
+      },
+      fontWeight: {
+        300: '300',
+        400: '400',
+        500: '500',
+        600: '600',
       },
       colors: {
         primary: {
@@ -57,6 +71,7 @@ export default {
           dark: '#1A202C',
           gray: '#4A5568',
         },
+        'orange-yellow-crayola': 'hsl(0, 0%, 70%)', // ✅ Custom color added here
       },
       blur: {
         '3xl': '64px',
@@ -89,11 +104,30 @@ export default {
       },
       backgroundImage: {
         'radial-gradient': 'radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%)',
-      }
+      },
+      boxShadow: {
+        '1': '-4px 8px 24px hsla(0, 0%, 0%, 0.25)',
+        '2': '0 16px 30px hsla(0, 0%, 0%, 0.25)',
+        '3': '0 16px 40px hsla(0, 0%, 0%, 0.25)',
+        '4': '0 25px 50px hsla(0, 0%, 0%, 0.15)',
+        '5': '0 24px 80px hsla(0, 0%, 0%, 0.25)',
+      },
+      transitionProperty: {
+        '1': 'all',
+        '2': 'all',
+      },
+      transitionDuration: {
+        '1': '250ms',
+        '2': '500ms',
+      },
+      transitionTimingFunction: {
+        '1': 'ease',
+        '2': 'ease-in-out',
+      },
     },
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ["light"],
+    themes: ['light'],
   },
 };

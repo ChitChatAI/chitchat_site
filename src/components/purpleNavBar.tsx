@@ -73,14 +73,14 @@ const NavBar: React.FC = () => {
                 key={path}
                 to={path}
                 className={({ isActive }) =>
-                  `font-satoshi text-sm font-medium tracking-tight px-3 py-2 transition-colors duration-200 active:opacity-80 ${
+                  `font-poppins text-sm font-medium tracking-tight px-3 py-2 transition-colors duration-200 active:opacity-80 ${
                     isActive
                       ? isScrolled
                         ? 'text-theme-main font-bold'
-                        : 'text-white font-bold'
+                        : 'text-orange-yellow-crayola font-bold'
                       : isScrolled
-                      ? 'text-gray-700 hover:text-theme-main'
-                      : 'text-white hover:text-theme-main'
+                        ? 'text-gray-700 hover:text-theme-main'
+                        : 'text-white hover:text-gray-300'
                   }`
                 }
               >
@@ -121,8 +121,10 @@ const NavBar: React.FC = () => {
                 to={path}
                 onClick={() => setIsMenuOpen(false)}
                 className={({ isActive }) =>
-                  `block px-4 py-2 font-satoshi text-sm font-medium transition-colors duration-200 active:opacity-80 ${
-                    isActive ? 'text-theme-main font-bold' : 'text-gray-700 hover:text-theme-main'
+                  `block px-4 py-2 font-poppins text-sm font-medium transition-colors duration-200 active:opacity-80 ${
+                    isActive
+                      ? 'text-theme-main font-bold'
+                      : 'text-gray-700 hover:text-theme-main'
                   }`
                 }
               >

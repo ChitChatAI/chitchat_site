@@ -180,31 +180,24 @@ const Pricing: React.FC = () => {
           {plans.map((plan, idx) => (
             <div
               key={idx}
-              className="relative bg-gradient-to-br from-white via-gray-50 to-purple-50 border border-theme-main/20 p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[540px] group scale-100 hover:scale-[1.025]"
+              className="bg-white border border-theme-main/15 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between min-h-[520px]"
               style={{
                 clipPath: "polygon(32px 0%, 100% 0%, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0% 100%, 0% 32px)",
               }}
             >
-              {/* Accent border on left */}
-              <div className="absolute left-0 top-6 bottom-6 w-1 bg-gradient-to-b from-theme-main/80 to-theme-main/0 rounded-full opacity-70" />
               <div>
                 <div className="flex items-center mb-6 space-x-4">
-                  <span className="relative flex items-center justify-center">
-                    <span className="absolute inset-0 rounded-full bg-theme-main/10 blur-sm scale-125" />
-                    <span className="material-symbols-outlined text-theme-main text-4xl z-10">{plan.icon}</span>
-                  </span>
-                  <span className="inline-block px-3 py-1 rounded-full bg-theme-main/10 text-theme-main font-bold text-xs uppercase tracking-wider shadow-sm border border-theme-main/20">
-                    {plan.name}
-                  </span>
+                  <span className="material-symbols-outlined text-theme-main text-3xl">{plan.icon}</span>
+                  <h3 className="text-xl font-header font-semibold text-gray-800 whitespace-nowrap overflow-hidden text-ellipsis">{plan.name}</h3>
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed font-satoshi font-medium">{plan.description}</p>
-                <div className="mb-6 flex items-end gap-2">
-                  <span className="text-4xl font-extrabold text-theme-main drop-shadow-sm">{plan.price}</span>
-                  <span className="text-base text-gray-500 font-semibold">{plan.frequency}</span>
+                <p className="text-gray-600 mb-6 leading-relaxed font-satoshi">{plan.description}</p>
+                <div className="mb-6">
+                  <span className="text-3xl font-bold text-gray-900">{plan.price}</span>
+                  <span className="text-base text-gray-500 ml-1">{plan.frequency}</span>
                 </div>
-                <ul className="space-y-3 text-gray-800 font-satoshi">
+                <ul className="space-y-3 text-gray-700">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-base font-medium">
+                    <li key={i} className="flex items-center text-sm">
                       <span className="material-symbols-outlined text-theme-main mr-2 text-lg">check_circle</span>
                       {feature}
                     </li>
@@ -213,11 +206,11 @@ const Pricing: React.FC = () => {
               </div>
               <div className="mt-10">
                 <button
-                  className={`w-full px-6 py-3 rounded-xl font-bold text-lg shadow-md transition-all duration-200 tracking-wide
+                  className={`font-satoshi w-full px-5 py-3 rounded-lg font-medium transition-all duration-200
     ${plan.name === 'Maintenance'
-                      ? 'bg-gray-900 hover:bg-gray-800 text-white'
-                      : 'bg-gradient-to-r from-theme-main to-purple-500 hover:from-theme-dark hover:to-purple-700 text-white'
-                    } group-hover:scale-105`}
+                    ? 'bg-gray-900 hover:bg-gray-800 text-white'
+                    : 'bg-theme-main hover:bg-theme-dark text-white'
+                    }`}
                 >
                   {plan.button}
                 </button>
