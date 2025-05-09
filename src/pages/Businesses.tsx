@@ -5,6 +5,7 @@ import { motion} from 'framer-motion';
 import Navbar from '../components/NavBar';  
 import Footer from '../components/Footer';
 import CallToAction from '../components/CallToAction';
+import CookieConsent from '../components/CookieConsent';
 
 const ForBusinesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
@@ -260,7 +261,7 @@ const ForBusinesses: React.FC = () => {
               How ChitChat Adds Value to Your Business
             </h3>
 
-            <div className="relative border-l-2 border-dotted border-purple-500 pl-12 space-y-20">
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
               {[
                 {
                   title: 'Reduce Support Costs',
@@ -296,7 +297,7 @@ const ForBusinesses: React.FC = () => {
                   viewport={{ once: true, amount: 0.2 }}
                   variants={itemAnimation}
                 >
-                  <span className="absolute -left-[14px] top-1 w-4 h-4 bg-purple-600 border-4 border-white rounded-full shadow-md transition-transform hover:scale-125"></span>
+                  <span className="absolute -left-[14px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md transition-transform hover:scale-125"></span>
                   <div className="ml-4">
                     <h4 className="text-2xl font-semibold text-gray-800 mb-2">{item.title}</h4>
                     <p className="text-sm text-theme-main font-bold uppercase tracking-wider mb-2">{item.stat}</p>
@@ -315,7 +316,7 @@ const ForBusinesses: React.FC = () => {
               What’s Included in Every ChitChat Package
             </h3>
 
-            <div className="relative border-l-2 border-dotted border-purple-500 pl-12 space-y-20">
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
               {[
                 {
                   title: "Tailored Persona Design",
@@ -346,7 +347,7 @@ const ForBusinesses: React.FC = () => {
                   viewport={{ once: true, amount: 0.2 }}
                   variants={itemAnimation}
                 >
-                  <span className="absolute -left-[14px] top-1 w-4 h-4 bg-purple-600 border-4 border-white rounded-full shadow-md transition-transform hover:scale-125"></span>
+                  <span className="absolute -left-[14px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md transition-transform hover:scale-125"></span>
                   <h4 className="text-2xl font-semibold text-gray-800 mb-2 ml-4">{item.title}</h4>
                   <p className="text-base text-gray-600 max-w-2xl leading-relaxed">{item.text}</p>
                 </motion.div>
@@ -359,99 +360,7 @@ const ForBusinesses: React.FC = () => {
         <CallToAction bgImage="/solutionsPage/solutions.jpg" />
 
         {/* Cookie Policy Floating Button - Left Side */}
-        <div className="fixed bottom-6 left-6 z-50">
-          <button
-            onClick={() => setCookiePolicyOpen(!cookiePolicyOpen)}
-            className="bg-theme-main text-white p-4 rounded-full shadow-lg hover:bg-theme-dark transition-all flex items-center justify-center"
-            aria-label="Cookie Policy"
-          >
-            <div className="transform transition-transform duration-300 hover:rotate-12">
-              <Cookie size={24} strokeWidth={1.5} />
-            </div>
-          </button>
-
-          {/* Cookie Policy Modal */}
-          {cookiePolicyOpen && (
-            <div 
-              className="fixed inset-x-0 mx-auto bottom-0 bg-white shadow-lg rounded-t-lg p-6 w-full sm:w-[500px] max-h-[90vh] overflow-y-auto z-50 transform transition-transform duration-300 ease-in-out"
-              style={{ 
-                transform: isModalExiting ? 'translateY(100%)' : 'translateY(0)',
-                animation: isModalExiting ? 'slideDown 0.3s ease-out forwards' : 'slideUp 0.3s ease-out forwards'
-              }}
-            >
-              {/* ChitChat logo */}
-              <div className="flex justify-center mb-4">
-                <img 
-                  src="/branding/chitchatAI.png"
-                  alt="ChitChat AI Logo"
-                  className="w-12 h-auto"
-                />
-              </div>
-              
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Your cookie preferences</h3>
-                <button 
-                  onClick={handleCloseModal}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-              
-              <p className="text-sm text-gray-600 mb-5">
-                We use cookies to keep our site secure and user-friendly, and to carry out the activities stated below.
-              </p>
-              
-              <p className="text-sm text-gray-600 mb-5">
-                You can customize your cookie preferences at any time by toggling the options on or off.
-              </p>
-              
-              <p className="text-sm text-gray-600 mb-6">
-                For more information, have a look at our <a href="#" className="text-theme-main underline hover:text-theme-dark">Privacy and Cookie Policy</a>
-              </p>
-              
-              <div className="border-t border-gray-200 pt-4 mb-5">
-                <h4 className="text-sm font-semibold mb-4">Manage consent preferences</h4>
-                
-                {/* Technical cookies toggle - always active */}
-                <div className="flex justify-between items-center mb-4">
-                  <div>
-                    <p className="text-sm font-medium text-gray-800">Technical cookies</p>
-                    <p className="text-xs text-gray-500">Always active</p>
-                  </div>
-                  <div className="bg-theme-main rounded-full w-10 h-5 flex items-center px-0.5">
-                    <div className="bg-white rounded-full w-4 h-4 ml-auto shadow-sm"></div>
-                  </div>
-                </div>
-                
-                {/* Analytics cookies toggle */}
-                <div className="flex justify-between items-center mb-6">
-                  <div>
-                    <p className="text-sm font-medium text-gray-800">Analytics cookies</p>
-                  </div>
-                  <button className="bg-gray-200 rounded-full w-10 h-5 flex items-center px-0.5 hover:bg-gray-300 transition-colors">
-                    <div className="bg-white rounded-full w-4 h-4 shadow-sm"></div>
-                  </button>
-                </div>
-              </div>
-              
-              <div className="flex justify-between space-x-3 pt-3 border-t border-gray-200">
-                <button 
-                  onClick={handleCloseModal}
-                  className="flex-1 py-2 border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors"
-                >
-                  Reject all
-                </button>
-                <button 
-                  onClick={handleCloseModal}
-                  className="flex-1 bg-theme-main text-white py-2 rounded font-medium hover:bg-theme-dark transition-colors"
-                >
-                  Confirm my choices
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+        <CookieConsent position="left" modalPosition="bottom" />
 
         {/* Add animation keyframes for both entrance and exit */}
         <style>

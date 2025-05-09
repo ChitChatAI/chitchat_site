@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { Cookie, X } from 'lucide-react';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
+import CookieConsent from '../components/CookieConsent';
 
 const Pricing: React.FC = () => {
   const [headerText, setHeaderText] = useState("");
@@ -106,35 +107,7 @@ const Pricing: React.FC = () => {
     {
       question: 'How long does it take to develop a persona?',
       answer: 'Persona development typically takes 4-6 weeks, depending on the complexity and requirements.',
-    },
-    {
-      question: 'Do you provide ongoing support after deployment?',
-      answer: 'Yes, we offer maintenance plans that include updates, performance monitoring, and optimization.',
-    },
-    {
-      question: 'Can we integrate the AI persona with our existing systems?',
-      answer: 'Absolutely. Our integration process ensures seamless compatibility with your existing tech stack.',
-    },
-    {
-      question: 'What is the cost of additional integrations?',
-      answer: 'Additional integrations are priced based on complexity. Contact us for a custom quote.',
-    },
-    {
-      question: 'Can we customize the persona’s tone and style?',
-      answer: 'Yes, we work closely with your team to ensure the persona reflects your brand’s tone and style.',
-    },
-    {
-      question: 'Do you offer training for our team?',
-      answer: 'Yes, we provide training sessions to help your team manage and optimize the AI persona.',
-    },
-    {
-      question: 'What happens if we need to scale quickly?',
-      answer: 'Our solutions are designed to scale seamlessly. We can support rapid scaling with minimal downtime.',
-    },
-    {
-      question: 'Is there a trial period for your services?',
-      answer: 'We do not offer trials, but we provide detailed demos and consultations to ensure our solution meets your needs.',
-    },
+    }
   ];
 
   const handleCloseModal = () => {
@@ -293,99 +266,7 @@ const Pricing: React.FC = () => {
       <Footer />
 
       {/* Cookie Policy Floating Button - Left Side */}
-      <div className="fixed bottom-6 left-6 z-50">
-        <button
-          onClick={() => setCookiePolicyOpen(!cookiePolicyOpen)}
-          className="bg-theme-main text-white p-4 rounded-full shadow-lg hover:bg-theme-dark transition-all flex items-center justify-center"
-          aria-label="Cookie Policy"
-        >
-          <div className="transform transition-transform duration-300 hover:rotate-12">
-            <Cookie size={24} strokeWidth={1.5} />
-          </div>
-        </button>
-
-        {/* Cookie Policy Modal - Slide from right */}
-        {cookiePolicyOpen && (
-          <div
-            className="fixed right-0 top-0 h-full bg-white shadow-lg p-6 w-full sm:w-[400px] max-h-screen overflow-y-auto z-50 transform transition-transform duration-300 ease-in-out"
-            style={{
-              transform: isModalExiting ? 'translateX(100%)' : 'translateX(0)',
-              animation: isModalExiting ? 'slideRight 0.3s ease-out forwards' : 'slideLeft 0.3s ease-out forwards'
-            }}
-          >
-            {/* ChitChat logo */}
-            <div className="flex justify-center mb-4">
-              <img
-                src="/branding/chitchatAI.png"
-                alt="ChitChat AI Logo"
-                className="w-12 h-auto"
-              />
-            </div>
-
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-800">Your cookie preferences</h3>
-              <button
-                onClick={handleCloseModal}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            <p className="text-sm text-gray-600 mb-5">
-              We use cookies to keep our site secure and user-friendly, and to carry out the activities stated below.
-            </p>
-
-            <p className="text-sm text-gray-600 mb-5">
-              You can customize your cookie preferences at any time by toggling the options on or off.
-            </p>
-
-            <p className="text-sm text-gray-600 mb-6">
-              For more information, have a look at our <a href="#" className="text-theme-main underline hover:text-theme-dark">Privacy and Cookie Policy</a>
-            </p>
-
-            <div className="border-t border-gray-200 pt-4 mb-5">
-              <h4 className="text-sm font-semibold mb-4">Manage consent preferences</h4>
-
-              {/* Technical cookies toggle - always active */}
-              <div className="flex justify-between items-center mb-4">
-                <div>
-                  <p className="text-sm font-medium text-gray-800">Technical cookies</p>
-                  <p className="text-xs text-gray-500">Always active</p>
-                </div>
-                <div className="bg-theme-main rounded-full w-10 h-5 flex items-center px-0.5">
-                  <div className="bg-white rounded-full w-4 h-4 ml-auto shadow-sm"></div>
-                </div>
-              </div>
-
-              {/* Analytics cookies toggle */}
-              <div className="flex justify-between items-center mb-6">
-                <div>
-                  <p className="text-sm font-medium text-gray-800">Analytics cookies</p>
-                </div>
-                <button className="bg-gray-200 rounded-full w-10 h-5 flex items-center px-0.5 hover:bg-gray-300 transition-colors">
-                  <div className="bg-white rounded-full w-4 h-4 shadow-sm"></div>
-                </button>
-              </div>
-            </div>
-
-            <div className="flex justify-between space-x-3 pt-3 border-t border-gray-200">
-              <button
-                onClick={handleCloseModal}
-                className="flex-1 py-2 border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors"
-              >
-                Reject all
-              </button>
-              <button
-                onClick={handleCloseModal}
-                className="flex-1 bg-theme-main text-white py-2 rounded font-medium hover:bg-theme-dark transition-colors"
-              >
-                Confirm my choices
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
+      <CookieConsent position="left" modalPosition="right" />
 
       {/* Updated animation keyframes for slide from right */}
       <style>

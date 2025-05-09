@@ -13,11 +13,11 @@ const NavBar: React.FC = () => {
 
   const navLinks = [
     { path: '/', label: 'About Us' },
-    { path: '/values', label: 'Values' },
     { path: '/solutions', label: 'Solutions' },
-    { path: '/partnerships', label: 'Businesses' },
-    { path: '/vision board', label: 'Vision Board' },
     { path: '/pricing', label: 'Pricing' },
+    { path: '/vision board', label: 'Vision Board' },
+    { path: '/values', label: 'Values' },
+    { path: '/partnerships', label: 'Businesses' },
     { path: '/contact us', label: 'Contact Us' },
   ];
 
