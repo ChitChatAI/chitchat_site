@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import Values from './pages/Values'; 
 import VisionBoard from './pages/VisionBoard'; 
 import Pricing from './pages/Pricing';
+import FeatureLearnMore from './pages/FeatureLearnMore';
 import './App.css';
 
 const LoadingPage: React.FC = () => {
@@ -52,6 +53,7 @@ const App: React.FC = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/values" element={<Values />} /> 
           <Route path="/vision board" element={<VisionBoard />} />
+          <Route path="/features/:slug" element={<FeatureLearnMore />} />
         </Routes>
       </div>
     </Router>
