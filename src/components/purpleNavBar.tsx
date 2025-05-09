@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -13,13 +12,13 @@ const NavBar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { path: "/", label: "About Us" },
-    { path: "/values", label: "Values" },
-    { path: "/solutions", label: "Solutions" },
-    { path: "/partnerships", label: "Businesses" },
-    { path: "/Vision Board", label: "Vision Board", badge: true },
-    { path: "/pricing", label: "Pricing" },
-    { path: "/contact us", label: "Contact Us" },
+    { path: '/', label: 'About Us' },
+    { path: '/values', label: 'Values' },
+    { path: '/solutions', label: 'Solutions' },
+    { path: '/partnerships', label: 'Businesses' },
+    { path: '/vision board', label: 'Vision Board' },
+    { path: '/pricing', label: 'Pricing' },
+    { path: '/contact us', label: 'Contact Us' },
   ];
 
   return (
@@ -33,11 +32,11 @@ const NavBar: React.FC = () => {
           {/* Logo and Brand */}
           <div className="flex items-center">
             <img
-              src={isScrolled ? "/branding/chitchatAI.png" : "/branding/chitchatAILite.png"}
+              src={isScrolled ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
               alt="ChitChat AI Logo"
               className="w-8 h-8 sm:w-10 sm:h-10 object-contain transition-all duration-300"
             />
-            <Link
+            <NavLink
               to="/"
               className={`ml-3 text-lg sm:text-xl font-satoshi-rounded font-bold tracking-wide relative ${
                 isScrolled ? 'text-gray-800' : 'text-white'
@@ -64,22 +63,26 @@ const NavBar: React.FC = () => {
               >
                 Chat
               </span>
-            </Link>
+            </NavLink>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">
             {navLinks.map(({ path, label, badge }) => (
-              <Link
+              <NavLink
                 key={path}
                 to={path}
-                className={`font-satoshi text-sm font-medium tracking-tight ${
-                  location.pathname === path
-                    ? 'text-theme-main font-bold'
-                    : isScrolled
-                    ? 'text-gray-700 hover:text-theme-main'
-                    : 'text-white hover:text-theme-main'
-                } transition-colors duration-200 px-3 py-2 active:opacity-80`}
+                className={({ isActive }) =>
+                  `font-satoshi text-sm font-medium tracking-tight px-3 py-2 transition-colors duration-200 active:opacity-80 ${
+                    isActive
+                      ? isScrolled
+                        ? 'text-theme-main font-bold'
+                        : 'text-white font-bold'
+                      : isScrolled
+                      ? 'text-gray-700 hover:text-theme-main'
+                      : 'text-white hover:text-theme-main'
+                  }`
+                }
               >
                 {label}
                 {badge && (
@@ -87,15 +90,13 @@ const NavBar: React.FC = () => {
                     New
                   </span>
                 )}
-              </Link>
+              </NavLink>
             ))}
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`lg:hidden p-2 rounded-md ${
-              isScrolled ? 'text-gray-800' : 'text-white'
-            }`}
+            className={`lg:hidden p-2 rounded-md ${isScrolled ? 'text-gray-800' : 'text-white'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -115,15 +116,15 @@ const NavBar: React.FC = () => {
         {isMenuOpen && (
           <div className="lg:hidden mt-2 bg-white rounded-md shadow-lg animate-slide-up">
             {navLinks.map(({ path, label, badge }) => (
-              <Link
+              <NavLink
                 key={path}
                 to={path}
-                className={`block px-4 py-2 font-satoshi text-sm font-medium ${
-                  location.pathname === path
-                    ? 'text-theme-main font-bold'
-                    : 'text-gray-700 hover:text-theme-main'
-                } transition-colors duration-200 active:opacity-80`}
                 onClick={() => setIsMenuOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 font-satoshi text-sm font-medium transition-colors duration-200 active:opacity-80 ${
+                    isActive ? 'text-theme-main font-bold' : 'text-gray-700 hover:text-theme-main'
+                  }`
+                }
               >
                 <div className="flex items-center justify-between">
                   <span>{label}</span>
@@ -133,7 +134,7 @@ const NavBar: React.FC = () => {
                     </span>
                   )}
                 </div>
-              </Link>
+              </NavLink>
             ))}
           </div>
         )}
