@@ -15,7 +15,7 @@ const VisionBoard: React.FC = () => {
     const [navbarSpaceState, setNavbarSpaceState] = useState<'normal' | 'tight' | 'very-tight' | 'collapse'>('normal');
     const location = useLocation();
     const { scrollYProgress } = useScroll();
-    const isHomePage = location.pathname === '/Vision Board';
+    const isHomePage = location.pathname === '/blog';
     
 
 
@@ -69,10 +69,10 @@ const VisionBoard: React.FC = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Fixed function to correctly detect Vision Board page
+    // Fixed function to correctly detect blog page
     const getNavLinkClass = (path: string) => {
-        // Special case for Vision Board - directly check current component
-        if (path === "/Vision Board") {
+        // Special case for blog - directly check current component
+        if (path === "/blog") {
             return `${isScrolled ? 'text-gray-700' : 'text-white'} font-semibold text-theme-main transition-colors duration-200 text-sm md:text-base`;
         }
 
@@ -153,7 +153,7 @@ const VisionBoard: React.FC = () => {
                 }}
             />
 
-            {/* Vision Board Header Hero Section with Parallax Effect */}
+            {/* blog Header Hero Section with Parallax Effect */}
             <motion.section
                 className="relative flex items-center justify-center bg-gradient-to-br from-purple-900 via-purple-800 to-theme-dark aspect-[16/9] min-h-[400px] md:min-h-[500px] bg-cover bg-center bg-no-repeat overflow-hidden"
                 initial={{ opacity: 0 }}
@@ -219,7 +219,7 @@ const VisionBoard: React.FC = () => {
             </motion.section>
 
 
-            {/* Vision Board Content - Enhanced Typography and Readability */}
+            {/* blog Content - Enhanced Typography and Readability */}
             <section className="py-12 md:py-16 bg-white">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto">

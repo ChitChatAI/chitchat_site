@@ -123,7 +123,7 @@ const Pricing: React.FC = () => {
       {/* Navigation Bar */}
       <NavBar />
 
-      {/* Hero Section with Overlay */}
+      {/* Hero Section with Overlay - UNCHANGED */}
       <section
         className="relative min-h-screen px-8 sm:px-12 lg:px-20 flex items-center justify-center text-center"
         style={{
@@ -166,122 +166,524 @@ const Pricing: React.FC = () => {
           {/* Removed the heading and description */}
         </div>
       </section>
-      {/* Pricing Cards */}
-      <section className="bg-gray-50 py-20 px-4 sm:px-10 lg:px-20">
-        <div className="max-w-7xl mx-auto text-center mb-16">
-          <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-header font-extrabold text-gray-900 mb-4 tracking-tight transition-all duration-700">
-            Our Plans
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto font-satoshi text-lg">
-            Clear, phase-based pricing with no surprises.
-          </p>
+      
+      {/* Enhanced Pricing Section with Complex Visual Elements */}
+      <section className="relative bg-gradient-to-b from-gray-50 to-white py-24 px-4 sm:px-10 lg:px-20 overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-40 left-10 w-64 h-64 rounded-full bg-purple-100 mix-blend-multiply opacity-70 blur-3xl"></div>
+          <div className="absolute top-60 right-10 w-72 h-72 rounded-full bg-indigo-100 mix-blend-multiply opacity-60 blur-3xl"></div>
+          <div className="absolute bottom-20 left-1/4 w-80 h-80 rounded-full bg-blue-50 mix-blend-multiply opacity-60 blur-3xl"></div>
+          
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.015]"></div>
+          
+          {/* Animated floating orbs */}
+          <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-theme-main/40 animate-float-slow"></div>
+          <div className="absolute top-1/3 right-1/3 w-6 h-6 rounded-full bg-theme-main/30 animate-float-medium"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-3 h-3 rounded-full bg-theme-main/50 animate-float-fast"></div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {plans.map((plan, idx) => (
-            <div
-              key={idx}
-              className="bg-white border border-theme-main/15 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between min-h-[520px]"
-              style={{
-                clipPath: "polygon(32px 0%, 100% 0%, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0% 100%, 0% 32px)",
-              }}
-            >
-              <div>
-                <div className="flex items-center mb-6 space-x-4">
-                  <span className="material-symbols-outlined text-theme-main text-3xl">{plan.icon}</span>
-                  <h3 className="text-xl font-header font-semibold text-gray-800 whitespace-nowrap overflow-hidden text-ellipsis">{plan.name}</h3>
-                </div>
-                <p className="text-gray-600 mb-6 leading-relaxed font-satoshi">{plan.description}</p>
-                <div className="mb-6">
-                  <span className="text-3xl font-bold text-gray-900">{plan.price}</span>
-                  <span className="text-base text-gray-500 ml-1">{plan.frequency}</span>
-                </div>
-                <ul className="space-y-3 text-gray-700">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-sm">
-                      <span className="material-symbols-outlined text-theme-main mr-2 text-lg">check_circle</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10">
-                <button
-                  className={`font-satoshi w-full px-5 py-3 rounded-lg font-medium transition-all duration-200
-    ${plan.name === 'Maintenance'
-                    ? 'bg-gray-900 hover:bg-gray-800 text-white'
-                    : 'bg-theme-main hover:bg-theme-dark text-white'
-                    }`}
-                >
-                  {plan.button}
-                </button>
-              </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Section heading with visual enhancement */}
+          <div className="text-center mb-20 relative">
+            <div className="hidden md:block absolute -top-14 left-1/2 transform -translate-x-1/2 w-28 h-1 bg-gradient-to-r from-transparent via-theme-main to-transparent"></div>
+            <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-header font-extrabold text-gray-900 mb-6 tracking-tight transition-all duration-700">
+              <span className="inline-block relative">
+                Our <span className="text-theme-main">Plans</span>
+                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 138 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5.45875C31.3333 1.9637 99.6667 -2.04921 137 9.97547" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-theme-main/30"></path>
+                </svg>
+              </span>
+            </h2>
+            <p className="relative text-gray-600 max-w-2xl mx-auto font-satoshi text-lg">
+              Clear, phase-based pricing with no surprises.
+              <span className="absolute -right-4 -top-4 text-5xl text-theme-main/10 font-serif">$</span>
+            </p>
+          </div>
+          
+          {/* Interactive comparison toggle */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex items-center bg-gray-100 rounded-full p-1">
+              <button className="py-2 px-6 rounded-full bg-theme-main text-white font-medium text-sm">
+                Standard Pricing
+              </button>
+              <button className="py-2 px-6 rounded-full text-gray-700 font-medium text-sm">
+                Enterprise Options
+              </button>
             </div>
-          ))}
-        </div>
-      </section>
-      {/* FAQ Section */}
-      <section className="bg-gray-50 py-20 px-4 sm:px-10 lg:px-20 border-t border-gray-200">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-header font-extrabold text-gray-900 text-center mb-12 tracking-tight transition-all duration-700">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-6">
-            {faqs.map((faq, idx) => (
+          </div>
+
+          {/* Complex 3D pricing cards with enhanced visuals */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            {plans.map((plan, idx) => (
               <div
                 key={idx}
-                className="relative bg-white border border-theme-main/15 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
-                style={{
-                  clipPath: "polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px)",
+                className={`group relative bg-white border border-gray-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between ${
+                  idx === 1 ? 'md:scale-110 md:-mt-6 md:mb-6 md:z-10' : ''
+                }`}
+              >
+                {/* Background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-gray-50 rounded-2xl -z-10"></div>
+                
+                {/* Decorative corner elements */}
+                <div className="absolute top-0 right-0 w-24 h-24 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-theme-main/5 transform rotate-45 translate-x-8 -translate-y-8 group-hover:bg-theme-main/10 transition-all duration-300"></div>
+                </div>
+                
+                <div className="absolute bottom-0 left-0 w-16 h-16 overflow-hidden">
+                  <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-theme-main/10 rounded-bl-xl"></div>
+                </div>
+                
+                {/* Highlight for middle plan */}
+                {idx === 1 && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-theme-main text-white text-xs font-bold py-1 px-4 rounded-full">
+                    Most Popular
+                  </div>
+                )}
+                
+                <div className="relative">
+                  <div className="flex items-center mb-8">
+                    <div className={`w-12 h-12 flex items-center justify-center rounded-lg ${
+                      idx === 0 ? 'bg-purple-50' : idx === 1 ? 'bg-blue-50' : 'bg-green-50'
+                    }`}>
+                      <span className={`material-symbols-outlined ${
+                        idx === 0 ? 'text-purple-600' : idx === 1 ? 'text-blue-600' : 'text-green-600'
+                      } text-2xl`}>
+                        {plan.icon}
+                      </span>
+                    </div>
+                    <h3 className="ml-4 text-xl font-header font-semibold text-gray-800">{plan.name}</h3>
+                  </div>
+                  
+                  <p className="text-gray-600 mb-8 leading-relaxed font-satoshi min-h-[60px]">{plan.description}</p>
+                  
+                  <div className="mb-8 flex items-end">
+                    <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                    <span className="text-base text-gray-500 ml-2 mb-1">{plan.frequency}</span>
+                  </div>
+                  
+                  <div className="relative mb-12">
+                    <div className={`absolute -left-3 top-0 bottom-0 w-1 ${
+                      idx === 0 ? 'bg-purple-200' : idx === 1 ? 'bg-blue-200' : 'bg-green-200'
+                    }`}></div>
+                    <ul className="space-y-4 text-gray-700">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="flex items-center text-sm">
+                          <span className={`material-symbols-outlined ${
+                            idx === 0 ? 'text-purple-600' : idx === 1 ? 'text-blue-600' : 'text-green-600'
+                          } mr-3 text-lg`}>
+                            check_circle
+                          </span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="relative">
+                  <button
+                    className={`relative w-full px-6 py-3 rounded-lg font-medium text-sm transition-all duration-300 overflow-hidden group-hover:scale-[1.02] shadow-md
+                      ${idx === 0 
+                        ? 'bg-purple-600 hover:bg-purple-700 text-white' 
+                        : idx === 1 
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                          : 'bg-green-600 hover:bg-green-700 text-white'}`
+                    }
+                  >
+                    <span className="relative z-10">{plan.button}</span>
+                    <span className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                  </button>
+                  
+                  <div className="mt-3 text-center">
+                    <a href="#" className="text-xs text-gray-500 hover:text-theme-main transition-colors">
+                      View full details
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Feature comparison teaser */}
+          <div className="mt-16 text-center">
+            <p className="text-gray-600">
+              Not sure which plan is right for you?
+              <a href="#" className="text-theme-main font-medium ml-1 border-b border-dashed border-theme-main/30">
+                Compare all features
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      {/* Enhanced Payment Partners Section - Now more visually complex */}
+      <section className="relative bg-white py-24 px-4 sm:px-10 lg:px-20 overflow-hidden border-t border-gray-100">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <svg className="absolute left-0 top-0 h-full text-gray-50" viewBox="0 0 150 800" fill="currentColor" preserveAspectRatio="none">
+            <path d="M0,0 L150,0 Q100,400 150,800 L0,800 Z"></path>
+          </svg>
+          <svg className="absolute right-0 top-0 h-full text-gray-50" viewBox="0 0 150 800" fill="currentColor" preserveAspectRatio="none">
+            <path d="M150,0 L0,0 Q50,400 0,800 L150,800 Z"></path>
+          </svg>
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative">
+          {/* Section heading with subtle animation */}
+          <div className="text-center mb-16 relative">
+            <span className="inline-block text-xs font-semibold text-theme-main tracking-widest uppercase mb-2 animate-pulse">
+              Trusted Worldwide
+            </span>
+            <h3 className="text-3xl font-header font-bold text-gray-800 mb-4">
+              Secure Payment Processing
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We've partnered with leading payment processors and financial institutions to provide secure, reliable payment options globally.
+            </p>
+            
+            {/* Subtle animated line separator */}
+            <div className="mt-6 relative h-px w-24 mx-auto bg-gradient-to-r from-transparent via-gray-300 to-transparent">
+              <div className="absolute h-1 w-12 bg-theme-main/30 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+            </div>
+          </div>
+          
+          {/* Payment processors section with enhanced styling */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
+            {/* Payment Logos */}
+            <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <img 
+                src="/payment-logos/visa.svg" 
+                alt="Visa" 
+                className="h-8 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/visa-10.svg";
+                  e.currentTarget.onerror = null;
                 }}
+              />
+            </div>
+            <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <img 
+                src="/payment-logos/mastercard.svg" 
+                alt="Mastercard" 
+                className="h-8 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/mastercard-2.svg";
+                  e.currentTarget.onerror = null;
+                }}
+              />
+            </div>
+            <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <img 
+                src="/payment-logos/amex.svg" 
+                alt="American Express" 
+                className="h-8 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/american-express-1.svg";
+                  e.currentTarget.onerror = null;
+                }}
+              />
+            </div>
+            <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <img 
+                src="/payment-logos/paypal.svg" 
+                alt="PayPal" 
+                className="h-8 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/paypal-2.svg";
+                  e.currentTarget.onerror = null;
+                }}
+              />
+            </div>
+            <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <img 
+                src="/payment-logos/stripe.svg" 
+                alt="Stripe" 
+                className="h-8 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/stripe-4.svg";
+                  e.currentTarget.onerror = null;
+                }}
+              />
+            </div>
+            <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <img 
+                src="/payment-logos/apple-pay.svg" 
+                alt="Apple Pay" 
+                className="h-8 object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/apple-pay-2.svg";
+                  e.currentTarget.onerror = null;
+                }}
+              />
+            </div>
+          </div>
+          
+          {/* Enhanced Banking Partners Section */}
+          <div className="mt-16 mb-6 text-center">
+            <h4 className="text-base text-gray-500 font-medium uppercase tracking-wider mb-6">
+              Trusted Banking Partners
+            </h4>
+            <p className="text-sm text-gray-600 max-w-2xl mx-auto mb-10">
+              We work with leading financial institutions to ensure secure and reliable transactions for businesses of all sizes.
+            </p>
+          </div>
+          
+          <div className="relative">
+            {/* Decorative elements */}
+            <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-purple-50 rounded-full blur-3xl opacity-30"></div>
+            <div className="absolute bottom-0 right-0 translate-x-1/3 translate-y-1/3 w-40 h-40 bg-blue-50 rounded-full blur-3xl opacity-30"></div>
+            
+            <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center bg-gray-50 py-10 px-8 rounded-2xl shadow-sm border border-gray-100">
+              {/* Banking Logos with enhanced presentation */}
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/hsbc.svg" 
+                  alt="HSBC" 
+                  className="h-12 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/hsbc-3.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/barclays.svg" 
+                  alt="Barclays" 
+                  className="h-12 object-contain" 
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/barclays-12.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/lloyds.svg" 
+                  alt="Lloyds Banking Group" 
+                  className="h-12 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/lloyds-bank-2.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/santander.svg" 
+                  alt="Santander" 
+                  className="h-12 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/santander-bank.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+            </div>
+            
+            {/* South African Banking Partners */}
+            <div className="mt-12 mb-6 text-center">
+              <h4 className="text-base text-gray-500 font-medium uppercase tracking-wider mb-6">
+                South African Banking Partners
+              </h4>
+              <p className="text-sm text-gray-600 max-w-2xl mx-auto mb-8">
+                We've partnered with leading South African financial institutions to provide seamless local payment solutions.
+              </p>
+            </div>
+            
+            <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center bg-gray-50 py-10 px-8 rounded-2xl shadow-sm border border-gray-100">
+              {/* South African Banking Logos */}
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/standard-bank.svg" 
+                  alt="Standard Bank" 
+                  className="h-12 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/standard-bank-of-south-africa-logo.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/fnb.svg" 
+                  alt="First National Bank" 
+                  className="h-12 object-contain" 
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/fnb-first-national-bank.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/nedbank.svg" 
+                  alt="Nedbank" 
+                  className="h-12 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/nedbank-1.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+              <div className="grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100 transform hover:scale-105">
+                <img 
+                  src="/payment-logos/absa.svg" 
+                  alt="ABSA Bank" 
+                  className="h-12 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://cdn.worldvectorlogo.com/logos/absa-group-limited-logo.svg";
+                    e.currentTarget.onerror = null;
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 text-center">
+            <div className="inline-block bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100">
+              <div className="flex items-center space-x-3">
+                <span className="text-green-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                  </svg>
+                </span>
+                <span className="text-sm font-medium text-gray-600">256-bit SSL Encryption</span>
+                <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                <span className="text-sm text-gray-500">All transactions are secure and encrypted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Advanced FAQ Section */}
+      <section className="relative bg-gray-50 py-24 px-4 sm:px-10 lg:px-20 overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" 
+          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+        
+        {/* Custom decorative elements */}
+        <div className="absolute right-10 top-10 w-40 h-40 bg-purple-50 rounded-full mix-blend-multiply blur-3xl"></div>
+        <div className="absolute left-10 bottom-10 w-60 h-60 bg-blue-50 rounded-full mix-blend-multiply blur-3xl"></div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
+              Got Questions?
+            </span>
+            <h2 className="text-4xl font-header font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              If you can't find what you're looking for, please
+              <Link to="/contact" className="text-theme-main font-medium mx-1 hover:underline">
+                contact our team
+              </Link>
+              for assistance.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {faqs.map((faq, idx) => (
+              <div 
+                key={idx} 
+                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100"
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
-                  className="w-full text-left flex justify-between items-center text-gray-800 font-medium text-lg focus:outline-none"
+                  className="w-full px-6 py-4 text-left flex justify-between items-center bg-gradient-to-r from-gray-50 to-white"
                 >
-                  <span>{faq.question}</span>
-                  <span
-                    className={`text-theme-main text-2xl transform transition-transform duration-200 ${
-                      openFAQ === idx ? "rotate-180" : ""
-                    }`}
-                  >
-                    {openFAQ === idx ? "−" : "+"}
-                  </span>
+                  <h4 className="font-header font-semibold text-gray-800 pr-8">
+                    {faq.question}
+                  </h4>
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 transition-colors duration-300 ${
+                    openFAQ === idx ? 'bg-theme-main border-theme-main' : ''
+                  }`}>
+                    <span className={`material-symbols-outlined text-sm ${
+                      openFAQ === idx ? 'text-white' : 'text-gray-500' 
+                    }`}>
+                      {openFAQ === idx ? 'remove' : 'add'}
+                    </span>
+                  </div>
                 </button>
-                {openFAQ === idx && (
-                  <div className="mt-4 text-gray-600 text-base leading-relaxed">
-                    <p className="p-4 bg-gray-50 rounded-lg border-l-4 border-theme-main/50 shadow-inner">
+                
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  openFAQ === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}>
+                  <div className="px-6 py-4 bg-white border-t border-gray-100">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Call-to-Action Section */}
-      <CallToAction className="mt-5" bgImage="/solutionsPage/solutions.jpg" />
+      {/* Call to Action Section */}
+      <CallToAction bgImage="/solutionsPage/solutions.jpg" />
 
+      {/* Footer */}
       <Footer />
 
-      {/* Cookie Policy Floating Button - Left Side */}
-      <CookieConsent position="left" modalPosition="right" />
-
-      {/* Updated animation keyframes for slide from right */}
-      <style>
-        {`
-        @keyframes slideLeft {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-
-        @keyframes slideRight {
-            from { transform: translateX(0); }
-            to { transform: translateX(100%); }
-        }
-        `}
-      </style>
+      {/* Cookie Consent Modal */}
+      {cookiePolicyOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="bg-white rounded-lg shadow-lg p-6 sm:p-8 max-w-md w-full"
+            initial={{ y: "-100vh" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100vh" }}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg sm:text-xl font-header font-semibold text-gray-800">
+                Cookie Policy
+              </h3>
+              <button
+                onClick={handleCloseModal}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="space-y-4 text-gray-700 font-satoshi text-sm sm:text-base">
+              <p>
+                We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All Cookies", you consent to our use of cookies.
+              </p>
+              <p>
+                You can manage your cookie preferences or withdraw your consent at any time by visiting our{" "}
+                <Link to="/privacy" className="text-theme-main font-medium">
+                  Privacy Policy
+                </Link>.
+              </p>
+            </div>
+            <div className="mt-6 flex justify-center gap-4">
+              <button
+                onClick={handleCloseModal}
+                className="bg-theme-main hover:bg-theme-dark text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200"
+              >
+                Accept All Cookies
+              </button>
+              <button
+                onClick={handleCloseModal}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-all duration-200"
+              >
+                Decline
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </>
   );
 };

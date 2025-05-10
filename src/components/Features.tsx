@@ -78,9 +78,6 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
                 key={index}
                 id={`features-${slug}`}
                 className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out h-full flex"
-                style={{
-                  clipPath: "polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px)",
-                }}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -89,7 +86,7 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
                 whileTap={{ scale: 0.97, opacity: 0.85 }}
               >
                 <div
-                  className="bg-white border border-theme-main p-6 rounded-lg shadow-lg hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group"
+                  className="bg-white border border-gray-300 p-6 rounded-lg shadow-lg hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full"
                   tabIndex={0}
                 >
                   <div className="flex items-center mb-4">
