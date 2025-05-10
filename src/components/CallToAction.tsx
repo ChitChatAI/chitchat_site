@@ -23,7 +23,7 @@ const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) 
       </p>
       <div className="flex justify-center gap-6 mt-8">
         <Link
-          to="/contact us"
+          to="/contactus"
           className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
             font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
             hover:transform hover:bg-white/100 flex items-center gap-2 group"

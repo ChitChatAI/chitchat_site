@@ -53,7 +53,7 @@ const App: React.FC = () => {
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/partnerships" element={<ForBusinesses />} />
           <Route path="/loading" element={<LoadingPage />} />
-          <Route path="/contact us" element={<ContactUs />} />
+          <Route path="/contactus" element={<ContactUs />} />
           <Route path="/pricing" element={<Navigate replace to="/partnerships#pricing" />} />
           <Route path="/values" element={<Values />} /> 
           <Route path="/blog" element={<VisionBoard />} />
