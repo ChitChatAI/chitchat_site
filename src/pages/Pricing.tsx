@@ -6,6 +6,7 @@ import { Cookie, X } from 'lucide-react';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
+import { initCustomCursor } from '../utils/cursorEffects';
 
 const Pricing: React.FC = () => {
   const [headerText, setHeaderText] = useState("");
@@ -117,6 +118,11 @@ const Pricing: React.FC = () => {
       setIsModalExiting(false);
     }, 300); // Match animation duration
   };
+
+  useEffect(() => {
+    const cleanupCursor = initCustomCursor();
+    return () => cleanupCursor();
+  }, []);
 
   return (
     <>
@@ -563,7 +569,7 @@ const Pricing: React.FC = () => {
       <section className="relative bg-gray-50 py-24 px-4 sm:px-10 lg:px-20 overflow-hidden">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-[0.03]" 
-          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2V6h4V4h-4zM0 34v-4H2v4h4v2H2v4H0v-4zm0-30V0H2v4h4v2H2v4H0V6h4V4H0z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
         
         {/* Custom decorative elements */}
         <div className="absolute right-10 top-10 w-40 h-40 bg-purple-50 rounded-full mix-blend-multiply blur-3xl"></div>

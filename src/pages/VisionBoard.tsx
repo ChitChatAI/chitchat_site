@@ -2,16 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { motion, useScroll } from 'framer-motion';
-import { ChevronDown, X, Menu, Cookie } from 'lucide-react'; // Added Cookie icon import
+import { ChevronDown, X, Menu, Cookie } from 'lucide-react';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
+import { initCustomCursor } from '../utils/cursorEffects';
 
 const VisionBoard: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false); // Added cookie policy state
-    const [isModalExiting, setIsModalExiting] = useState(false); // Added state for animation
+    const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
+    const [isModalExiting, setIsModalExiting] = useState(false);
     const [navbarSpaceState, setNavbarSpaceState] = useState<'normal' | 'tight' | 'very-tight' | 'collapse'>('normal');
     const location = useLocation();
     const { scrollYProgress } = useScroll();
@@ -137,8 +138,19 @@ const VisionBoard: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        const cleanupCursor = initCustomCursor();
+        return () => cleanupCursor();
+    }, []);
+
     return (
         <>
+            <div className="mouse-reactive-bg">
+                <div className="bg-element"></div>
+                <div className="bg-element"></div>
+                <div className="bg-element"></div>
+            </div>
+
             {/* Navigation Bar */}
             <NavBar />
             {/* Scroll Progress Bar - Positioned directly under navbar */}
@@ -497,6 +509,44 @@ const VisionBoard: React.FC = () => {
                 }
                 `}
             </style>
+
+            {/* Floating Particle System */}
+            <div className="fixed inset-0 z-[-1] pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-white"></div>
+                <div className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-theme-main/10 blur-3xl animate-float"></div>
+                <div className="absolute bottom-[15%] right-[5%] w-48 h-48 rounded-full bg-purple-100/20 blur-3xl animate-float-slow"></div>
+                <div className="absolute top-[50%] left-[50%] w-16 h-16 rounded-full bg-blue-100/30 blur-2xl animate-float-fast"></div>
+            </div>
+
+            {/* Keyframe Animations */}
+            <style jsx>{`
+                @keyframes float {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-15px); }
+                }
+
+                @keyframes float-slow {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-10px); }
+                }
+
+                @keyframes float-fast {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-20px); }
+                }
+
+                .animate-float {
+                    animation: float 6s ease-in-out infinite;
+                }
+
+                .animate-float-slow {
+                    animation: float-slow 8s ease-in-out infinite;
+                }
+
+                .animate-float-fast {
+                    animation: float-fast 4s ease-in-out infinite;
+                }
+            `}</style>
 
             <Footer />
         </>

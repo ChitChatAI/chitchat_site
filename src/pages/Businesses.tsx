@@ -6,6 +6,7 @@ import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
+import { initCustomCursor } from '../utils/cursorEffects';
 
 const ForBusinesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
@@ -237,6 +238,11 @@ const ForBusinesses: React.FC = () => {
       answer: 'Persona development typically takes 4-6 weeks, depending on the complexity and requirements.',
     }
   ];
+
+  useEffect(() => {
+    const cleanupCursor = initCustomCursor();
+    return () => cleanupCursor();
+  }, []);
 
   return (
     <>
@@ -556,7 +562,7 @@ const ForBusinesses: React.FC = () => {
         <section className="bg-white py-16 px-4 sm:px-10 lg:px-20 border-t border-gray-100">
           <div className="max-w-7xl mx-auto">
             <h3 className="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider mb-8">
-              Trusted by businesses worldwide
+              Trusted by businesses in MZANSI
             </h3>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">

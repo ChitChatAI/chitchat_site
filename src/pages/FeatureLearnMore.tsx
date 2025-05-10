@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 // Make sure to install react-markdown: npm install react-markdown
 import ReactMarkdown from 'react-markdown';
+import { initCustomCursor } from '../utils/cursorEffects';
 
 const featureDetails: Record<
   string,
@@ -90,6 +91,11 @@ const fadeInVariants = {
 const FeatureLearnMore: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const feature = featureDetails[slug || ''];
+
+  useEffect(() => {
+    const cleanupCursor = initCustomCursor();
+    return () => cleanupCursor();
+  }, []);
 
   if (!feature) {
     return (

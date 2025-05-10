@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ChevronDown, X, Menu, Cookie } from 'lucide-react';
 import NavBar from '../components/NavBar';
 import CookieConsent from '../components/CookieConsent';
+import { initCustomCursor } from '../utils/cursorEffects';
 
 const values = [
     {
@@ -67,6 +68,11 @@ const Values: React.FC = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const cleanupCursor = initCustomCursor();
+        return () => cleanupCursor();
+    }, []);
+
     const getNavLinkClass = (path: string) =>
         `relative inline-block px-3 py-2 text-sm font-medium transition-all duration-200
         ${isScrolled ? 'text-gray-700' : 'text-white'}
@@ -100,7 +106,11 @@ const Values: React.FC = () => {
 
     return (
         <>
-
+            <div className="mouse-reactive-bg">
+                <div className="bg-element"></div>
+                <div className="bg-element"></div>
+                <div className="bg-element"></div>
+            </div>
 
             <NavBar />
 
