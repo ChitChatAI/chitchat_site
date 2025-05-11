@@ -48,10 +48,29 @@ const Values: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
     const [isModalExiting, setIsModalExiting] = useState(false); // New state for animation
+    const [activeSection, setActiveSection] = useState('climbers'); // Track the active section
     const location = useLocation();
 
     useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 10);
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+
+            // Update active section based on scroll position
+            const sections = ['climbers', 'climber-values', 'scientists', 'scientist-values', 'open', 'open-values', 'tribe', 'tribe-values', 'globe'];
+            let currentSection = 'climbers';
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = document.getElementById(sections[i]);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                        currentSection = sections[i];
+                        break;
+                    }
+                }
+            }
+            setActiveSection(currentSection);
+        };
+
         window.addEventListener('scroll', handleScroll);
         handleScroll(); // Initial state
         return () => window.removeEventListener('scroll', handleScroll);
@@ -113,6 +132,24 @@ const Values: React.FC = () => {
             </div>
 
             <NavBar />
+
+            {/* Side Navigation Dots for sections */}
+            <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
+                <div className="flex flex-col items-center space-y-4">
+                    {['climbers', 'climber-values', 'scientists', 'scientist-values', 'open', 'open-values', 'tribe', 'tribe-values', 'globe'].map((section) => (
+                        <button
+                            key={section}
+                            onClick={() => handleScrollToSection(section)}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                activeSection === section 
+                                    ? 'bg-theme-main scale-125 shadow-lg shadow-theme-main/30' 
+                                    : 'bg-gray-300 hover:bg-gray-400'
+                            }`}
+                            aria-label={`Scroll to ${section} section`}
+                        ></button>
+                    ))}
+                </div>
+            </div>
 
             {/* Cookie Policy Floating Button */}
             {/* Hero Section */}

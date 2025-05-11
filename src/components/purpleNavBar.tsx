@@ -40,18 +40,17 @@ const NavBar: React.FC = () => {
 
   const navLinks = [
     { path: '/', label: 'About Us' },
-    { path: '/solutions', label: 'Solutions' },
-    { path: '/blog', label: 'Blog' },
-    { path: '/values', label: 'Values' },
-    { path: '/partnerships', label: 'Businesses' },
+    { path: '/solutions', label: 'The Solutions' },
+    { path: '/partnerships', label: 'For Businesses' },
+    { path: '/values', label: 'Our Core Values' },
+    { path: '/blog', label: 'Read AI Persona Blog' },
     { path: '/contactus', label: 'Contact Us' },
   ];
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-theme-main'
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-theme-main'
+        }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
@@ -64,9 +63,8 @@ const NavBar: React.FC = () => {
             />
             <NavLink
               to="/"
-              className={`ml-3 text-lg sm:text-xl font-satoshi-rounded font-bold tracking-wide relative ${
-                isScrolled ? 'text-gray-800' : 'text-white'
-              } transition-all duration-300`}
+              className={`ml-3 text-lg sm:text-xl font-satoshi-rounded font-bold tracking-wide relative ${isScrolled ? 'text-gray-800' : 'text-white'
+                } transition-all duration-300`}
             >
               <span
                 className="relative z-10 font-satoshi"
@@ -78,9 +76,8 @@ const NavBar: React.FC = () => {
                 Chit
               </span>
               <span
-                className={`${
-                  isScrolled ? 'text-theme-main' : 'text-theme-white'
-                } relative z-10 transition-colors duration-300 font-satoshi`}
+                className={`${isScrolled ? 'text-theme-main' : 'text-theme-white'
+                  } relative z-10 transition-colors duration-300 font-satoshi`}
                 style={{
                   clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
                   WebkitClipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
@@ -95,19 +92,17 @@ const NavBar: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:block relative" ref={desktopMenuRef}>
             <button
-              className={`flex items-center space-x-2 font-['Clash_Display'] font-medium transition-colors duration-200 px-4 py-2 rounded-md ${
-                isScrolled
+              className={`flex items-center space-x-2 font-['Clash_Display'] font-medium transition-colors duration-200 px-4 py-2 rounded-md ${isScrolled
                   ? 'text-gray-700 hover:bg-gray-100'
                   : 'text-white hover:bg-white/10'
-              }`}
+                }`}
               onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
             >
               <span>{getCurrentPageName()}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`h-5 w-5 transform transition-transform duration-300 ${
-                  isDesktopMenuOpen ? 'rotate-180' : ''
-                }`}
+                className={`h-5 w-5 transform transition-transform duration-300 ${isDesktopMenuOpen ? 'rotate-180' : ''
+                  }`}
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -128,8 +123,7 @@ const NavBar: React.FC = () => {
                     to={path}
                     onClick={() => setIsDesktopMenuOpen(false)}
                     className={({ isActive }) =>
-                      `flex items-center justify-between block px-4 py-2 font-poppins text-sm font-bold transition-colors duration-200 hover:bg-gray-100 ${
-                        isActive ? 'text-theme-main' : 'text-gray-700'
+                      `flex items-center justify-between block px-4 py-2 font-poppins text-sm font-bold transition-colors duration-200 hover:bg-gray-100 ${isActive ? 'text-theme-main' : 'text-gray-700'
                       }`
                     }
                   >
@@ -172,10 +166,9 @@ const NavBar: React.FC = () => {
                 to={path}
                 onClick={() => setIsMenuOpen(false)}
                 className={({ isActive }) =>
-                  `block px-4 py-2 font-poppins text-sm font-medium transition-colors duration-300 active:opacity-90 border-l-2 ${
-                    isActive
-                      ? 'text-theme-main font-bold border-theme-main' 
-                      : 'text-gray-700 hover:text-theme-main border-transparent hover:border-theme-main/30'
+                  `block px-4 py-2 font-poppins text-sm font-medium transition-colors duration-300 active:opacity-90 border-l-2 ${isActive
+                    ? 'text-theme-main font-bold border-theme-main'
+                    : 'text-gray-700 hover:text-theme-main border-transparent hover:border-theme-main/30'
                   }`
                 }
               >

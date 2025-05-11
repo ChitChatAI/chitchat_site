@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import FeatureCard from './FeatureCard';
 
 const Features: React.FC<{ id?: string }> = ({ id }) => {
   useEffect(() => {
@@ -56,8 +55,20 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
   ];
 
   return (
-    <section id={id} className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section id={id} className="relative py-16 bg-gray-50">
+      {/* Background and Overlay */}
+      <div 
+        className="absolute inset-0 z-0 -top-24 bg-fixed animate-fade-in" 
+        style={{
+          backgroundImage: 'url("/solutionsPage/solutions.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      ></div>
+      <div className="absolute inset-0 z-0 bg-white/80 -top-24"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-header font-bold text-center text-langchain-dark mb-4 leading-[150%] font-sans">
             Key Capabilities
@@ -70,7 +81,8 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-8 max-w-3xl mx-auto">
+        {/* Feature Cards in 2x2 Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
           {features.map((feature, index) => {
             const slug = feature.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
             return (
@@ -90,7 +102,6 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
                   tabIndex={0}
                 >
                   <div className="flex items-center mb-4">
-                    {/* Add back the icon */}
                     <span className="material-symbols-outlined text-theme-main text-4xl mr-4 transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main">
                       {feature.icon}
                     </span>
@@ -126,6 +137,13 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
             );
           })}
         </div>
+      </div>
+
+      {/* Curved Divider */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto fill-white">
+          <path d="M0,96L80,85.3C160,75,320,53,480,58.7C640,64,800,96,960,96C1120,96,1280,64,1360,48L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        </svg>
       </div>
     </section>
   );

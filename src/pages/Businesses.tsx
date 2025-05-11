@@ -12,6 +12,7 @@ const ForBusinesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null); // Track active section
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
   const headerRef = useRef<HTMLHeadingElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,6 +28,19 @@ const ForBusinesses: React.FC = () => {
   useEffect(() => {
       const handleScroll = () => {
           setIsScrolled(window.scrollY > 10);
+
+          // Update active section based on scroll position
+          const sections = ['hero', 'use-cases', 'features', 'value', 'pricing'];
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                setActiveSection(section);
+                break;
+              }
+            }
+          }
       };
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll); 
@@ -137,7 +151,6 @@ const ForBusinesses: React.FC = () => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
-      // Removed setMenuOpen(false) line
     }
   };
 
@@ -248,12 +261,30 @@ const ForBusinesses: React.FC = () => {
     <>
       {/* Navigation Bar */}
       <Navbar />
-      
+
+      {/* Side Navigation Dots for sections */}
+      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
+        <div className="flex flex-col items-center space-y-4">
+          {['hero', 'use-cases', 'features', 'value', 'pricing'].map((section) => (
+            <button
+              key={section}
+              onClick={() => handleScrollToSection(section)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                activeSection === section 
+                  ? 'bg-theme-main scale-125 shadow-lg shadow-theme-main/30' 
+                  : 'bg-gray-300 hover:bg-gray-400'
+              }`}
+              aria-label={`Scroll to ${section} section`}
+            ></button>
+          ))}
+        </div>
+      </div>
+
       <main className="font-satoshi">
         {/* Hero Section */}
         <motion.section
           id="hero"
-          className="relative min-h-screen flex items-center justify-center text-white opacity-0 transition-opacity duration-700 overflow-x-hidden"
+          className="relative min-h-screen flex items-center justify-center text-white px-6 sm:px-10 lg:px-20"
           initial="hidden"
           animate="visible"
           variants={scrollAnimation}
@@ -311,7 +342,7 @@ const ForBusinesses: React.FC = () => {
             <div className="h-32 flex items-center justify-center mb-6">
               <h2
                 ref={headerRef}
-                className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg min-h-[4rem] transition-all duration-700"
+                className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2.5rem,6vw,4rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg min-h-[4rem] transition-all duration-700"
               >
                 {headerText && headerText.split('\n').map((line, index) => (
                   <span key={index} className="block">{line}</span>
@@ -321,22 +352,19 @@ const ForBusinesses: React.FC = () => {
             <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto mb-16 font-satoshi text-white/90">
               We provide AI solutions that seamlessly integrate into your business operations, enhancing customer engagement and driving results.
             </p>
-            <div className="absolute bottom- left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-              <div className="w-6 h-6 border-b-2 border-r-2 border-white rotate-45" />
-            </div>
           </div>
         </motion.section>
 
-        {/* Use Cases Section - Enhanced Neural Dot Timeline Style */}
+        {/* Use Cases Section */}
         <section
           id="use-cases"
-          className="relative py-20 px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100"
+          className="relative py-20 px-6 sm:px-10 lg:px-20"
         >
           <div className="relative z-20 max-w-7xl mx-auto">
-            <h2 className="scroll-review opacity-0 transform translate-y-6 text-gray-900 font-header font-extrabold text-[clamp(2rem,5vw,2.5rem)] leading-[140%] tracking-tight text-center mb-12 transition-all duration-700">
+            <h2 className="scroll-review opacity-0 transform translate-y-6 text-gray-900 font-header font-extrabold text-[clamp(2.5rem,5vw,3rem)] leading-[140%] tracking-tight text-center mb-12 transition-all duration-700">
               Use Cases
             </h2>
-            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 neural-timeline">
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16 neural-timeline">
               {useCases.map((useCase, index, arr) => (
                 <div key={index} className="relative">
                   {/* Enhanced neural dot */}
@@ -356,7 +384,7 @@ const ForBusinesses: React.FC = () => {
         {/* Features  Section */}
         <section
           id="features"
-          className="relative px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100 scroll-review opacity-0 transition-opacity duration-700"
+          className="relative px-6 sm:px-10 bg-gradient-to-b from-gray-50 to-gray-100"
         >
           <motion.div
             className="relative z-20 max-w-7xl mx-auto"
@@ -371,47 +399,23 @@ const ForBusinesses: React.FC = () => {
         </section>
         
         {/* Business Values Section */}
-        <section id="value" className="relative py-32 px-6 border-t border-gray-100 bg-white">
+        <section id="value" className="relative py-32 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
           <motion.div
             className="max-w-7xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            variants={scrollAnimation}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            }}
           >
-            <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
+            <h3 className="scroll-review text-4xl font-bold text-center text-theme-main mb-20">
               How ChitChat Adds Value to Your Business
             </h3>
 
             <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
-              {[
-                {
-                  title: 'Reduce Support Costs',
-                  stat: 'Up to 40% cost reduction',
-                  text: 'Replace call center agents or scale your operations without new hires.',
-                },
-                {
-                  title: 'Boost Retention & Upsells',
-                  stat: '20% increase in customer retention',
-                  text: 'Drive revenue through nuanced conversations, not generic sales scripts.',
-                },
-                {
-                  title: 'Save Valuable Time',
-                  stat: '30% faster response times',
-                  text: 'No writing prompts or managing AI yourself – we handle everything.',
-                },
-                {
-                  title: 'Gain Competitive Edge',
-                  stat: '15% higher customer satisfaction',
-                  text: 'Stand out by offering truly believable AI support before your competitors.',
-                },
-                {
-                  title: 'Improve Customer Experience',
-                  stat: '95% positive feedback from users',
-                  text: 'Create human-like interactions that feel personal and emotionally intelligent.',
-                },
-              ].map((item, index) => (
+              {businessValues.map((item, index) => (
                 <motion.div
                   key={index}
                   className="relative scroll-review opacity-0 transform translate-y-10"
@@ -423,8 +427,8 @@ const ForBusinesses: React.FC = () => {
                   <span className="absolute -left-[14px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md transition-transform hover:scale-125"></span>
                   <div className="ml-4">
                     <h4 className="text-2xl font-semibold text-gray-800 mb-2">{item.title}</h4>
-                    <p className="text-sm text-theme-main font-bold uppercase tracking-wider mb-2">{item.stat}</p>
-                    <p className="text-base text-gray-600 leading-relaxed">{item.text}</p>
+                    <p className="text-sm text-theme-main font-bold uppercase tracking-wider mb-2">{item.metric}</p>
+                    <p className="text-base text-gray-600 leading-relaxed">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -434,8 +438,17 @@ const ForBusinesses: React.FC = () => {
 
         {/* What's Included Section */}
         <section id="whats-included" className="relative bg-white py-32 px-6 border-t border-gray-100">
-          <div className="max-w-6xl mx-auto">
-            <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
+          <motion.div
+            className="max-w-6xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            }}
+          >
+            <h3 className="scroll-review text-4xl font-bold text-center text-theme-main mb-20">
               What’s Included in Every ChitChat Package
             </h3>
 
@@ -476,12 +489,26 @@ const ForBusinesses: React.FC = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Simplified Pricing Section - More elegant styling */}
-        <section id="pricing" className="relative bg-gray-50 py-24 px-4 sm:px-10 lg:px-20">
-          <div className="max-w-7xl mx-auto">
+        <section id="pricing" className="relative bg-gray-50 py-24 px-6 sm:px-10 lg:px-20">
+          {/* Background image - extended higher with negative top positioning */}
+          <div 
+            className="absolute inset-0 z-0 -top-24 bg-fixed animate-fade-in" 
+            style={{
+              backgroundImage: 'url("/solutionsPage/solutions.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          ></div>
+          
+          {/* Overlay for readability - also extended higher */}
+          <div className="absolute inset-0 z-0 bg-white/80 -top-24"></div>
+
+          <div className="relative z-10 max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
                 Pricing
@@ -494,58 +521,74 @@ const ForBusinesses: React.FC = () => {
               </p>
             </div>
             
-            {/* Refined pricing cards */}
+            {/* Refined Pricing Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               {plans.map((plan, idx) => (
-                <div
+                <motion.div
                   key={idx}
-                  className={`card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100
-                    ${idx === 1 ? 'relative md:-mt-4 md:shadow-md' : ''}`}
+                  className={`relative bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 ${
+                    idx === 1 ? 'scale-105 z-10' : 'scale-100'
+                  }`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ delay: idx * 0.1, duration: 0.7 }}
                 >
                   {idx === 1 && (
-                    <div className="bg-theme-main text-white text-xs py-1.5 px-3 text-center font-semibold">
+                    <div className="absolute top-0 left-0 w-full bg-theme-main text-white text-xs py-1.5 px-3 text-center font-semibold">
                       Most Popular
                     </div>
                   )}
-                  <div className="p-6 sm:p-8">
-                    <div className="flex items-center mb-4">
-                      <span className={`material-symbols-outlined text-2xl mr-3 ${
-                        idx === 0 ? 'text-purple-500' : idx === 1 ? 'text-theme-main' : 'text-green-500'
-                      }`}>
-                        {plan.icon}
-                      </span>
-                      <h3 className="text-xl font-semibold text-gray-800">{plan.name}</h3>
+                  <div className="p-8 flex flex-col h-full">
+                    {/* Icon and Title */}
+                    <div className="flex items-center mb-6">
+                      <div
+                        className={`w-12 h-12 flex items-center justify-center rounded-full shadow-md ${
+                          idx === 0 ? 'bg-purple-100 text-purple-500' : idx === 1 ? 'bg-theme-main/10 text-theme-main' : 'bg-green-100 text-green-500'
+                        }`}
+                      >
+                        <span className="material-symbols-outlined text-3xl">{plan.icon}</span>
+                      </div>
+                      <h3 className="ml-4 text-xl font-semibold text-gray-800">{plan.name}</h3>
                     </div>
-                    
-                    <div className="mb-4">
+
+                    {/* Price and Frequency */}
+                    <div className="mb-6">
                       <span className="text-3xl font-bold text-gray-900">{plan.price}</span>
                       <span className="text-gray-500 ml-2">{plan.frequency}</span>
                     </div>
-                    
+
+                    {/* Description */}
                     <p className="text-gray-600 mb-6 text-sm">{plan.description}</p>
-                    
+
+                    {/* Features */}
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, i) => (
-                        <li key={i} className="flex text-sm text-gray-700">
-                          <svg className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
+                        <li key={i} className="flex items-center text-gray-700 text-sm">
+                          <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                            <span className="material-symbols-outlined text-theme-main text-sm">
+                              check_circle
+                            </span>
+                          </div>
                           {feature}
                         </li>
                       ))}
                     </ul>
-                    
-                    <button
-                      className={`w-full py-3 rounded-lg font-medium transition-all duration-300 ${
-                        idx === 1 
-                          ? 'bg-theme-main hover:bg-theme-dark text-white hover:shadow-lg' 
-                          : 'bg-gray-100 hover:bg-gray-200 text-gray-800 hover:shadow'
-                      }`}
-                    >
-                      {plan.button}
-                    </button>
+
+                    {/* Call-to-Action Button */}
+                    <div className="mt-auto">
+                      <button
+                        className={`w-full py-3 rounded-lg font-medium transition-all duration-300 ${
+                          idx === 1
+                            ? 'bg-theme-main hover:bg-theme-dark text-white hover:shadow-lg'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800 hover:shadow'
+                        }`}
+                      >
+                        {plan.button}
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
             
@@ -556,58 +599,53 @@ const ForBusinesses: React.FC = () => {
               </Link>
             </div>
           </div>
-        </section>
 
-        {/* Payment Partners Section - Keep if needed or simplify further */}
-        <section className="bg-white py-16 px-4 sm:px-10 lg:px-20 border-t border-gray-100">
-          <div className="max-w-7xl mx-auto">
-            <h3 className="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider mb-8">
-              Trusted by businesses in MZANSI
-            </h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
-              {['visa', 'mastercard', 'amex', 'paypal', 'stripe', 'apple-pay'].map((brand) => (
-                <div key={brand} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
-                  <img 
-                    src={`/payment-logos/${brand}.svg`}
-                    alt={brand.charAt(0).toUpperCase() + brand.slice(1).replace('-', ' ')}
-                    className="h-8 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.src = `https://cdn.worldvectorlogo.com/logos/${brand}.svg`;
-                      e.currentTarget.onerror = null;
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
+          {/* Curved Divider */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto fill-white">
+              <path d="M0,96L80,85.3C160,75,320,53,480,58.7C640,64,800,96,960,96C1120,96,1280,64,1360,48L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+            </svg>
           </div>
         </section>
 
         {/* Pricing FAQ Section */}
-        <section className="bg-gray-50 py-20 px-4 sm:px-10 lg:px-20">
+        <section className="bg-gray-50 py-20 px-6 sm:px-10 lg:px-20">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
               Frequently Asked Questions
             </h2>
             
             <div className="space-y-6">
               {faqs.map((faq, idx) => (
-                <div key={idx} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div
+                  key={idx}
+                  className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg"
+                >
                   <button
                     onClick={() => toggleFAQ(idx)}
-                    className="w-full px-6 py-4 text-left flex justify-between items-center"
+                    className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
                   >
-                    <h3 className="font-medium text-gray-800">
+                    <h3 className="font-medium text-gray-800 text-base">
                       {faq.question}
                     </h3>
-                    <span className="material-symbols-outlined text-gray-400">
-                      {openFAQ === idx ? 'remove' : 'add'}
+                    <span
+                      className={`material-symbols-outlined text-gray-400 transition-transform duration-300 ${
+                        openFAQ === idx ? 'rotate-180' : ''
+                      }`}
+                    >
+                      expand_more
                     </span>
                   </button>
                   
-                  <div className={`transition-all duration-200 ${openFAQ === idx ? 'block' : 'hidden'}`}>
+                  <div
+                    className={`transition-all duration-300 ${
+                      openFAQ === idx ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+                    } overflow-hidden`}
+                  >
                     <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                      <p className="text-gray-600 text-sm">{faq.answer}</p>
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
                   </div>
                 </div>

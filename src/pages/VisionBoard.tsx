@@ -16,8 +16,7 @@ const VisionBoard: React.FC = () => {
     const [navbarSpaceState, setNavbarSpaceState] = useState<'normal' | 'tight' | 'very-tight' | 'collapse'>('normal');
     const location = useLocation();
     const { scrollYProgress } = useScroll();
-    const isHomePage = location.pathname === '/blog';
-    
+
 
 
     // Refs for measuring navbar elements
@@ -145,10 +144,23 @@ const VisionBoard: React.FC = () => {
 
     return (
         <>
-            <div className="mouse-reactive-bg">
-                <div className="bg-element"></div>
-                <div className="bg-element"></div>
-                <div className="bg-element"></div>
+            {/* Complex Background Details */}
+            <div className="fixed inset-0 z-[-1] pointer-events-none">
+                {/* Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-white"></div>
+
+                {/* Radial Gradient Circles */}
+                <div className="absolute top-[20%] left-[10%] w-96 h-96 rounded-full bg-gradient-radial from-purple-400 to-transparent blur-3xl opacity-50"></div>
+                <div className="absolute bottom-[15%] right-[5%] w-72 h-72 rounded-full bg-gradient-radial from-blue-400 to-transparent blur-3xl opacity-50"></div>
+                <div className="absolute top-[50%] left-[50%] w-64 h-64 rounded-full bg-gradient-radial from-pink-400 to-transparent blur-2xl opacity-50"></div>
+
+                {/* Abstract Shapes */}
+                <div className="absolute top-[10%] left-[30%] w-48 h-48 bg-theme-main/10 rounded-full blur-3xl animate-float"></div>
+                <div className="absolute bottom-[20%] right-[20%] w-64 h-64 bg-purple-100/20 rounded-full blur-3xl animate-float-slow"></div>
+                <div className="absolute top-[60%] left-[70%] w-32 h-32 bg-blue-100/30 rounded-full blur-2xl animate-float-fast"></div>
+
+                {/* Grid Overlay */}
+                <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             </div>
 
             {/* Navigation Bar */}
@@ -493,30 +505,7 @@ const VisionBoard: React.FC = () => {
             <CallToAction bgImage="/solutionsPage/solutions.jpg" />
 
             {/* Cookie Policy Floating Button */}
-            <CookieConsent position="left" modalPosition="right" />
-
-            {/* Add animation keyframes for both entrance and exit */}
-            <style>
-                {`
-                @keyframes slideLeft {
-                    from { transform: translateX(100%); }
-                    to { transform: translateX(0); }
-                }
-                
-                @keyframes slideRight {
-                    from { transform: translateX(0); }
-                    to { transform: translateX(100%); }
-                }
-                `}
-            </style>
-
-            {/* Floating Particle System */}
-            <div className="fixed inset-0 z-[-1] pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-white"></div>
-                <div className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-theme-main/10 blur-3xl animate-float"></div>
-                <div className="absolute bottom-[15%] right-[5%] w-48 h-48 rounded-full bg-purple-100/20 blur-3xl animate-float-slow"></div>
-                <div className="absolute top-[50%] left-[50%] w-16 h-16 rounded-full bg-blue-100/30 blur-2xl animate-float-fast"></div>
-            </div>
+            <CookieConsent position="left" modalPosition="bottom" />
 
             {/* Keyframe Animations */}
             <style jsx>{`
@@ -545,6 +534,16 @@ const VisionBoard: React.FC = () => {
 
                 .animate-float-fast {
                     animation: float-fast 4s ease-in-out infinite;
+                }
+
+                .bg-grid-pattern {
+                    background-image: linear-gradient(to right, rgba(80, 36, 255, 0.05) 1px, transparent 1px),
+                                      linear-gradient(to bottom, rgba(80, 36, 255, 0.05) 1px, transparent 1px);
+                    background-size: 30px 30px;
+                }
+
+                .bg-gradient-radial {
+                    background: radial-gradient(circle, var(--tw-gradient-stops));
                 }
             `}</style>
 
