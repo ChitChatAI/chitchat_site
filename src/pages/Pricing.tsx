@@ -125,7 +125,7 @@ const Pricing: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div className="bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a] text-gray-300">
       {/* Navigation Bar */}
       <NavBar />
 
@@ -690,7 +690,7 @@ const Pricing: React.FC = () => {
           </motion.div>
         </motion.div>
       )}
-    </>
+    </div>
   );
 };
 

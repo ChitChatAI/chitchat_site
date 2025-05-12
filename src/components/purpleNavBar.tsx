@@ -40,7 +40,6 @@ const NavBar: React.FC = () => {
 
   const navLinks = [
     { path: '/', label: 'About Us' },
-    { path: '/solutions', label: 'The Solutions' },
     { path: '/partnerships', label: 'For Businesses' },
     { path: '/values', label: 'Our Core Values' },
     { path: '/blog', label: 'Read AI Persona Blog' },

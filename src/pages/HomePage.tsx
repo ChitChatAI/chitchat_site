@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
-import Hero from '../components/Hero';
 import Features from '../components/Features';
-import MeetOurCEO from '../components/MeetOurCEO';
-import Testimonials from '../components/Testimonials';
 import Community from '../components/Community';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
+import Solutions from '../components/Solutions';
+import Hero from '../components/Hero';
 
 const HomePage: React.FC = () => {
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const parallaxElements = useRef<HTMLElement[]>([]);
+  const parallaxRef = useRef<HTMLDivElement>(null);
+  const [headerText, setHeaderText] = useState('');
+  const fullText = "Built for Every Business.\nDesigned to Feel Human.";
+  const [isVisible, setIsVisible] = useState(false);
+  const headerRef = useRef<HTMLHeadingElement>(null);
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,46 +107,25 @@ const HomePage: React.FC = () => {
     const cleanupCursor = initCustomCursor();
     return () => cleanupCursor();
   }, []);
+  
 
   return (
-    <>
+    <div className="bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a] text-gray-300">
       {/* Parallax Background */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <div className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-theme-main/10 blur-3xl parallax-element" data-speed="0.3"></div>
-        <div className="absolute bottom-[15%] right-[5%] w-48 h-48 rounded-full bg-purple-100/20 blur-3xl parallax-element" data-speed="0.2"></div>
-        <div className="absolute top-[50%] left-[50%] w-16 h-16 rounded-full bg-blue-100/30 blur-2xl parallax-element" data-speed="0.1"></div>
-      </div>
+      <div className="fixed inset-0 z-[-1] pointer-events-none bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a]">
+        <div className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-theme-main/20 blur-3xl parallax-element" data-speed="0.3"></div>
+        <div className="absolute bottom-[15%] right-[5%] w-48 h-48 rounded-full bg-purple-900/30 blur-3xl parallax-element" data-speed="0.2"></div>
+        <div className="absolute top-[50%] left-[50%] w-16 h-16 rounded-full bg-blue-900/40 blur-2xl parallax-element" data-speed="0.1"></div>
 
-      {/* Side Navigation Dots for sections */}
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
-        <div className="flex flex-col items-center space-y-4">
-          {['hero', 'features', 'meet-our-ceo', 'testimonials', 'community'].map((section) => (
-            <button
-              key={section}
-              onClick={() => handleScrollToSection(section)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                activeSection === section 
-                  ? 'bg-theme-main scale-125 shadow-lg shadow-theme-main/30' 
-                  : 'bg-gray-300 hover:bg-gray-400'
-              }`}
-              aria-label={`Scroll to ${section} section`}
-            ></button>
-          ))}
+        {/* Dynamic Floating Elements */}
+        <div className="absolute inset-0 flex justify-center items-center space-x-6 animate-fade-in delay-400">
+          <div className="w-16 h-16 bg-gradient-to-br from-blue-700 to-purple-700 rounded-full shadow-[0_0_30px_rgba(128,90,213,0.6)] animate-spin-slow"></div>
+          <div className="w-20 h-20 bg-gradient-to-br from-pink-700 to-purple-700 rounded-full shadow-[0_0_40px_rgba(219,39,119,0.6)] animate-pulse"></div>
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-700 to-pink-700 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.6)] animate-bounce"></div>
         </div>
       </div>
-      
+
       <Header />
-      <main className="relative overflow-hidden">
-        <Hero id="hero" />
-        <Features id="features" />
-        <MeetOurCEO id="meet-our-ceo" />
-        <Testimonials id="testimonials" />
-        <Community id="community" />
-        
-        {/* Removed the floating scroll to top button */}
-        
-      </main>
-      <Footer />
 
       {/* Cookie Policy Floating Button */}
       <CookieConsent position="left" modalPosition="bottom" />
@@ -168,7 +152,7 @@ const HomePage: React.FC = () => {
           transform: translateY(0);
         }
       `}</style>
-    </>
+    </div>
   );
 };
 

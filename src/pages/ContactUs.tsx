@@ -216,7 +216,7 @@ const ContactUs: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div className="bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a] text-gray-300">
       <NavBar />
       
       {/* Modern floating alert with animation */}
@@ -706,7 +706,7 @@ const ContactUs: React.FC = () => {
       `}</style>
       
       <Footer />
-    </>
+    </div>
   );
 };
 

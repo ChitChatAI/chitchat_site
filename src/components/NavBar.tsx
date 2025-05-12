@@ -40,7 +40,6 @@ const NavBar: React.FC = () => {
 
   const navLinks = [
     { path: '/', label: 'About Us' },
-    { path: '/solutions', label: 'The Solutions' },
     { path: '/partnerships', label: 'For Businesses' },
     { path: '/values', label: 'Our Core Values' },
     { path: '/blog', label: 'Read AI Persona Blog' },
@@ -50,7 +49,7 @@ const NavBar: React.FC = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+        isScrolled ? 'bg-gradient-to-br from-[#0f0b1e] via-[#260a40] to-[#1f0033] shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,40 +64,19 @@ const NavBar: React.FC = () => {
             <NavLink
               to="/"
               className={`ml-3 text-lg sm:text-xl font-satoshi-rounded font-bold tracking-wide relative ${
-                isScrolled ? 'text-gray-800' : 'text-white'
+                isScrolled ? 'text-white' : 'text-white/80'
               } transition-all duration-300`}
             >
-              <span
-                className="relative z-10 font-satoshi"
-                style={{
-                  clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)',
-                  WebkitClipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)',
-                }}
-              >
-                Chit
-              </span>
-              <span
-                className={`${
-                  isScrolled ? 'text-theme-main' : 'text-theme-white'
-                } relative z-10 transition-colors duration-300 font-satoshi`}
-                style={{
-                  clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
-                  WebkitClipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
-                  textShadow: '0px 4px 6px rgba(0, 0, 0, 0.2)',
-                }}
-              >
-                Chat
-              </span>
+              <span className="relative z-10 font-satoshi">Chit</span>
+              <span className="text-theme-main relative z-10 transition-colors duration-300 font-satoshi">Chat</span>
             </NavLink>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:block relative" ref={desktopMenuRef}>
             <button
-              className={`flex items-center space-x-2 font-['Clash_Display'] font-medium transition-colors duration-200 px-4 py-2 rounded-md ${
-                isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/10'
+              className={`flex items-center space-x-2 font-medium transition-colors duration-200 px-4 py-2 rounded-md ${
+                isScrolled ? 'text-white hover:text-theme-main' : 'text-white/80 hover:text-theme-main'
               }`}
               onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
             >
@@ -147,7 +125,9 @@ const NavBar: React.FC = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`lg:hidden p-2 rounded-md ${isScrolled ? 'text-gray-800' : 'text-white'}`}
+            className={`lg:hidden p-2 rounded-md ${
+              isScrolled ? 'text-white hover:text-theme-main' : 'text-white/80 hover:text-theme-main'
+            }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -165,27 +145,22 @@ const NavBar: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden mt-2 bg-white rounded-md shadow-lg animate-slide-up">
-            {navLinks.map(({ path, label, badge }) => (
+          <div className="lg:hidden mt-2 bg-gradient-to-br from-[#0f0b1e] via-[#260a40] to-[#1f0033] rounded-md shadow-lg animate-slide-up">
+            {navLinks.map(({ path, label }) => (
               <NavLink
                 key={path}
                 to={path}
                 onClick={() => setIsMenuOpen(false)}
                 className={({ isActive }) =>
-                  `block px-4 py-2 font-poppins text-sm font-medium transition-colors duration-300 active:opacity-90 border-l-2 ${
+                  `block px-4 py-2 font-medium transition-colors duration-300 active:opacity-90 border-l-2 ${
                     isActive
-                      ? 'text-theme-main font-bold border-theme-main' 
-                      : 'text-gray-700 hover:text-theme-main border-transparent hover:border-theme-main/30'
+                      ? 'text-theme-main font-bold border-theme-main'
+                      : 'text-white/80 hover:text-theme-main border-transparent hover:border-theme-main/50'
                   }`
                 }
               >
                 <div className="flex items-center justify-between">
                   <span>{label}</span>
-                  {badge && (
-                    <span className="ml-2 px-2 py-0.5 text-xs bg-theme-main/10 text-theme-main rounded-full font-medium">
-                      New
-                    </span>
-                  )}
                 </div>
               </NavLink>
             ))}

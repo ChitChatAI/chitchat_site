@@ -38,7 +38,7 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
               href="#" 
               className="border border-gray-300 hover:border-theme-main hover:text-theme-main text-gray-600 px-6 py-3 rounded-md transition-colors duration-200 font-medium"
             >
-              GitHub Discussions
+              Contact Us
             </a>
           </div>
         </div>

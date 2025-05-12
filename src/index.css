@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-[#0f0b1e] via-[#260a40] to-[#1f0033] text-white;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white;
+  }
+  p, span, li, a {
+    @apply text-gray-400;
+  }
+}
+
 /* Additional custom styles */
 html {
   scroll-behavior: smooth;
@@ -9,20 +30,15 @@ html {
 }
 
 body {
-  @apply font-sans text-gray-800 antialiased bg-white;
-  line-height: 150%; /* Set line height to 150% for better spacing */
+  @apply font-sans text-gray-300 bg-[#0a0a0a];
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Be Vietnam Pro', sans-serif; /* Keep existing font family */
-  font-weight: 700; /* Bold headers for hierarchy */
-  letter-spacing: -0.01em; /* Slightly tighter letter spacing for elegance */
+  @apply text-white;
 }
 
 p, span, li, a {
-  font-family: 'Satoshi', sans-serif; /* Keep existing font family */
-  font-weight: 400; /* Regular weight for readability */
-  max-width: 100ch; /* Limit line length to 100 characters */
+  @apply text-gray-400;
 }
 
 /* Refined font sizes with improved hierarchy */
