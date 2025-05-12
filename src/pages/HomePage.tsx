@@ -123,9 +123,9 @@ const HomePage: React.FC = () => {
           <div className="w-20 h-20 bg-gradient-to-br from-pink-700 to-purple-700 rounded-full shadow-[0_0_40px_rgba(219,39,119,0.6)] animate-pulse"></div>
           <div className="w-12 h-12 bg-gradient-to-br from-blue-700 to-pink-700 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.6)] animate-bounce"></div>
         </div>
-      </div>
-
-      <Header />
+      </div> 
+        <Header />
+        <Solutions />
 
       {/* Cookie Policy Floating Button */}
       <CookieConsent position="left" modalPosition="bottom" />

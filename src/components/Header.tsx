@@ -113,7 +113,7 @@ const Header: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-radial from-transparent via-[#1c1033]/50 to-[#0f0b1e] opacity-80 z-0 pointer-events-none" />
 
             {/* Content */}
-            <div className="relative z-10 max-w-6xl text-center px-6 flex flex-col items-center justify-center min-h-screen">
+            <div className="relative z-10 max-w-6xl text-center px-6 mx-auto flex flex-col items-center justify-center min-h-screen">
                 <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-fade-in">
                     The Future of AI Conversations.<br />So Real, You'll Forget It's Not.
                 </h1>
