@@ -1,8 +1,39 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
 
 const Header: React.FC = () => {
+    const [videoLoaded, setVideoLoaded] = useState(false);
+    const [videoError, setVideoError] = useState(false);
+
+    useEffect(() => {
+        const videoElement = document.getElementById('heroVideo') as HTMLVideoElement;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && videoElement) {
+                        videoElement.load();
+                        observer.disconnect();
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (videoElement) {
+            observer.observe(videoElement);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    const handleVideoLoaded = () => {
+        setVideoLoaded(true);
+    };
+
+    const handleVideoError = () => {
+        setVideoError(true);
+    };
 
     return (
         <>
@@ -25,29 +56,41 @@ const Header: React.FC = () => {
                                 </p>
                                 <div className="join-us_buttons-wrapper flex flex-col sm:flex-row justify-center sm:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full mt-10 animate-fade-in delay-500">
                                     <Link
-                                      to="/contact-sales"
-                                      className="font-satoshi bg-theme-main hover:bg-theme-dark text-white px-5 py-3 rounded-md font-medium shadow-md hover:shadow-lg transition-all duration-300"
+                                        to="/contact-sales"
+                                        className="font-satoshi bg-theme-main hover:bg-theme-dark text-white px-5 py-3 rounded-md font-medium shadow-md hover:shadow-lg transition-all duration-300"
                                     >
-                                      Get a demo
+                                        Get a demo
                                     </Link>
-
-                                    {/* Modernized Futuristic Button with Purple Theme */}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                {/* Video Wrapper */}
                 <div className="header_background-video-wrapper absolute top-0 left-0 w-full h-full z-0">
+                    {/* Fallback Image */}
+                    <img
+                        src="/homePage/fallbackHeaderImage.png"
+                        alt="Fallback Header"
+                        className={`absolute inset-0 w-full h-full object-cover object-center z-0 transition-opacity duration-700 ease-in-out
+      ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}
+                    />
+
+                    {/* Lazy-loaded Video */}
                     <video
+                        id="heroVideo"
+                        className={`absolute inset-0 w-full h-full object-cover object-center brightness-75 will-change-transform transition-opacity duration-1000 ease-in-out
+      ${videoLoaded && !videoError ? 'opacity-100' : 'opacity-0'}`}
                         autoPlay
                         muted
                         loop
                         playsInline
-                        id="myVideo"
-                        className="w-full h-full object-cover object-center brightness-75 will-change-transform"
-                        disablePictureInPicture={true}
-                        disableRemotePlayback={true}
+                        preload="metadata"
+                        onLoadedData={handleVideoLoaded}
+                        onError={handleVideoError}
+                        disablePictureInPicture
+                        disableRemotePlayback
                     >
                         <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
                     </video>
@@ -56,6 +99,7 @@ const Header: React.FC = () => {
                     <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-10" />
                     <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[6px]" />
                 </div>
+
             </header>
         </>
     );
