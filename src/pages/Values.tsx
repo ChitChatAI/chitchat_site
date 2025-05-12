@@ -6,7 +6,6 @@ import { ChevronDown, X, Menu, Cookie } from 'lucide-react';
 import NavBar from '../components/NavBar';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
-import SideNavigationDots from '../components/SideNavigationDots';
 import CallToAction from '../components/CallToAction'; // Added import for CallToAction
 
 const values = [
@@ -129,8 +128,7 @@ const Values: React.FC = () => {
         <>
             <div className="bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a] text-gray-300">
                 <NavBar />
-                <SideNavigationDots sections={['climbers', 'scientists', 'open', 'tribe', 'globe']} />
-
+                
                 {/* Hero Section */}
                 <section id="climbers" className="relative bg-cover bg-center text-white">
                     <div className="absolute inset-0 bg-black/50 z-10" />
