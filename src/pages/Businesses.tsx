@@ -6,18 +6,19 @@ import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
+import SideNavigationDots from '../components/SideNavigationDots';
 import { initCustomCursor } from '../utils/cursorEffects';
 
 const ForBusinesses: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [headerText, setHeaderText] = useState('');
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null); // Track active section
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
   const headerRef = useRef<HTMLHeadingElement>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isHomePage = location.pathname === '/';
   
@@ -31,21 +32,32 @@ const ForBusinesses: React.FC = () => {
 
           // Update active section based on scroll position
           const sections = ['hero', 'use-cases', 'features', 'value', 'pricing'];
+          let foundActiveSection = false;
           for (const section of sections) {
             const element = document.getElementById(section);
             if (element) {
               const rect = element.getBoundingClientRect();
               if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
                 setActiveSection(section);
+                foundActiveSection = true;
                 break;
               }
             }
+          }
+          if (!foundActiveSection) {
+            setActiveSection(null); // Reset if no section is active
           }
       };
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll); 
   }, []);
 
+  const handleScrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     let i = 0;
@@ -57,14 +69,13 @@ const ForBusinesses: React.FC = () => {
     return () => clearInterval(typingInterval);
   }, [fullText]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Remove scroll animation logic
-    };
+  const handleVideoLoaded = () => {
+    setVideoLoaded(true);
+  };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleVideoError = () => {
+    setVideoError(true);
+  };
 
   const scrollAnimation = {
     hidden: { opacity: 0, y: 50 },
@@ -147,13 +158,6 @@ const ForBusinesses: React.FC = () => {
     },
   ];
 
-  const handleScrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   // Handle modal closing with animation
   const handleCloseModal = () => {
     setIsModalExiting(true);
@@ -161,11 +165,6 @@ const ForBusinesses: React.FC = () => {
       setCookiePolicyOpen(false);
       setIsModalExiting(false);
     }, 300); // Match this with the animation duration
-  };
-
-  // Function to handle video loading
-  const handleVideoLoaded = () => {
-    setVideoLoaded(true);
   };
 
   // Load video after component mount with delay to prioritize other content
@@ -262,23 +261,7 @@ const ForBusinesses: React.FC = () => {
       {/* Navigation Bar */}
       <Navbar />
 
-      {/* Side Navigation Dots for sections */}
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
-        <div className="flex flex-col items-center space-y-4">
-          {['hero', 'use-cases', 'features', 'value', 'pricing'].map((section) => (
-            <button
-              key={section}
-              onClick={() => handleScrollToSection(section)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                activeSection === section 
-                  ? 'bg-theme-main scale-125 shadow-lg shadow-theme-main/30' 
-                  : 'bg-gray-300 hover:bg-gray-400'
-              }`}
-              aria-label={`Scroll to ${section} section`}
-            ></button>
-          ))}
-        </div>
-      </div>
+      <SideNavigationDots sections={['hero', 'use-cases', 'features', 'value', 'pricing']} />
 
       <main className="font-satoshi">
         {/* Hero Section */}
@@ -290,51 +273,45 @@ const ForBusinesses: React.FC = () => {
           variants={scrollAnimation}
           transition={{ duration: 1, ease: 'easeOut' }}
         >
-          {/* Video background - enhanced with progressive loading */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900 to-indigo-900 z-0">
-            {/* Placeholder image shown while video loads */}
-            <img 
-              src="/businessesPage/BusinessBG.png" 
-              alt="Business Background"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}
-            />
-            
-            {/* Video with improved loading */}
-            <video
-              ref={videoRef}
-              className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              onLoadedData={handleVideoLoaded}
-              onCanPlay={handleVideoLoaded}
-              disablePictureInPicture={true}
-              disableRemotePlayback={true}
-              controlsList="nodownload nofullscreen noremoteplayback"
-              style={{ 
-                objectFit: 'cover',
-                width: '100%',
-                height: '100%',
-                WebkitAppearance: 'none',
-              }}
-              poster="/businessesPage/BusinessBG.png"
-            ></video>
-            
-            {/* Loading indicator */}
-            {!videoLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center z-10">
-                <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            )}
-          </div>
+          {/* Fallback Image */}
+          <motion.img
+            src="/businessesPage/BusinessBG.png"
+            alt="Business Background"
+            className={`absolute inset-0 w-full h-full object-cover ${
+              videoLoaded ? 'opacity-0' : 'opacity-100'
+            }`}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: videoLoaded ? 1.1 : 1, opacity: videoLoaded ? 0 : 1 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+          />
+
+          {/* Video with Lazy Loading */}
+          <motion.video
+            ref={videoRef}
+            className={`absolute inset-0 w-full h-full object-cover z-0 ${
+              videoLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            onLoadedData={handleVideoLoaded}
+            onError={handleVideoError}
+            disablePictureInPicture={true}
+            disableRemotePlayback={true}
+            controlsList="nodownload nofullscreen noremoteplayback"
+            initial={{ scale: 1.1 }}
+            animate={{ scale: videoLoaded ? 1 : 1.1, opacity: videoLoaded ? 1 : 0 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+          >
+            <source src="/businessesPage/businessVideo.mp4" type="video/mp4" />
+          </motion.video>
 
           {/* PURPLISH GLASS OVERLAY */}
           <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-10" />
           <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[5px]" />
-         {/* Purple fog overlay from bottom to top */}
-         <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-purple-500/50 via-purple-400/20 to-transparent z-10 pointer-events-none" />
 
 
           {/* Content */}

@@ -6,6 +6,7 @@ import { ChevronDown, X, Menu, Cookie } from 'lucide-react';
 import NavBar from '../components/NavBar';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
+import SideNavigationDots from '../components/SideNavigationDots';
 
 const values = [
     {
@@ -132,26 +133,7 @@ const Values: React.FC = () => {
             </div>
 
             <NavBar />
-
-            {/* Side Navigation Dots for sections */}
-            <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
-                <div className="flex flex-col items-center space-y-4">
-                    {['climbers', 'climber-values', 'scientists', 'scientist-values', 'open', 'open-values', 'tribe', 'tribe-values', 'globe'].map((section) => (
-                        <button
-                            key={section}
-                            onClick={() => handleScrollToSection(section)}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                activeSection === section 
-                                    ? 'bg-theme-main scale-125 shadow-lg shadow-theme-main/30' 
-                                    : 'bg-gray-300 hover:bg-gray-400'
-                            }`}
-                            aria-label={`Scroll to ${section} section`}
-                        ></button>
-                    ))}
-                </div>
-            </div>
-
-            {/* Cookie Policy Floating Button */}
+            <SideNavigationDots sections={['climbers', 'scientists', 'open', 'tribe', 'globe']} />
             {/* Hero Section */}
             <section
                 id="climbers"

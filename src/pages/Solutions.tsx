@@ -11,6 +11,7 @@ import education from '../assets/lottie/education.json';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
+import SideNavigationDots from '../components/SideNavigationDots';
 
 const Solutions: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -196,16 +197,9 @@ const Solutions: React.FC = () => {
     <>
       <NavBar />
       
-      {/* Modern Background Elements */}
-      <div className="fixed inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-white z-[-2] pointer-events-none">
-        {/* Abstract shapes */}
-        <div className="absolute top-[30%] left-[10%] w-64 h-64 rounded-full bg-theme-main/5 filter blur-3xl opacity-70 animate-float-slow"></div>
-        <div className="absolute bottom-[20%] right-[5%] w-96 h-96 rounded-full bg-purple-100/20 filter blur-3xl opacity-70 animate-float"></div>
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-grid-pattern"></div>
-      </div>
-      
+      {/* Side Navigation Dots */}
+      <SideNavigationDots sections={['hero', 'categories', 'industries']} />
+
       <main ref={parallaxRef} className="relative z-10 overflow-hidden">
         <section id="hero" className="relative pt-48 pb-32 px-6 overflow-hidden">
           {/* Background image - extended higher with negative top positioning */}
@@ -347,7 +341,8 @@ const Solutions: React.FC = () => {
           </div>
         </section>
 
-        {/* Enhanced Neural Dot Timeline Section */}
+
+        {/* Industries Section */}
         <section id="industries" className="relative bg-white py-32 px-6 overflow-hidden">
           <div className="max-w-6xl mx-auto">
             <motion.div
