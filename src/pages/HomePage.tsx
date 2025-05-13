@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
-import Hero from '../components/Hero';
 import Features from '../components/Features';
-import MeetOurCEO from '../components/MeetOurCEO';
-import Testimonials from '../components/Testimonials';
 import Community from '../components/Community';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
+import Businesses from '../components/Businesses';
 
 const HomePage: React.FC = () => {
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
@@ -132,10 +130,8 @@ const HomePage: React.FC = () => {
       
       <Header />
       <main className="relative overflow-hidden">
-        <Hero id="hero" />
+        <Businesses />
         <Features id="features" />
-        <MeetOurCEO id="meet-our-ceo" />
-        <Testimonials id="testimonials" />
         <Community id="community" />
         
         {/* Removed the floating scroll to top button */}

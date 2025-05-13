@@ -23,35 +23,35 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
 
   const features = [
     {
-      title: "Human Augmented Intelligence",
-      description: "Enhance human decision-making with emotionally aware AI agents that work alongside people, not just replace them.",
-      icon: "psychology_alt"
+      title: "Psychologically Engineered Personas",
+      description: "Our personas are crafted with deep emotional intelligence and personality theory. They are built to sound, feel, and think like real people.",
+      icon: "psychology_alt",
     },
     {
       title: "Multi-Persona Support",
-      description: "Seamlessly switch between our tailored AI personalities, each designed for specific business needs and customer experiences.",
-      icon: "switch_account"
-    },
-    {
-      title: "Real-Time Comparisons",
-      description: "Benchmark humanized AI outputs against raw models like GPT-4 to measure tone, empathy, and accuracy in real time.",
-      icon: "insights"
-    },
-    {
-      title: "Effortless Growth",
-      description: "As your business grows, our AI personas grow with you — maintaining quality and consistency across every customer interaction.",
-      icon: "trending_up"
+      description: "Tailored personas for different business roles. Whether it’s a kind billing assistant or a confident troubleshooter, each one feels uniquely human.",
+      icon: "switch_account",
     },
     {
       title: "Ongoing Optimisation",
-      description: "We actively update your AI personas' prompts based on real conversations — improving tone, accuracy, and helpfulness over time.",
-      icon: "auto_fix_high"
+      description: "We continuously fine-tune personas using real customer conversations, improving tone, empathy, and clarity over time.",
+      icon: "auto_fix_high",
     },
     {
       title: "Seamless Integration",
-      description: "Easily integrate our AI personas into your existing tools and workflows, ensuring a smooth and efficient adoption process.",
-      icon: "integration_instructions"
-    }
+      description: "Plug ChitChat into your existing platforms - web chat, or WhatsApp - for smooth, end-to-end automation.",
+      icon: "integration_instructions",
+    },
+    {
+      title: "Custom Conversations at Scale",
+      description: "Automate high-quality, emotionally aware conversations without sacrificing nuance or accuracy. No scripts, no awkward pauses.",
+      icon: "chat",
+    },
+    {
+      title: "Built to Replace, Not Just Assist",
+      description: "ChitChat doesn’t just support your team - it becomes it. Replace entire call centers with AI that feels personal, not robotic.",
+      icon: "support_agent",
+    },
   ];
 
   return (
@@ -71,7 +71,7 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-header font-bold text-center text-langchain-dark mb-4 leading-[150%] font-sans">
-            Key Capabilities
+            What Sets Us Apart
           </h2>
           <p
             className="text-center font-sans text-langchain-gray mb-12 max-w-2xl mx-auto"

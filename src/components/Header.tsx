@@ -71,7 +71,7 @@ const Header: React.FC = () => {
                 <div className="header_background-video-wrapper absolute top-0 left-0 w-full h-full z-0">
                     {/* Fallback Image */}
                     <img
-                        src="/homePage/fallbackHeaderImage.png"
+                        src="/businessPage/BusinessBG.jpg"
                         alt="Fallback Header"
                         className={`absolute inset-0 w-full h-full object-cover object-center z-0 transition-opacity duration-700 ease-in-out
       ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
                         disablePictureInPicture
                         disableRemotePlayback
                     >
-                        <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+                        <source src="public\businessesPage\businessVideo.mp4" type="video/mp4" />
                     </video>
 
                     {/* PURPLISH GLASS OVERLAY */}

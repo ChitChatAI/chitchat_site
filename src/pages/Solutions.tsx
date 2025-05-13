@@ -174,6 +174,33 @@ const Solutions: React.FC = () => {
     }
   ];
 
+  const useCases = [
+    {
+      title: 'Customer Support Automation',
+      description: 'Revolutionize your customer support with AI that understands and resolves issues 24/7, reducing response times and increasing satisfaction.'
+    },
+    {
+      title: 'Sales Lead Qualification',
+      description: 'Automatically qualify and prioritize leads based on engagement and intent, ensuring your sales team focuses on the right prospects.'
+    },
+    {
+      title: 'Appointment Scheduling',
+      description: 'Streamline your scheduling process with AI that can book, reschedule, and send reminders for appointments, reducing no-shows and optimizing time.'
+    },
+    {
+      title: 'Personalized Marketing Campaigns',
+      description: 'Create dynamic, personalized marketing campaigns that adapt to user behavior and preferences, increasing engagement and conversion rates.'
+    },
+    {
+      title: 'AI-Powered Tutoring',
+      description: 'Offer on-demand tutoring support that adapts to individual learning styles and paces, providing a personalized education experience.'
+    },
+    {
+      title: 'Healthcare Patient Engagement',
+      description: 'Enhance patient engagement with AI that provides personalized health tips, medication reminders, and answers to medical queries.'
+    },
+  ];
+
   // Handle card hover effects
   const handleCardHover = (index: number | null) => {
     setActiveCategory(index);
@@ -404,11 +431,67 @@ const Solutions: React.FC = () => {
                 ))}
               </div>
             </div>
+
+            {/* Blurb under More Industries We Serve */}
+            <motion.div
+              className="mt-16 text-center relative overflow-hidden"
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 1, ease: 'easeInOut' }}
+            >
+              <div className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-medium px-12 py-8 rounded-xl shadow-lg overflow-hidden">
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-center"
+                  initial={{ x: '100%' }}
+                  animate={{ x: '-100%' }}
+                  transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  Don’t see your industry? <span className="font-bold mx-2">ChitChat is flexible.</span> Our AI personas are fully customizable and can be tailored to any industry, tone, or role — even if it’s not listed here. If you’ve got a use case, we can build the voice for it.
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-20 rounded-xl pointer-events-none"></div>
+              </div>
+            </motion.div>
           </div>
           
           {/* Background elements */}
           <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-purple-100/20 filter blur-3xl opacity-50 z-0"></div>
           <div className="absolute -bottom-20 -left-40 w-64 h-64 rounded-full bg-theme-main/5 filter blur-3xl opacity-70 z-0"></div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section id="use-cases" className="relative py-20 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
+          <div className="relative z-20 max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4 pb-6 text-center">
+              Use Cases
+            </h2>
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16 neural-timeline">
+              {useCases.map((useCase, index, arr) => (
+                <div
+                  key={index}
+                  className="relative bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  style={{
+                    clipPath: 'polygon(0 0, 100% 10%, 100% 90%, 0 100%)',
+                  }}
+                >
+                  {/* Modernized neural dot with uniform padding */}
+                  <span className="absolute -left-[42px] top-1 p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center">
+                    <span className="w-3 h-3 bg-white rounded-full"></span>
+                  </span>
+                  <h3 className="font-header text-2xl font-bold text-theme-main mb-3">
+                    {useCase.title}
+                  </h3>
+                  <p className="text-base text-gray-700 font-satoshi leading-relaxed mb-2">
+                    {useCase.description}
+                  </p>
+                  {index < arr.length - 1 && (
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-theme-main/20 to-transparent mt-8 rounded-full"></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Enhanced Call To Action */}
