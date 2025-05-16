@@ -217,6 +217,13 @@ const ContactUs: React.FC = () => {
 
   return (
     <>
+      {/* Animated Gradient Background */}
+      <div className="fixed inset-0 z-[-2] pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] animate-gradient-move"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-2/3 w-40 h-40 bg-pink-200/30 rounded-full blur-2xl animate-pulse"></div>
+      </div>
       <NavBar />
       
       {/* Modern floating alert with animation */}
@@ -275,7 +282,7 @@ const ContactUs: React.FC = () => {
           </div>
 
           {/* Advanced 3D card container for the form */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
+          <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
             {/* Form steps container */}
             <div className="relative z-10">
               {/* Modern progress tracker */}
@@ -669,14 +676,10 @@ const ContactUs: React.FC = () => {
           50% { transform: translateY(-10px); }
         }
         
-        @keyframes float-in {
-          0% { opacity: 0; transform: translate(-50%, -20px); }
-          100% { opacity: 1; transform: translate(-50%, 0); }
-        }
-        
-        @keyframes success-enter {
-          0% { opacity: 0; transform: scale(0.9) translateY(10px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
+        @keyframes gradient-move {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
         
         .animate-float {
@@ -687,12 +690,9 @@ const ContactUs: React.FC = () => {
           animation: float-delayed 7s ease-in-out 1s infinite;
         }
         
-        .animate-float-in {
-          animation: float-in 0.5s ease-out forwards;
-        }
-        
-        .animate-success-enter {
-          animation: success-enter 0.5s ease-out forwards;
+        .animate-gradient-move {
+          background-size: 200% 200%;
+          animation: gradient-move 18s ease-in-out infinite;
         }
         
         .perspective-card {

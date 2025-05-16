@@ -224,11 +224,8 @@ const Solutions: React.FC = () => {
     <>
       <NavBar />
       
-      {/* Side Navigation Dots */}
-      <SideNavigationDots sections={['hero', 'categories', 'industries']} />
-
       <main ref={parallaxRef} className="relative z-10 overflow-hidden">
-        <section id="hero" className="relative pt-48 pb-32 px-6 overflow-hidden">
+        <div id="hero" className="relative py-32 px-6 overflow-hidden">
           {/* Background image - extended higher with negative top positioning */}
           <div 
             className="absolute inset-0 z-0 -top-24 bg-fixed animate-fade-in" 
@@ -359,18 +356,10 @@ const Solutions: React.FC = () => {
               ))}
             </div>
           </motion.div>
-          
-          {/* Curved divider to next section */}
-          <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto fill-white">
-              <path d="M0,96L80,85.3C160,75,320,53,480,58.7C640,64,800,96,960,96C1120,96,1280,64,1360,48L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-            </svg>
           </div>
-        </section>
-
 
         {/* Industries Section */}
-        <section id="industries" className="relative bg-white py-32 px-6 overflow-hidden">
+        <div id="industries" className="relative py-32 px-6 overflow-hidden">
           <div className="max-w-6xl mx-auto">
             <motion.div
               className="mb-20 text-center"
@@ -387,49 +376,28 @@ const Solutions: React.FC = () => {
               </p>
             </motion.div>
             
-            {/* Enhanced neural timeline */}
-            <div className="relative neural-timeline">
-              {/* Timeline line with animation */}
-              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-theme-main to-transparent neural-timeline-line"></div>
-              
-              <div className="ml-10 md:ml-16 space-y-24">
-                {additionalSolutions.map((item, index) => (
-                  <motion.div 
-                    key={index} 
-                    className="relative"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, threshold: 0.2 }}
-                    transition={{ delay: index * 0.1, duration: 0.7 }}
-                  >
-                    {/* Enhanced neural dot */}
-                    <div className="absolute -left-[36px] md:-left-[42px] top-2 neural-dot-container">
-                      <span className="neural-dot w-5 h-5 rounded-full bg-theme-main/80 flex items-center justify-center shadow-md shadow-theme-main/20 border-2 border-white">
-                        <span className="w-2 h-2 rounded-full bg-white"></span>
-                      </span>
-                    </div>
-                    
-                    {/* Content card with subtle glass effect */}
-                    <div className="p-6 md:p-8 rounded-xl bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
-                      <h4 className="text-2xl font-bold text-theme-main mb-3">{item.title}</h4>
-                      <p className="text-gray-700 leading-relaxed">{item.text}</p>
-                      
-                      {/* Subtle button */}
-                      <a href="#" className="mt-4 inline-flex items-center text-sm text-theme-main hover:text-theme-dark font-medium group">
-                        <span>Explore capabilities</span>
-                        <svg 
-                          className="w-4 h-4 ml-1 transform transition-transform group-hover:translate-x-1" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </a>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+            {/* Normal neural timeline */}
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16 neural-timeline">
+              {additionalSolutions.map((item, index, arr) => (
+                <div
+                  key={index}
+                  className="relative bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-start"
+                  style={{
+                    clipPath: 'polygon(0 0, 100% 10%, 100% 90%, 0 100%)',
+                  }}
+                >
+                  {/* Neural dot style */}
+                  <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                  <div className="ml-4">
+                    <h4 className="text-2xl font-semibold text-gray-800 mb-2">{item.title}</h4>
+                    {/* No metric for additionalSolutions, so skip metric line */}
+                    <p className="text-base text-gray-600 leading-relaxed">{item.text}</p>
+                  </div>
+                  {index < arr.length - 1 && (
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-theme-main/20 to-transparent mt-8 rounded-full"></div>
+                  )}
+                </div>
+              ))}
             </div>
 
             {/* Blurb under More Industries We Serve */}
@@ -458,10 +426,10 @@ const Solutions: React.FC = () => {
           {/* Background elements */}
           <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-purple-100/20 filter blur-3xl opacity-50 z-0"></div>
           <div className="absolute -bottom-20 -left-40 w-64 h-64 rounded-full bg-theme-main/5 filter blur-3xl opacity-70 z-0"></div>
-        </section>
+        </div>
 
         {/* Use Cases Section */}
-        <section id="use-cases" className="relative py-20 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
+        <div id="use-cases" className="relative py-32 px-6 overflow-hidden">
           <div className="relative z-20 max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-800 mb-4 pb-6 text-center">
               Use Cases
@@ -470,21 +438,18 @@ const Solutions: React.FC = () => {
               {useCases.map((useCase, index, arr) => (
                 <div
                   key={index}
-                  className="relative bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="relative bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-start"
                   style={{
                     clipPath: 'polygon(0 0, 100% 10%, 100% 90%, 0 100%)',
                   }}
                 >
-                  {/* Modernized neural dot with uniform padding */}
-                  <span className="absolute -left-[42px] top-1 p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center">
-                    <span className="w-3 h-3 bg-white rounded-full"></span>
-                  </span>
-                  <h3 className="font-header text-2xl font-bold text-theme-main mb-3">
-                    {useCase.title}
-                  </h3>
-                  <p className="text-base text-gray-700 font-satoshi leading-relaxed mb-2">
-                    {useCase.description}
-                  </p>
+                  {/* Neural dot style */}
+                  <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                  <div className="ml-4">
+                    <h4 className="text-2xl font-semibold text-gray-800 mb-2">{useCase.title}</h4>
+                    {/* No metric for useCases, so skip metric line */}
+                    <p className="text-base text-gray-600 leading-relaxed">{useCase.description}</p>
+                  </div>
                   {index < arr.length - 1 && (
                     <div className="w-16 h-0.5 bg-gradient-to-r from-theme-main/20 to-transparent mt-8 rounded-full"></div>
                   )}
@@ -492,7 +457,7 @@ const Solutions: React.FC = () => {
               ))}
             </div>
           </div>
-        </section>
+        </div>
 
         {/* Enhanced Call To Action */}
         <CallToAction 

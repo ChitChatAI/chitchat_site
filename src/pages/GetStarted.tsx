@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 
 const GetStarted: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4 sm:px-6">
-      <div className="max-w-md w-full bg-white p-6 sm:p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] px-4 sm:px-6 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-theme-main/10 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl animate-float-delayed"></div>
+      <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-pink-200/30 rounded-full blur-2xl animate-pulse"></div>
+      <div className="max-w-md w-full bg-white/70 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/30 relative z-10">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-6 font-header tracking-tight">
           Create Your Account
         </h2>
         <form className="space-y-4">
@@ -54,11 +58,27 @@ const GetStarted: React.FC = () => {
         </form>
         <p className="mt-4 text-sm text-center text-gray-600">
           Already have an account?{' '}
-          <Link to="/sign-in" className="text-theme-main hover:underline">
+          <Link to="/sign-in" className="text-theme-main hover:underline font-medium">
             Sign In
           </Link>
         </p>
       </div>
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 7s ease-in-out 1s infinite;
+        }
+      `}</style>
     </div>
   );
 };

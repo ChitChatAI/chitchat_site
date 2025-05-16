@@ -21,8 +21,8 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-gray-50 py-12 text-center">
-        <div className="scroll-review mt-10 pt-6 border-t border-gray-200 opacity-0 transform translate-y-10">
-          <p className="text-sm font-sans text-gray-600 leading-[150%]">
+        <div className="scroll-review mt-10 pt-6 border-t border-gray-200 opacity-0 transform translate-y-10 flex justify-center items-center">
+          <p className="text-sm font-sans text-gray-600 leading-[150%] text-center">
             &copy; {new Date().getFullYear()} ChitChat AI. All rights reserved.
           </p>
         </div>

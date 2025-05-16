@@ -1,39 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
 
 const Header: React.FC = () => {
-    const [videoLoaded, setVideoLoaded] = useState(false);
-    const [videoError, setVideoError] = useState(false);
+    const [showVideo, setShowVideo] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
-        const videoElement = document.getElementById('heroVideo') as HTMLVideoElement;
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && videoElement) {
-                        videoElement.load();
-                        observer.disconnect();
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+        const handleScroll = () => {
+            if (window.scrollY > 40 && !showVideo) {
+                setShowVideo(true);
+            } else if (window.scrollY <= 40 && showVideo) {
+                setShowVideo(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [showVideo]);
 
-        if (videoElement) {
-            observer.observe(videoElement);
+    useEffect(() => {
+        if (showVideo && videoRef.current) {
+            videoRef.current.play();
+        } else if (videoRef.current) {
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
         }
-
-        return () => observer.disconnect();
-    }, []);
-
-    const handleVideoLoaded = () => {
-        setVideoLoaded(true);
-    };
-
-    const handleVideoError = () => {
-        setVideoError(true);
-    };
+    }, [showVideo]);
 
     return (
         <>
@@ -42,8 +34,8 @@ const Header: React.FC = () => {
 
             {/* Header Section */}
             <header className="section_header relative overflow-hidden min-h-screen flex items-center justify-center font-sans">
-                <div className="padding-global py-24 w-full">
-                    <div className="container-large mx-auto px-6 py-10 text-left relative z-10">
+                <div className="padding-global w-full">
+                    <div className="container-large mx-auto px-20 py-28 text-left relative z-10">
                         <div className="header_content flex flex-col items-center sm:items-start justify-center w-full text-center sm:text-left animate-fade-in">
                             <div className="header_title-wrap is-home max-w-4xl">
                                 <h1 className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg">
@@ -67,39 +59,51 @@ const Header: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Video Wrapper */}
+                {/* Background Wrapper */}
                 <div className="header_background-video-wrapper absolute top-0 left-0 w-full h-full z-0">
-                    {/* Fallback Image */}
+                    {/* Smooth transition between image and video */}
                     <img
-                        src="/businessPage/BusinessBG.jpg"
-                        alt="Fallback Header"
-                        className={`absolute inset-0 w-full h-full object-cover object-center z-0 transition-opacity duration-700 ease-in-out
-      ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}
+                        src="/businessesPage/BusinessBG.png"
+                        alt="Header Background"
+                        className={`absolute inset-0 w-full h-full object-cover object-center z-0 transition-opacity duration-700 ease-in-out scale-105 blur-[2px] brightness-90
+                            ${showVideo ? 'opacity-0' : 'opacity-100'}`}
+                        style={{
+                            filter: 'drop-shadow(0 8px 40px rgba(60,0,120,0.25)) blur(2px) brightness(0.9)',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            zIndex: 0,
+                            objectFit: 'cover',
+                        }}
                     />
-
-                    {/* Lazy-loaded Video */}
                     <video
-                        id="heroVideo"
-                        className={`absolute inset-0 w-full h-full object-cover object-center brightness-75 will-change-transform transition-opacity duration-1000 ease-in-out
-      ${videoLoaded && !videoError ? 'opacity-100' : 'opacity-0'}`}
-                        autoPlay
+                        ref={videoRef}
+                        className={`absolute inset-0 w-full h-full object-cover object-center z-0 transition-opacity duration-700 ease-in-out scale-105 blur-[2px] brightness-90
+                            ${showVideo ? 'opacity-100' : 'opacity-0'}`}
+                        style={{
+                            filter: 'drop-shadow(0 8px 40px rgba(60,0,120,0.25)) blur(2px) brightness(0.9)',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            zIndex: 0,
+                            objectFit: 'cover',
+                        }}
                         muted
                         loop
                         playsInline
-                        preload="metadata"
-                        onLoadedData={handleVideoLoaded}
-                        onError={handleVideoError}
-                        disablePictureInPicture
-                        disableRemotePlayback
+                        preload="auto"
                     >
-                        <source src="public\businessesPage\businessVideo.mp4" type="video/mp4" />
+                        <source src="/businessesPage/businessVideo.mp4" type="video/mp4" />
                     </video>
-
-                    {/* PURPLISH GLASS OVERLAY */}
+                    {/* Extra gradient overlays for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#260a40]/60 via-transparent to-[#0a0a23]/70 z-10 pointer-events-none"></div>
                     <div className="absolute inset-0 border border-white/10 rounded-xl shadow-[0_4px_60px_rgba(255,255,255,0.1)] z-10" />
-                    <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[6px]" />
+                    <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[5px]" />
                 </div>
-
             </header>
         </>
     );

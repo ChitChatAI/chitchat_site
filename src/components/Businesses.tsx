@@ -104,7 +104,17 @@ const Businesses: React.FC = () => {
   return (
     <div className="font-satoshi">
       {/* Business Values Section */}
-      <section id="value" className="relative py-32 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
+      <section id="value" className="relative px-16 sm:px-10 lg:px-20 border-t border-gray-100">
+        {/* Glowy elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-purple-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-20 right-20 w-48 h-48 bg-blue-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-pink-300/30 rounded-lg rotate-45 blur-2xl pointer-events-none"></div>
+        <div className="absolute top-5 right-1/4 w-24 h-24 bg-yellow-300/30 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="absolute bottom-10 left-1/4 w-20 h-20 bg-green-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-1/4 right-10 w-28 h-28 bg-red-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-1/4 left-5 w-28 h-28 bg-indigo-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-1/3 left-16 w-24 h-24 bg-teal-300/30 rounded-full blur-2xl pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/6 w-20 h-20 bg-orange-300/30 rounded-full blur-3xl pointer-events-none"></div>
         <motion.div
           className="max-w-7xl mx-auto"
           initial="hidden"
@@ -112,13 +122,12 @@ const Businesses: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
           variants={{
             hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
           }}
         >
-          <h3 className="text-3xl font-bold text-gray-800 mb-4 pb-6 text-center">
+          <h3 className="text-3xl font-bold text-gray-800 mb-4 pb-16 text-center">
             How ChitChat Adds Value to Your Business
           </h3>
-      
           <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
             {businessValues.map((item, index) => (
               <motion.div
@@ -129,10 +138,8 @@ const Businesses: React.FC = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={itemAnimation}
               >
-                {/* Modernized neural dot with uniform padding */}
-                <span className="absolute -left-[14px] top-1 p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center">
-                  <span className="w-3 h-3 bg-white rounded-full"></span>
-                </span>
+                {/* Neural dot style */}
+                <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
                 <div className="ml-4">
                   <h4 className="text-2xl font-semibold text-gray-800 mb-2">{item.title}</h4>
                   <p className="text-sm text-theme-main font-bold uppercase tracking-wider mb-2">{item.metric}</p>
@@ -143,9 +150,9 @@ const Businesses: React.FC = () => {
           </div>
         </motion.div>
       </section>
-
       {/* What's Included Section */}
       <section id="whats-included" className="relative bg-white py-32 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
+      
         <motion.div
           className="max-w-6xl mx-auto"
           initial="hidden"
@@ -191,10 +198,8 @@ const Businesses: React.FC = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={itemAnimation}
               >
-                {/* Modernized neural dot with uniform padding */}
-                <span className="absolute -left-[14px] top-1 p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center">
-                  <span className="w-3 h-3 bg-white rounded-full"></span>
-                </span>
+                {/* Neural dot style */}
+                <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
                 <h4 className="text-2xl font-semibold text-gray-800 mb-2 ml-4">{item.title}</h4>
                 <p className="text-base text-gray-600 max-w-2xl leading-relaxed">{item.text}</p>
               </motion.div>

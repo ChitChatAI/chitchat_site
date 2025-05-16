@@ -113,9 +113,13 @@ const FeatureLearnMore: React.FC = () => {
   }
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-20 px-4 flex items-center">
+    <section className="min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] py-20 px-4 flex items-center relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-theme-main/10 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl animate-float-delayed"></div>
+      <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-pink-200/30 rounded-full blur-2xl animate-pulse"></div>
       <motion.div
-        className="max-w-2xl mx-auto w-full bg-white rounded-2xl shadow-2xl p-10 relative"
+        className="max-w-2xl mx-auto w-full bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-10 relative z-10"
         initial="hidden"
         animate="visible"
         variants={fadeInVariants}
@@ -139,6 +143,22 @@ const FeatureLearnMore: React.FC = () => {
           <ReactMarkdown>{feature.details}</ReactMarkdown>
         </div>
       </motion.div>
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 7s ease-in-out 1s infinite;
+        }
+      `}</style>
     </section>
   );
 };
