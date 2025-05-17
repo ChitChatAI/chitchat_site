@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import NavBar from '../components/purpleNavBar';
-import Footer from '../components/Footer';
+import Navbar from '../components/NavBar';
 import Lottie from 'lottie-react';
 import { ChevronDown, X, Cookie } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -11,14 +10,13 @@ import education from '../assets/lottie/education.json';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
-import SideNavigationDots from '../components/SideNavigationDots';
+import Footer from '../components/Footer';
 
 const Solutions: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const parallaxElements = useRef<HTMLElement[]>([]);
-  const [headerText, setHeaderText] = useState('');
-  const fullText = "Built for Every Business.\nDesigned to Feel Human.";
-  const [isVisible, setIsVisible] = useState(false);
+  // Remove typing effect state
+  const headerText = "Built for Every Business.\nDesigned to Feel Human.";
   const headerRef = useRef<HTMLHeadingElement>(null);
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
@@ -70,24 +68,6 @@ const Solutions: React.FC = () => {
       observer.disconnect();
     };
   }, []);
-
-  useEffect(() => {
-    if (isVisible) {
-      let i = 0;
-      const typingInterval = setInterval(() => {
-        setHeaderText(fullText.substring(0, i + 1));
-        i++;
-
-        if (i > fullText.length) {
-          clearInterval(typingInterval);
-        }
-      }, 50);
-
-      return () => clearInterval(typingInterval);
-    } else {
-      setHeaderText('');
-    }
-  }, [isVisible, fullText]);
 
   const getLottie = (title: string) => {
     switch (title) {
@@ -222,145 +202,93 @@ const Solutions: React.FC = () => {
 
   return (
     <>
-      <NavBar />
-      
+    <Navbar />
       <main ref={parallaxRef} className="relative z-10 overflow-hidden">
-        <div id="hero" className="relative py-32 px-6 overflow-hidden">
-          {/* Background image - extended higher with negative top positioning */}
-          <div 
-            className="absolute inset-0 z-0 -top-24 bg-fixed animate-fade-in" 
-            style={{
-              backgroundImage: 'url("/solutionsPage/solutions.jpg")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          ></div>
-          
-          {/* Overlay for readability - also extended higher */}
+        <div id="hero" className="relative py-20 md:py-44 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
+          {/* Glowy background elements */}
+          <div className="absolute top-0 left-0 w-[32rem] h-[32rem] bg-theme-main/10 rounded-full blur-[120px] -z-10"></div>
+          <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-pink-400/10 rounded-full blur-[100px] -z-10"></div>
+          <div className="pointer-events-none">
+            <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[140px] opacity-40 z-0"></div>
+            <div className="absolute bottom-10 left-1/4 w-60 h-60 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[110px] opacity-30 z-0"></div>
+            <div className="absolute top-10 right-1/4 w-80 h-80 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[120px] opacity-30 z-0"></div>
+          </div>
+          {/* Overlay for readability */}
           <div className="absolute inset-0 z-0 bg-white/80 -top-24"></div>
-          
-          {/* Keep decorative elements but adjust opacity */}
-          <div className="absolute top-0 -right-16 w-64 h-64 bg-theme-main/10 rounded-full filter blur-3xl animate-pulse-slow z-0"></div>
-          <div className="absolute -top-20 -left-16 w-64 h-64 bg-purple-300/10 rounded-full filter blur-3xl animate-pulse-slow animation-delay-1000 z-0"></div>
-          
-          {/* Content Wrapper - adjusted text colors for better contrast against white overlay */}
-          <motion.div
-            className="relative z-10 max-w-6xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          >
-            {/* Header Badge - adjusted for better visibility on white overlay */}
-            <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
-              Solutions for Every Industry
-            </div>
-            
-            {/* Header & Intro - text colors adjusted for white overlay */}
-            <div className="mb-24">
-              <div className="h-32 flex items-center justify-center mb-8">
-                <h2
-                  ref={headerRef}
-                  className="scroll-review text-5xl md:text-6xl font-bold text-gray-900 whitespace-pre-line leading-tight"
-                >
-                  {headerText}
-                </h2>
-              </div>
-              
-              <motion.p 
-                className="text-lg md:text-xl text-center text-gray-700 max-w-2xl mx-auto mb-12 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                Discover how our AI solutions can transform your business with human-like interactions 
-                <span className="text-theme-main font-medium"> that engage, convert, and delight.</span>
-              </motion.p>
-              
-              {/* Scrolling prompt - adjusted for white overlay */}
-              <motion.div
-                className="flex flex-col items-center justify-center mt-16 animate-bounce-gentle"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 1.2, duration: 0.8 }}
-              >
-                <span className="text-sm text-gray-500 mb-2">Explore Solutions</span>
-                <ChevronDown className="h-5 w-5 text-gray-400" />
-              </motion.div>
-            </div>
-
-            {/* Category Cards - Keep existing enhanced styling */}
-            <div id="categories" className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-24 text-left">
-              {solutionCategories.map((category, index) => (
-                <motion.div
-                  key={index}
-                  className={`scroll-review bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden no-underline ${
-                    activeCategory === index ? 'ring-2 ring-theme-main/30 transform scale-[1.02]' : ''
-                  }`}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 * index, duration: 0.7 }}
-                  onMouseEnter={() => handleCardHover(index)}
-                  onMouseLeave={() => handleCardHover(null)}
-                >
-                  <div className="relative p-6 md:p-8 h-full flex flex-col">
-                    {/* Category header */}
-                    <div className="flex items-center mb-5 no-underline">
-                      <div className="w-16 h-16 flex items-center justify-center mr-4 bg-theme-main/5 rounded-lg no-underline">
-                        <Lottie
-                          animationData={getLottie(category.title)}
-                          loop
-                          autoplay
-                          style={{ height: '48px', width: '48px' }}
-                          className="no-underline"
-                        />
-                      </div>
-                      <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent no-underline">
-                        {category.title}
-                      </h3>
-                    </div>
-                    
-                      
-                    
-                    {/* Description */}
-                    <p className="text-gray-600 text-lg mb-6 leading-relaxed flex-grow no-underline">
-                      {category.description}
+          {/* Content Wrapper */}
+          <div className="container mx-auto px-6 sm:px-12">
+            <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 min-h-[600px]">
+              {/* Left: Header and Paragraph */}
+              <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]">
+                <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
+                  Solutions for Every Industry
+                </div>
+                <div className="flex flex-col md:flex-row md:items-start md:space-x-10 w-full">
+                  <div className="flex-1">
+                    <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
+                      <span className="block bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent animate-gradient-x pb-4">
+                        {headerText.split('\n')[0]}
+                      </span>
+                      <span className="block text-[#260a40] mt-2 animate-fade-in-up delay-150">
+                        {headerText.split('\n')[1]}
+                      </span>
+                    </h1>
+                    <p className="text-2xl sm:text-3xl md:text-2xl text-gray-700 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
+                      Discover how our <span className="text-theme-main font-semibold">AI solutions</span> can transform your business with human-like interactions that engage, convert, and delight.
                     </p>
-                    
-                    {/* Features */}
-                    <ul className="space-y-3 mb-6">
-                      {category.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center">
-                          <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                            <span className="material-symbols-outlined text-theme-main text-sm no-underline">
-                              check_circle
-                            </span>
-                          </div>
-                          <span className="text-gray-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    {/* Call to action */}
-                    <div className="mt-auto pt-4">
-                      <a
-                        href="#"
-                        className="group inline-flex items-center text-theme-main hover:text-theme-dark font-medium transition-colors duration-300 no-underline"
-                      >
-                        <span>Learn more</span>
-                        <span className="ml-1 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
-                      </a>
+                    <div className="flex flex-wrap gap-6 mt-4 animate-fade-in-up delay-500">
+                  
+                      <button className="px-10 py-4 rounded-full bg-white border-2 border-theme-main text-theme-main font-bold shadow hover:bg-theme-main hover:text-white transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/20">
+                        See Our Blog
+                      </button>
+                    </div>
+                    {/* Animated dots for life */}
+                    <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
+                      <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+                      <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+                      <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
                     </div>
                   </div>
-                </motion.div>
-              ))}
+                  {/* Right: Banner Image */}
+                  <div className="flex-1 flex justify-center md:justify-end items-start mt-10 md:mt-0">
+                    <div className="relative group">
+                      <div className="absolute -top-10 -left-10 w-40 h-40 bg-theme-main/10 rounded-full blur-2xl z-0 animate-float"></div>
+                      <img
+                        src="/images/productive.png"
+                        alt="Productive"
+                        className="relative max-w-sm md:max-w-lg lg:max-w-2xl w-full h-auto rounded-[2.5rem] z-10 group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {/* Elegant floating card */}
+                      <div className="absolute -bottom-16 z-50 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl px-12 py-8 flex flex-col items-center border border-gray-100 min-w-[260px] animate-fade-in-up delay-500">
+                        <span className="text-theme-main font-bold text-2xl mb-2 tracking-wide flex items-center gap-2">
+                          <svg className="w-6 h-6 text-theme-main animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                          </svg>
+                          Live AI Demo
+                        </span>
+                        <span className="text-gray-500 text-lg">Let's talk</span>
+                      </div>
+                      <div className="absolute bottom-0 right-0 w-32 h-32 bg-pink-400/10 rounded-full blur-2xl z-0 animate-float-slow"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </motion.div>
           </div>
+        </div>
 
         {/* Industries Section */}
-        <div id="industries" className="relative py-32 px-6 overflow-hidden">
-          <div className="max-w-6xl mx-auto">
+        <div id="industries" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
+          {/* Glowy background elements */}
+          <div className="absolute top-0 left-0 w-[24rem] h-[24rem] bg-theme-main/10 rounded-full blur-[100px] -z-10"></div>
+          <div className="absolute bottom-0 right-0 w-[20rem] h-[20rem] bg-pink-400/10 rounded-full blur-[80px] -z-10"></div>
+          <div className="pointer-events-none">
+            <div className="absolute top-1/4 left-1/3 w-72 h-72 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[80px] opacity-40 z-0"></div>
+            <div className="absolute bottom-10 left-1/4 w-44 h-44 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[70px] opacity-30 z-0"></div>
+            <div className="absolute top-10 right-1/4 w-60 h-60 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[90px] opacity-30 z-0"></div>
+          </div>
+          <div className="container mx-auto px-6 sm:px-12">
             <motion.div
               className="mb-20 text-center"
               initial={{ opacity: 0, y: 30 }}
@@ -370,105 +298,74 @@ const Solutions: React.FC = () => {
               <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
                 Versatile Solutions
               </span>
-              <h3 className="text-4xl font-bold text-gray-900 mb-4">More Industries We Serve</h3>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <h3 className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                More Industries We Serve
+              </h3>
+              <p className="text-xl sm:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto font-medium drop-shadow">
                 Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
               </p>
             </motion.div>
-            
             {/* Normal neural timeline */}
-            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16 neural-timeline">
-              {additionalSolutions.map((item, index, arr) => (
-                <div
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
+              {additionalSolutions.map((item, index) => (
+                <motion.div
                   key={index}
-                  className="relative bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-start"
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 10%, 100% 90%, 0 100%)',
-                  }}
+                  className="relative scroll-review transform translate-y-10"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
                 >
                   {/* Neural dot style */}
                   <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="ml-4">
-                    <h4 className="text-2xl font-semibold text-gray-800 mb-2">{item.title}</h4>
-                    {/* No metric for additionalSolutions, so skip metric line */}
-                    <p className="text-base text-gray-600 leading-relaxed">{item.text}</p>
+                  <div className="flex flex-row w-full items-start">
+                    <div className="w-1/3 min-w-[180px] pr-6 flex items-center">
+                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{item.title}</h4>
+                    </div>
+                    <div className="w-2/3">
+                      <p className="text-base text-gray-600 leading-relaxed">{item.text}</p>
+                    </div>
                   </div>
-                  {index < arr.length - 1 && (
-                    <div className="w-16 h-0.5 bg-gradient-to-r from-theme-main/20 to-transparent mt-8 rounded-full"></div>
-                  )}
-                </div>
+                </motion.div>
               ))}
             </div>
-
-            {/* Blurb under More Industries We Serve */}
-            <motion.div
-              className="mt-16 text-center relative overflow-hidden"
-              initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
-            >
-              <div className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-medium px-12 py-8 rounded-xl shadow-lg overflow-hidden">
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-center"
-                  initial={{ x: '100%' }}
-                  animate={{ x: '-100%' }}
-                  transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-                  style={{ whiteSpace: 'nowrap' }}
-                >
-                  Don’t see your industry? <span className="font-bold mx-2">ChitChat is flexible.</span> Our AI personas are fully customizable and can be tailored to any industry, tone, or role — even if it’s not listed here. If you’ve got a use case, we can build the voice for it.
-                </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-20 rounded-xl pointer-events-none"></div>
-              </div>
-            </motion.div>
           </div>
-          
-          {/* Background elements */}
-          <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-purple-100/20 filter blur-3xl opacity-50 z-0"></div>
-          <div className="absolute -bottom-20 -left-40 w-64 h-64 rounded-full bg-theme-main/5 filter blur-3xl opacity-70 z-0"></div>
         </div>
 
         {/* Use Cases Section */}
-        <div id="use-cases" className="relative py-32 px-6 overflow-hidden">
-          <div className="relative z-20 max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4 pb-6 text-center">
+        <div id="use-cases" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
+          {/* Glowy background elements */}
+          <div className="absolute top-0 left-0 w-[20rem] h-[20rem] bg-theme-main/10 rounded-full blur-[80px] -z-10"></div>
+          <div className="absolute bottom-0 right-0 w-[16rem] h-[16rem] bg-pink-400/10 rounded-full blur-[60px] -z-10"></div>
+          <div className="pointer-events-none">
+            <div className="absolute top-1/4 left-1/3 w-52 h-52 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[60px] opacity-40 z-0"></div>
+            <div className="absolute bottom-10 left-1/4 w-32 h-32 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[50px] opacity-30 z-0"></div>
+            <div className="absolute top-10 right-1/4 w-44 h-44 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[70px] opacity-30 z-0"></div>
+          </div>
+          <div className="container mx-auto px-6 sm:px-12">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
               Use Cases
             </h2>
-            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16 neural-timeline">
-              {useCases.map((useCase, index, arr) => (
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
+              {useCases.map((useCase, index) => (
                 <div
                   key={index}
-                  className="relative bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-start"
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 10%, 100% 90%, 0 100%)',
-                  }}
+                  className="relative bg-white/90 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl"
                 >
                   {/* Neural dot style */}
                   <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="ml-4">
-                    <h4 className="text-2xl font-semibold text-gray-800 mb-2">{useCase.title}</h4>
-                    {/* No metric for useCases, so skip metric line */}
-                    <p className="text-base text-gray-600 leading-relaxed">{useCase.description}</p>
+                  <div className="flex flex-row w-full items-start">
+                    <div className="w-1/3 min-w-[180px] pr-6 flex items-center">
+                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{useCase.title}</h4>
+                    </div>
+                    <div className="w-2/3">
+                      <p className="text-base text-gray-600 leading-relaxed">{useCase.description}</p>
+                    </div>
                   </div>
-                  {index < arr.length - 1 && (
-                    <div className="w-16 h-0.5 bg-gradient-to-r from-theme-main/20 to-transparent mt-8 rounded-full"></div>
-                  )}
                 </div>
               ))}
             </div>
           </div>
         </div>
-
-        {/* Enhanced Call To Action */}
-        <CallToAction 
-          bgImage="/solutionsPage/solutions.jpg" 
-          showOverlay={true} 
-          overlayOpacity={0.85}
-        />
-
-        {/* Cookie Policy Floating Button - Left Side */}
-        <CookieConsent position="left" modalPosition="bottom" />
-
         {/* Animation keyframes and styles */}
         <style jsx global>{`
           /* Base animations */
@@ -567,6 +464,7 @@ const Solutions: React.FC = () => {
           }
         `}</style>
       </main>
+      <CallToAction bgImage='/solutionsPage/solutions.jpg'/>
       <Footer />
     </>
   );

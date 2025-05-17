@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Header from '../components/Header';
+import Navbar from '../components/NavBar';
 import Features from '../components/Features';
 import Community from '../components/Community';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
+import Solutions from './Solutions';
+import Hero from '../components/Hero';
 
 const HomePage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('hero');
@@ -51,37 +53,9 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      {/* Parallax Background */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full">
-          <img
-            src="/businessesPage/BusinessBG.png"
-            alt="Background"
-            className="w-full h-full object-cover object-center fixed top-0 left-0 z-[-2] pointer-events-none select-none"
-            style={{
-              width: '100vw',
-              height: '100vh',
-              objectFit: 'cover',
-              objectPosition: 'center',
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              zIndex: -2,
-              pointerEvents: 'none',
-              userSelect: 'none',
-            }}
-            draggable={false}
-          />
-        </div>
-        <div className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-theme-main/10 blur-3xl parallax-element" data-speed="0.3"></div>
-        <div className="absolute bottom-[15%] right-[5%] w-48 h-48 rounded-full bg-purple-100/20 blur-3xl parallax-element" data-speed="0.2"></div>
-        <div className="absolute top-[50%] left-[50%] w-16 h-16 rounded-full bg-blue-100/30 blur-2xl parallax-element" data-speed="0.1"></div>
-      </div>
-
-      {/* Removed side navigation dots */}
-      
-      <Header />
-      <main className="relative overflow-hidden bg-gradient-to-br from-white via-gray-100 to-gray-50 min-h-screen">
+      <Navbar />
+      <main className="relative overflow-hidden bg-white min-h-screen">
+        <Hero />
         <Features id="features" />
         <Businesses />
         <Community id="community" />

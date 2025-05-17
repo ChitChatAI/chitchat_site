@@ -55,14 +55,25 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
   ];
 
   return (
-    <section id={id} className="relative py-16 bg-white">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-header font-bold text-center text-langchain-dark mb-4 leading-[150%] font-sans">
+    <section
+      id={id}
+      className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8"
+    >
+      {/* Subtle glowy background elements */}
+      <div className="absolute top-0 left-0 w-[28rem] h-[28rem] bg-theme-main/10 rounded-full blur-[120px] -z-10"></div>
+      <div className="absolute bottom-0 right-0 w-[24rem] h-[24rem] bg-pink-400/10 rounded-full blur-[100px] -z-10"></div>
+      <div className="pointer-events-none">
+        <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[100px] opacity-40 z-0"></div>
+        <div className="absolute bottom-10 left-1/4 w-48 h-48 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[80px] opacity-30 z-0"></div>
+        <div className="absolute top-10 right-1/4 w-64 h-64 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[90px] opacity-30 z-0"></div>
+      </div>
+      <div className="container mx-auto px-6 sm:px-12">
+        <div className="max-w-4xl mx-auto mb-12">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
             What Sets Us Apart
           </h2>
           <p
-            className="text-center font-sans text-langchain-gray mb-12 max-w-2xl mx-auto"
+            className="text-center text-xl sm:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto font-medium drop-shadow"
             style={{ lineHeight: '1.5', maxWidth: '100ch' }}
           >
             Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalised, human-like customer interactions at scale.
@@ -70,7 +81,7 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
         </div>
 
         {/* Feature Cards in 2x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto mb-16">
           {features.map((feature, index) => {
             const slug = feature.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
             return (
@@ -78,40 +89,40 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
                 key={index}
                 id={`features-${slug}`}
                 className="scroll-review opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out h-full flex"
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
-                whileHover={{ scale: 1.025, boxShadow: "0 8px 32px 0 rgba(80, 36, 255, 0.10)" }}
+                whileHover={{ scale: 1.03, boxShadow: "0 8px 32px 0 rgba(80, 36, 255, 0.10)" }}
                 whileTap={{ scale: 0.97, opacity: 0.85 }}
               >
                 <div
-                  className="bg-white border border-gray-300 p-6 rounded-lg shadow-lg hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full"
+                  className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
                   tabIndex={0}
                 >
-                  <div className="flex items-center mb-4">
-                    <span className="material-symbols-outlined text-theme-main text-4xl mr-4 transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main">
+                  <div className="flex items-center mb-5">
+                    <span className="material-symbols-outlined text-theme-main text-5xl mr-5 transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main drop-shadow-lg">
                       {feature.icon}
                     </span>
-                    <h3 className="text-xl font-semibold text-gray-800 leading-[150%] font-sans" style={{ maxWidth: '100ch' }}>
+                    <h3 className="text-2xl font-bold text-gray-800 leading-[150%] font-sans bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                       {feature.title}
                     </h3>
                   </div>
                   <p
-                    className="text-gray-600 font-sans mb-4"
+                    className="text-gray-600 font-sans mb-4 text-lg"
                     style={{ lineHeight: '1.5', maxWidth: '100ch' }}
                   >
                     {feature.description}
                   </p>
                   <Link
                     to={`/features/${feature.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
-                    className="text-theme-main font-medium flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                    className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
                     tabIndex={0}
                   >
                     Learn More
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 ml-1"
+                      className="h-5 w-5 ml-1"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -126,8 +137,8 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
           })}
         </div>
       </div>
-
-      
+      {/* Subtle bottom divider */}
+      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-gray-100 to-transparent pointer-events-none"></div>
     </section>
   );
 };

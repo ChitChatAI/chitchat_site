@@ -133,167 +133,117 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section
       id={id}
-      className="pt-28 pb-28 md:pt-36 md:pb-36 bg-gradient-to-b from-white via-gray-50 to-gray-100 font-[Satoshi]"
+      className="relative py-20 md:py-44 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8"
     >
-      <div className="container mx-auto px-6 sm:px-10 text-center">
-        <h1 className="scroll-review opacity-0 transform translate-y-6 text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight transition-all duration-700">
-          Human Augmented AI <span className="text-[#260a40]">in Action</span>
-        </h1>
-        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-14 leading-relaxed">
-          Experience how our personas compare to standard AI in real conversations — right here in your browser.
-        </p>
-
-        <div className="flex justify-center items-center space-x-8 w-full mb-14">
-          <button
-            className={`px-8 py-4 rounded-lg text-base font-medium transition-all duration-300 ${
-              activePersona === 'samantha'
-                ? 'bg-theme-main text-white shadow-md hover:shadow-lg hover:bg-theme-dark'
-                : 'border border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
-            }`}
-            onClick={() => setActivePersona('samantha')}
-          >
-            Samantha
-          </button>
-          <button
-            className={`px-8 py-4 rounded-lg text-base font-medium transition-all duration-300 ${
-              activePersona === 'arin'
-                ? 'bg-theme-main text-white shadow-md hover:shadow-lg hover:bg-theme-dark'
-                : 'border border-gray-300 text-gray-700 hover:bg-theme-dark hover:text-white'
-            }`}
-            onClick={() => setActivePersona('arin')}
-          >
-            Arin
-          </button>
-        </div>
-
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 transition-all">
-          {/* Samantha/Arin Panel */}
-          <div className="scroll-review opacity-0 transform translate-y-10 group">
-            <div className="bg-white/95 rounded-2xl border border-gray-200 shadow-lg p-8 min-h-[340px] flex flex-col justify-between transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <span className="w-2.5 h-2.5 bg-green-500 rounded-full mr-3 animate-pulse"></span>
-                <h3 className="scroll-review opacity-0 transform translate-y-4 text-base font-semibold text-gray-700 transition-all duration-700">
-                  {activePersona === 'samantha' ? 'Samantha' : 'Arin'} responds:
-                </h3>
-              </div>
-              <div className="space-y-3 pb-2">
-                {(activePersona === 'samantha' ? samanthaHistory : arinHistory).map((message, index) => (
-                  <div
-                    key={index}
-                    className={`px-4 py-3 rounded-xl border border-gray-100 text-base transition-all ${
-                      index % 2 === 0
-                        ? 'bg-gradient-to-br from-theme-main/90 to-theme-main/70 text-white'
-                        : 'bg-gradient-to-br from-theme-light/80 to-theme-light/60 text-gray-800'
-                    }`}
-                  >
-                    {message}
-                  </div>
-                ))}
-                {typingIndicator && (
-                  <div className="flex items-center gap-2 text-gray-500 text-sm px-2 animate-fade-in">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-theme-main rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2 h-2 bg-theme-main rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2 h-2 bg-theme-main rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                    </div>
-                    <span>{typingIndicator}</span>
-                  </div>
-                )}
-                {!input && (
-                  <div className="mt-5 bg-gray-50 rounded-lg p-3 border border-gray-100">
-                    <p className="text-sm font-medium text-gray-600 mb-2">Try asking about:</p>
-                    <ul className="space-y-1.5">
-                      {suggestions.map((suggestion, index) => (
-                        <li
-                          key={index}
-                          className="text-sm text-gray-600 hover:text-theme-main cursor-pointer transition-colors pl-3 border-l-2 border-gray-200 hover:border-theme-main"
-                          onClick={() => setInput(suggestion)}
-                        >
-                          {suggestion}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+      {/* Modern blurred background shapes */}
+      <div className="absolute top-0 left-0 w-[32rem] h-[32rem] bg-theme-main/10 rounded-full blur-[120px] -z-10 animate-float-slow"></div>
+      <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-pink-400/10 rounded-full blur-[100px] -z-10 animate-float"></div>
+      {/* Glowy elements */}
+      <div className="pointer-events-none">
+        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[140px] opacity-40 z-0"></div>
+        <div className="absolute bottom-10 left-1/4 w-60 h-60 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[110px] opacity-30 z-0"></div>
+        <div className="absolute top-10 right-1/4 w-80 h-80 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[120px] opacity-30 z-0"></div>
+      </div>
+      <div className="container mx-auto px-6 sm:px-12">
+        <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 min-h-[700px]">
+          {/* Left: Header and Paragraph */}
+          <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px] py-0">
+            <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
+              Customer Support AI
             </div>
-          </div>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
 
-          {/* ChatGPT Panel */}
-          <div className="scroll-review opacity-0 transform translate-y-10 group">
-            <div className="bg-white/95 rounded-2xl border border-gray-200 shadow-lg p-8 min-h-[340px] flex flex-col justify-between transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <span className="w-2.5 h-2.5 bg-blue-500 rounded-full mr-3 animate-pulse"></span>
-                <h3 className="scroll-review opacity-0 transform translate-y-4 text-base font-semibold text-gray-700 transition-all duration-700">ChatGPT responds:</h3>
-              </div>
-              <div className="space-y-3 pb-2">
-                {gptReply ? (
-                  <div className="bg-gradient-to-br from-gray-100 to-gray-50 px-4 py-3 rounded-xl border border-gray-100 text-base text-gray-800">
-                    {gptReply}
-                  </div>
-                ) : (
-                  !input && (
-                    <div className="mt-5 bg-gray-50 rounded-lg p-3 border border-gray-100">
-                      <p className="text-sm font-medium text-gray-600 mb-2">Try asking about:</p>
-                      <ul className="space-y-1.5">
-                        {suggestions.map((suggestion, index) => (
-                          <li
-                            key={index}
-                            className="text-sm text-gray-600 hover:text-blue-500 cursor-pointer transition-colors pl-3 border-l-2 border-gray-200 hover:border-blue-500"
-                            onClick={() => setInput(suggestion)}
-                          >
-                            {suggestion}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )
-                )}
-                {typingIndicator && (
-                  <div className="flex items-center gap-2 text-gray-500 text-sm px-2 animate-fade-in">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                    </div>
-                    <span>{loading ? 'ChatGPT typing...' : typingIndicator}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Input Area */}
-        <div className="scroll-review mt-14 max-w-2xl mx-auto opacity-0 transform translate-y-10">
-          <div className="relative group">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="w-full px-5 py-4 border border-gray-200 rounded-xl shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 bg-white/80 backdrop-blur-sm"
-              placeholder="Type your message here..."
-              disabled={messageCount >= 5}
-            />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-theme-main/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
-          </div>
-          <button
-            onClick={handleSend}
-            disabled={loading || messageCount >= 5 || !input.trim()}
-            className={`mt-5 w-full font-satoshi px-5 py-3 rounded-lg font-medium transition-all duration-300
-              ${loading || messageCount >= 5 || !input.trim()
-                ? 'opacity-70 cursor-not-allowed bg-gray-200 text-gray-500'
-                : 'bg-theme-main hover:bg-theme-dark text-white hover:scale-105 shadow-md'
-              }`}
-          >
-            {messageCount >= 5 ? 'Limit Reached (5 Messages)' : loading ? 'Sending...' : 'Send to AI'}
-          </button>
-          {messageCount > 0 && (
-            <p className="mt-3 text-xs text-gray-500 text-center">
-              {5 - messageCount} message{5 - messageCount !== 1 ? 's' : ''} remaining
+              <span className="block bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent animate-gradient-x pb-4">
+                Human Augmented AI
+              </span>
+              <span className="block text-[#260a40] mt-2 animate-fade-in-up delay-150">in Action</span>
+            </h1>
+            <p className="text-lg md:text-xl text-center text-gray-700 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up delay-300">
+              Experience how our <span className="text-theme-main font-semibold">personas</span> transform customer support by delivering personalized interactions and effective solutions.
             </p>
-          )}
+            <div className="flex flex-wrap gap-6 mt-4 animate-fade-in-up delay-500">
+              <button className="px-10 py-4 rounded-full bg-theme-main text-white font-bold shadow-2xl hover:bg-theme-dark transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/40">
+                Request a Demo
+              </button>
+             
+            </div>
+            {/* Animated dots for life */}
+            <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
+              <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+              <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+              <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
+            </div>
+          </div>
+          {/* Right: Banner Image */}
+          <div className="flex-1 flex justify-center md:justify-end items-start">
+            <div className="relative group">
+              <div className="absolute -top-10 -left-10 w-40 h-40 bg-theme-main/10 rounded-full blur-2xl z-0 animate-float"></div>
+              <img
+                src="/images/hero.png"
+                alt="Stats Banner"
+                className="relative max-w-sm md:max-w-lg lg:max-w-2xl w-full h-auto rounded-[2.5rem] z-10 group-hover:scale-105 transition-transform duration-500"
+              />
+              {/* Elegant floating card */}
+              <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl px-12 py-8 flex flex-col items-center border border-gray-100 min-w-[260px] animate-fade-in-up delay-500">
+                <span className="text-theme-main font-bold text-2xl mb-2 tracking-wide flex items-center gap-2">
+                  <svg className="w-6 h-6 text-theme-main animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                  </svg>
+                  Live AI Demo
+                </span>
+                <span className="text-gray-500 text-lg">Let's talk</span>
+              </div>
+              <div className="absolute bottom-0 right-0 w-32 h-32 bg-pink-400/10 rounded-full blur-2xl z-0 animate-float-slow"></div>
+            </div>
+          </div>
         </div>
       </div>
+      {/* Subtle bottom divider */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-100 to-transparent pointer-events-none"></div>
+      {/* Animations */}
+      <style jsx>{`
+        .animate-float {
+          animation: float 12s ease-in-out infinite;
+        }
+        .animate-float-slow {
+          animation: float 18s ease-in-out infinite;
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-30px); }
+        }
+        .animate-fade-in-up {
+          opacity: 0;
+          transform: translateY(30px);
+          animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        .animate-fade-in-up.delay-150 { animation-delay: 0.15s; }
+        .animate-fade-in-up.delay-300 { animation-delay: 0.3s; }
+        .animate-fade-in-up.delay-500 { animation-delay: 0.5s; }
+        .animate-fade-in-up.delay-700 { animation-delay: 0.7s; }
+        @keyframes fadeInUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient-x 6s ease-in-out infinite;
+        }
+        @keyframes gradient-x {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .animate-pulse {
+          animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      `}</style>
     </section>
   );
 };

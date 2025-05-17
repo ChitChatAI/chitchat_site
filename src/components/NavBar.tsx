@@ -1,71 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
-  const desktopMenuRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
-
-  // Get current page name from path
-  const getCurrentPageName = () => {
-    const currentPath = location.pathname;
-    const currentLink = navLinks.find(
-      (link) =>
-        link.path === currentPath ||
-        (currentPath !== '/' && link.path !== '/' && currentPath.startsWith(link.path))
-    );
-    return currentLink?.label || 'Home';
-  };
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
-
-    // Close menu when clicking outside
-    const handleClickOutside = (event: MouseEvent) => {
-      if (desktopMenuRef.current && !desktopMenuRef.current.contains(event.target as Node)) {
-        setIsDesktopMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/solutions', label: 'Our Solutions For You' },
-    { path: '/blog', label: 'Persona Blog' },
-    { path: '/contactus', label: 'Let\'s Talk' },
+    { path: '/', label: 'About us' },
+    {path: '/solutions', label: 'Solutions' },
+    { path: '/blog', label: 'Blog' },
+    { path: '/contactus', label: "Let's talk" },
   ];
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
-      }`}
-    >
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-50/100 px-0 shadow-sm border-b border-gray-200">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-3">
           {/* Logo and Brand */}
-          <div className="flex items-center">
+          <NavLink to="/" className="flex items-center space-x-2 group">
             <img
-              src={isScrolled ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
+              src="/branding/chitchatAI.png"
               alt="ChitChat AI Logo"
-              className="w-8 h-8 sm:w-10 sm:h-10 object-contain transition-all duration-300"
+              className="w-10 h-10 sm:w-12 sm:h-12 object-contain drop-shadow-md"
             />
-            <NavLink
-              to="/"
-              className={`ml-3 text-lg sm:text-xl font-satoshi-rounded font-bold tracking-wide relative ${
-                isScrolled ? 'text-gray-800' : 'text-white'
-              } transition-all duration-300`}
-            >
+            <span className="ml-2 text-2xl sm:text-3xl font-satoshi-rounded font-extrabold tracking-wide text-gray-900 group-hover:text-theme-main transition-colors duration-300">
               <span
                 className="relative z-10 font-satoshi"
                 style={{
@@ -76,117 +32,77 @@ const NavBar: React.FC = () => {
                 Chit
               </span>
               <span
-                className={`${
-                  isScrolled ? 'text-theme-main' : 'text-theme-white'
-                } relative z-10 transition-colors duration-300 font-satoshi`}
+                className="text-theme-main relative z-10 transition-colors duration-300 font-satoshi"
                 style={{
                   clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
                   WebkitClipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
-                  textShadow: '0px 4px 6px rgba(0, 0, 0, 0.2)',
+                  textShadow: '0px 4px 12px rgba(80,36,255,0.15)',
                 }}
               >
                 Chat
               </span>
-            </NavLink>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:block relative" ref={desktopMenuRef}>
+            </span>
+          </NavLink>
+          {/* Desktop NavLinks */}
+          <ul className="hidden lg:flex items-center space-x-10 ml-8">
+            {navLinks.map(({ path, label }) => (
+              <li key={path} className="flex flex-col items-center group">
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `font-poppins text-lg font-semibold transition-colors duration-200 pb-1 ${
+                      isActive
+                        ? 'text-theme-main'
+                        : 'text-gray-700 hover:text-theme-main'
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          {/* Mobile Menu Toggle */}
+          <div className="lg:hidden">
             <button
-              className={`flex items-center space-x-2 font-['Clash_Display'] font-medium transition-colors duration-200 px-4 py-2 rounded-md ${
-                isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/10'
-              }`}
-              onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
+              className="p-2 rounded-full text-theme-main bg-white/90 shadow border border-theme-main/10 hover:bg-theme-main/10 transition"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
             >
-              <span>{getCurrentPageName()}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`h-5 w-5 transform transition-transform duration-300 ${
-                  isDesktopMenuOpen ? 'rotate-180' : ''
-                }`}
-                viewBox="0 0 20 20"
-                fill="currentColor"
+                className="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
               </svg>
             </button>
-
-            {/* Desktop dropdown menu */}
-            {isDesktopMenuOpen && (
-              <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 animate-fade-in-down">
-                {navLinks.map(({ path, label, badge }) => (
+          </div>
+        </div>
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="lg:hidden mt-2 bg-white rounded-2xl shadow-2xl py-6 px-8 z-50 border border-gray-100">
+            <ul className="flex flex-col space-y-6">
+              {navLinks.map(({ path, label }) => (
+                <li key={path} className="flex items-center space-x-4 group">
                   <NavLink
-                    key={path}
                     to={path}
-                    onClick={() => setIsDesktopMenuOpen(false)}
+                    onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
-                      `flex items-center justify-between block px-4 py-2 font-poppins text-sm font-bold transition-colors duration-200 hover:bg-gray-100 ${
-                        isActive ? 'text-theme-main' : 'text-gray-700'
+                      `font-poppins text-lg font-semibold transition-colors duration-200 ${
+                        isActive
+                          ? 'text-theme-main'
+                          : 'text-gray-700 hover:text-theme-main'
                       }`
                     }
                   >
-                    <span>{label}</span>
-                    {badge && (
-                      <span className="ml-2 px-2 py-0.5 text-xs bg-theme-light text-theme-main rounded-full">
-                        New
-                      </span>
-                    )}
+                    {label}
                   </NavLink>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className={`lg:hidden p-2 rounded-md ${isScrolled ? 'text-gray-800' : 'text-white'}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden mt-2 bg-white rounded-md shadow-lg animate-slide-up">
-            {navLinks.map(({ path, label, badge }) => (
-              <NavLink
-                key={path}
-                to={path}
-                onClick={() => setIsMenuOpen(false)}
-                className={({ isActive }) =>
-                  `block px-4 py-2 font-poppins text-sm font-medium transition-colors duration-300 active:opacity-90 border-l-2 ${
-                    isActive
-                      ? 'text-theme-main font-bold border-theme-main' 
-                      : 'text-gray-700 hover:text-theme-main border-transparent hover:border-theme-main/30'
-                  }`
-                }
-              >
-                <div className="flex items-center justify-between">
-                  <span>{label}</span>
-                  {badge && (
-                    <span className="ml-2 px-2 py-0.5 text-xs bg-theme-main/10 text-theme-main rounded-full font-medium">
-                      New
-                    </span>
-                  )}
-                </div>
-              </NavLink>
-            ))}
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>

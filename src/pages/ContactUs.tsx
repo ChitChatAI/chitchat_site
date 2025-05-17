@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../components/purpleNavBar';
+import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import { initCustomCursor } from '../utils/cursorEffects';
 
@@ -217,14 +217,36 @@ const ContactUs: React.FC = () => {
 
   return (
     <>
+      <NavBar />
       {/* Animated Gradient Background */}
       <div className="fixed inset-0 z-[-2] pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] animate-gradient-move"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl animate-float-delayed"></div>
-        <div className="absolute top-1/2 left-2/3 w-40 h-40 bg-pink-200/30 rounded-full blur-2xl animate-pulse"></div>
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100 animate-gradient-move parallax-el"
+          data-speed="0.1"
+        ></div>
+        <div
+          className="absolute top-0 left-0 w-[32rem] h-[32rem] bg-theme-main/10 rounded-full blur-[120px] parallax-el"
+          data-speed="0.18"
+        ></div>
+        <div
+          className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-pink-400/10 rounded-full blur-[100px] parallax-el"
+          data-speed="0.13"
+        ></div>
+        <div className="pointer-events-none">
+          <div
+            className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[140px] opacity-40 parallax-el"
+            data-speed="0.22"
+          ></div>
+          <div
+            className="absolute bottom-10 left-1/4 w-60 h-60 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[110px] opacity-30 parallax-el"
+            data-speed="0.16"
+          ></div>
+          <div
+            className="absolute top-10 right-1/4 w-80 h-80 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[120px] opacity-30 parallax-el"
+            data-speed="0.19"
+          ></div>
+        </div>
       </div>
-      <NavBar />
       
       {/* Modern floating alert with animation */}
       {showAlert && (
@@ -255,392 +277,400 @@ const ContactUs: React.FC = () => {
         </div>
       )}
       
-      {/* Modern hero section with 3D effects and geometric shapes */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-        {/* Background decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.02] z-0"></div>
+      {/* Modern hero section */}
+      <section className="relative pt-20 md:pt-44 pb-24 px-4 sm:px-8 bg-gradient-to-b from-gray-50 to-white font-[Satoshi] overflow-hidden">
+        {/* Glowy background elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.02] parallax-el" data-speed="0.09"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-float parallax-el" data-speed="0.15"></div>
+          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl animate-float-delayed parallax-el" data-speed="0.11"></div>
+          <div className="absolute top-1/2 left-2/3 w-40 h-40 bg-pink-200/30 rounded-full blur-2xl animate-pulse parallax-el" data-speed="0.13"></div>
+        </div>
         
-        {/* Geometric shapes */}
-        <div className="absolute top-20 right-[5%] w-32 h-32 rounded-3xl bg-theme-main/5 rotate-12 animate-float opacity-70"></div>
-        <div className="absolute bottom-20 left-[10%] w-24 h-24 rounded-full bg-purple-100/50 animate-float-delayed"></div>
-        <div className="absolute top-40 left-[15%] w-12 h-12 rounded-lg bg-theme-main/10 rotate-45 animate-pulse"></div>
-        
-        {/* Content */}
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-16 max-w-3xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-theme-main/10 text-theme-main text-sm font-medium">
-              Contact Us
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl font-header font-extrabold text-gray-900 mb-6 leading-tight">
-              Let's Build <span className="text-theme-main">Your AI Solution</span>
-            </h1>
-            
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Fill out the form below to get started with ChitChat AI. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
-            </p>
-          </div>
-
-          {/* Advanced 3D card container for the form */}
-          <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
-            {/* Form steps container */}
-            <div className="relative z-10">
-              {/* Modern progress tracker */}
-              <div className="mb-14 max-w-3xl mx-auto">
-                <div className="flex items-center justify-between relative">
-                  {/* Progress line */}
-                  <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2"></div>
-                  
-                  {[1, 2, 3].map((step) => (
-                    <div key={step} className="relative z-10 flex flex-col items-center">
-                      <div 
-                        className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-all duration-500 
-                        ${currentStep >= step 
-                          ? 'bg-theme-main text-white shadow-lg shadow-theme-main/30' 
-                          : 'bg-white text-gray-400 border border-gray-200'}`}
-                      >
-                        {currentStep > step ? (
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                          </svg>
-                        ) : (
-                          <span className="text-sm font-semibold">{step}</span>
-                        )}
-                      </div>
-                      <span 
-                        className={`text-sm font-satoshi font-medium transition-all duration-300 
-                        ${currentStep >= step ? 'text-theme-main' : 'text-gray-400'}`}
-                      >
-                        {step === 1 ? 'Your Details' : step === 2 ? 'Company' : 'Additional Info'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+        <div className="container mx-auto px-6 sm:px-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-20 md:gap-40 min-h-[600px]">
+            {/* Left: Header and Paragraph */}
+            <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]">
+              <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
+                Contact Us
               </div>
-
-              {/* Success Message - Enhanced with 3D effect */}
-              {isSubmitted && (
-                <div className="bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 p-6 mb-10 rounded-xl max-w-2xl mx-auto shadow-lg transform animate-success-enter">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0 bg-green-100 p-3 rounded-full shadow-inner">
-                      <svg className="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-xl font-semibold text-green-800">Message Sent Successfully!</h4>
-                      <p className="text-green-700">
-                        Thank you for reaching out. Our team will get back to you shortly.
-                      </p>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
+                <span className="block bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent animate-gradient-x pb-4">
+                  Let's Build Your AI Solution
+                </span>
+              </h1>
+              <p className="text-2xl sm:text-3xl md:text-2xl text-gray-700 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
+                Fill out the form below to get started with <span className="text-theme-main font-semibold">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
+              </p>
+              {/* Animated dots for life */}
+              <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
+                <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+                <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+                <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
+              </div>
+            </div>
+            {/* Right: Form Card */}
+            <div className="flex-1 flex justify-center md:justify-end items-start mt-10 md:mt-0">
+              <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card w-full max-w-3xl">
+                {/* Form steps container */}
+                <div className="relative z-10">
+                  {/* Modern progress tracker */}
+                  <div className="mb-14 max-w-3xl mx-auto">
+                    <div className="flex items-center justify-between relative">
+                      {/* Progress line */}
+                      <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2"></div>
+                      
+                      {[1, 2, 3].map((step) => (
+                        <div key={step} className="relative z-10 flex flex-col items-center">
+                          <div 
+                            className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-all duration-500 
+                            ${currentStep >= step 
+                              ? 'bg-theme-main text-white shadow-lg shadow-theme-main/30' 
+                              : 'bg-white text-gray-400 border border-gray-200'}`}
+                          >
+                            {currentStep > step ? (
+                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                              </svg>
+                            ) : (
+                              <span className="text-sm font-semibold">{step}</span>
+                            )}
+                          </div>
+                          <span 
+                            className={`text-sm font-satoshi font-medium transition-all duration-300 
+                            ${currentStep >= step ? 'text-theme-main' : 'text-gray-400'}`}
+                          >
+                            {step === 1 ? 'Your Details' : step === 2 ? 'Company' : 'Additional Info'}
+                          </span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
-              )}
 
-              {/* Form Steps with modernized inputs */}
-              <div className="max-w-3xl mx-auto">
-                {/* Step 1: Contact Details */}
-                <div className={`${getStepClasses(1)}`}>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Your Contact Details</h3>
-                  <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* First name field with floating label */}
-                      <div className="relative group">
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          placeholder="First Name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          className={`${inputBase} ${errors.name ? inputError : ''}`}
-                          required
-                        />
-                        <label htmlFor="name" className={`${labelBase} ${errors.name ? 'text-red-500' : ''}`}>
-                          First Name
-                        </label>
-                        {errors.name && (
-                          <p className="mt-2 text-sm text-red-600 flex items-center font-satoshi">
-                            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            {errors.name}
-                          </p>
-                        )}
-                      </div>
-                      
-                      {/* Surname field with floating label */}
-                      <div className="relative group">
-                        <input
-                          type="text"
-                          id="surname"
-                          name="surname"
-                          placeholder="Surname"
-                          value={formData.surname}
-                          onChange={handleChange}
-                          className={`${inputBase} ${errors.surname ? inputError : ''}`}
-                          required
-                        />
-                        <label htmlFor="surname" className={`${labelBase} ${errors.surname ? 'text-red-500' : ''}`}>
-                          Surname
-                        </label>
-                        {errors.surname && (
-                          <p className="mt-2 text-sm text-red-600 flex items-center font-satoshi">
-                            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            {errors.surname}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    
-                    {/* Email field with floating label */}
-                    <div className="relative group">
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={`${inputBase} ${errors.email ? inputError : ''}`}
-                        required
-                      />
-                      <label htmlFor="email" className={`${labelBase} ${errors.email ? 'text-red-500' : ''}`}>
-                        Email Address
-                      </label>
-                      {formData.email && !errors.email && validateEmail(formData.email) && (
-                        <div className="absolute right-4 top-4">
-                          <svg className="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  {/* Success Message - Enhanced with 3D effect */}
+                  {isSubmitted && (
+                    <div className="bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 p-6 mb-10 rounded-xl max-w-2xl mx-auto shadow-lg transform animate-success-enter">
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0 bg-green-100 p-3 rounded-full shadow-inner">
+                          <svg className="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
                         </div>
-                      )}
-                      {errors.email && (
-                        <p className="mt-2 text-sm text-red-600 flex items-center">
-                          <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                          </svg>
-                          {errors.email}
-                        </p>
-                      )}
-                    </div>
-                    
-                    {/* Subject field with floating label */}
-                    <div className="relative group">
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        placeholder="Subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className={inputBase}
-                      />
-                      <label htmlFor="subject" className={labelBase}>
-                        Subject (Optional)
-                      </label>
-                    </div>
-                  </form>
-                </div>
-
-                {/* Step 2: Company & Goals */}
-                <div className={`${getStepClasses(2)}`}>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Company & Goals</h3>
-                  <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                    {/* Company size selection */}
-                    <div className="relative group">
-                      <select
-                        id="companySize"
-                        name="companySize"
-                        value={formData.companySize}
-                        onChange={handleChange}
-                        className={`${inputBase} appearance-none ${errors.companySize ? inputError : ''}`}
-                        required
-                      >
-                        <option value="" disabled></option>
-                        <option value="Solo">Solo</option>
-                        <option value="Startup">Startup (2-10)</option>
-                        <option value="SME">Small/Medium (11-100)</option>
-                        <option value="Enterprise">Enterprise (101+)</option>
-                      </select>
-                      <label htmlFor="companySize" className={`${labelBase} ${errors.companySize ? 'text-red-500' : ''}`}>
-                        Company Size
-                      </label>
-                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                        <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                        </svg>
-                      </div>
-                      {errors.companySize && <p className="mt-2 text-sm text-red-600">{errors.companySize}</p>}
-                    </div>
-                    
-                    {/* Industry field */}
-                    <div className="relative group">
-                      <input
-                        type="text"
-                        id="industry"
-                        name="industry"
-                        placeholder="Industry"
-                        value={formData.industry}
-                        onChange={handleChange}
-                        className={`${inputBase} ${errors.industry ? inputError : ''}`}
-                        required
-                      />
-                      <label htmlFor="industry" className={`${labelBase} ${errors.industry ? 'text-red-500' : ''}`}>
-                        Industry
-                      </label>
-                      {errors.industry && <p className="mt-2 text-sm text-red-600">{errors.industry}</p>}
-                    </div>
-                    
-                    {/* Goals selection */}
-                    <div className="relative group">
-                      <select
-                        id="goals"
-                        name="goals"
-                        value={formData.goals}
-                        onChange={handleChange}
-                        className={`${inputBase} appearance-none ${errors.goals ? inputError : ''}`}
-                        required
-                      >
-                        <option value="" disabled></option>
-                        <option value="Customer Support AI">Customer Support AI</option>
-                        <option value="Sales Assistant">Sales Assistant</option>
-                        <option value="Internal Automation">Internal Automation</option>
-                        <option value="Other">Other</option>
-                      </select>
-                      <label htmlFor="goals" className={`${labelBase} ${errors.goals ? 'text-red-500' : ''}`}>
-                        Primary Goal
-                      </label>
-                      <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                        <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                        </svg>
-                      </div>
-                      {errors.goals && <p className="mt-2 text-sm text-red-600">{errors.goals}</p>}
-                    </div>
-                  </form>
-                </div>
-
-                {/* Step 3: Additional Info */}
-                <div className={`${getStepClasses(3)}`}>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Additional Information</h3>
-                  <form onSubmit={handleSubmit} className="space-y-8">
-                    {/* Interests checkboxes */}
-                    <div className="space-y-4">
-                      <label className="block text-gray-700 font-medium mb-4">What are you interested in?</label>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
-                          <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-gray-50 transition-all duration-300 cursor-pointer">
-                            <input
-                              type="checkbox"
-                              name={interest}
-                              checked={formData.interests.includes(interest)}
-                              onChange={handleCheckboxChange}
-                              className="w-5 h-5 text-theme-main rounded focus:ring-theme-main/40 focus:ring-offset-0 focus:ring-2 mr-3"
-                            />
-                            <span className="text-gray-700">{interest}</span>
-                          </label>
-                        ))}
+                        <div className="ml-4">
+                          <h4 className="text-xl font-semibold text-green-800">Message Sent Successfully!</h4>
+                          <p className="text-green-700">
+                            Thank you for reaching out. Our team will get back to you shortly.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    
-                    {/* Team description field */}
-                    <div className="relative group">
-                      <textarea
-                        id="teamDescription"
-                        name="teamDescription"
-                        rows={3}
-                        placeholder="Team Description"
-                        value={formData.teamDescription}
-                        onChange={handleChange}
-                        className={inputBase}
-                      />
-                      <label htmlFor="teamDescription" className={labelBase}>
-                        About Your Team (Optional)
-                      </label>
-                    </div>
-                    
-                    {/* Message field */}
-                    <div className="relative group">
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={5}
-                        placeholder="Your Message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className={`${inputBase} ${errors.message ? inputError : ''}`}
-                        required
-                      />
-                      <label htmlFor="message" className={`${labelBase} ${errors.message ? 'text-red-500' : ''}`}>
-                        Your Message
-                      </label>
-                      {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}
-                      <p className="mt-2 text-sm text-gray-500">Tell us about your specific needs or questions</p>
-                    </div>
-                  </form>
-                </div>
-
-                {/* Navigation buttons */}
-                <div className="mt-12 flex justify-between items-center">
-                  {currentStep > 1 ? (
-                    <button
-                      onClick={handlePrevStep}
-                      className="inline-flex items-center px-5 py-3 rounded-xl font-medium transition-all duration-300 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:shadow-md active:scale-95 space-x-2"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                      </svg>
-                      <span>Back</span>
-                    </button>
-                  ) : <div></div>}
-                  
-                  {currentStep < 3 ? (
-                    <button
-                      onClick={handleNextStep}
-                      className="inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 bg-theme-main text-white hover:bg-theme-dark active:scale-95 hover:shadow-lg space-x-2 group"
-                    >
-                      <span>Continue</span>
-                      <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  ) : (
-                    <button
-                      type="submit"
-                      onClick={handleSubmit}
-                      disabled={isSubmitting}
-                      className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${
-                        isSubmitting
-                          ? 'bg-gray-400 cursor-not-allowed'
-                          : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'
-                      }`}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          <span>Submit</span>
-                          <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                          </svg>
-                        </>
-                      )}
-                    </button>
                   )}
+
+                  {/* Form Steps with modernized inputs */}
+                  <div className="max-w-3xl mx-auto">
+                    {/* Step 1: Contact Details */}
+                    <div className={`${getStepClasses(1)}`}>
+                      <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Your Contact Details</h3>
+                      <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {/* First name field with floating label */}
+                          <div className="relative group">
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              placeholder="First Name"
+                              value={formData.name}
+                              onChange={handleChange}
+                              className={`${inputBase} ${errors.name ? inputError : ''}`}
+                              required
+                            />
+                            <label htmlFor="name" className={`${labelBase} ${errors.name ? 'text-red-500' : ''}`}>
+                              First Name
+                            </label>
+                            {errors.name && (
+                              <p className="mt-2 text-sm text-red-600 flex items-center font-satoshi">
+                                <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
+                                </svg>
+                                {errors.name}
+                              </p>
+                            )}
+                          </div>
+                          
+                          {/* Surname field with floating label */}
+                          <div className="relative group">
+                            <input
+                              type="text"
+                              id="surname"
+                              name="surname"
+                              placeholder="Surname"
+                              value={formData.surname}
+                              onChange={handleChange}
+                              className={`${inputBase} ${errors.surname ? inputError : ''}`}
+                              required
+                            />
+                            <label htmlFor="surname" className={`${labelBase} ${errors.surname ? 'text-red-500' : ''}`}>
+                              Surname
+                            </label>
+                            {errors.surname && (
+                              <p className="mt-2 text-sm text-red-600 flex items-center font-satoshi">
+                                <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
+                                </svg>
+                                {errors.surname}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Email field with floating label */}
+                        <div className="relative group">
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email Address"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className={`${inputBase} ${errors.email ? inputError : ''}`}
+                            required
+                          />
+                          <label htmlFor="email" className={`${labelBase} ${errors.email ? 'text-red-500' : ''}`}>
+                            Email Address
+                          </label>
+                          {formData.email && !errors.email && validateEmail(formData.email) && (
+                            <div className="absolute right-4 top-4">
+                              <svg className="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
+                          {errors.email && (
+                            <p className="mt-2 text-sm text-red-600 flex items-center">
+                              <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
+                              </svg>
+                              {errors.email}
+                            </p>
+                          )}
+                        </div>
+                        
+                        {/* Subject field with floating label */}
+                        <div className="relative group">
+                          <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            placeholder="Subject"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            className={inputBase}
+                          />
+                          <label htmlFor="subject" className={labelBase}>
+                            Subject (Optional)
+                          </label>
+                        </div>
+                      </form>
+                    </div>
+
+                    {/* Step 2: Company & Goals */}
+                    <div className={`${getStepClasses(2)}`}>
+                      <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Company & Goals</h3>
+                      <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                        {/* Company size selection */}
+                        <div className="relative group">
+                          <select
+                            id="companySize"
+                            name="companySize"
+                            value={formData.companySize}
+                            onChange={handleChange}
+                            className={`${inputBase} appearance-none ${errors.companySize ? inputError : ''}`}
+                            required
+                          >
+                            <option value="" disabled></option>
+                            <option value="Solo">Solo</option>
+                            <option value="Startup">Startup (2-10)</option>
+                            <option value="SME">Small/Medium (11-100)</option>
+                            <option value="Enterprise">Enterprise (101+)</option>
+                          </select>
+                          <label htmlFor="companySize" className={`${labelBase} ${errors.companySize ? 'text-red-500' : ''}`}>
+                            Company Size
+                          </label>
+                          <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                            </svg>
+                          </div>
+                          {errors.companySize && <p className="mt-2 text-sm text-red-600">{errors.companySize}</p>}
+                        </div>
+                        
+                        {/* Industry field */}
+                        <div className="relative group">
+                          <input
+                            type="text"
+                            id="industry"
+                            name="industry"
+                            placeholder="Industry"
+                            value={formData.industry}
+                            onChange={handleChange}
+                            className={`${inputBase} ${errors.industry ? inputError : ''}`}
+                            required
+                          />
+                          <label htmlFor="industry" className={`${labelBase} ${errors.industry ? 'text-red-500' : ''}`}>
+                            Industry
+                          </label>
+                          {errors.industry && <p className="mt-2 text-sm text-red-600">{errors.industry}</p>}
+                        </div>
+                        
+                        {/* Goals selection */}
+                        <div className="relative group">
+                          <select
+                            id="goals"
+                            name="goals"
+                            value={formData.goals}
+                            onChange={handleChange}
+                            className={`${inputBase} appearance-none ${errors.goals ? inputError : ''}`}
+                            required
+                          >
+                            <option value="" disabled></option>
+                            <option value="Customer Support AI">Customer Support AI</option>
+                            <option value="Sales Assistant">Sales Assistant</option>
+                            <option value="Internal Automation">Internal Automation</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <label htmlFor="goals" className={`${labelBase} ${errors.goals ? 'text-red-500' : ''}`}>
+                            Primary Goal
+                          </label>
+                          <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                            </svg>
+                          </div>
+                          {errors.goals && <p className="mt-2 text-sm text-red-600">{errors.goals}</p>}
+                        </div>
+                      </form>
+                    </div>
+
+                    {/* Step 3: Additional Info */}
+                    <div className={`${getStepClasses(3)}`}>
+                      <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Additional Information</h3>
+                      <form onSubmit={handleSubmit} className="space-y-8">
+                        {/* Interests checkboxes */}
+                        <div className="space-y-4">
+                          <label className="block text-gray-700 font-medium mb-4">What are you interested in?</label>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
+                              <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-gray-50 transition-all duration-300 cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  name={interest}
+                                  checked={formData.interests.includes(interest)}
+                                  onChange={handleCheckboxChange}
+                                  className="w-5 h-5 text-theme-main rounded focus:ring-theme-main/40 focus:ring-offset-0 focus:ring-2 mr-3"
+                                />
+                                <span className="text-gray-700">{interest}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        {/* Team description field */}
+                        <div className="relative group">
+                          <textarea
+                            id="teamDescription"
+                            name="teamDescription"
+                            rows={3}
+                            placeholder="Team Description"
+                            value={formData.teamDescription}
+                            onChange={handleChange}
+                            className={inputBase}
+                          />
+                          <label htmlFor="teamDescription" className={labelBase}>
+                            About Your Team (Optional)
+                          </label>
+                        </div>
+                        
+                        {/* Message field */}
+                        <div className="relative group">
+                          <textarea
+                            id="message"
+                            name="message"
+                            rows={5}
+                            placeholder="Your Message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            className={`${inputBase} ${errors.message ? inputError : ''}`}
+                            required
+                          />
+                          <label htmlFor="message" className={`${labelBase} ${errors.message ? 'text-red-500' : ''}`}>
+                            Your Message
+                          </label>
+                          {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}
+                          <p className="mt-2 text-sm text-gray-500">Tell us about your specific needs or questions</p>
+                        </div>
+                      </form>
+                    </div>
+
+                    {/* Navigation buttons */}
+                    <div className="mt-12 flex justify-between items-center">
+                      {currentStep > 1 ? (
+                        <button
+                          onClick={handlePrevStep}
+                          className="inline-flex items-center px-5 py-3 rounded-xl font-medium transition-all duration-300 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:shadow-md active:scale-95 space-x-2"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                          </svg>
+                          <span>Back</span>
+                        </button>
+                      ) : <div></div>}
+                      
+                      {currentStep < 3 ? (
+                        <button
+                          onClick={handleNextStep}
+                          className="inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 bg-theme-main text-white hover:bg-theme-dark active:scale-95 hover:shadow-lg space-x-2 group"
+                        >
+                          <span>Continue</span>
+                          <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      ) : (
+                        <button
+                          type="submit"
+                          onClick={handleSubmit}
+                          disabled={isSubmitting}
+                          className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${
+                            isSubmitting
+                              ? 'bg-gray-400 cursor-not-allowed'
+                              : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'
+                          }`}
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                              Processing...
+                            </>
+                          ) : (
+                            <>
+                              <span>Submit</span>
+                              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                              </svg>
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          
           {/* Trust indicators */}
           <div className="mt-10 flex flex-wrap justify-center items-center gap-5 text-gray-500 text-sm">
             <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
@@ -704,7 +734,20 @@ const ContactUs: React.FC = () => {
           transform: perspective(1000px) rotateX(2deg);
         }
       `}</style>
-      
+      <script dangerouslySetInnerHTML={{
+        __html: `
+        (function() {
+          function parallaxScroll() {
+            var scrollY = window.scrollY;
+            document.querySelectorAll('.parallax-el').forEach(function(el) {
+              var speed = parseFloat(el.getAttribute('data-speed')) || 0.1;
+              el.style.transform = 'translateY(' + (-scrollY * speed) + 'px)';
+            });
+          }
+          window.addEventListener('scroll', parallaxScroll);
+        })();
+        `
+      }} />
       <Footer />
     </>
   );
