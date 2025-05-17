@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 
 // Modern input styling with floating label support and improved states
@@ -212,6 +213,17 @@ const ContactUs: React.FC = () => {
 
   useEffect(() => {
     const cleanupCursor = initCustomCursor();
+    // On-load animation for hero section
+    const hero = document.getElementById('contact-hero-parallax-row');
+    if (hero) {
+      hero.style.opacity = '0';
+      hero.style.transform = 'translateY(60px)';
+      setTimeout(() => {
+        hero.style.transition = 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1)';
+        hero.style.opacity = '1';
+        hero.style.transform = 'translateY(0)';
+      }, 100);
+    }
     return () => cleanupCursor();
   }, []);
 
@@ -288,9 +300,17 @@ const ContactUs: React.FC = () => {
         </div>
         
         <div className="container mx-auto px-6 sm:px-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-20 md:gap-40 min-h-[600px]">
+          <div
+            className="flex flex-col md:flex-row items-center justify-between gap-20 md:gap-40 min-h-[600px]"
+            id="contact-hero-parallax-row"
+            style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
+          >
             {/* Left: Header and Paragraph */}
-            <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]">
+            <div
+              className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]"
+              id="contact-parallax-left"
+              style={{ willChange: 'transform' }}
+            >
               <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
                 Contact Us
               </div>
@@ -310,7 +330,11 @@ const ContactUs: React.FC = () => {
               </div>
             </div>
             {/* Right: Form Card */}
-            <div className="flex-1 flex justify-center md:justify-end items-start mt-10 md:mt-0">
+            <div
+              className="flex-1 flex justify-center md:justify-end items-start mt-10 md:mt-0"
+              id="contact-parallax-right"
+              style={{ willChange: 'transform' }}
+            >
               <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card w-full max-w-3xl">
                 {/* Form steps container */}
                 <div className="relative z-10">
@@ -694,60 +718,8 @@ const ContactUs: React.FC = () => {
           </div>
         </div>
       </section>
-      
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes gradient-move {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 7s ease-in-out 1s infinite;
-        }
-        
-        .animate-gradient-move {
-          background-size: 200% 200%;
-          animation: gradient-move 18s ease-in-out infinite;
-        }
-        
-        .perspective-card {
-          transform: perspective(1000px) rotateX(0deg);
-          transition: transform 0.5s ease;
-        }
-        
-        .perspective-card:hover {
-          transform: perspective(1000px) rotateX(2deg);
-        }
-      `}</style>
-      <script dangerouslySetInnerHTML={{
-        __html: `
-        (function() {
-          function parallaxScroll() {
-            var scrollY = window.scrollY;
-            document.querySelectorAll('.parallax-el').forEach(function(el) {
-              var speed = parseFloat(el.getAttribute('data-speed')) || 0.1;
-              el.style.transform = 'translateY(' + (-scrollY * speed) + 'px)';
-            });
-          }
-          window.addEventListener('scroll', parallaxScroll);
-        })();
-        `
-      }} />
+      {/* <CookieConsent /> */}
+      <CookieConsent position="left" modalPosition="bottom" />
       <Footer />
     </>
   );

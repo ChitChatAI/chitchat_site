@@ -200,6 +200,24 @@ const Solutions: React.FC = () => {
     return () => cleanupCursor();
   }, []);
 
+  // Add this effect just before the return statement (inside the component)
+  useEffect(() => {
+    // Subtle parallax for hero left/right columns
+    const handleParallax = () => {
+      const scrollY = window.scrollY;
+      const left = document.getElementById('parallax-left');
+      const right = document.getElementById('parallax-right');
+      if (left) {
+        left.style.transform = `translateY(${scrollY * 0.06}px)`;
+      }
+      if (right) {
+        right.style.transform = `translateY(${scrollY * 0.03}px)`;
+      }
+    };
+    window.addEventListener('scroll', handleParallax, { passive: true });
+    return () => window.removeEventListener('scroll', handleParallax);
+  }, []);
+
   return (
     <>
     <Navbar />
@@ -223,34 +241,60 @@ const Solutions: React.FC = () => {
                 <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
                   Solutions for Every Industry
                 </div>
-                <div className="flex flex-col md:flex-row md:items-start md:space-x-10 w-full">
-                  <div className="flex-1">
-                    <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
-                      <span className="block bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent animate-gradient-x pb-4">
-                        {headerText.split('\n')[0]}
-                      </span>
-                      <span className="block text-[#260a40] mt-2 animate-fade-in-up delay-150">
-                        {headerText.split('\n')[1]}
-                      </span>
-                    </h1>
-                    <p className="text-2xl sm:text-3xl md:text-2xl text-gray-700 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
-                      Discover how our <span className="text-theme-main font-semibold">AI solutions</span> can transform your business with human-like interactions that engage, convert, and delight.
-                    </p>
-                    <div className="flex flex-wrap gap-6 mt-4 animate-fade-in-up delay-500">
-                  
-                      <button className="px-10 py-4 rounded-full bg-white border-2 border-theme-main text-theme-main font-bold shadow hover:bg-theme-main hover:text-white transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/20">
-                        See Our Blog
-                      </button>
-                    </div>
-                    {/* Animated dots for life */}
-                    <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
-                      <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
-                      <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
-                      <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
+                {/* Add animation and parallax to the whole flex row */}
+                <motion.div
+                  className="flex flex-col md:flex-row md:items-start md:space-x-10 w-full"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  style={{ willChange: 'transform' }}
+                  // Parallax effect
+                  onScrollCapture={e => {
+                    // No-op: handled by effect below
+                  }}
+                  id="hero-parallax-row"
+                >
+                  <div
+                    className="flex-1"
+                    id="parallax-left"
+                    style={{ willChange: 'transform' }}
+                  >
+                    <div className="flex flex-col md:flex-row md:items-start md:space-x-10 w-full">
+                      <div className="flex-1">
+                        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
+                          <span className="block bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent animate-gradient-x pb-4">
+                            {headerText.split('\n')[0]}
+                          </span>
+                          <span className="block text-[#260a40] mt-2 animate-fade-in-up delay-150">
+                            {headerText.split('\n')[1]}
+                          </span>
+                        </h1>
+                        <p className="text-2xl sm:text-3xl md:text-2xl text-gray-700 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
+                          Discover how our <span className="text-theme-main font-semibold">AI solutions</span> can transform your business with human-like interactions that engage, convert, and delight.
+                        </p>
+                        <div className="flex flex-wrap gap-6 mt-4 animate-fade-in-up delay-500">
+                          <a
+                            href="/blog"
+                            className="px-10 py-4 rounded-full bg-white border-2 border-theme-main text-theme-main font-bold shadow hover:bg-theme-main hover:text-white transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/20"
+                          >
+                            See Our Blog
+                          </a>
+                        </div>
+                        {/* Animated dots for life */}
+                        <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
+                          <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+                          <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+                          <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   {/* Right: Banner Image */}
-                  <div className="flex-1 flex justify-center md:justify-end items-start mt-10 md:mt-0">
+                  <div
+                    className="flex-1 flex justify-center md:justify-end items-start mt-10 md:mt-0"
+                    id="parallax-right"
+                    style={{ willChange: 'transform' }}
+                  >
                     <div className="relative group">
                       <div className="absolute -top-10 -left-10 w-40 h-40 bg-theme-main/10 rounded-full blur-2xl z-0 animate-float"></div>
                       <img
@@ -272,7 +316,7 @@ const Solutions: React.FC = () => {
                       <div className="absolute bottom-0 right-0 w-32 h-32 bg-pink-400/10 rounded-full blur-2xl z-0 animate-float-slow"></div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -282,7 +326,13 @@ const Solutions: React.FC = () => {
           <div className="container mx-auto px-6 sm:px-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
               {/* Card 1: Telecommunications */}
-              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+              >
                 <div className="flex items-center mb-5">
                   <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
                     <Lottie
@@ -342,9 +392,15 @@ const Solutions: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
                   </svg>
                 </a>
-              </div>
+              </motion.div>
               {/* Card 2: E-Commerce */}
-              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+              >
                 <div className="flex items-center mb-5">
                   <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
                     <Lottie
@@ -404,9 +460,15 @@ const Solutions: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
                   </svg>
                 </a>
-              </div>
+              </motion.div>
               {/* Card 3: Healthcare */}
-              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+              >
                 <div className="flex items-center mb-5">
                   <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
                     <Lottie
@@ -466,9 +528,15 @@ const Solutions: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
                   </svg>
                 </a>
-              </div>
+              </motion.div>
               {/* Card 4: Education & Online Learning */}
-              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+              >
                 <div className="flex items-center mb-5">
                   <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
                     <Lottie
@@ -528,7 +596,7 @@ const Solutions: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
                   </svg>
                 </a>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -544,10 +612,11 @@ const Solutions: React.FC = () => {
           </div>
           <div className="container mx-auto px-6 sm:px-12">
             <motion.div
-              className="mb-20 text-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              className="mb-20 text-center scroll-review"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
                 Versatile Solutions
@@ -564,10 +633,11 @@ const Solutions: React.FC = () => {
               {additionalSolutions.map((item, index) => (
                 <motion.div
                   key={index}
-                  className="relative scroll-review transform translate-y-10"
-                  initial="hidden"
-                  whileInView="visible"
+                  className="relative scroll-review"
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
                 >
                   {/* Neural dot style */}
                   <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
@@ -584,7 +654,6 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </div>
-
         {/* Use Cases Section */}
         <div id="use-cases" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
           {/* Glowy background elements */}
@@ -596,14 +665,24 @@ const Solutions: React.FC = () => {
             <div className="absolute top-10 right-1/4 w-44 h-44 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[70px] opacity-30 z-0"></div>
           </div>
           <div className="container mx-auto px-6 sm:px-12">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+            <motion.h2
+              className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent scroll-review"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Use Cases
-            </h2>
+            </motion.h2>
             <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
               {useCases.map((useCase, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="relative bg-white/90 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl"
+                  className="relative bg-white/90 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl scroll-review"
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
                 >
                   {/* Neural dot style */}
                   <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
@@ -615,7 +694,7 @@ const Solutions: React.FC = () => {
                       <p className="text-base text-gray-600 leading-relaxed">{useCase.description}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -718,6 +797,7 @@ const Solutions: React.FC = () => {
           }
         `}</style>
       </main>
+      <CookieConsent position="left" modalPosition="bottom" />
       <CallToAction bgImage='/solutionsPage/solutions.jpg'/>
       <Footer />
     </>
