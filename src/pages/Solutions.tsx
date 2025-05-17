@@ -277,7 +277,261 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </div>
-
+        {/* Cards Section - under hero */}
+        <section className="relative z-10 -mt-24 mb-24">
+          <div className="container mx-auto px-6 sm:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+              {/* Card 1: Telecommunications */}
+              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+                <div className="flex items-center mb-5">
+                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                    <Lottie
+                      animationData={customerService}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                    Telecommunications
+                  </h3>
+                </div>
+                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">24/7 emotionally responsive support</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Seamless handoff to human agents</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Context-aware conversation history</span>
+                  </li>
+                </ul>
+                <a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              {/* Card 2: E-Commerce */}
+              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+                <div className="flex items-center mb-5">
+                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                    <Lottie
+                      animationData={sales}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                    E-Commerce
+                  </h3>
+                </div>
+                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Qualified lead generation</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Personalized product recommendations</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Consistent brand voice and messaging</span>
+                  </li>
+                </ul>
+                <a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              {/* Card 3: Healthcare */}
+              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+                <div className="flex items-center mb-5">
+                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                    <Lottie
+                      animationData={healthcare}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                    Healthcare
+                  </h3>
+                </div>
+                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Empathetic health guidance</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Medication and appointment reminders</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Wellness check-ins and monitoring</span>
+                  </li>
+                </ul>
+                <a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              {/* Card 4: Education & Online Learning */}
+              <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+                <div className="flex items-center mb-5">
+                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                    <Lottie
+                      animationData={education}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                    Education & Online Learning
+                  </h3>
+                </div>
+                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Adaptive learning pathways</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">Personalized feedback and assessment</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-700">24/7 learning support</span>
+                  </li>
+                </ul>
+                <a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
         {/* Industries Section */}
         <div id="industries" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
           {/* Glowy background elements */}

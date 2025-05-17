@@ -131,6 +131,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   };
 
   return (
+    <>
     <section
       id={id}
       className="relative py-20 md:py-44 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8"
@@ -245,6 +246,76 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
         }
       `}</style>
     </section>
+    {/* Cards Section - under hero */}
+    <section className="relative z-10 -mt-24 mb-24">
+      <div className="container mx-auto px-6 sm:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+          {/* Card 1 */}
+          <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+            <div className="flex items-center mb-5">
+              <span className="material-symbols-outlined text-theme-main text-5xl mr-5 drop-shadow-lg">
+                psychology_alt
+              </span>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                Psychologically Engineered Personas
+              </h3>
+            </div>
+            <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+              Our personas are crafted with deep emotional intelligence and personality theory. They are built to sound, feel, and think like real people.
+            </p>
+            <a
+              href="#"
+              className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+              tabIndex={0}
+            >
+              Learn More
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          {/* Card 2 */}
+          <div className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg">
+            <div className="flex items-center mb-5">
+              <span className="material-symbols-outlined text-theme-main text-5xl mr-5 drop-shadow-lg">
+                switch_account
+              </span>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                Multi-Persona Support
+              </h3>
+            </div>
+            <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+              Tailored personas for different business roles. Whether it’s a kind billing assistant or a confident troubleshooter, each one feels uniquely human.
+            </p>
+            <a
+              href="#"
+              className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+              tabIndex={0}
+            >
+              Learn More
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    </>
   );
 };
 
