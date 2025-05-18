@@ -67,26 +67,37 @@ const NavBar: React.FC = () => {
         </div>
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="mt-2 bg-white rounded-2xl shadow-2xl py-6 px-8 z-50 border border-gray-100">
-            <ul className="flex flex-col space-y-6">
-              {navLinks.map(({ path, label }) => (
-                <li key={path} className="flex items-center space-x-4 group">
-                  <NavLink
-                    to={path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `font-poppins text-lg font-semibold transition-colors duration-200 ${
-                        isActive
-                          ? 'text-theme-main'
-                          : 'text-gray-700 hover:text-theme-main'
-                      }`
-                    }
-                  >
-                    {label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+          <div className="fixed inset-0 z-50 flex items-start justify-end bg-black/60 backdrop-blur-sm transition-all duration-300">
+            <div className="mt-24 mr-4 sm:mr-8 bg-gradient-to-br from-[#18132a] via-black/95 to-[#2a1a4d] rounded-3xl shadow-2xl py-10 px-10 min-w-[260px] max-w-xs border border-white/10 relative animate-fade-in-up">
+              <button
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-theme-main/20 text-theme-main transition-all duration-200 shadow"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <ul className="flex flex-col space-y-8 mt-2">
+                {navLinks.map(({ path, label }) => (
+                  <li key={path} className="flex items-center space-x-4 group">
+                    <NavLink
+                      to={path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={({ isActive }) =>
+                        `font-poppins text-xl font-semibold transition-colors duration-200 px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-main/40 focus:bg-theme-main/10 ${
+                          isActive
+                            ? 'text-theme-main bg-theme-main/10 shadow-md'
+                            : 'text-gray-200 hover:text-theme-main hover:bg-theme-main/10'
+                        }`
+                      }
+                    >
+                      {label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
       </div>

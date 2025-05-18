@@ -9,24 +9,18 @@ interface CallToActionProps {
 const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) => (
   <section
     id="cta"
-    className={`relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8 ${className}`}
+    className={`relative py-20 md:py-32 bg-black text-white font-[Satoshi] overflow-hidden px-4 sm:px-8 ${className}`}
   >
-    {/* Glowy background elements */}
-    <div className="absolute top-0 left-0 w-[24rem] h-[24rem] bg-theme-main/10 rounded-full blur-[100px] -z-10"></div>
-    <div className="absolute bottom-0 right-0 w-[20rem] h-[20rem] bg-pink-400/10 rounded-full blur-[80px] -z-10"></div>
-    <div className="pointer-events-none">
-      <div className="absolute top-1/4 left-1/3 w-72 h-72 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[80px] opacity-40 z-0"></div>
-      <div className="absolute bottom-10 left-1/4 w-44 h-44 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[70px] opacity-30 z-0"></div>
-      <div className="absolute top-10 right-1/4 w-60 h-60 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[90px] opacity-30 z-0"></div>
-    </div>
+    {/* Optional video or dark overlay background can be added here if desired */}
+    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
     <div className="relative z-20 max-w-3xl mx-auto text-center">
       <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
         Get Started
       </div>
-      <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-extrabold text-gray-900 whitespace-pre-line leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent transition-all duration-700">
+      <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-extrabold text-white whitespace-pre-line leading-tight tracking-tight drop-shadow-xl">
         Ready to Elevate Your Business?
       </h2>
-      <p className="text-xl sm:text-2xl text-gray-700 max-w-2xl mx-auto mb-8 leading-relaxed font-medium drop-shadow mt-6">
+      <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto mb-8 leading-relaxed font-medium drop-shadow mt-6">
         Discover how ChitChat can transform your customer experience with tailored AI solutions.
       </p>
       <div className="flex flex-wrap justify-center gap-6 mt-8">

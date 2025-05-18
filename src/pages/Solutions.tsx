@@ -221,245 +221,201 @@ const Solutions: React.FC = () => {
   return (
     <>
     <Navbar />
-      <main ref={parallaxRef} className="relative z-10 overflow-hidden">
-        <div id="hero" className="relative md:py-44 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
-          {/* Glowy background elements */}
-          <div className="absolute top-0 left-0 w-[32rem] h-[32rem] bg-theme-main/10 rounded-full blur-[120px] -z-10"></div>
-          <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-pink-400/10 rounded-full blur-[100px] -z-10"></div>
-          <div className="pointer-events-none">
-            <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[140px] opacity-40 z-0"></div>
-            <div className="absolute bottom-10 left-1/4 w-60 h-60 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[110px] opacity-30 z-0"></div>
-            <div className="absolute top-10 right-1/4 w-80 h-80 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[120px] opacity-30 z-0"></div>
-          </div>
-          {/* Overlay for readability */}
-          <div className="absolute inset-0 z-0 bg-white/80 -top-24"></div>
-          {/* Content Wrapper */}
-          <div className="container mx-auto px-6 sm:px-12">
+      <main ref={parallaxRef} className="relative z-10 overflow-hidden min-h-screen bg-black">
+        {/* HERO SECTION */}
+        <section id="hero" className="parallax-element py-16 relative z-10 pt-32">
+          {/* Video Background */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          >
+            <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10"></div>
+          <div className="container mx-auto px-6 sm:px-12 relative z-20">
             <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 min-h-[600px]">
-              {/* Left: Header and Paragraph */}
               <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]">
-                <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
-                  Solutions for Every Industry
+              
+                <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
+                  <span className="block text-white font-extrabold animate-gradient-x pb-4">
+                    Built for Every Business.
+                  </span>
+                  <span className="block text-white font-extrabold mt-2 animate-fade-in-up delay-150">
+                    Designed to Feel Human.
+                  </span>
+                </h1>
+                <p className="text-2xl sm:text-3xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
+                  Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
+                </p>
+                {/* Animated dots for life */}
+                <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center md:justify-start">
+                  <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+                  <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+                  <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
                 </div>
-                {/* Add animation and parallax to the whole flex row */}
-                <motion.div
-                  className="flex flex-col md:flex-row md:items-start md:space-x-10 w-full"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  style={{ willChange: 'transform' }}
-                  // Parallax effect
-                  onScrollCapture={e => {
-                    // No-op: handled by effect below
-                  }}
-                  id="hero-parallax-row"
-                >
-                  <div
-                    className="flex-1"
-                    id="parallax-left"
-                    style={{ willChange: 'transform' }}
-                  >
-                    <div className="flex flex-col md:flex-row md:items-start md:space-x-10 w-full">
-                      <div className="flex-1">
-                        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
-                          <span className="block bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent animate-gradient-x pb-4">
-                            {headerText.split('\n')[0]}
-                          </span>
-                          <span className="block text-[#260a40] mt-2 animate-fade-in-up delay-150">
-                            {headerText.split('\n')[1]}
-                          </span>
-                        </h1>
-                        <p className="text-2xl sm:text-3xl md:text-2xl text-gray-700 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
-                          Discover how our <span className="text-theme-main font-semibold">AI solutions</span> can transform your business with human-like interactions that engage, convert, and delight.
-                        </p>
-                        <div className="flex flex-wrap gap-6 mt-4 animate-fade-in-up delay-500">
-                          <a
-                            href="/blog"
-                            className="px-10 py-4 rounded-full bg-white border-2 border-theme-main text-theme-main font-bold shadow hover:bg-theme-main hover:text-white transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/20"
-                          >
-                            See Our Blog
-                          </a>
-                        </div>
-                        {/* Animated dots for life */}
-                        <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
-                          <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
-                          <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
-                          <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Right: Banner Image */}
-                  <div
-                    className="flex-1 flex justify-center md:justify-end items-start mt-10 md:mt-0"
-                    id="parallax-right"
-                    style={{ willChange: 'transform' }}
-                  >
-                    <div className="relative group">
-                      <div className="absolute -top-10 -left-10 w-40 h-40 bg-theme-main/10 rounded-full blur-2xl z-0 animate-float"></div>
-                      <img
-                        src="/images/productive.png"
-                        alt="Productive"
-                        className="relative max-w-sm md:max-w-lg lg:max-w-2xl w-full h-auto rounded-[2.5rem] z-10 group-hover:scale-105 transition-transform duration-500"
-                      />
-                      {/* Elegant floating card */}
-                      <div className="absolute -bottom-16 z-50 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl px-12 py-8 flex flex-col items-center border border-gray-100 min-w-[260px] animate-fade-in-up delay-500">
-                        <span className="text-theme-main font-bold text-2xl mb-2 tracking-wide flex items-center gap-2">
-                          <svg className="w-6 h-6 text-theme-main animate-spin" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                          </svg>
-                          Live AI Demo
-                        </span>
-                        <span className="text-gray-500 text-lg">Let's talk</span>
-                      </div>
-                      <div className="absolute bottom-0 right-0 w-32 h-32 bg-pink-400/10 rounded-full blur-2xl z-0 animate-float-slow"></div>
-                    </div>
-                  </div>
-                </motion.div>
               </div>
+              
             </div>
           </div>
-        </div>
-        {/* Cards Section - under hero */}
-        <section className="relative z-10 -mt-24 mb-24">
+        </section>
+        {/* CARDS SECTION */}
+        <section className="relative z-10 py-16 bg-black">
           <div className="container mx-auto px-6 sm:px-12">
+            <motion.div
+              className="mb-12 text-center"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+          Explore Our Solutions
+              </h2>
+              <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
+          Discover how our AI solutions can transform your business across various industries.
+              </p>
+            </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
               {/* Card 1: Telecommunications */}
               <motion.div
-                initial={{ opacity: 0, y: 60, scale: 0.97 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+          initial={{ opacity: 0, y: 60, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+          style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-                <div className="flex items-center mb-5">
-                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
-                    <Lottie
-                      animationData={customerService}
-                      loop
-                      autoplay
-                      style={{ height: '48px', width: '48px' }}
-                    />
-                  </div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-                    Telecommunications
-                  </h3>
-                </div>
-                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-                  Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-700">24/7 emotionally responsive support</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-700">Seamless handoff to human agents</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-700">Context-aware conversation history</span>
-                  </li>
-                </ul>
-                <a
-                  href="#"
-                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-                  tabIndex={0}
-                >
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-                  </svg>
-                </a>
+          <div className="flex items-center mb-5">
+            <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+              <Lottie
+                animationData={customerService}
+                loop
+                autoplay
+                style={{ height: '48px', width: '48px' }}
+              />
+            </div>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+              Telecommunications
+            </h3>
+          </div>
+          <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+            Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
+          </p>
+          <ul className="space-y-3 mb-6">
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">24/7 emotionally responsive support</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Seamless handoff to human agents</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Context-aware conversation history</span>
+            </li>
+          </ul>
+          <a
+            href="#"
+            className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+            tabIndex={0}
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+            </svg>
+          </a>
               </motion.div>
               {/* Card 2: E-Commerce */}
               <motion.div
-                initial={{ opacity: 0, y: 60, scale: 0.97 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+          initial={{ opacity: 0, y: 60, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+          style={{ clipPath: 'polygon(12% 0%, 88% 0%, 100% 20%, 100% 80%, 88% 100%, 12% 100%, 0% 80%, 0% 20%)' }}
               >
-                <div className="flex items-center mb-5">
-                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
-                    <Lottie
-                      animationData={sales}
-                      loop
-                      autoplay
-                      style={{ height: '48px', width: '48px' }}
-                    />
-                  </div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-                    E-Commerce
-                  </h3>
-                </div>
-                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-                  Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-700">Qualified lead generation</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-700">Personalized product recommendations</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-700">Consistent brand voice and messaging</span>
-                  </li>
-                </ul>
-                <a
-                  href="#"
-                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-                  tabIndex={0}
-                >
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-                  </svg>
-                </a>
+          <div className="flex items-center mb-5">
+            <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+              <Lottie
+                animationData={sales}
+                loop
+                autoplay
+                style={{ height: '48px', width: '48px' }}
+              />
+            </div>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+              E-Commerce
+            </h3>
+          </div>
+          <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+            Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
+          </p>
+          <ul className="space-y-3 mb-6">
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Qualified lead generation</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Personalized product recommendations</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Consistent brand voice and messaging</span>
+            </li>
+          </ul>
+          <a
+            href="#"
+            className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+            tabIndex={0}
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+            </svg>
+          </a>
               </motion.div>
               {/* Card 3: Healthcare */}
               <motion.div
@@ -467,7 +423,8 @@ const Solutions: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                style={{ clipPath: 'polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%)' }}
               >
                 <div className="flex items-center mb-5">
                   <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
@@ -482,7 +439,7 @@ const Solutions: React.FC = () => {
                     Healthcare
                   </h3>
                 </div>
-                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.
                 </p>
                 <ul className="space-y-3 mb-6">
@@ -492,7 +449,7 @@ const Solutions: React.FC = () => {
                         check_circle
                       </span>
                     </div>
-                    <span className="text-gray-700">Empathetic health guidance</span>
+                    <span className="text-gray-200">Empathetic health guidance</span>
                   </li>
                   <li className="flex items-center">
                     <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
@@ -500,7 +457,7 @@ const Solutions: React.FC = () => {
                         check_circle
                       </span>
                     </div>
-                    <span className="text-gray-700">Medication and appointment reminders</span>
+                    <span className="text-gray-200">Medication and appointment reminders</span>
                   </li>
                   <li className="flex items-center">
                     <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
@@ -508,7 +465,7 @@ const Solutions: React.FC = () => {
                         check_circle
                       </span>
                     </div>
-                    <span className="text-gray-700">Wellness check-ins and monitoring</span>
+                    <span className="text-gray-200">Wellness check-ins and monitoring</span>
                   </li>
                 </ul>
                 <a
@@ -535,7 +492,8 @@ const Solutions: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
-                className="bg-white/90 border border-gray-200 p-8 rounded-2xl shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)' }}
               >
                 <div className="flex items-center mb-5">
                   <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
@@ -550,7 +508,7 @@ const Solutions: React.FC = () => {
                     Education & Online Learning
                   </h3>
                 </div>
-                <p className="text-gray-600 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.
                 </p>
                 <ul className="space-y-3 mb-6">
@@ -560,7 +518,7 @@ const Solutions: React.FC = () => {
                         check_circle
                       </span>
                     </div>
-                    <span className="text-gray-700">Adaptive learning pathways</span>
+                    <span className="text-gray-200">Adaptive learning pathways</span>
                   </li>
                   <li className="flex items-center">
                     <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
@@ -568,7 +526,7 @@ const Solutions: React.FC = () => {
                         check_circle
                       </span>
                     </div>
-                    <span className="text-gray-700">Personalized feedback and assessment</span>
+                    <span className="text-gray-200">Personalized feedback and assessment</span>
                   </li>
                   <li className="flex items-center">
                     <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
@@ -576,7 +534,7 @@ const Solutions: React.FC = () => {
                         check_circle
                       </span>
                     </div>
-                    <span className="text-gray-700">24/7 learning support</span>
+                    <span className="text-gray-200">24/7 learning support</span>
                   </li>
                 </ul>
                 <a
@@ -600,31 +558,23 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </section>
-        {/* Industries Section */}
-        <div id="industries" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
-          {/* Glowy background elements */}
-          <div className="absolute top-0 left-0 w-[24rem] h-[24rem] bg-theme-main/10 rounded-full blur-[100px] -z-10"></div>
-          <div className="absolute bottom-0 right-0 w-[20rem] h-[20rem] bg-pink-400/10 rounded-full blur-[80px] -z-10"></div>
-          <div className="pointer-events-none">
-            <div className="absolute top-1/4 left-1/3 w-72 h-72 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[80px] opacity-40 z-0"></div>
-            <div className="absolute bottom-10 left-1/4 w-44 h-44 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[70px] opacity-30 z-0"></div>
-            <div className="absolute top-10 right-1/4 w-60 h-60 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[90px] opacity-30 z-0"></div>
-          </div>
+        {/* INDUSTRIES SECTION */}
+        <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
           <div className="container mx-auto px-6 sm:px-12">
             <motion.div
               className="mb-20 text-center scroll-review"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
             >
               <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
                 Versatile Solutions
               </span>
-              <h3 className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+              <h3 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                 More Industries We Serve
               </h3>
-              <p className="text-xl sm:text-2xl text-gray-700 mb-12 max-w-2xl mx-auto font-medium drop-shadow">
+              <p className="text-xl sm:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto font-medium drop-shadow">
                 Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
               </p>
             </motion.div>
@@ -646,31 +596,23 @@ const Solutions: React.FC = () => {
                       <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{item.title}</h4>
                     </div>
                     <div className="w-2/3">
-                      <p className="text-base text-gray-600 leading-relaxed">{item.text}</p>
+                      <p className="text-base text-gray-200 leading-relaxed">{item.text}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
-        </div>
-        {/* Use Cases Section */}
-        <div id="use-cases" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
-          {/* Glowy background elements */}
-          <div className="absolute top-0 left-0 w-[20rem] h-[20rem] bg-theme-main/10 rounded-full blur-[80px] -z-10"></div>
-          <div className="absolute bottom-0 right-0 w-[16rem] h-[16rem] bg-pink-400/10 rounded-full blur-[60px] -z-10"></div>
-          <div className="pointer-events-none">
-            <div className="absolute top-1/4 left-1/3 w-52 h-52 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[60px] opacity-40 z-0"></div>
-            <div className="absolute bottom-10 left-1/4 w-32 h-32 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[50px] opacity-30 z-0"></div>
-            <div className="absolute top-10 right-1/4 w-44 h-44 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[70px] opacity-30 z-0"></div>
-          </div>
+        </section>
+        {/* USE CASES SECTION */}
+        <section id="use-cases" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
           <div className="container mx-auto px-6 sm:px-12">
             <motion.h2
-              className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent scroll-review"
+              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent scroll-review"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
             >
               Use Cases
             </motion.h2>
@@ -678,7 +620,7 @@ const Solutions: React.FC = () => {
               {useCases.map((useCase, index) => (
                 <motion.div
                   key={index}
-                  className="relative bg-white/90 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl scroll-review"
+                  className="relative bg-white/5 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl scroll-review"
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -691,133 +633,32 @@ const Solutions: React.FC = () => {
                       <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{useCase.title}</h4>
                     </div>
                     <div className="w-2/3">
-                      <p className="text-base text-gray-600 leading-relaxed">{useCase.description}</p>
+                      <p className="text-base text-gray-200 leading-relaxed">{useCase.description}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
-        </div>
-        {/* Animation keyframes and styles */}
-        <style jsx global>{`
-          /* Base animations */
-          @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-          }
-          
-          @keyframes slideDown {
-            from { transform: translateY(0); }
-            to { transform: translateY(100%); }
-          }
-          
-          /* Modern animations */
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-          }
-          
-          @keyframes float-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-          }
-          
-          @keyframes pulse-slow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.7; }
-          }
-          
-          @keyframes bounce-gentle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-          }
-          
-          /* Apply animations */
-          .animate-float {
-            animation: float 8s ease-in-out infinite;
-          }
-          
-          .animate-float-slow {
-            animation: float-slow 12s ease-in-out infinite;
-          }
-          
-          .animate-pulse-slow {
-            animation: pulse-slow 6s ease-in-out infinite;
-          }
-          
-          .animate-bounce-gentle {
-            animation: bounce-gentle 3s ease-in-out infinite;
-          }
-          
-          .animation-delay-1000 {
-            animation-delay: 1s;
-          }
-          
-          /* Neural timeline enhancements */
-          .neural-timeline {
-            position: relative;
-          }
-          
-          .neural-timeline-line {
-            opacity: 0;
-            animation: growLine 1.5s ease-out forwards 0.5s;
-          }
-          
-          @keyframes growLine {
-            from { opacity: 0; height: 0; }
-            to { opacity: 1; height: 100%; }
-          }
-          
-          .neural-dot-container {
-            position: relative;
-            z-index: 10;
-          }
-          
-          .neural-dot {
-            transform: scale(0);
-            animation: growDot 0.6s cubic-bezier(0.17, 0.67, 0.36, 1.5) forwards;
-          }
-          
-          @keyframes growDot {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-          }
-          
-          .neural-dot-container:hover .neural-dot {
-            transform: scale(1.2);
-            transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.36, 1.5);
-          }
-          
-          /* Background grid pattern */
-          .bg-grid-pattern {
-            background-image: linear-gradient(to right, rgba(80, 36, 255, 0.05) 1px, transparent 1px), 
-                              linear-gradient(to bottom, rgba(80, 36, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-          }
-        `}</style>
-        <style jsx>{`
-    .solutions-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    @media (min-width: 768px) {
-        .solutions-grid {
-            grid-template-columns: repeat(2, 1fr);
+        </section>
+        <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
         }
-    }
-
-    @media (min-width: 1024px) {
-        .solutions-grid {
-            grid-template-columns: repeat(3, 1fr);
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
         }
-    }
-`}</style>
+        .parallax-element {
+          will-change: transform;
+          position: relative;
+          z-index: 10;
+        }
+      `}</style>
       </main>
       <CookieConsent position="left" modalPosition="bottom" />
-      <CallToAction bgImage='/solutionsPage/solutions.jpg'/>
+      <CallToAction />
       <Footer />
     </>
   );
