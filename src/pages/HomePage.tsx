@@ -50,17 +50,17 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main className="relative overflow-hidden bg-white min-h-screen">
-        <section id="hero" className="parallax-element">
+      <main className="relative overflow-hidden min-h-screen bg-black">
+        <section id="hero" className="parallax-element mb-0 py-16 relative z-10">
           <Hero />
         </section>
-        <section id="features" className="parallax-element">
+        <section id="features" className="parallax-element mb-0 py-16 relative z-10">
           <Features />
         </section>
-        <section id="businesses" className="parallax-element">
+        <section id="businesses" className="parallax-element mb-0 py-16 relative z-10">
           <Businesses />
         </section>
-        <section id="community" className="parallax-element">
+        <section id="community" className="parallax-element mb-0 py-16 relative z-10">
           <Community />
         </section>
       </main>
@@ -78,35 +78,26 @@ const HomePage: React.FC = () => {
 
         .parallax-element {
           will-change: transform;
+          position: relative;
+          z-index: 10;
         }
 
-        /* Remove scroll animation for sections */
         section {
+          margin-bottom: 0 !important;
           opacity: 1 !important;
           transform: none !important;
           transition: none !important;
+          /* Remove forced padding reset so component padding applies */
         }
         section.animate-in-view {
           opacity: 1 !important;
           transform: none !important;
         }
 
-        .hero-section {
-          padding: 16px;
-          text-align: center;
-        }
-
-        @media (min-width: 768px) {
-          .hero-section {
-            padding: 32px;
-            text-align: left;
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .hero-section {
-            padding: 48px;
-          }
+        h1, h2, h3, h4, h5, h6 {
+          font-size: 1.5rem;
+          font-weight: normal;
+          margin-bottom: 1rem;
         }
       `}</style>
     </>
