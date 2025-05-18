@@ -1,24 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, useAnimation } from 'framer-motion';
-import CookieConsent from './CookieConsent';
-import CallToAction from './CallToAction';
-import Footer from './Footer';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+
+const itemAnimation = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+};
 
 const Businesses: React.FC = () => {
+  // Typing animation for AI intro text (used in first section)
   const [headerText, setHeaderText] = useState('');
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
-  const headerRef = useRef<HTMLHeadingElement>(null);
-
-    const scrollAnimation = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  const itemAnimation = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
 
   useEffect(() => {
     let i = 0;
@@ -30,48 +21,76 @@ const Businesses: React.FC = () => {
     return () => clearInterval(typingInterval);
   }, [fullText]);
 
-   const includedFeatures = [
-      { title: 'Custom Persona Design', description: 'Psychology-driven personas that understand emotional nuance.' },
-      { title: 'Tone & Personality Development', description: 'Carefully crafted voices that match your brand identity.' },
-      { title: 'Industry-Specific Adaptation', description: 'Tailored knowledge base for your business vertical.' },
-      { title: 'Integration Support', description: 'Works with your existing tech stack (chat, WhatsApp, voice, etc.).' },
-      { title: 'Developer Collaboration', description: 'We work with your team or provide our own technical experts.' },
-      { title: 'Continuous Improvements', description: 'Regular updates based on conversation data and feedback.' },
-      { title: 'Human Testing & QA', description: 'Rigorous quality assurance by our psychology specialists.' }
-    ];
+  const includedFeatures = [
+    { 
+      title: 'Custom Persona Design', 
+      description: 'Psychology-driven personas that understand emotional nuance.',
+      icon: 'psychology'
+    },
+    { 
+      title: 'Tone & Personality Development', 
+      description: 'Carefully crafted voices that match your brand identity.',
+      icon: 'record_voice_over'
+    },
+    { 
+      title: 'Industry-Specific Adaptation', 
+      description: 'Tailored knowledge base for your business vertical.',
+      icon: 'business_center'
+    },
+    { 
+      title: 'Integration Support', 
+      description: 'Works with your existing tech stack (chat, WhatsApp, voice, etc.).',
+      icon: 'integration_instructions'
+    },
+    { 
+      title: 'Developer Collaboration', 
+      description: 'We work with your team or provide our own technical experts.',
+      icon: 'code'
+    },
+    { 
+      title: 'Continuous Improvements', 
+      description: 'Regular updates based on conversation data and feedback.',
+      icon: 'update'
+    },
+    { 
+      title: 'Human Testing & QA', 
+      description: 'Rigorous quality assurance by our psychology specialists.',
+      icon: 'bug_report'
+    }
+  ];
   
-    const businessValues = [
-      {
-        title: 'Reduce Support Costs',
-        description: 'Replace call center agents or scale your operations without new hires.',
-        icon: 'savings',
-        metric: 'Up to 40% cost reduction',
-      },
-      {
-        title: 'Boost Retention & Upsells',
-        description: 'Drive revenue through nuanced conversations, not generic sales scripts.',
-        icon: 'trending_up',
-        metric: '20% increase in customer retention',
-      },
-      {
-        title: 'Save Valuable Time',
-        description: 'No writing prompts or managing AI yourself - we handle everything.',
-        icon: 'schedule',
-        metric: '30% faster response times',
-      },
-      {
-        title: 'Gain Competitive Edge',
-        description: 'Stand out by offering truly believable AI support before your competitors.',
-        icon: 'workspace_premium',
-        metric: '15% higher customer satisfaction',
-      },
-      {
-        title: 'Improve Customer Experience',
-        description: 'Create human-like interactions that feel personal and emotionally intelligent.',
-        icon: 'sentiment_satisfied',
-        metric: '95% positive feedback from users',
-      },
-    ];
+  const businessValues = [
+    {
+      title: 'Reduce Support Costs',
+      description: 'Replace call center agents or scale your operations without new hires.',
+      icon: 'savings',
+      metric: 'Up to 40% cost reduction',
+    },
+    {
+      title: 'Boost Retention & Upsells',
+      description: 'Drive revenue through nuanced conversations, not generic sales scripts.',
+      icon: 'trending_up',
+      metric: '20% increase in customer retention',
+    },
+    {
+      title: 'Save Valuable Time',
+      description: 'No writing prompts or managing AI yourself - we handle everything.',
+      icon: 'schedule',
+      metric: '30% faster response times',
+    },
+    {
+      title: 'Gain Competitive Edge',
+      description: 'Stand out by offering truly believable AI support before your competitors.',
+      icon: 'workspace_premium',
+      metric: '15% higher customer satisfaction',
+    },
+    {
+      title: 'Improve Customer Experience',
+      description: 'Create human-like interactions that feel personal and emotionally intelligent.',
+      icon: 'sentiment_satisfied',
+      metric: '95% positive feedback from users',
+    },
+  ];
 
   const useCases = [
     {
@@ -214,6 +233,29 @@ const Businesses: React.FC = () => {
             ))}
           </div>
         </motion.div>
+      </section>
+      {/* Use Cases Section */}
+      <section id="use-cases" className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
+            How Businesses Use ChitChat
+          </h2>
+          
+          <div className="space-y-8">
+            {useCases.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-8 hover:bg-white/10 transition-all duration-300"
+              >
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-gray-300 text-lg">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );

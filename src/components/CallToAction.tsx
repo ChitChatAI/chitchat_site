@@ -9,35 +9,39 @@ interface CallToActionProps {
 const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) => (
   <section
     id="cta"
-    className={`relative py-16 px-6 sm:px-10 text-white bg-cover bg-center scroll-review ${className}`}
-    style={bgImage ? { backgroundImage: `url('${bgImage}')` } : undefined}
+    className={`relative py-20 md:py-32 bg-black text-white font-[Satoshi] overflow-hidden px-4 sm:px-8 ${className}`}
   >
-    {/* Overlay for readability */}
-    <div className="absolute inset-0 z-0 bg-white/90 -top-24" />
+    {/* Optional video or dark overlay background can be added here if desired */}
+    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
     <div className="relative z-20 max-w-3xl mx-auto text-center">
-      <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-bold text-gray-900 whitespace-pre-line transition-all duration-700">
+      <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
+        Get Started
+      </div>
+      <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-extrabold text-white whitespace-pre-line leading-tight tracking-tight drop-shadow-xl">
         Ready to Elevate Your Business?
       </h2>
-      <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed p-6">
+      <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto mb-8 leading-relaxed font-medium drop-shadow mt-6">
         Discover how ChitChat can transform your customer experience with tailored AI solutions.
       </p>
-      <div className="flex justify-center gap-6 mt-8">
+      <div className="flex flex-wrap justify-center gap-6 mt-8">
         <Link
           to="/contactus"
-          className="px-6 py-3.5 rounded-lg bg-white/90 backdrop-blur text-theme-main border border-purple-200 
-            font-medium text-base transition-all duration-300 hover:shadow-lg hover:shadow-purple-200/30
-            hover:transform hover:bg-white/100 flex items-center gap-2 group"
+          className="px-10 py-4 rounded-full bg-theme-main text-white font-bold shadow-2xl hover:bg-theme-dark transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/40"
         >
-          <span className="opacity-80 group-hover:opacity-100">Contact Us</span>
+          Contact Us
         </Link>
         <Link
           to="/book-call"
-          className="px-6 py-3.5 rounded-lg bg-theme-main text-white 
-            font-medium text-base shadow-md shadow-theme-main transition-all duration-300 hover:shadow-xl hover:shadow-purple-400/40
-            hover:transform flex items-center gap-2 group"
+          className="px-10 py-4 rounded-full bg-white border-2 border-theme-main text-theme-main font-bold shadow hover:bg-theme-main hover:text-white transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/20"
         >
-          <span>Book a Call</span>
+          Book a Call
         </Link>
+      </div>
+      {/* Animated dots for life */}
+      <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center">
+        <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+        <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+        <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
       </div>
     </div>
   </section>

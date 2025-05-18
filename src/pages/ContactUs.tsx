@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../components/purpleNavBar';
+import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 
 // Modern input styling with floating label support and improved states
-const inputBase = "peer w-full px-5 py-4 bg-white/5 backdrop-blur-sm border border-gray-200 rounded-xl font-satoshi text-gray-700 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 shadow-sm";
-const inputError = "border-red-300 bg-red-50/20 focus:border-red-400 focus:ring-red-300/40";
-const labelBase = "absolute left-5 -top-2.5 px-1 text-xs transition-all bg-white font-satoshi font-medium peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-theme-main";
+const inputBase = "peer w-full px-5 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-xl font-satoshi text-gray-200 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 shadow-sm";
+const inputError = "border-red-400 bg-red-900/20 focus:border-red-400 focus:ring-red-300/40";
+const labelBase = "absolute left-5 -top-2.5 px-1 text-xs transition-all bg-black/80 font-satoshi font-medium peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-300 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-theme-main";
 
 const ContactUs: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    surname: string;
+    email: string;
+    subject: string;
+    message: string;
+    companySize: string;
+    industry: string;
+    goals: string;
+    interests: string[];
+    teamDescription: string;
+  }>({
     name: '',
-    surname: '', 
+    surname: '',
     email: '',
     subject: '',
     message: '',
@@ -78,14 +90,14 @@ const ContactUs: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    
+
     // Auto-capitalize name and surname
     if (name === 'name' || name === 'surname') {
       setFormData((prev) => ({ ...prev, [name]: capitalizeFirstLetter(value) }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
-    
+
     // Email validation
     if (name === 'email' && value.trim() !== '') {
       if (!validateEmail(value)) {
@@ -112,7 +124,7 @@ const ContactUs: React.FC = () => {
 
   const validateStep = (step: number) => {
     const newErrors: Record<string, string> = {};
-    
+
     if (step === 1) {
       if (!formData.name.trim()) newErrors.name = 'Name is required';
       if (!formData.surname.trim()) newErrors.surname = 'Surname is required';
@@ -126,7 +138,7 @@ const ContactUs: React.FC = () => {
       if (!formData.industry.trim()) newErrors.industry = 'Industry is required';
       if (!formData.goals) newErrors.goals = 'Please select a goal';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -150,7 +162,7 @@ const ContactUs: React.FC = () => {
       if (progressBar) {
         progressBar.style.width = `${((currentStep + 1) / 3) * 100}%`;
       }
-      
+
       // Then update the step after a very short delay
       setTimeout(() => {
         setCurrentStep((prev) => Math.min(prev + 1, 3));
@@ -173,7 +185,7 @@ const ContactUs: React.FC = () => {
       setTimeout(() => setShowAlert(false), 4000);
       return;
     }
-    
+
     setIsSubmitting(true);
     setErrors({});
 
@@ -212,13 +224,46 @@ const ContactUs: React.FC = () => {
 
   useEffect(() => {
     const cleanupCursor = initCustomCursor();
+    // On-load animation for hero section
+    const hero = document.getElementById('contact-hero-parallax-row');
+    if (hero) {
+      hero.style.opacity = '0';
+      hero.style.transform = 'translateY(60px)';
+      setTimeout(() => {
+        hero.style.transition = 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1)';
+        hero.style.opacity = '1';
+        hero.style.transform = 'translateY(0)';
+      }, 100);
+    }
     return () => cleanupCursor();
   }, []);
 
   return (
     <>
       <NavBar />
-      
+      {/* Modern dark video + image background */}
+      <div className="fixed inset-0 z-[-2] pointer-events-none">
+        <img
+          src="/solutionsPage/solutions.jpg"
+          alt="Contact Us Background"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
+          draggable="false"
+        />
+      </div>
+      <div className="fixed inset-0 z-[-1] pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-60"
+        >
+          <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+      </div>
+      <div className="fixed inset-0 z-[-3] bg-black" />
+
       {/* Modern floating alert with animation */}
       {showAlert && (
         <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 animate-float-in">
@@ -226,7 +271,7 @@ const ContactUs: React.FC = () => {
             <div className="flex items-start">
               <div className="flex-shrink-0">
                 <svg className="h-5 w-5 text-theme-main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zm-1 5a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               </div>
               <div className="ml-3">
@@ -247,35 +292,57 @@ const ContactUs: React.FC = () => {
           </div>
         </div>
       )}
-      
-      {/* Modern hero section with 3D effects and geometric shapes */}
-      <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-        {/* Background decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.02] z-0"></div>
-        
-        {/* Geometric shapes */}
-        <div className="absolute top-20 right-[5%] w-32 h-32 rounded-3xl bg-theme-main/5 rotate-12 animate-float opacity-70"></div>
-        <div className="absolute bottom-20 left-[10%] w-24 h-24 rounded-full bg-purple-100/50 animate-float-delayed"></div>
-        <div className="absolute top-40 left-[15%] w-12 h-12 rounded-lg bg-theme-main/10 rotate-45 animate-pulse"></div>
-        
-        {/* Content */}
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="mb-16 max-w-3xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-theme-main/10 text-theme-main text-sm font-medium">
-              Contact Us
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl font-header font-extrabold text-gray-900 mb-6 leading-tight">
-              Let's Build <span className="text-theme-main">Your AI Solution</span>
-            </h1>
-            
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Fill out the form below to get started with ChitChat AI. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
-            </p>
-          </div>
 
-          {/* Advanced 3D card container for the form */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
+      {/* Modern hero section */}
+      <section className="relative md:pt-48 pb-24 px-4 sm:px-8 bg-black bg-gradient-to-b from-black via-[#18132a] to-[#18132a] font-[Satoshi] overflow-hidden text-white border-b border-white/10 shadow-xl">
+        {/* Video + image background handled globally */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <img
+            src="/solutionsPage/solutions.jpg"
+            alt="Contact Us Background"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
+            draggable="false"
+          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0 opacity-60"
+          >
+            <source src="/businessesPage/businessVideo.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.04] parallax-el" data-speed="0.09"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-theme-main/30 rounded-full blur-3xl animate-float parallax-el" data-speed="0.15"></div>
+          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl animate-float-delayed parallax-el" data-speed="0.11"></div>
+          <div className="absolute top-1/2 left-2/3 w-40 h-40 bg-purple-400/30 rounded-full blur-2xl animate-pulse parallax-el" data-speed="0.13"></div>
+        </div>
+        <div className="container mx-auto px-6 sm:px-12 relative z-10">
+            <div
+            className="flex flex-col items-center justify-center min-h-[500px] text-center"
+            id="contact-hero-parallax-row"
+            style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
+            >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-contact-hero-fade-in">
+              <span className="block animate-contact-hero-slide-in">Let's Build Your AI Solution</span>
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
+              Fill out the form below to get started with <span className="text-theme-main font-semibold animate-contact-hero-gradient-in delay-400">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
+            </p>
+            <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
+              <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+              <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+              <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
+            </div>
+            </div>
+        </div>
+      </section>
+
+      {/* Shifted Form Section */}
+      <section className="relative px-4 sm:px-10 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
+        <div className="container mx-auto">
+          <div className="bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card w-full max-w-3xl mx-auto">
             {/* Form steps container */}
             <div className="relative z-10">
               {/* Modern progress tracker */}
@@ -283,14 +350,14 @@ const ContactUs: React.FC = () => {
                 <div className="flex items-center justify-between relative">
                   {/* Progress line */}
                   <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2"></div>
-                  
+
                   {[1, 2, 3].map((step) => (
                     <div key={step} className="relative z-10 flex flex-col items-center">
-                      <div 
+                      <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-all duration-500 
-                        ${currentStep >= step 
-                          ? 'bg-theme-main text-white shadow-lg shadow-theme-main/30' 
-                          : 'bg-white text-gray-400 border border-gray-200'}`}
+                        ${currentStep >= step
+                            ? 'bg-theme-main text-white shadow-lg shadow-theme-main/30'
+                            : 'bg-white text-gray-400 border border-gray-200'}`}
                       >
                         {currentStep > step ? (
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -300,7 +367,7 @@ const ContactUs: React.FC = () => {
                           <span className="text-sm font-semibold">{step}</span>
                         )}
                       </div>
-                      <span 
+                      <span
                         className={`text-sm font-satoshi font-medium transition-all duration-300 
                         ${currentStep >= step ? 'text-theme-main' : 'text-gray-400'}`}
                       >
@@ -334,7 +401,7 @@ const ContactUs: React.FC = () => {
               <div className="max-w-3xl mx-auto">
                 {/* Step 1: Contact Details */}
                 <div className={`${getStepClasses(1)}`}>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Your Contact Details</h3>
+                  <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Your Contact Details</h3>
                   <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* First name field with floating label */}
@@ -346,14 +413,12 @@ const ContactUs: React.FC = () => {
                           placeholder="First Name"
                           value={formData.name}
                           onChange={handleChange}
-                          className={`${inputBase} ${errors.name ? inputError : ''}`}
+                          className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.name ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
                           required
                         />
-                        <label htmlFor="name" className={`${labelBase} ${errors.name ? 'text-red-500' : ''}`}>
-                          First Name
-                        </label>
+                        <label htmlFor="name" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.name ? ' text-red-400' : ''}`}>First Name</label>
                         {errors.name && (
-                          <p className="mt-2 text-sm text-red-600 flex items-center font-satoshi">
+                          <p className="mt-2 text-sm text-red-400 flex items-center font-satoshi">
                             <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
                             </svg>
@@ -361,7 +426,7 @@ const ContactUs: React.FC = () => {
                           </p>
                         )}
                       </div>
-                      
+
                       {/* Surname field with floating label */}
                       <div className="relative group">
                         <input
@@ -371,14 +436,12 @@ const ContactUs: React.FC = () => {
                           placeholder="Surname"
                           value={formData.surname}
                           onChange={handleChange}
-                          className={`${inputBase} ${errors.surname ? inputError : ''}`}
+                          className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.surname ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
                           required
                         />
-                        <label htmlFor="surname" className={`${labelBase} ${errors.surname ? 'text-red-500' : ''}`}>
-                          Surname
-                        </label>
+                        <label htmlFor="surname" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.surname ? ' text-red-400' : ''}`}>Surname</label>
                         {errors.surname && (
-                          <p className="mt-2 text-sm text-red-600 flex items-center font-satoshi">
+                          <p className="mt-2 text-sm text-red-400 flex items-center font-satoshi">
                             <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
                             </svg>
@@ -387,7 +450,7 @@ const ContactUs: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    
+
                     {/* Email field with floating label */}
                     <div className="relative group">
                       <input
@@ -397,12 +460,10 @@ const ContactUs: React.FC = () => {
                         placeholder="Email Address"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`${inputBase} ${errors.email ? inputError : ''}`}
+                        className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.email ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
                         required
                       />
-                      <label htmlFor="email" className={`${labelBase} ${errors.email ? 'text-red-500' : ''}`}>
-                        Email Address
-                      </label>
+                      <label htmlFor="email" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.email ? ' text-red-400' : ''}`}>Email Address</label>
                       {formData.email && !errors.email && validateEmail(formData.email) && (
                         <div className="absolute right-4 top-4">
                           <svg className="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -411,7 +472,7 @@ const ContactUs: React.FC = () => {
                         </div>
                       )}
                       {errors.email && (
-                        <p className="mt-2 text-sm text-red-600 flex items-center">
+                        <p className="mt-2 text-sm text-red-400 flex items-center">
                           <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
                           </svg>
@@ -419,7 +480,7 @@ const ContactUs: React.FC = () => {
                         </p>
                       )}
                     </div>
-                    
+
                     {/* Subject field with floating label */}
                     <div className="relative group">
                       <input
@@ -440,7 +501,7 @@ const ContactUs: React.FC = () => {
 
                 {/* Step 2: Company & Goals */}
                 <div className={`${getStepClasses(2)}`}>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Company & Goals</h3>
+                  <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Company & Goals</h3>
                   <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                     {/* Company size selection */}
                     <div className="relative group">
@@ -468,7 +529,7 @@ const ContactUs: React.FC = () => {
                       </div>
                       {errors.companySize && <p className="mt-2 text-sm text-red-600">{errors.companySize}</p>}
                     </div>
-                    
+
                     {/* Industry field */}
                     <div className="relative group">
                       <input
@@ -486,7 +547,7 @@ const ContactUs: React.FC = () => {
                       </label>
                       {errors.industry && <p className="mt-2 text-sm text-red-600">{errors.industry}</p>}
                     </div>
-                    
+
                     {/* Goals selection */}
                     <div className="relative group">
                       <select
@@ -518,27 +579,27 @@ const ContactUs: React.FC = () => {
 
                 {/* Step 3: Additional Info */}
                 <div className={`${getStepClasses(3)}`}>
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-8 font-satoshi">Additional Information</h3>
+                  <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Additional Information</h3>
                   <form onSubmit={handleSubmit} className="space-y-8">
                     {/* Interests checkboxes */}
                     <div className="space-y-4">
-                      <label className="block text-gray-700 font-medium mb-4">What are you interested in?</label>
+                      <label className="block text-gray-200 font-medium mb-4">What are you interested in?</label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
                           <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-gray-50 transition-all duration-300 cursor-pointer">
                             <input
                               type="checkbox"
                               name={interest}
-                              checked={formData.interests.includes(interest)}
+                              checked={formData.interests && Array.isArray(formData.interests) ? formData.interests.includes(interest) : false}
                               onChange={handleCheckboxChange}
                               className="w-5 h-5 text-theme-main rounded focus:ring-theme-main/40 focus:ring-offset-0 focus:ring-2 mr-3"
                             />
-                            <span className="text-gray-700">{interest}</span>
+                            <span className="text-gray-200">{interest}</span>
                           </label>
                         ))}
                       </div>
                     </div>
-                    
+
                     {/* Team description field */}
                     <div className="relative group">
                       <textarea
@@ -550,11 +611,9 @@ const ContactUs: React.FC = () => {
                         onChange={handleChange}
                         className={inputBase}
                       />
-                      <label htmlFor="teamDescription" className={labelBase}>
-                        About Your Team (Optional)
-                      </label>
+                      <label htmlFor="teamDescription" className={labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}>About Your Team (Optional)</label>
                     </div>
-                    
+
                     {/* Message field */}
                     <div className="relative group">
                       <textarea
@@ -567,11 +626,8 @@ const ContactUs: React.FC = () => {
                         className={`${inputBase} ${errors.message ? inputError : ''}`}
                         required
                       />
-                      <label htmlFor="message" className={`${labelBase} ${errors.message ? 'text-red-500' : ''}`}>
-                        Your Message
-                      </label>
-                      {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}
-                      <p className="mt-2 text-sm text-gray-500">Tell us about your specific needs or questions</p>
+                      <label htmlFor="message" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.message ? ' text-red-400' : ''}`}>Your Message</label>
+                      <p className="mt-2 text-sm text-gray-400">Tell us about your specific needs or questions</p>
                     </div>
                   </form>
                 </div>
@@ -589,7 +645,7 @@ const ContactUs: React.FC = () => {
                       <span>Back</span>
                     </button>
                   ) : <div></div>}
-                  
+
                   {currentStep < 3 ? (
                     <button
                       onClick={handleNextStep}
@@ -605,11 +661,10 @@ const ContactUs: React.FC = () => {
                       type="submit"
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${
-                        isSubmitting
+                      className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${isSubmitting
                           ? 'bg-gray-400 cursor-not-allowed'
                           : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'
-                      }`}
+                        }`}
                     >
                       {isSubmitting ? (
                         <>
@@ -633,79 +688,57 @@ const ContactUs: React.FC = () => {
               </div>
             </div>
           </div>
-          
-          {/* Trust indicators */}
-          <div className="mt-10 flex flex-wrap justify-center items-center gap-5 text-gray-500 text-sm">
-            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
-              <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span>SSL Secured</span>
-            </div>
-            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
-              <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span>100% Confidential</span>
-            </div>
-            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm">
-              <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>24-48 Hour Response</span>
-            </div>
-          </div>
         </div>
       </section>
-      
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes float-in {
-          0% { opacity: 0; transform: translate(-50%, -20px); }
-          100% { opacity: 1; transform: translate(-50%, 0); }
-        }
-        
-        @keyframes success-enter {
-          0% { opacity: 0; transform: scale(0.9) translateY(10px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 7s ease-in-out 1s infinite;
-        }
-        
-        .animate-float-in {
-          animation: float-in 0.5s ease-out forwards;
-        }
-        
-        .animate-success-enter {
-          animation: success-enter 0.5s ease-out forwards;
-        }
-        
-        .perspective-card {
-          transform: perspective(1000px) rotateX(0deg);
-          transition: transform 0.5s ease;
-        }
-        
-        .perspective-card:hover {
-          transform: perspective(1000px) rotateX(2deg);
-        }
-      `}</style>
-      
+      {/* Trust indicators */}
+      <div className="mt-10 flex flex-wrap justify-center items-center gap-5 text-gray-300 text-sm bg-black/90 py-8 border-t border-white/10">
+        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
+          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>SSL Secured</span>
+        </div>
+        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
+          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span>100% Confidential</span>
+        </div>
+        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
+          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>24-48 Hour Response</span>
+        </div>
+      </div>
+
+      <CookieConsent position="left" modalPosition="bottom" />
       <Footer />
+      <style>{`
+        @keyframes contact-hero-fade-in {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-contact-hero-fade-in {
+          animation: contact-hero-fade-in 1.1s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes contact-hero-slide-in {
+          0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-contact-hero-slide-in {
+          animation: contact-hero-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes contact-hero-gradient-in {
+          0% { opacity: 0; filter: blur(8px); }
+          100% { opacity: 1; filter: blur(0); }
+        }
+        .animate-contact-hero-gradient-in {
+          animation: contact-hero-gradient-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+      `}</style>
     </>
   );
 };

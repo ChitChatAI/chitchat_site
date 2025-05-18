@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import NavBar from '../components/purpleNavBar';
-import Footer from '../components/Footer';
+import Navbar from '../components/NavBar';
 import Lottie from 'lottie-react';
 import { ChevronDown, X, Cookie } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -11,18 +10,22 @@ import education from '../assets/lottie/education.json';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
-import SideNavigationDots from '../components/SideNavigationDots';
+import Footer from '../components/Footer';
 
 const Solutions: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const parallaxElements = useRef<HTMLElement[]>([]);
-  const [headerText, setHeaderText] = useState('');
-  const fullText = "Built for Every Business.\nDesigned to Feel Human.";
-  const [isVisible, setIsVisible] = useState(false);
+  // Remove typing effect state
+  const headerText = "Built for Every Business.\nDesigned to Feel Human.";
   const headerRef = useRef<HTMLHeadingElement>(null);
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [showHero, setShowHero] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShowHero(true), 300); // Delay for cool effect
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,24 +73,6 @@ const Solutions: React.FC = () => {
       observer.disconnect();
     };
   }, []);
-
-  useEffect(() => {
-    if (isVisible) {
-      let i = 0;
-      const typingInterval = setInterval(() => {
-        setHeaderText(fullText.substring(0, i + 1));
-        i++;
-
-        if (i > fullText.length) {
-          clearInterval(typingInterval);
-        }
-      }, 50);
-
-      return () => clearInterval(typingInterval);
-    } else {
-      setHeaderText('');
-    }
-  }, [isVisible, fullText]);
 
   const getLottie = (title: string) => {
     switch (title) {
@@ -220,388 +205,495 @@ const Solutions: React.FC = () => {
     return () => cleanupCursor();
   }, []);
 
+  // Add this effect just before the return statement (inside the component)
+  useEffect(() => {
+    // Subtle parallax for hero left/right columns
+    const handleParallax = () => {
+      const scrollY = window.scrollY;
+      const left = document.getElementById('parallax-left');
+      const right = document.getElementById('parallax-right');
+      if (left) {
+        left.style.transform = `translateY(${scrollY * 0.06}px)`;
+      }
+      if (right) {
+        right.style.transform = `translateY(${scrollY * 0.03}px)`;
+      }
+    };
+    window.addEventListener('scroll', handleParallax, { passive: true });
+    return () => window.removeEventListener('scroll', handleParallax);
+  }, []);
+
   return (
     <>
-      <NavBar />
-      
-      {/* Side Navigation Dots */}
-      <SideNavigationDots sections={['hero', 'categories', 'industries']} />
-
-      <main ref={parallaxRef} className="relative z-10 overflow-hidden">
-        <section id="hero" className="relative pt-48 pb-32 px-6 overflow-hidden">
-          {/* Background image - extended higher with negative top positioning */}
-          <div 
-            className="absolute inset-0 z-0 -top-24 bg-fixed animate-fade-in" 
-            style={{
-              backgroundImage: 'url("/solutionsPage/solutions.jpg")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          ></div>
-          
-          {/* Overlay for readability - also extended higher */}
-          <div className="absolute inset-0 z-0 bg-white/80 -top-24"></div>
-          
-          {/* Keep decorative elements but adjust opacity */}
-          <div className="absolute top-0 -right-16 w-64 h-64 bg-theme-main/10 rounded-full filter blur-3xl animate-pulse-slow z-0"></div>
-          <div className="absolute -top-20 -left-16 w-64 h-64 bg-purple-300/10 rounded-full filter blur-3xl animate-pulse-slow animation-delay-1000 z-0"></div>
-          
-          {/* Content Wrapper - adjusted text colors for better contrast against white overlay */}
-          <motion.div
-            className="relative z-10 max-w-6xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+    <Navbar />
+      <main ref={parallaxRef} className="relative z-10 overflow-hidden min-h-screen bg-black">
+        {/* HERO SECTION */}
+        <section id="hero" className="parallax-element py-16 relative z-10 pt-32">
+          {/* Video Background */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0"
           >
-            {/* Header Badge - adjusted for better visibility on white overlay */}
-            <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
-              Solutions for Every Industry
-            </div>
-            
-            {/* Header & Intro - text colors adjusted for white overlay */}
-            <div className="mb-24">
-              <div className="h-32 flex items-center justify-center mb-8">
-                <h2
-                  ref={headerRef}
-                  className="scroll-review text-5xl md:text-6xl font-bold text-gray-900 whitespace-pre-line leading-tight"
-                >
-                  {headerText}
-                </h2>
+            <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10"></div>
+          {/* Animated floating shapes */}
+          <div className="absolute top-10 left-1/4 w-60 h-60 bg-theme-main/20 rounded-full blur-3xl animate-float z-20"></div>
+          <div className="absolute bottom-10 right-1/4 w-40 h-40 bg-pink-400/20 rounded-full blur-2xl animate-float-delayed z-20"></div>
+          <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-purple-400/30 rounded-full blur-2xl animate-pulse z-20"></div>
+          <div className="container mx-auto px-6 sm:px-12 relative z-20">
+            <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 min-h-[600px] scroll-review">
+              <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]">
+                {showHero && (
+                  <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
+                    <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">
+                      Built for Every Business.
+                    </span>
+                    <span className="block text-white font-extrabold mt-2 animate-hero-slide-in delay-200">
+                      Designed to Feel Human.
+                    </span>
+                  </h1>
+                )}
+                {!showHero && (
+                  <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl opacity-0">
+                    <span className="block text-white font-extrabold pb-4">
+                      Built for Every Business.
+                    </span>
+                    <span className="block text-white font-extrabold mt-2">
+                      Designed to Feel Human.
+                    </span>
+                  </h1>
+                )}
+                <p className="text-2xl sm:text-3xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
+                  Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
+                </p>
+                {/* Animated dots for life */}
+                <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center md:justify-start">
+                  <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+                  <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+                  <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
+                </div>
               </div>
               
-              <motion.p 
-                className="text-lg md:text-xl text-center text-gray-700 max-w-2xl mx-auto mb-12 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                Discover how our AI solutions can transform your business with human-like interactions 
-                <span className="text-theme-main font-medium"> that engage, convert, and delight.</span>
-              </motion.p>
-              
-              {/* Scrolling prompt - adjusted for white overlay */}
+            </div>
+          </div>
+        </section>
+        {/* CARDS SECTION */}
+        <section className="relative z-10 py-16 bg-black">
+          <div className="container mx-auto px-6 sm:px-12">
+            <motion.div
+              className="mb-12 text-center"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+          Explore Our Solutions
+              </h2>
+              <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
+          Discover how our AI solutions can transform your business across various industries.
+              </p>
+            </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+              {/* Card 1: Telecommunications */}
               <motion.div
-                className="flex flex-col items-center justify-center mt-16 animate-bounce-gentle"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 1.2, duration: 0.8 }}
+          initial={{ opacity: 0, y: 60, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+          style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-                <span className="text-sm text-gray-500 mb-2">Explore Solutions</span>
-                <ChevronDown className="h-5 w-5 text-gray-400" />
+          <div className="flex items-center mb-5">
+            <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+              <Lottie
+                animationData={customerService}
+                loop
+                autoplay
+                style={{ height: '48px', width: '48px' }}
+              />
+            </div>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+              Telecommunications
+            </h3>
+          </div>
+          <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+            Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
+          </p>
+          <ul className="space-y-3 mb-6">
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">24/7 emotionally responsive support</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Seamless handoff to human agents</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Context-aware conversation history</span>
+            </li>
+          </ul>
+          <a
+            href="#"
+            className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+            tabIndex={0}
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+            </svg>
+          </a>
+              </motion.div>
+              {/* Card 2: E-Commerce */}
+              <motion.div
+          initial={{ opacity: 0, y: 60, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+          style={{ clipPath: 'polygon(12% 0%, 88% 0%, 100% 20%, 100% 80%, 88% 100%, 12% 100%, 0% 80%, 0% 20%)' }}
+              >
+          <div className="flex items-center mb-5">
+            <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+              <Lottie
+                animationData={sales}
+                loop
+                autoplay
+                style={{ height: '48px', width: '48px' }}
+              />
+            </div>
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+              E-Commerce
+            </h3>
+          </div>
+          <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+            Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
+          </p>
+          <ul className="space-y-3 mb-6">
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Qualified lead generation</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Personalized product recommendations</span>
+            </li>
+            <li className="flex items-center">
+              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                <span className="material-symbols-outlined text-theme-main text-sm">
+            check_circle
+                </span>
+              </div>
+              <span className="text-gray-200">Consistent brand voice and messaging</span>
+            </li>
+          </ul>
+          <a
+            href="#"
+            className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+            tabIndex={0}
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+            </svg>
+          </a>
+              </motion.div>
+              {/* Card 3: Healthcare */}
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                style={{ clipPath: 'polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%)' }}
+              >
+                <div className="flex items-center mb-5">
+                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                    <Lottie
+                      animationData={healthcare}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                    Healthcare
+                  </h3>
+                </div>
+                <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-200">Empathetic health guidance</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-200">Medication and appointment reminders</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-200">Wellness check-ins and monitoring</span>
+                  </li>
+                </ul>
+                <a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </a>
+              </motion.div>
+              {/* Card 4: Education & Online Learning */}
+              <motion.div
+                initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)' }}
+              >
+                <div className="flex items-center mb-5">
+                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                    <Lottie
+                      animationData={education}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                    Education & Online Learning
+                  </h3>
+                </div>
+                <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-200">Adaptive learning pathways</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-200">Personalized feedback and assessment</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                      <span className="material-symbols-outlined text-theme-main text-sm">
+                        check_circle
+                      </span>
+                    </div>
+                    <span className="text-gray-200">24/7 learning support</span>
+                  </li>
+                </ul>
+                <a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </a>
               </motion.div>
             </div>
-
-            {/* Category Cards - Keep existing enhanced styling */}
-            <div id="categories" className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-24 text-left">
-              {solutionCategories.map((category, index) => (
+          </div>
+        </section>
+        {/* INDUSTRIES SECTION */}
+        <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
+          <div className="container mx-auto px-6 sm:px-12">
+            <motion.div
+              className="mb-20 text-center scroll-review"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
+                Versatile Solutions
+              </span>
+              <h3 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                More Industries We Serve
+              </h3>
+              <p className="text-xl sm:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto font-medium drop-shadow">
+                Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
+              </p>
+            </motion.div>
+            {/* Normal neural timeline */}
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
+              {additionalSolutions.map((item, index) => (
                 <motion.div
                   key={index}
-                  className={`scroll-review bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden no-underline ${
-                    activeCategory === index ? 'ring-2 ring-theme-main/30 transform scale-[1.02]' : ''
-                  }`}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 * index, duration: 0.7 }}
-                  onMouseEnter={() => handleCardHover(index)}
-                  onMouseLeave={() => handleCardHover(null)}
+                  className="relative scroll-review"
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
                 >
-                  <div className="relative p-6 md:p-8 h-full flex flex-col">
-                    {/* Category header */}
-                    <div className="flex items-center mb-5 no-underline">
-                      <div className="w-16 h-16 flex items-center justify-center mr-4 bg-theme-main/5 rounded-lg no-underline">
-                        <Lottie
-                          animationData={getLottie(category.title)}
-                          loop
-                          autoplay
-                          style={{ height: '48px', width: '48px' }}
-                          className="no-underline"
-                        />
-                      </div>
-                      <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent no-underline">
-                        {category.title}
-                      </h3>
+                  {/* Neural dot style */}
+                  <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                  <div className="flex flex-row w-full items-start">
+                    <div className="w-1/3 min-w-[180px] pr-6 flex items-center">
+                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{item.title}</h4>
                     </div>
-                    
-                      
-                    
-                    {/* Description */}
-                    <p className="text-gray-600 text-lg mb-6 leading-relaxed flex-grow no-underline">
-                      {category.description}
-                    </p>
-                    
-                    {/* Features */}
-                    <ul className="space-y-3 mb-6">
-                      {category.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center">
-                          <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                            <span className="material-symbols-outlined text-theme-main text-sm no-underline">
-                              check_circle
-                            </span>
-                          </div>
-                          <span className="text-gray-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    {/* Call to action */}
-                    <div className="mt-auto pt-4">
-                      <a
-                        href="#"
-                        className="group inline-flex items-center text-theme-main hover:text-theme-dark font-medium transition-colors duration-300 no-underline"
-                      >
-                        <span>Learn more</span>
-                        <span className="ml-1 transform transition-transform duration-300 group-hover:translate-x-1">→</span>
-                      </a>
+                    <div className="w-2/3">
+                      <p className="text-base text-gray-200 leading-relaxed">{item.text}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-          
-          {/* Curved divider to next section */}
-          <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto fill-white">
-              <path d="M0,96L80,85.3C160,75,320,53,480,58.7C640,64,800,96,960,96C1120,96,1280,64,1360,48L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-            </svg>
           </div>
         </section>
-
-
-        {/* Industries Section */}
-        <section id="industries" className="relative bg-white py-32 px-6 overflow-hidden">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              className="mb-20 text-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+        {/* USE CASES SECTION */}
+        <section id="use-cases" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
+          <div className="container mx-auto px-6 sm:px-12">
+            <motion.h2
+              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent scroll-review"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
             >
-              <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
-                Versatile Solutions
-              </span>
-              <h3 className="text-4xl font-bold text-gray-900 mb-4">More Industries We Serve</h3>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
-              </p>
-            </motion.div>
-            
-            {/* Enhanced neural timeline */}
-            <div className="relative neural-timeline">
-              {/* Timeline line with animation */}
-              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-theme-main to-transparent neural-timeline-line"></div>
-              
-              <div className="ml-10 md:ml-16 space-y-24">
-                {additionalSolutions.map((item, index) => (
-                  <motion.div 
-                    key={index} 
-                    className="relative"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, threshold: 0.2 }}
-                    transition={{ delay: index * 0.1, duration: 0.7 }}
-                  >
-                    {/* Enhanced neural dot */}
-                    <div className="absolute -left-[36px] md:-left-[42px] top-2 neural-dot-container">
-                      <span className="neural-dot w-5 h-5 rounded-full bg-theme-main/80 flex items-center justify-center shadow-md shadow-theme-main/20 border-2 border-white">
-                        <span className="w-2 h-2 rounded-full bg-white"></span>
-                      </span>
-                    </div>
-                    
-                    {/* Content card with subtle glass effect */}
-                    <div className="p-6 md:p-8 rounded-xl bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
-                      <h4 className="text-2xl font-bold text-theme-main mb-3">{item.title}</h4>
-                      <p className="text-gray-700 leading-relaxed">{item.text}</p>
-                      
-                      {/* Subtle button */}
-                      <a href="#" className="mt-4 inline-flex items-center text-sm text-theme-main hover:text-theme-dark font-medium group">
-                        <span>Explore capabilities</span>
-                        <svg 
-                          className="w-4 h-4 ml-1 transform transition-transform group-hover:translate-x-1" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </a>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Blurb under More Industries We Serve */}
-            <motion.div
-              className="mt-16 text-center relative overflow-hidden"
-              initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
-            >
-              <div className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-medium px-12 py-8 rounded-xl shadow-lg overflow-hidden">
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center text-lg font-semibold text-center"
-                  initial={{ x: '100%' }}
-                  animate={{ x: '-100%' }}
-                  transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-                  style={{ whiteSpace: 'nowrap' }}
-                >
-                  Don’t see your industry? <span className="font-bold mx-2">ChitChat is flexible.</span> Our AI personas are fully customizable and can be tailored to any industry, tone, or role — even if it’s not listed here. If you’ve got a use case, we can build the voice for it.
-                </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-20 rounded-xl pointer-events-none"></div>
-              </div>
-            </motion.div>
-          </div>
-          
-          {/* Background elements */}
-          <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-purple-100/20 filter blur-3xl opacity-50 z-0"></div>
-          <div className="absolute -bottom-20 -left-40 w-64 h-64 rounded-full bg-theme-main/5 filter blur-3xl opacity-70 z-0"></div>
-        </section>
-
-        {/* Use Cases Section */}
-        <section id="use-cases" className="relative py-20 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
-          <div className="relative z-20 max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4 pb-6 text-center">
               Use Cases
-            </h2>
-            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16 neural-timeline">
-              {useCases.map((useCase, index, arr) => (
-                <div
+            </motion.h2>
+            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
+              {useCases.map((useCase, index) => (
+                <motion.div
                   key={index}
-                  className="relative bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 10%, 100% 90%, 0 100%)',
-                  }}
+                  className="relative bg-white/5 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl scroll-review"
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
                 >
-                  {/* Modernized neural dot with uniform padding */}
-                  <span className="absolute -left-[42px] top-1 p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center">
-                    <span className="w-3 h-3 bg-white rounded-full"></span>
-                  </span>
-                  <h3 className="font-header text-2xl font-bold text-theme-main mb-3">
-                    {useCase.title}
-                  </h3>
-                  <p className="text-base text-gray-700 font-satoshi leading-relaxed mb-2">
-                    {useCase.description}
-                  </p>
-                  {index < arr.length - 1 && (
-                    <div className="w-16 h-0.5 bg-gradient-to-r from-theme-main/20 to-transparent mt-8 rounded-full"></div>
-                  )}
-                </div>
+                  {/* Neural dot style */}
+                  <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                  <div className="flex flex-row w-full items-start">
+                    <div className="w-1/3 min-w-[180px] pr-6 flex items-center">
+                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{useCase.title}</h4>
+                    </div>
+                    <div className="w-2/3">
+                      <p className="text-base text-gray-200 leading-relaxed">{useCase.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
-
-        {/* Enhanced Call To Action */}
-        <CallToAction 
-          bgImage="/solutionsPage/solutions.jpg" 
-          showOverlay={true} 
-          overlayOpacity={0.85}
-        />
-
-        {/* Cookie Policy Floating Button - Left Side */}
-        <CookieConsent position="left" modalPosition="bottom" />
-
-        {/* Animation keyframes and styles */}
-        <style jsx global>{`
-          /* Base animations */
-          @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-          }
-          
-          @keyframes slideDown {
-            from { transform: translateY(0); }
-            to { transform: translateY(100%); }
-          }
-          
-          /* Modern animations */
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-          }
-          
-          @keyframes float-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-          }
-          
-          @keyframes pulse-slow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.7; }
-          }
-          
-          @keyframes bounce-gentle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-          }
-          
-          /* Apply animations */
-          .animate-float {
-            animation: float 8s ease-in-out infinite;
-          }
-          
-          .animate-float-slow {
-            animation: float-slow 12s ease-in-out infinite;
-          }
-          
-          .animate-pulse-slow {
-            animation: pulse-slow 6s ease-in-out infinite;
-          }
-          
-          .animate-bounce-gentle {
-            animation: bounce-gentle 3s ease-in-out infinite;
-          }
-          
-          .animation-delay-1000 {
-            animation-delay: 1s;
-          }
-          
-          /* Neural timeline enhancements */
-          .neural-timeline {
-            position: relative;
-          }
-          
-          .neural-timeline-line {
-            opacity: 0;
-            animation: growLine 1.5s ease-out forwards 0.5s;
-          }
-          
-          @keyframes growLine {
-            from { opacity: 0; height: 0; }
-            to { opacity: 1; height: 100%; }
-          }
-          
-          .neural-dot-container {
-            position: relative;
-            z-index: 10;
-          }
-          
-          .neural-dot {
-            transform: scale(0);
-            animation: growDot 0.6s cubic-bezier(0.17, 0.67, 0.36, 1.5) forwards;
-          }
-          
-          @keyframes growDot {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-          }
-          
-          .neural-dot-container:hover .neural-dot {
-            transform: scale(1.2);
-            transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.36, 1.5);
-          }
-          
-          /* Background grid pattern */
-          .bg-grid-pattern {
-            background-image: linear-gradient(to right, rgba(80, 36, 255, 0.05) 1px, transparent 1px), 
-                              linear-gradient(to bottom, rgba(80, 36, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-          }
-        `}</style>
+        <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .parallax-element {
+          will-change: transform;
+          position: relative;
+          z-index: 10;
+        }
+        @keyframes hero-fade-in {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-hero-fade-in {
+          animation: hero-fade-in 1.1s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes hero-slide-in {
+          0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-hero-slide-in {
+          animation: hero-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+      `}</style>
       </main>
+      <CookieConsent position="left" modalPosition="bottom" />
+      <CallToAction />
       <Footer />
     </>
   );
