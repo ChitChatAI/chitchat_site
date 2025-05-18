@@ -324,11 +324,11 @@ const ContactUs: React.FC = () => {
             id="contact-hero-parallax-row"
             style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
             >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
-              Let's Build Your AI Solution
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-contact-hero-fade-in">
+              <span className="block animate-contact-hero-slide-in">Let's Build Your AI Solution</span>
             </h1>
-            <p className="text-xl sm:text-2xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
-              Fill out the form below to get started with <span className="text-theme-main font-semibold">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
+            <p className="text-xl sm:text-2xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
+              Fill out the form below to get started with <span className="text-theme-main font-semibold animate-contact-hero-gradient-in delay-400">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
             </p>
             <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
               <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
@@ -340,7 +340,7 @@ const ContactUs: React.FC = () => {
       </section>
 
       {/* Shifted Form Section */}
-      <section className="relative py-24 px-4 sm:px-10 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
+      <section className="relative px-4 sm:px-10 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
         <div className="container mx-auto">
           <div className="bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card w-full max-w-3xl mx-auto">
             {/* Form steps container */}
@@ -714,6 +714,31 @@ const ContactUs: React.FC = () => {
 
       <CookieConsent position="left" modalPosition="bottom" />
       <Footer />
+      <style>{`
+        @keyframes contact-hero-fade-in {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-contact-hero-fade-in {
+          animation: contact-hero-fade-in 1.1s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes contact-hero-slide-in {
+          0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-contact-hero-slide-in {
+          animation: contact-hero-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes contact-hero-gradient-in {
+          0% { opacity: 0; filter: blur(8px); }
+          100% { opacity: 1; filter: blur(0); }
+        }
+        .animate-contact-hero-gradient-in {
+          animation: contact-hero-gradient-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+      `}</style>
     </>
   );
 };

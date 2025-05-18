@@ -21,6 +21,11 @@ const Solutions: React.FC = () => {
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [showHero, setShowHero] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShowHero(true), 300); // Delay for cool effect
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -235,18 +240,33 @@ const Solutions: React.FC = () => {
             <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10"></div>
+          {/* Animated floating shapes */}
+          <div className="absolute top-10 left-1/4 w-60 h-60 bg-theme-main/20 rounded-full blur-3xl animate-float z-20"></div>
+          <div className="absolute bottom-10 right-1/4 w-40 h-40 bg-pink-400/20 rounded-full blur-2xl animate-float-delayed z-20"></div>
+          <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-purple-400/30 rounded-full blur-2xl animate-pulse z-20"></div>
           <div className="container mx-auto px-6 sm:px-12 relative z-20">
-            <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 min-h-[600px]">
+            <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 min-h-[600px] scroll-review">
               <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]">
-              
-                <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-fade-in-up">
-                  <span className="block text-white font-extrabold animate-gradient-x pb-4">
-                    Built for Every Business.
-                  </span>
-                  <span className="block text-white font-extrabold mt-2 animate-fade-in-up delay-150">
-                    Designed to Feel Human.
-                  </span>
-                </h1>
+                {showHero && (
+                  <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
+                    <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">
+                      Built for Every Business.
+                    </span>
+                    <span className="block text-white font-extrabold mt-2 animate-hero-slide-in delay-200">
+                      Designed to Feel Human.
+                    </span>
+                  </h1>
+                )}
+                {!showHero && (
+                  <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl opacity-0">
+                    <span className="block text-white font-extrabold pb-4">
+                      Built for Every Business.
+                    </span>
+                    <span className="block text-white font-extrabold mt-2">
+                      Designed to Feel Human.
+                    </span>
+                  </h1>
+                )}
                 <p className="text-2xl sm:text-3xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-fade-in-up delay-300">
                   Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
                 </p>
@@ -655,6 +675,21 @@ const Solutions: React.FC = () => {
           position: relative;
           z-index: 10;
         }
+        @keyframes hero-fade-in {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-hero-fade-in {
+          animation: hero-fade-in 1.1s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes hero-slide-in {
+          0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-hero-slide-in {
+          animation: hero-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .delay-200 { animation-delay: 0.2s; }
       `}</style>
       </main>
       <CookieConsent position="left" modalPosition="bottom" />

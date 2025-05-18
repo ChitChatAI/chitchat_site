@@ -38,10 +38,10 @@ const Header: React.FC = () => {
                     <div className="container-large mx-auto px-20 py-28 text-left relative z-10">
                         <div className="header_content flex flex-col items-center sm:items-start justify-center w-full text-center sm:text-left animate-fade-in">
                             <div className="header_title-wrap is-home max-w-4xl">
-                                <h1 className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-fade-in delay-100 drop-shadow-lg">
-                                    <span className="block mb-4">The Future of AI Conversations,</span>
-                                    <span className="block mb-4">So Real, You'll Forget It's Not.</span>
-                                    <span className="hero-gradient-text block text-[clamp(1.25rem,4vw,2.25rem)] mt-6 drop-shadow-lg">Human Augmented AI by ChitChat</span>
+                                <h1 className="scroll-review opacity-0 transform translate-y-6 text-white font-header font-extrabold text-[clamp(2rem,6vw,3.25rem)] leading-[150%] tracking-tight sm:leading-[1.4] animate-header-hero drop-shadow-lg">
+                                    <span className="block mb-4 animate-header-slide-in">The Future of AI Conversations,</span>
+                                    <span className="block mb-4 animate-header-slide-in delay-150">So Real, You'll Forget It's Not.</span>
+                                    <span className="hero-gradient-text block text-[clamp(1.25rem,4vw,2.25rem)] mt-6 drop-shadow-lg animate-header-gradient-in delay-300">Human Augmented AI by ChitChat</span>
                                 </h1>
                                 <p className="text-white/80 font-sans text-base sm:text-lg mt-4 max-w-3xl drop-shadow-sm leading-[150%]">
                                     Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
@@ -105,6 +105,31 @@ const Header: React.FC = () => {
                     <div className="absolute inset-0 z-20 bg-[#260a40]/30 backdrop-blur-[5px]" />
                 </div>
             </header>
+            <style>{`
+        @keyframes header-hero {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-header-hero {
+          animation: header-hero 1.1s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes header-slide-in {
+          0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-header-slide-in {
+          animation: header-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes header-gradient-in {
+          0% { opacity: 0; filter: blur(8px); }
+          100% { opacity: 1; filter: blur(0); }
+        }
+        .animate-header-gradient-in {
+          animation: header-gradient-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .delay-150 { animation-delay: 0.15s; }
+        .delay-300 { animation-delay: 0.3s; }
+      `}</style>
         </>
     );
 };
