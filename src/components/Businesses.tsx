@@ -104,7 +104,15 @@ const Businesses: React.FC = () => {
   return (
     <div className="font-satoshi">
       {/* Business Values Section */}
-      <section id="value" className="relative py-32 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
+      <section id="value" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 border-t border-gray-100 overflow-hidden px-4 sm:px-8 lg:px-20">
+        {/* Subtle glowy background elements */}
+        <div className="absolute top-0 left-0 w-[28rem] h-[28rem] bg-theme-main/10 rounded-full blur-[120px] -z-10"></div>
+        <div className="absolute bottom-0 right-0 w-[24rem] h-[24rem] bg-pink-400/10 rounded-full blur-[100px] -z-10"></div>
+        <div className="pointer-events-none">
+          <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[100px] opacity-40 z-0"></div>
+          <div className="absolute bottom-10 left-1/4 w-48 h-48 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[80px] opacity-30 z-0"></div>
+          <div className="absolute top-10 right-1/4 w-64 h-64 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[90px] opacity-30 z-0"></div>
+        </div>
         <motion.div
           className="max-w-7xl mx-auto"
           initial="hidden"
@@ -112,13 +120,12 @@ const Businesses: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
           variants={{
             hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
           }}
         >
-          <h3 className="text-3xl font-bold text-gray-800 mb-4 pb-6 text-center">
+          <h3 className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 pb-16 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
             How ChitChat Adds Value to Your Business
           </h3>
-      
           <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
             {businessValues.map((item, index) => (
               <motion.div
@@ -129,12 +136,12 @@ const Businesses: React.FC = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={itemAnimation}
               >
-                {/* Modernized neural dot with uniform padding */}
-                <span className="absolute -left-[14px] top-1 p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center">
-                  <span className="w-3 h-3 bg-white rounded-full"></span>
-                </span>
+                {/* Neural dot style */}
+                <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
                 <div className="ml-4">
-                  <h4 className="text-2xl font-semibold text-gray-800 mb-2">{item.title}</h4>
+                  <h4 className="text-2xl font-bold text-gray-800 mb-2 bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                    {item.title}
+                  </h4>
                   <p className="text-sm text-theme-main font-bold uppercase tracking-wider mb-2">{item.metric}</p>
                   <p className="text-base text-gray-600 leading-relaxed">{item.description}</p>
                 </div>
@@ -143,9 +150,16 @@ const Businesses: React.FC = () => {
           </div>
         </motion.div>
       </section>
-
       {/* What's Included Section */}
-      <section id="whats-included" className="relative bg-white py-32 px-6 sm:px-10 lg:px-20 border-t border-gray-100">
+      <section id="whats-included" className="relative bg-white py-20 md:py-32 border-t border-gray-100 overflow-hidden px-4 sm:px-8 lg:px-20">
+        {/* Subtle glowy background elements */}
+        <div className="absolute top-0 left-0 w-[20rem] h-[20rem] bg-theme-main/10 rounded-full blur-[100px] -z-10"></div>
+        <div className="absolute bottom-0 right-0 w-[18rem] h-[18rem] bg-pink-400/10 rounded-full blur-[80px] -z-10"></div>
+        <div className="pointer-events-none">
+          <div className="absolute top-1/4 left-1/3 w-60 h-60 bg-gradient-to-br from-theme-main/20 via-purple-400/10 to-pink-400/10 rounded-full blur-[80px] opacity-40 z-0"></div>
+          <div className="absolute bottom-10 left-1/4 w-36 h-36 bg-gradient-to-tr from-pink-400/20 via-theme-main/10 to-white/0 rounded-full blur-[60px] opacity-30 z-0"></div>
+          <div className="absolute top-10 right-1/4 w-48 h-48 bg-gradient-to-bl from-purple-400/20 via-theme-main/10 to-white/0 rounded-full blur-[70px] opacity-30 z-0"></div>
+        </div>
         <motion.div
           className="max-w-6xl mx-auto"
           initial="hidden"
@@ -156,10 +170,9 @@ const Businesses: React.FC = () => {
             visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
           }}
         >
-          <h3 className="text-3xl font-bold text-gray-800 mb-4 pb-6 text-center">
+          <h3 className="text-4xl sm:text-5xl font-extrabold text-center text-gray-900 mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
             What’s Included in Every ChitChat Package
           </h3>
-      
           <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20">
             {[
               {
@@ -191,19 +204,17 @@ const Businesses: React.FC = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={itemAnimation}
               >
-                {/* Modernized neural dot with uniform padding */}
-                <span className="absolute -left-[14px] top-1 p-2 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg flex items-center justify-center">
-                  <span className="w-3 h-3 bg-white rounded-full"></span>
-                </span>
-                <h4 className="text-2xl font-semibold text-gray-800 mb-2 ml-4">{item.title}</h4>
+                {/* Neural dot style */}
+                <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                <h4 className="text-2xl font-bold text-gray-800 mb-2 ml-4 bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                  {item.title}
+                </h4>
                 <p className="text-base text-gray-600 max-w-2xl leading-relaxed">{item.text}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </section>
-      
-
     </div>
   );
 };
