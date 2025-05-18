@@ -165,7 +165,7 @@ const Values: React.FC = () => {
             {/* Values Section */}
             <section
                 id="climber-values"
-                className="py-16 px-6 bg-gray-50"
+                className="py-16 px-6 bg-gray-50 values-section"
             >
                 <div
                     className="relative z-20 max-w-7xl mx-auto"
@@ -180,7 +180,7 @@ const Values: React.FC = () => {
                                     key={index}
                                     className="relative"
                                 >
-                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full"></span>
                                     <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
                                     <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
                                 </div>
@@ -224,7 +224,7 @@ const Values: React.FC = () => {
             </section>
 
             {/* Scientists Values Section */}
-            <section id="scientist-values" className="py-16 px-6 bg-gray-50">
+            <section id="scientist-values" className="py-16 px-6 bg-gray-50 values-section">
                 <div
                     className="relative z-20 max-w-7xl mx-auto"
                 >
@@ -251,7 +251,7 @@ const Values: React.FC = () => {
                                     key={index}
                                     className="relative"
                                 >
-                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full"></span>
                                     <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
                                     <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
                                 </div>
@@ -295,7 +295,7 @@ const Values: React.FC = () => {
 
 
             {/* Open Values Section */}
-            <section id="open-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50">
+            <section id="open-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50 values-section">
                 <div
                     className="relative z-20 max-w-7xl mx-auto"
                 >
@@ -334,7 +334,7 @@ const Values: React.FC = () => {
                                     key={index}
                                     className="relative"
                                 >
-                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md"></span>
+                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full"></span>
                                     <h3 className="text-2xl font-semibold text-theme-main mb-2">{value.title}</h3>
                                     <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{value.description}</p>
                                 </div>
@@ -377,7 +377,7 @@ const Values: React.FC = () => {
             </section>
 
             {/* Tribe Values Section */}
-            <section id="tribe-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50">
+            <section id="tribe-values" className="py-16 px-10 sm:px-14 md:px-20 bg-gray-50 values-section">
                 <div className="relative z-20 max-w-7xl mx-auto">
                     <div className="max-w-6xl mx-auto">
                         <h3 className="scroll-review opacity-0 transform translate-y-6 text-4xl font-bold text-center text-gray-900 mb-20 transition-all duration-700">
@@ -397,7 +397,7 @@ const Values: React.FC = () => {
                             ].map((value, index, arr) => (
                                 <div key={index} className="relative">
                                     {/* Main neural dot */}
-                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full shadow-md z-10"></span>
+                                    <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full z-10"></span>
                                     <h3 className="text-2xl font-semibold text-theme-main mb-3 drop-shadow-md">{value.title}</h3>
                                     <p className="text-base text-gray-600 drop-shadow-sm">{value.description}</p>
                                 </div>
@@ -460,6 +460,23 @@ affords us, and strive to improve things for others.`}
                 }
                 `}
             </style>
+            <style jsx>{`
+    .values-section {
+        padding: 16px;
+    }
+
+    @media (min-width: 768px) {
+        .values-section {
+            padding: 32px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .values-section {
+            padding: 48px;
+        }
+    }
+`}</style>
 
             <Footer />
         </>

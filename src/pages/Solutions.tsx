@@ -222,7 +222,7 @@ const Solutions: React.FC = () => {
     <>
     <Navbar />
       <main ref={parallaxRef} className="relative z-10 overflow-hidden">
-        <div id="hero" className="relative py-20 md:py-44 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
+        <div id="hero" className="relative md:py-44 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8">
           {/* Glowy background elements */}
           <div className="absolute top-0 left-0 w-[32rem] h-[32rem] bg-theme-main/10 rounded-full blur-[120px] -z-10"></div>
           <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-pink-400/10 rounded-full blur-[100px] -z-10"></div>
@@ -796,6 +796,25 @@ const Solutions: React.FC = () => {
             background-size: 30px 30px;
           }
         `}</style>
+        <style jsx>{`
+    .solutions-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+        .solutions-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .solutions-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+`}</style>
       </main>
       <CookieConsent position="left" modalPosition="bottom" />
       <CallToAction bgImage='/solutionsPage/solutions.jpg'/>

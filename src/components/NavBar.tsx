@@ -5,7 +5,7 @@ const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks = [
     { path: '/', label: 'About us' },
-    {path: '/solutions', label: 'Solutions' },
+    { path: '/solutions', label: 'Solutions' },
     { path: '/blog', label: 'Blog' },
     { path: '/contactus', label: "Let's talk" },
   ];
@@ -43,47 +43,31 @@ const NavBar: React.FC = () => {
               </span>
             </span>
           </NavLink>
-          {/* Desktop NavLinks */}
-          <ul className="hidden lg:flex items-center space-x-10 ml-8">
-            {navLinks.map(({ path, label }) => (
-              <li key={path} className="flex flex-col items-center group">
-                <NavLink
-                  to={path}
-                  className={({ isActive }) =>
-                    `font-poppins text-lg font-semibold transition-colors duration-200 pb-1 ${
-                      isActive
-                        ? 'text-theme-main'
-                        : 'text-gray-700 hover:text-theme-main'
-                    }`
-                  }
-                >
-                  {label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-          {/* Mobile Menu Toggle */}
-          <div className="lg:hidden">
-            <button
-              className="p-2 rounded-full text-theme-main bg-white/90 shadow border border-theme-main/10 hover:bg-theme-main/10 transition"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
+          {/* Hamburger Menu Toggle */}
+          <button
+            className="p-2 rounded-full text-theme-main bg-white/90 shadow border border-theme-main/10 hover:bg-theme-main/10 transition"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-            </button>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}
+              />
+            </svg>
+          </button>
         </div>
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden mt-2 bg-white rounded-2xl shadow-2xl py-6 px-8 z-50 border border-gray-100">
+          <div className="mt-2 bg-white rounded-2xl shadow-2xl py-6 px-8 z-50 border border-gray-100">
             <ul className="flex flex-col space-y-6">
               {navLinks.map(({ path, label }) => (
                 <li key={path} className="flex items-center space-x-4 group">

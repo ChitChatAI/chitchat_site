@@ -221,92 +221,16 @@ const Pricing: React.FC = () => {
           </div>
 
           {/* Complex 3D pricing cards with enhanced visuals */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pricing-cards">
             {plans.map((plan, idx) => (
               <div
                 key={idx}
-                className={`group relative bg-white border border-gray-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between ${
-                  idx === 1 ? 'md:scale-110 md:-mt-6 md:mb-6 md:z-10' : ''
-                }`}
+                className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10"
               >
-                {/* Background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-gray-50 rounded-2xl -z-10"></div>
-                
-                {/* Decorative corner elements */}
-                <div className="absolute top-0 right-0 w-24 h-24 overflow-hidden">
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-theme-main/5 transform rotate-45 translate-x-8 -translate-y-8 group-hover:bg-theme-main/10 transition-all duration-300"></div>
-                </div>
-                
-                <div className="absolute bottom-0 left-0 w-16 h-16 overflow-hidden">
-                  <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-theme-main/10 rounded-bl-xl"></div>
-                </div>
-                
-                {/* Highlight for middle plan */}
-                {idx === 1 && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-theme-main text-white text-xs font-bold py-1 px-4 rounded-full">
-                    Most Popular
-                  </div>
-                )}
-                
                 <div className="relative">
-                  <div className="flex items-center mb-8">
-                    <div className={`w-12 h-12 flex items-center justify-center rounded-lg ${
-                      idx === 0 ? 'bg-purple-50' : idx === 1 ? 'bg-blue-50' : 'bg-green-50'
-                    }`}>
-                      <span className={`material-symbols-outlined ${
-                        idx === 0 ? 'text-purple-600' : idx === 1 ? 'text-blue-600' : 'text-green-600'
-                      } text-2xl`}>
-                        {plan.icon}
-                      </span>
-                    </div>
-                    <h3 className="ml-4 text-xl font-header font-semibold text-gray-800">{plan.name}</h3>
-                  </div>
-                  
-                  <p className="text-gray-600 mb-8 leading-relaxed font-satoshi min-h-[60px]">{plan.description}</p>
-                  
-                  <div className="mb-8 flex items-end">
-                    <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                    <span className="text-base text-gray-500 ml-2 mb-1">{plan.frequency}</span>
-                  </div>
-                  
-                  <div className="relative mb-12">
-                    <div className={`absolute -left-3 top-0 bottom-0 w-1 ${
-                      idx === 0 ? 'bg-purple-200' : idx === 1 ? 'bg-blue-200' : 'bg-green-200'
-                    }`}></div>
-                    <ul className="space-y-4 text-gray-700">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-center text-sm">
-                          <span className={`material-symbols-outlined ${
-                            idx === 0 ? 'text-purple-600' : idx === 1 ? 'text-blue-600' : 'text-green-600'
-                          } mr-3 text-lg`}>
-                            check_circle
-                          </span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                
-                <div className="relative">
-                  <button
-                    className={`relative w-full px-6 py-3 rounded-lg font-medium text-sm transition-all duration-300 overflow-hidden group-hover:scale-[1.02] shadow-md
-                      ${idx === 0 
-                        ? 'bg-purple-600 hover:bg-purple-700 text-white' 
-                        : idx === 1 
-                          ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                          : 'bg-green-600 hover:bg-green-700 text-white'}`
-                    }
-                  >
-                    <span className="relative z-10">{plan.button}</span>
-                    <span className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
-                  </button>
-                  
-                  <div className="mt-3 text-center">
-                    <a href="#" className="text-xs text-gray-500 hover:text-theme-main transition-colors">
-                      View full details
-                    </a>
-                  </div>
+                  <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full"></span>
+                  <h3 className="text-2xl font-semibold text-theme-main mb-2">{plan.name}</h3>
+                  <p className="text-base text-gray-600 max-w-3xl leading-relaxed">{plan.description}</p>
                 </div>
               </div>
             ))}
@@ -690,6 +614,25 @@ const Pricing: React.FC = () => {
           </motion.div>
         </motion.div>
       )}
+      <style jsx>{`
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .pricing-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .pricing-cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+      `}</style>
     </>
   );
 };

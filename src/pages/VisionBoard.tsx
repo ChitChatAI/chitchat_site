@@ -143,7 +143,7 @@ const VisionBoard: React.FC = () => {
     }, []);
 
     return (
-        <>
+        <div className="vision-board-container">
             {/* Complex Background Details */}
             <div className="fixed inset-0 z-[-1] pointer-events-none">
                 {/* Gradient Background */}
@@ -545,10 +545,26 @@ const VisionBoard: React.FC = () => {
                 .bg-gradient-radial {
                     background: radial-gradient(circle, var(--tw-gradient-stops));
                 }
+
+                .vision-board-container {
+                    padding: 16px;
+                }
+
+                @media (min-width: 768px) {
+                    .vision-board-container {
+                        padding: 32px;
+                    }
+                }
+
+                @media (min-width: 1024px) {
+                    .vision-board-container {
+                        padding: 48px;
+                    }
+                }
             `}</style>
 
             <Footer />
-        </>
+        </div>
     );
 };
 

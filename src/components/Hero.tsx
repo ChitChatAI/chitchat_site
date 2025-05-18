@@ -134,7 +134,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
     <>
     <section
       id={id}
-      className="relative py-20 md:py-44 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8"
+      className="relative py-6 md:py-32 bg-gradient-to-br from-white via-gray-50 to-gray-100 font-[Satoshi] overflow-hidden px-4 sm:px-8"
     >
       {/* Modern blurred background shapes */}
       <div className="absolute top-0 left-0 w-[32rem] h-[32rem] bg-theme-main/10 rounded-full blur-[120px] -z-10 animate-float-slow"></div>
