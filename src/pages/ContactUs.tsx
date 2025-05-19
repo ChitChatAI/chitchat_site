@@ -324,8 +324,8 @@ const ContactUs: React.FC = () => {
             id="contact-hero-parallax-row"
             style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
             >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-contact-hero-fade-in">
-              <span className="block animate-contact-hero-slide-in">Let's Build Your AI Solution</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
+              <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">Let's Build Your AI Solution</span>
             </h1>
             <p className="text-xl sm:text-2xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
               Fill out the form below to get started with <span className="text-theme-main font-semibold animate-contact-hero-gradient-in delay-400">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
