@@ -242,16 +242,43 @@ const Businesses: React.FC = () => {
             How Businesses Use ChitChat
           </h2>
           
-          <div className="space-y-8">
-            {useCases.map((item, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'Instant Support That Feels Personal',
+                description:
+                  'No more long wait times or robotic replies. Our AI personas handle customer queries immediately, 24/7, while sounding human, warm, and helpful.',
+              },
+              {
+                title: 'Customer Retention, Reinvented',
+                description:
+                  'Catch cancellations before they happen. Our AI personas are trained in subtle psychological techniques to calm, connect, and convince.',
+              },
+              {
+                title: 'Humanised Automation for Every Department',
+                description:
+                  'From tech support to billing, we tailor the tone. Each persona is custom-built to match your brand and department needs.',
+              },
+              {
+                title: 'Never Sound Generic Again',
+                description:
+                  'Say goodbye to copy-paste chatbot templates. ChitChat personas are deeply humanised, each with unique quirks, tone, and emotional intelligence.',
+              },
+              {
+                title: 'Custom Chatbots for Any Industry',
+                description:
+                  "Whether you're in telecoms, healthcare, finance, or e-commerce - we design personas that fit right in with deep context training and real conversational nuance.",
+              },
+            ].map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-8 hover:bg-white/10 transition-all duration-300"
+                className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6 hover:bg-white/20 transition-all duration-300"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)' }}
               >
-                <h3 className="text-2xl font-bold text-white mb-3">
+                <h3 className="text-2xl font-bold mb-3 text-white bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                   {item.title}
                 </h3>
-                <p className="text-gray-300 text-lg">{item.description}</p>
+                <p className="text-gray-300">{item.description}</p>
               </div>
             ))}
           </div>
