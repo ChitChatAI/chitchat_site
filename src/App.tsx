@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import VisionBoard from './pages/VisionBoard'; 
 import Solutions from './pages/Solutions';
 import FeatureLearnMore from './pages/FeatureLearnMore';
+import DevelopmentWorkflow from './pages/DevelopmentWorkflow';
 import './App.css';
 import useScrollAnimation from './hooks/useScrollAnimation';
 
@@ -52,6 +53,8 @@ const App: React.FC = () => {
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/blog" element={<VisionBoard />} />
           <Route path="/features/:slug" element={<FeatureLearnMore />} />
+          <Route path="/development-workflow" element={<DevelopmentWorkflow />} />
+          {/* Redirect any unknown routes to the home page */}
         </Routes>
       </div>
     </Router>

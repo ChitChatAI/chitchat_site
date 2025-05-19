@@ -320,7 +320,7 @@ const ContactUs: React.FC = () => {
       )}
 
       {/* Modern hero section */}
-      <section className="relative md:pt-48 pb-24 px-4 sm:px-8 bg-black bg-gradient-to-b from-black via-[#18132a] to-[#18132a] font-[Satoshi] overflow-hidden text-white border-b border-white/10 shadow-xl">
+      <section className="relative px-4 sm:px-8 bg-black bg-gradient-to-b from-black via-[#18132a] to-[#18132a] font-[Satoshi] overflow-hidden text-white border-b border-white/10 shadow-xl">
         {/* Video + image background handled globally */}
         <div className="absolute inset-0 pointer-events-none z-0">
           <img
@@ -346,7 +346,7 @@ const ContactUs: React.FC = () => {
         </div>
         <div className="container mx-auto px-6 sm:px-12 relative z-10">
             <div
-            className="flex flex-col items-center justify-center min-h-[500px] text-center"
+            className="flex flex-col items-center justify-center min-h-screen text-center mx-auto"
             id="contact-hero-parallax-row"
             style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
             >

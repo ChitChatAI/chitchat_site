@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.9 },
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 20 },
+  };
+
   const navLinks = [
     { path: '/', label: 'About us' },
     { path: '/solutions', label: 'Solutions' },
+    { path: '/development-workflow', label: 'Workflow' }, // Moved up for higher priority
     { path: '/blog', label: 'Blog' },
     { path: '/contactus', label: "Let's talk" },
   ];
@@ -67,10 +82,24 @@ const NavBar: React.FC = () => {
         </div>
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="fixed inset-0 z-50 flex items-start justify-end bg-black/60 backdrop-blur-sm transition-all duration-300">
-            <div className="mt-24 mr-4 sm:mr-8 bg-gradient-to-br from-[#18132a] via-black/95 to-[#2a1a4d] rounded-3xl shadow-2xl py-10 px-10 min-w-[260px] max-w-xs border border-white/10 relative animate-fade-in-up">
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={modalVariants}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              className="bg-white rounded-lg shadow-lg p-6 w-80"
+              variants={contentVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+            >
               <button
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-theme-main/20 text-theme-main transition-all duration-200 shadow"
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Close menu"
               >
@@ -78,17 +107,15 @@ const NavBar: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <ul className="flex flex-col space-y-8 mt-2">
+              <ul className="flex flex-col space-y-4">
                 {navLinks.map(({ path, label }) => (
-                  <li key={path} className="flex items-center space-x-4 group">
+                  <li key={path}>
                     <NavLink
                       to={path}
                       onClick={() => setIsMenuOpen(false)}
                       className={({ isActive }) =>
-                        `font-poppins text-xl font-semibold transition-colors duration-200 px-2 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-main/40 focus:bg-theme-main/10 ${
-                          isActive
-                            ? 'text-theme-main bg-theme-main/10 shadow-md'
-                            : 'text-gray-200 hover:text-theme-main hover:bg-theme-main/10'
+                        `block text-lg font-medium text-gray-700 hover:text-theme-main ${
+                          isActive ? 'text-theme-main' : ''
                         }`
                       }
                     >
@@ -97,8 +124,8 @@ const NavBar: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
       </div>
     </nav>
