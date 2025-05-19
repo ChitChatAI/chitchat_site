@@ -3,6 +3,8 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
+import emailjs from 'emailjs-com';
+import Confetti from 'react-confetti';
 
 // Modern input styling with floating label support and improved states
 const inputBase = "peer w-full px-5 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-xl font-satoshi text-gray-200 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 shadow-sm";
@@ -40,6 +42,7 @@ const ContactUs: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const [showConfetti, setShowConfetti] = React.useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -176,6 +179,28 @@ const ContactUs: React.FC = () => {
 
   const handlePrevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+      e.currentTarget,
+      'YOUR_USER_ID' // Replace with your EmailJS user ID
+    )
+    .then((result) => {
+      console.log(result.text);
+      alert('Message sent successfully!');
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 5000); // Stop confetti after 5 seconds
+    }, (error) => {
+      console.log(error.text);
+      alert('Failed to send the message. Please try again later.');
+    });
+
+    e.currentTarget.reset();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.message.trim()) {
@@ -240,6 +265,7 @@ const ContactUs: React.FC = () => {
 
   return (
     <>
+      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
       <NavBar />
       {/* Modern dark video + image background */}
       <div className="fixed inset-0 z-[-2] pointer-events-none">
@@ -580,7 +606,7 @@ const ContactUs: React.FC = () => {
                 {/* Step 3: Additional Info */}
                 <div className={`${getStepClasses(3)}`}>
                   <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Additional Information</h3>
-                  <form onSubmit={handleSubmit} className="space-y-8">
+                  <form onSubmit={sendEmail} className="space-y-8">
                     {/* Interests checkboxes */}
                     <div className="space-y-4">
                       <label className="block text-gray-200 font-medium mb-4">What are you interested in?</label>

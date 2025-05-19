@@ -23,11 +23,14 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           Human Augmented AI in Customer Service
         </h1>
         <p className="text-lg md:text-2xl mb-8 animate-fade-in">
-          Beyond traditional AI, we empower agents with unique personas that deliver personalized, engaging customer experiences.
+           Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
         </p>
-        <button className="mt-6 px-6 py-3 bg-white text-theme-main font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-300">
-          Get Started
-        </button>
+        <a
+          href="/contactus"
+          className="mt-6 px-6 py-3 bg-white text-theme-main font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-300"
+        >
+          Get a demo
+        </a>
       </div>
     </section>
   );
