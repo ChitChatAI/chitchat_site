@@ -3,15 +3,17 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
-import emailjs from 'emailjs-com';
 import Confetti from 'react-confetti';
+import emailjs from 'emailjs-com';
+import { useNavigate } from 'react-router-dom';
 
-// Modern input styling with floating label support and improved states
-const inputBase = "peer w-full px-5 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-xl font-satoshi text-gray-200 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 shadow-sm";
-const inputError = "border-red-400 bg-red-900/20 focus:border-red-400 focus:ring-red-300/40";
-const labelBase = "absolute left-5 -top-2.5 px-1 text-xs transition-all bg-black/80 font-satoshi font-medium peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-300 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-theme-main";
+// Updated input text color to white
+const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border border-gray-200 rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
+const inputError = "block w-full px-4 py-3 text-sm text-white bg-red-50/20 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300";
 
 const ContactUs: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<{
     name: string;
     surname: string;
@@ -179,24 +181,39 @@ const ContactUs: React.FC = () => {
 
   const handlePrevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  // Updated the sendEmail function with the provided template ID, service ID, and public key
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    emailjs.sendForm(
-      'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
-      e.currentTarget,
-      'YOUR_USER_ID' // Replace with your EmailJS user ID
-    )
-    .then((result) => {
-      console.log(result.text);
+    const serviceID = 'service_ihcw9or';
+    const templateID = 'template_7n5qv2j';
+    const userID = 'ORC1Bf6tLenC_Wsui';
+
+    const formDataToSend = {
+      name: formData.name,
+      surname: formData.surname,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      companySize: formData.companySize,
+      industry: formData.industry,
+      goals: formData.goals,
+      interests: formData.interests.join(', '),
+      teamDescription: formData.teamDescription,
+    };
+
+    try {
+      await emailjs.send(serviceID, templateID, formDataToSend, userID);
       alert('Message sent successfully!');
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000); // Stop confetti after 5 seconds
-    }, (error) => {
-      console.log(error.text);
+      setShowConfetti(true); // Trigger confetti on successful email send
+      setTimeout(() => {
+        setShowConfetti(false); // Stop confetti after 5 seconds
+        navigate('/'); // Redirect to the home page
+      }, 5000);
+    } catch (error) {
+      console.error('Failed to send the message:', error);
       alert('Failed to send the message. Please try again later.');
-    });
+    }
 
     e.currentTarget.reset();
   };
@@ -353,7 +370,7 @@ const ContactUs: React.FC = () => {
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
               <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">Let's Build Your AI Solution</span>
             </h1>
-            <p className="text-xl sm:text-2xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
+            <p className="text-xl sm:text-2xl md:text-2xl text-white max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
               Fill out the form below to get started with <span className="text-theme-main font-semibold animate-contact-hero-gradient-in delay-400">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
             </p>
             <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
@@ -368,7 +385,7 @@ const ContactUs: React.FC = () => {
       {/* Shifted Form Section */}
       <section className="relative px-4 sm:px-10 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
         <div className="container mx-auto">
-          <div className="bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card w-full max-w-3xl mx-auto">
+          <div className="w-full mx-auto bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
             {/* Form steps container */}
             <div className="relative z-10">
               {/* Modern progress tracker */}
@@ -428,100 +445,91 @@ const ContactUs: React.FC = () => {
                 {/* Step 1: Contact Details */}
                 <div className={`${getStepClasses(1)}`}>
                   <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Your Contact Details</h3>
-                  <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-6" onSubmit={sendEmail}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* First name field with floating label */}
                       <div className="relative group">
                         <input
                           type="text"
                           id="name"
                           name="name"
-                          placeholder="First Name"
                           value={formData.name}
                           onChange={handleChange}
-                          className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.name ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
+                          className={`${inputBase} ${errors.name ? inputError : ''}`}
                           required
                         />
-                        <label htmlFor="name" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.name ? ' text-red-400' : ''}`}>First Name</label>
-                        {errors.name && (
-                          <p className="mt-2 text-sm text-red-400 flex items-center font-satoshi">
-                            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            {errors.name}
-                          </p>
-                        )}
+                        <label
+                          htmlFor="name"
+                          className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                            ${formData.name ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                        >
+                          First Name
+                        </label>
+                        {errors.name && <p className="mt-2 text-sm text-red-400">{errors.name}</p>}
                       </div>
-
-                      {/* Surname field with floating label */}
                       <div className="relative group">
                         <input
                           type="text"
                           id="surname"
                           name="surname"
-                          placeholder="Surname"
                           value={formData.surname}
                           onChange={handleChange}
-                          className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.surname ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
+                          className={`${inputBase} ${errors.surname ? inputError : ''}`}
                           required
                         />
-                        <label htmlFor="surname" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.surname ? ' text-red-400' : ''}`}>Surname</label>
-                        {errors.surname && (
-                          <p className="mt-2 text-sm text-red-400 flex items-center font-satoshi">
-                            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            {errors.surname}
-                          </p>
-                        )}
+                        <label
+                          htmlFor="surname"
+                          className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                            ${formData.surname ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                        >
+                          Surname
+                        </label>
+                        {errors.surname && <p className="mt-2 text-sm text-red-400">{errors.surname}</p>}
                       </div>
                     </div>
-
-                    {/* Email field with floating label */}
                     <div className="relative group">
                       <input
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Email Address"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.email ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
+                        className={`${inputBase} ${errors.email ? inputError : ''}`}
                         required
                       />
-                      <label htmlFor="email" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.email ? ' text-red-400' : ''}`}>Email Address</label>
-                      {formData.email && !errors.email && validateEmail(formData.email) && (
-                        <div className="absolute right-4 top-4">
-                          <svg className="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                      {errors.email && (
-                        <p className="mt-2 text-sm text-red-400 flex items-center">
-                          <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                          </svg>
-                          {errors.email}
-                        </p>
-                      )}
+                      <label
+                        htmlFor="email"
+                        className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                          ${formData.email ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                      >
+                        Email Address
+                      </label>
+                      {errors.email && <p className="mt-2 text-sm text-red-400">{errors.email}</p>}
                     </div>
-
-                    {/* Subject field with floating label */}
                     <div className="relative group">
                       <input
                         type="text"
                         id="subject"
                         name="subject"
-                        placeholder="Subject"
                         value={formData.subject}
                         onChange={handleChange}
                         className={inputBase}
                       />
-                      <label htmlFor="subject" className={labelBase}>
+                      <label
+                        htmlFor="subject"
+                        className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                          ${formData.subject ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                      >
                         Subject (Optional)
                       </label>
                     </div>
+                    {currentStep === 1 && (
+                      <button
+                        type="submit"
+                        className="hidden"
+                      >
+                        Submit
+                      </button>
+                    )}
                   </form>
                 </div>
 
@@ -536,16 +544,16 @@ const ContactUs: React.FC = () => {
                         name="companySize"
                         value={formData.companySize}
                         onChange={handleChange}
-                        className={`${inputBase} appearance-none ${errors.companySize ? inputError : ''}`}
+                        className={`${inputBase} appearance-none text-white ${errors.companySize ? inputError : ''}`}
                         required
                       >
-                        <option value="" disabled></option>
-                        <option value="Solo">Solo</option>
-                        <option value="Startup">Startup (2-10)</option>
-                        <option value="SME">Small/Medium (11-100)</option>
-                        <option value="Enterprise">Enterprise (101+)</option>
+                        <option value="" disabled className="text-gray-400">Select Company Size</option>
+                        <option value="Solo" className="text-white">Solo</option>
+                        <option value="Startup" className="text-white">Startup (2-10)</option>
+                        <option value="SME" className="text-white">Small/Medium (11-100)</option>
+                        <option value="Enterprise" className="text-white">Enterprise (101+)</option>
                       </select>
-                      <label htmlFor="companySize" className={`${labelBase} ${errors.companySize ? 'text-red-500' : ''}`}>
+                      <label htmlFor="companySize" className="text-white">
                         Company Size
                       </label>
                       <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -568,7 +576,7 @@ const ContactUs: React.FC = () => {
                         className={`${inputBase} ${errors.industry ? inputError : ''}`}
                         required
                       />
-                      <label htmlFor="industry" className={`${labelBase} ${errors.industry ? 'text-red-500' : ''}`}>
+                      <label htmlFor="industry" className="text-white">
                         Industry
                       </label>
                       {errors.industry && <p className="mt-2 text-sm text-red-600">{errors.industry}</p>}
@@ -581,16 +589,16 @@ const ContactUs: React.FC = () => {
                         name="goals"
                         value={formData.goals}
                         onChange={handleChange}
-                        className={`${inputBase} appearance-none ${errors.goals ? inputError : ''}`}
+                        className={`${inputBase} appearance-none text-white ${errors.goals ? inputError : ''}`}
                         required
                       >
-                        <option value="" disabled></option>
-                        <option value="Customer Support AI">Customer Support AI</option>
-                        <option value="Sales Assistant">Sales Assistant</option>
-                        <option value="Internal Automation">Internal Automation</option>
-                        <option value="Other">Other</option>
+                        <option value="" disabled className="text-gray-400">Select Primary Goal</option>
+                        <option value="Customer Support AI" className="text-white">Customer Support AI</option>
+                        <option value="Sales Assistant" className="text-white">Sales Assistant</option>
+                        <option value="Internal Automation" className="text-white">Internal Automation</option>
+                        <option value="Other" className="text-white">Other</option>
                       </select>
-                      <label htmlFor="goals" className={`${labelBase} ${errors.goals ? 'text-red-500' : ''}`}>
+                      <label htmlFor="goals" className="text-white">
                         Primary Goal
                       </label>
                       <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -609,7 +617,7 @@ const ContactUs: React.FC = () => {
                   <form onSubmit={sendEmail} className="space-y-8">
                     {/* Interests checkboxes */}
                     <div className="space-y-4">
-                      <label className="block text-gray-200 font-medium mb-4">What are you interested in?</label>
+                      <label className="block text-gray-100 font-medium mb-4 text-lg">What are you interested in?</label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
                           <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-gray-50 transition-all duration-300 cursor-pointer">
@@ -620,7 +628,7 @@ const ContactUs: React.FC = () => {
                               onChange={handleCheckboxChange}
                               className="w-5 h-5 text-theme-main rounded focus:ring-theme-main/40 focus:ring-offset-0 focus:ring-2 mr-3"
                             />
-                            <span className="text-gray-200">{interest}</span>
+                            <span className="text-white">{interest}</span>
                           </label>
                         ))}
                       </div>
@@ -637,7 +645,7 @@ const ContactUs: React.FC = () => {
                         onChange={handleChange}
                         className={inputBase}
                       />
-                      <label htmlFor="teamDescription" className={labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}>About Your Team (Optional)</label>
+                      <label htmlFor="teamDescription" className="text-white">About Your Team (Optional)</label>
                     </div>
 
                     {/* Message field */}
@@ -652,7 +660,7 @@ const ContactUs: React.FC = () => {
                         className={`${inputBase} ${errors.message ? inputError : ''}`}
                         required
                       />
-                      <label htmlFor="message" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.message ? ' text-red-400' : ''}`}>Your Message</label>
+                      <label htmlFor="message" className="text-white">Your Message</label>
                       <p className="mt-2 text-sm text-gray-400">Tell us about your specific needs or questions</p>
                     </div>
                   </form>

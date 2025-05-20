@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
+import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 
 const DevelopmentWorkflow: React.FC = () => {
@@ -602,6 +603,7 @@ const DevelopmentWorkflow: React.FC = () => {
 
       {/* Call to Action Section */}
       <CallToAction bgImage="/solutionsPage/solutions.jpg" />
+      <CookieConsent position="left" modalPosition="bottom" />
 
       {/* Footer */}
       <Footer />

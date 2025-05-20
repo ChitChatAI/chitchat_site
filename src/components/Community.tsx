@@ -23,19 +23,18 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
           <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 leading-tight tracking-tight drop-shadow-xl">
             Be Part of Our AI Revolution
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto font-medium drop-shadow">
-            Join a thriving community of innovators shaping the future of AI.
-            Collaborate, share insights, and build cutting-edge solutions together.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <p className="text-lg text-gray-300 mb-6 mx-auto font-medium">
+              Join us in shaping the future of AI. Collaborate and innovate together.
+            </p><div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/chitchatai/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-10 py-4 rounded-full bg-theme-main text-white font-bold shadow-2xl hover:bg-theme-dark transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/40"
             >
-              LinkedIn Community
-            </a>
-            <a
-              href="#"
+              LinkedIn 
+            </a>            <a
+              href="/contactus"
               className="px-10 py-4 rounded-full bg-white border-2 border-theme-main text-theme-main font-bold shadow hover:bg-theme-main hover:text-white transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/20"
             >
               Contact Us

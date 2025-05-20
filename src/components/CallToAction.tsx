@@ -30,12 +30,6 @@ const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) 
         >
           Contact Us
         </Link>
-        <Link
-          to="/book-call"
-          className="px-10 py-4 rounded-full bg-white border-2 border-theme-main text-theme-main font-bold shadow hover:bg-theme-main hover:text-white transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/20"
-        >
-          Book a Call
-        </Link>
       </div>
       {/* Animated dots for life */}
       <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center">

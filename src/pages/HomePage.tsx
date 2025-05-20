@@ -67,10 +67,8 @@ const HomePage: React.FC = () => {
       <Footer />
 
       {/* Cookie Policy Floating Button */}
-      <CookieConsent position="left" modalPosition="bottom" />
-
-      {/* Keyframe Animations */}
-      <style jsx>{`
+      <CookieConsent position="left" modalPosition="bottom" />      {/* Keyframe Animations */}
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-15px); }

@@ -38,9 +38,7 @@ const Solutions: React.FC = () => {
 
     if (parallaxRef.current) {
       parallaxElements.current = Array.from(document.querySelectorAll('.parallax-element'));
-    }
-
-    window.addEventListener('scroll', handleScroll);
+    }    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -258,9 +256,8 @@ const Solutions: React.FC = () => {
   return (
     <>
     <Navbar />
-      <main ref={parallaxRef} className="relative z-10 overflow-hidden min-h-screen bg-black">
-        {/* HERO SECTION */}
-        <section id="hero" className="parallax-element py-16 relative z-10 pt-32">
+      <main ref={parallaxRef} className="relative z-10 overflow-hidden min-h-screen bg-black">        {/* HERO SECTION */}
+        <section id="hero" className="parallax-element h-screen relative z-10 flex items-center">
           {/* Video Background */}
           <video
             autoPlay
@@ -275,10 +272,9 @@ const Solutions: React.FC = () => {
           {/* Animated floating shapes */}
           <div className="absolute top-10 left-1/4 w-60 h-60 bg-theme-main/20 rounded-full blur-3xl animate-float z-20"></div>
           <div className="absolute bottom-10 right-1/4 w-40 h-40 bg-pink-400/20 rounded-full blur-2xl animate-float-delayed z-20"></div>
-          <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-purple-400/30 rounded-full blur-2xl animate-pulse z-20"></div>
-          <div className="container mx-auto px-6 sm:px-12 relative z-20">
-            <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 min-h-[600px] scroll-review">
-              <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left h-full min-h-[400px]">
+          <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-purple-400/30 rounded-full blur-2xl animate-pulse z-20"></div>          <div className="container mx-auto px-6 sm:px-12 relative z-20">
+            <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 scroll-review">
+              <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left">
                 {showHero && (
                   <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
                     <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">
@@ -406,24 +402,6 @@ const Solutions: React.FC = () => {
                   ))}
                 </motion.ul>
                 
-                <motion.a
-                  href="#"
-                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-                  tabIndex={0}
-                  variants={linkVariants}
-                >
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-                  </svg>
-                </motion.a>
               </motion.div>
 
               {/* Card 2: E-Commerce */}
@@ -483,24 +461,6 @@ const Solutions: React.FC = () => {
                   ))}
                 </motion.ul>
                 
-                <motion.a
-                  href="#"
-                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-                  tabIndex={0}
-                  variants={linkVariants}
-                >
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-                  </svg>
-                </motion.a>
               </motion.div>
 
               {/* Card 3: Healthcare */}
@@ -560,24 +520,6 @@ const Solutions: React.FC = () => {
                   ))}
                 </motion.ul>
                 
-                <motion.a
-                  href="#"
-                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-                  tabIndex={0}
-                  variants={linkVariants}
-                >
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-                  </svg>
-                </motion.a>
               </motion.div>
 
               {/* Card 4: Education & Online Learning */}
@@ -637,24 +579,6 @@ const Solutions: React.FC = () => {
                   ))}
                 </motion.ul>
                 
-                <motion.a
-                  href="#"
-                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-                  tabIndex={0}
-                  variants={linkVariants}
-                >
-                  Learn More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-                  </svg>
-                </motion.a>
               </motion.div>
             </motion.div>
           </div>
