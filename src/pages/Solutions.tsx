@@ -11,31 +11,6 @@ import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Footer from '../components/Footer';
-              >
-                {/* Glow background effect */}
-                <motion.div 
-                  className="absolute -inset-2 bg-gradient-to-r from-theme-main/30 via-purple-700/20 to-pink-500/30 rounded-lg opacity-0 group-hover:opacity-100 blur-xl z-0"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 0 }}
-                  whileHover={{ 
-                    opacity: 0.7, 
-                    scale: 1.2, 
-                    transition: { duration: 0.4 }
-                  }}
-                ></motion.div>
-                
-                <div className="flex items-center mb-5 relative z-10">
-                  <motion.div 
-                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg shadow-lg relative overflow-hidden"
-                    variants={iconVariants}
-                  >
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-br from-theme-main/40 to-purple-700/30 opacity-0 group-hover:opacity-100"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0 }}
-                      whileHover={{ opacity: 1, transition: { duration: 0.3 } }}
-                    ></motion.div>t { initCustomCursor } from '../utils/cursorEffects';
-import Footer from '../components/Footer';
 
 const Solutions: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -364,8 +339,7 @@ const Solutions: React.FC = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
             >
-              {/* Card 1: Telecommunications */}
-              <motion.div
+              {/* Card 1: Telecommunications */}              <motion.div
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
