@@ -256,8 +256,9 @@ const Solutions: React.FC = () => {
   return (
     <>
     <Navbar />
-      <main ref={parallaxRef} className="relative z-10 overflow-hidden min-h-screen bg-black">        {/* HERO SECTION */}
-        <section id="hero" className="parallax-element h-screen relative z-10 flex items-center">
+      <main ref={parallaxRef} className="relative z-10 pt-14 overflow-hidden min-h-screen bg-black">
+        {/* HERO SECTION */}
+        <section id="hero" className="parallax-element h-screen relative z-10 flex items-center px-4 sm:px-6 md:px-8">
           {/* Video Background */}
           <video
             autoPlay
@@ -272,7 +273,7 @@ const Solutions: React.FC = () => {
           {/* Animated floating shapes */}
           <div className="absolute top-10 left-1/4 w-60 h-60 bg-theme-main/20 rounded-full blur-3xl animate-float z-20"></div>
           <div className="absolute bottom-10 right-1/4 w-40 h-40 bg-pink-400/20 rounded-full blur-2xl animate-float-delayed z-20"></div>
-          <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-purple-400/30 rounded-full blur-2xl animate-pulse z-20"></div>          <div className="container mx-auto px-6 sm:px-12 relative z-20">
+          <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-purple-400/30 rounded-full blur-2xl animate-pulse z-20"></div>          <div className="container mx-auto relative z-20">
             <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 scroll-review">
               <div className="flex-1 flex flex-col items-start justify-center text-center md:text-left">
                 {showHero && (
@@ -311,8 +312,8 @@ const Solutions: React.FC = () => {
         </section>
 
         {/* CARDS SECTION */}
-        <section className="relative z-10 py-16 bg-black">
-          <div className="container mx-auto px-6 sm:px-12">
+        <section className="relative z-10 py-16 bg-black px-4 sm:px-6 md:px-8">
+          <div className="container mx-auto">
             <motion.div
               className="mb-12 text-center"
               initial="hidden"
@@ -320,16 +321,16 @@ const Solutions: React.FC = () => {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeInUpVariants}
             >
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                 Explore Our Solutions
               </h2>
-              <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
                 Discover how our AI solutions can transform your business across various industries.
               </p>
             </motion.div>
 
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto"
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
@@ -339,7 +340,7 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg overflow-hidden"
+                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
                 {/* Glow background effect */}
@@ -353,20 +354,20 @@ const Solutions: React.FC = () => {
                     transition: { duration: 0.4 }
                   }}
                 ></motion.div>
-                <div className="flex items-center mb-5">
+                <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
-                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
                     variants={iconVariants}
                   >
                     <Lottie
                       animationData={customerService}
                       loop
                       autoplay
-                      style={{ height: '48px', width: '48px' }}
+                      style={{ height: '40px', width: '40px' }}
                     />
                   </motion.div>
                   <motion.h3 
-                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
                     Telecommunications
@@ -409,23 +410,23 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
+                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
                 style={{ clipPath: 'polygon(12% 0%, 88% 0%, 100% 20%, 100% 80%, 88% 100%, 12% 100%, 0% 80%, 0% 20%)' }}
               >
-                <div className="flex items-center mb-5">
+                <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
-                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
                     variants={iconVariants}
                   >
                     <Lottie
                       animationData={sales}
                       loop
                       autoplay
-                      style={{ height: '48px', width: '48px' }}
+                      style={{ height: '40px', width: '40px' }}
                     />
                   </motion.div>
                   <motion.h3 
-                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
                     E-Commerce
@@ -468,23 +469,23 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
+                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
                 style={{ clipPath: 'polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%)' }}
               >
-                <div className="flex items-center mb-5">
+                <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
-                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
                     variants={iconVariants}
                   >
                     <Lottie
                       animationData={healthcare}
                       loop
                       autoplay
-                      style={{ height: '48px', width: '48px' }}
+                      style={{ height: '40px', width: '40px' }}
                     />
                   </motion.div>
                   <motion.h3 
-                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
                     Healthcare
@@ -527,23 +528,23 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
+                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
                 style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)' }}
               >
-                <div className="flex items-center mb-5">
+                <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
-                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
                     variants={iconVariants}
                   >
                     <Lottie
                       animationData={education}
                       loop
                       autoplay
-                      style={{ height: '48px', width: '48px' }}
+                      style={{ height: '40px', width: '40px' }}
                     />
                   </motion.div>
                   <motion.h3 
-                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
                     Education & Online Learning
@@ -581,12 +582,32 @@ const Solutions: React.FC = () => {
                 
               </motion.div>
             </motion.div>
+            
+            {/* Industry-wide callout */}
+            <motion.div 
+              className="mt-16 bg-white/5 border border-white/10 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+            >
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Not seeing your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We serve them all.</span>
+              </h3>
+              <p className="text-lg text-gray-300 mb-6">
+                Our adaptable AI solutions can be tailored for any business vertical, delivering personalized customer experiences that feel genuinely human — regardless of your industry's unique challenges.
+              </p>
+              <a href="/contactus" className="inline-flex items-center justify-center px-6 py-3 bg-theme-main hover:bg-purple-700 text-white font-medium rounded-lg transition-all duration-300">
+                Discuss Your Industry Needs
+                <span className="material-symbols-outlined ml-2">arrow_forward</span>
+              </a>
+            </motion.div>
           </div>
         </section>
 
         {/* INDUSTRIES SECTION */}
-        <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
-          <div className="container mx-auto px-6 sm:px-12">
+        <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-6 md:px-8">
+          <div className="container mx-auto">
             <motion.div
               className="mb-20 text-center"
               initial="hidden"
@@ -605,8 +626,7 @@ const Solutions: React.FC = () => {
               </p>
             </motion.div>
             
-            {/* Normal neural timeline */}
-            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
+            <div className="relative border-l-2 border-dotted border-theme-main pl-6 sm:pl-12 space-y-20">
               {additionalSolutions.map((item, index) => (
                 <motion.div
                   key={index}
@@ -616,13 +636,12 @@ const Solutions: React.FC = () => {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
                 >
-                  {/* Neural dot style */}
-                  <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="flex flex-row w-full items-start">
-                    <div className="w-1/3 min-w-[180px] pr-6 flex items-center">
-                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{item.title}</h4>
+                  <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                  <div className="flex flex-col sm:flex-row items-start gap-2">
+                    <div className="w-full sm:w-1/3 mb-2 sm:mb-0">
+                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">{item.title}</h4>
                     </div>
-                    <div className="w-2/3">
+                    <div className="w-full sm:w-2/3">
                       <p className="text-base text-gray-200 leading-relaxed">{item.text}</p>
                     </div>
                   </div>
@@ -633,8 +652,8 @@ const Solutions: React.FC = () => {
         </section>
 
         {/* USE CASES SECTION */}
-        <section id="use-cases" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
-          <div className="container mx-auto px-6 sm:px-12">
+        <section id="use-cases" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-6 md:px-8">
+          <div className="container mx-auto">
             <motion.h2
               className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 40 }}
@@ -644,25 +663,22 @@ const Solutions: React.FC = () => {
             >
               Use Cases
             </motion.h2>
-            <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
+            <div className="relative border-l-2 border-dotted border-theme-main pl-6 sm:pl-12 space-y-20">
               {useCases.map((useCase, index) => (
                 <motion.div
                   key={index}
-                  className="relative bg-white/5 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl"
+                  className="relative bg-white/5 p-6 md:p-8 transition-all duration-300 flex flex-col sm:flex-row items-start border-b border-gray-200 rounded-2xl shadow-xl gap-2"
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
                 >
-                  {/* Neural dot style */}
-                  <span className="absolute -left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="flex flex-row w-full items-start">
-                    <div className="w-1/3 min-w-[180px] pr-6 flex items-center">
-                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent mb-2">{useCase.title}</h4>
-                    </div>
-                    <div className="w-2/3">
-                      <p className="text-base text-gray-200 leading-relaxed">{useCase.description}</p>
-                    </div>
+                  <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                  <div className="w-full sm:w-1/3 mb-2 sm:mb-0">
+                    <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">{useCase.title}</h4>
+                  </div>
+                  <div className="w-full sm:w-2/3">
+                    <p className="text-base text-gray-200 leading-relaxed">{useCase.description}</p>
                   </div>
                 </motion.div>
               ))}

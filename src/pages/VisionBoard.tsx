@@ -207,7 +207,7 @@ const VisionBoard: React.FC = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.7 }}
                         >
-                            Our Prebuilt Personas (And Why They're Just the Start)
+                            Our Personas (And Why They're Just the Start)
                         </motion.h1>
                     </div>
                 </motion.div>

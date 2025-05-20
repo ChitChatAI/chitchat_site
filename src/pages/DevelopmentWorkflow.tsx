@@ -349,7 +349,7 @@ const DevelopmentWorkflow: React.FC = () => {
                 ].map((tool, index) => (
                     <motion.div
                         key={index}
-                        className="flex flex-col items-center bg-white/5 backdrop-blur-lg rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-white/10"
+                        className="flex flex-col items-center justify-center bg-white/5 backdrop-blur-lg rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-white/10 w-32 h-32"
                         whileHover={{ scale: 1.05 }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -358,10 +358,10 @@ const DevelopmentWorkflow: React.FC = () => {
                         <img
                             src={tool.icon}
                             alt={tool.name}
-                            className="w-16 h-16 mb-4"
+                            className="w-12 h-12 mb-3 object-contain"
                             style={{ fill: 'var(--theme-main)' }}
                         />
-                        <h3 className="text-lg font-semibold text-white">{tool.name}</h3>
+                        <h3 className="text-sm font-semibold text-white text-center">{tool.name}</h3>
                     </motion.div>
                 ))}
             </motion.div>
