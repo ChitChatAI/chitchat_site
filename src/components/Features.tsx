@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const Features: React.FC<{ id?: string }> = ({ id }) => {
   useEffect(() => {
@@ -18,6 +19,11 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
 
     return () => observer.disconnect();
   }, []);
+
+  const slideUpVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   const features = [
     {
@@ -59,22 +65,36 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
     >
       <div className="container mx-auto px-6 sm:px-12">
         <div className="max-w-4xl mx-auto mb-12 text-center">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight">
+          <motion.h2
+            className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={slideUpVariants}
+          >
             What Sets Us Apart
-          </h2>
-          <p
+          </motion.h2>
+          <motion.p
             className="text-xl sm:text-2xl text-gray-200 mb-12 font-medium"
             style={{ lineHeight: '1.5' }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={slideUpVariants}
           >
             Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalized, human-like customer interactions at scale.
-          </p>
+          </motion.p>
         </div>
         <div className="space-y-10 max-w-5xl mx-auto">
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
               className="relative flex flex-col md:flex-row items-center md:items-start gap-8 border border-white/20 bg-white/5 backdrop-blur-md p-8 rounded-lg hover:bg-white/10 transition-all duration-300"
               style={{ clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)' }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={slideUpVariants}
             >
               <div className="flex-shrink-0 text-center md:text-left">
                 <span className="material-symbols-outlined text-theme-main text-6xl">
@@ -89,7 +109,7 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
                   {feature.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

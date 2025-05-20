@@ -11,17 +11,38 @@ import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Footer from '../components/Footer';
+              >
+                {/* Glow background effect */}
+                <motion.div 
+                  className="absolute -inset-2 bg-gradient-to-r from-theme-main/30 via-purple-700/20 to-pink-500/30 rounded-lg opacity-0 group-hover:opacity-100 blur-xl z-0"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 0 }}
+                  whileHover={{ 
+                    opacity: 0.7, 
+                    scale: 1.2, 
+                    transition: { duration: 0.4 }
+                  }}
+                ></motion.div>
+                
+                <div className="flex items-center mb-5 relative z-10">
+                  <motion.div 
+                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg shadow-lg relative overflow-hidden"
+                    variants={iconVariants}
+                  >
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-br from-theme-main/40 to-purple-700/30 opacity-0 group-hover:opacity-100"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0 }}
+                      whileHover={{ opacity: 1, transition: { duration: 0.3 } }}
+                    ></motion.div>t { initCustomCursor } from '../utils/cursorEffects';
+import Footer from '../components/Footer';
 
 const Solutions: React.FC = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const parallaxElements = useRef<HTMLElement[]>([]);
-  // Remove typing effect state
-  const headerText = "Built for Every Business.\nDesigned to Feel Human.";
   const headerRef = useRef<HTMLHeadingElement>(null);
-  const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
-  const [isModalExiting, setIsModalExiting] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const [showHero, setShowHero] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setShowHero(true), 300); // Delay for cool effect
@@ -53,9 +74,9 @@ const Solutions: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true);
+            setIsHeaderVisible(true);
           } else {
-            setIsVisible(false);
+            setIsHeaderVisible(false);
           }
         });
       },
@@ -74,63 +95,136 @@ const Solutions: React.FC = () => {
     };
   }, []);
 
-  const getLottie = (title: string) => {
-    switch (title) {
-      case 'Telecommunications':
-        return customerService;
-      case 'E-Commerce':
-        return sales;
-      case 'Healthcare':
-        return healthcare;
-      case 'Education & Online Learning':
-        return education;
-      default:
-        return customerService;
+  // Animation variants
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" } }
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.2,
+      }
+    }
+  };
+  const cardVariants = {
+    hidden: { opacity: 0, y: 60, scale: 0.9, rotateY: -15 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      rotateY: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 20, 
+        mass: 1,
+        delayChildren: 0.3,
+        staggerChildren: 0.1
+      } 
+    },
+    hover: { 
+      scale: 1.05, 
+      boxShadow: "0 25px 50px -12px rgba(31, 41, 55, 0.35)",
+      y: -10,
+      transition: { 
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1],
+        boxShadow: { delay: 0.05 }
+      }
+    },
+    tap: { 
+      scale: 0.97, 
+      y: 5,
+      transition: { duration: 0.1, ease: "easeOut" }
+    }
+  };
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180, opacity: 0 },
+    visible: { 
+      scale: 1, 
+      rotate: 0, 
+      opacity: 1,
+      transition: { 
+        type: "spring", 
+        stiffness: 260, 
+        damping: 20 
+      } 
+    },
+    hover: { 
+      rotate: 15, 
+      scale: 1.2, 
+      filter: "drop-shadow(0 0 10px rgba(125, 99, 210, 0.7))",
+      transition: { 
+        duration: 0.4, 
+        ease: [0.19, 1, 0.22, 1] 
+      } 
+    }
+  };
+  const textRevealVariants = {
+    hidden: { opacity: 0, y: 20, clipPath: "inset(0 100% 0 0)" },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      clipPath: "inset(0 0 0 0)",
+      transition: { 
+        duration: 0.7, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: 0.2 
+      } 
+    }
+  };
+  const listItemVariants = {
+    hidden: { opacity: 0, x: -20, scale: 0.95 },
+    visible: (i) => ({ 
+      opacity: 1, 
+      x: 0, 
+      scale: 1,
+      transition: { 
+        duration: 0.5,
+        delay: i * 0.15,
+        ease: [0.25, 1, 0.5, 1]
+      } 
+    })
+  };
+  const linkVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        delay: 0.7, 
+        duration: 0.6,
+        ease: [0.19, 1, 0.22, 1]
+      } 
     }
   };
 
-  const solutionCategories = [
-    {
-      title: 'Telecommunications',
-      description: 'Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.',
-      features: [
-        '24/7 emotionally responsive support',
-        'Seamless handoff to human agents',
-        'Context-aware conversation history',
-      ],
-      animationClass: 'animate-slide-in-left',
-    },
-    {
-      title: 'E-Commerce',
-      description: 'Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.',
-      features: [
-        'Qualified lead generation',
-        'Personalized product recommendations',
-        'Consistent brand voice and messaging',
-      ],
-      animationClass: 'animate-slide-in-right',
-    },
-    {
-      title: 'Healthcare',
-      description: 'Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.',
-      features: [
-        'Empathetic health guidance',
-        'Medication and appointment reminders',
-        'Wellness check-ins and monitoring',
-      ],
-      animationClass: 'animate-fade-in',
-    },
-    {
-      title: 'Education & Online Learning',
-      description: 'Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.',
-      features: [
-        'Adaptive learning pathways',
-        'Personalized feedback and assessment',
-        '24/7 learning support',
-      ],
-      animationClass: 'animate-slide-up',
-    },
-  ];
+  useEffect(() => {
+    const cleanupCursor = initCustomCursor();
+    return () => cleanupCursor();
+  }, []);
+
+  // Add this effect just before the return statement (inside the component)
+  useEffect(() => {
+    // Subtle parallax for hero left/right columns
+    const handleParallax = () => {
+      const scrollY = window.scrollY;
+      const left = document.getElementById('parallax-left');
+      const right = document.getElementById('parallax-right');
+      if (left) {
+        left.style.transform = `translateY(${scrollY * 0.06}px)`;
+      }
+      if (right) {
+        right.style.transform = `translateY(${scrollY * 0.03}px)`;
+      }
+    };
+    window.addEventListener('scroll', handleParallax, { passive: true });
+    return () => window.removeEventListener('scroll', handleParallax);
+  }, []);
 
   const additionalSolutions = [
     {
@@ -185,43 +279,6 @@ const Solutions: React.FC = () => {
       description: 'Enhance patient engagement with AI that provides personalized health tips, medication reminders, and answers to medical queries.'
     },
   ];
-
-  // Handle card hover effects
-  const handleCardHover = (index: number | null) => {
-    setActiveCategory(index);
-  };
-
-  // Handle modal closing with animation
-  const handleCloseModal = () => {
-    setIsModalExiting(true);
-    setTimeout(() => {
-      setCookiePolicyOpen(false);
-      setIsModalExiting(false);
-    }, 300);
-  };
-
-  useEffect(() => {
-    const cleanupCursor = initCustomCursor();
-    return () => cleanupCursor();
-  }, []);
-
-  // Add this effect just before the return statement (inside the component)
-  useEffect(() => {
-    // Subtle parallax for hero left/right columns
-    const handleParallax = () => {
-      const scrollY = window.scrollY;
-      const left = document.getElementById('parallax-left');
-      const right = document.getElementById('parallax-right');
-      if (left) {
-        left.style.transform = `translateY(${scrollY * 0.06}px)`;
-      }
-      if (right) {
-        right.style.transform = `translateY(${scrollY * 0.03}px)`;
-      }
-    };
-    window.addEventListener('scroll', handleParallax, { passive: true });
-    return () => window.removeEventListener('scroll', handleParallax);
-  }, []);
 
   return (
     <>
@@ -281,222 +338,264 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </section>
+
         {/* CARDS SECTION */}
         <section className="relative z-10 py-16 bg-black">
           <div className="container mx-auto px-6 sm:px-12">
             <motion.div
               className="mb-12 text-center"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
+              variants={fadeInUpVariants}
             >
               <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-          Explore Our Solutions
+                Explore Our Solutions
               </h2>
               <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
-          Discover how our AI solutions can transform your business across various industries.
+                Discover how our AI solutions can transform your business across various industries.
               </p>
             </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
               {/* Card 1: Telecommunications */}
               <motion.div
-          initial={{ opacity: 0, y: 60, scale: 0.97 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
-          style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
+                variants={cardVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-          <div className="flex items-center mb-5">
-            <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
-              <Lottie
-                animationData={customerService}
-                loop
-                autoplay
-                style={{ height: '48px', width: '48px' }}
-              />
-            </div>
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-              Telecommunications
-            </h3>
-          </div>
-          <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-            Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
-          </p>
-          <ul className="space-y-3 mb-6">
-            <li className="flex items-center">
-              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                <span className="material-symbols-outlined text-theme-main text-sm">
-            check_circle
-                </span>
-              </div>
-              <span className="text-gray-200">24/7 emotionally responsive support</span>
-            </li>
-            <li className="flex items-center">
-              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                <span className="material-symbols-outlined text-theme-main text-sm">
-            check_circle
-                </span>
-              </div>
-              <span className="text-gray-200">Seamless handoff to human agents</span>
-            </li>
-            <li className="flex items-center">
-              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                <span className="material-symbols-outlined text-theme-main text-sm">
-            check_circle
-                </span>
-              </div>
-              <span className="text-gray-200">Context-aware conversation history</span>
-            </li>
-          </ul>
-          <a
-            href="#"
-            className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-            tabIndex={0}
-          >
-            Learn More
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-            </svg>
-          </a>
+                {/* Glow background effect */}
+                <motion.div 
+                  className="absolute -inset-2 bg-gradient-to-r from-theme-main/30 via-purple-700/20 to-pink-500/30 rounded-lg opacity-0 group-hover:opacity-100 blur-xl z-0"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 0 }}
+                  whileHover={{ 
+                    opacity: 0.7, 
+                    scale: 1.2, 
+                    transition: { duration: 0.4 }
+                  }}
+                ></motion.div>
+                <div className="flex items-center mb-5">
+                  <motion.div 
+                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    variants={iconVariants}
+                  >
+                    <Lottie
+                      animationData={customerService}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </motion.div>
+                  <motion.h3 
+                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    variants={textRevealVariants}
+                  >
+                    Telecommunications
+                  </motion.h3>
+                </div>
+                
+                <motion.p 
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  variants={textRevealVariants}
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
+                  Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
+                </motion.p>
+                
+                <motion.ul 
+                  className="space-y-3 mb-6"
+                  variants={staggerContainer}
+                >
+                  {["24/7 emotionally responsive support", "Seamless handoff to human agents", "Context-aware conversation history"].map((item, i) => (
+                    <motion.li 
+                      key={i} 
+                      className="flex items-center"
+                      variants={listItemVariants}
+                      custom={i}
+                    >
+                      <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-theme-main text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+                
+                <motion.a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                  variants={linkVariants}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </motion.a>
               </motion.div>
+
               {/* Card 2: E-Commerce */}
               <motion.div
-          initial={{ opacity: 0, y: 60, scale: 0.97 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-          className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
-          style={{ clipPath: 'polygon(12% 0%, 88% 0%, 100% 20%, 100% 80%, 88% 100%, 12% 100%, 0% 80%, 0% 20%)' }}
+                variants={cardVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
+                style={{ clipPath: 'polygon(12% 0%, 88% 0%, 100% 20%, 100% 80%, 88% 100%, 12% 100%, 0% 80%, 0% 20%)' }}
               >
-          <div className="flex items-center mb-5">
-            <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
-              <Lottie
-                animationData={sales}
-                loop
-                autoplay
-                style={{ height: '48px', width: '48px' }}
-              />
-            </div>
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-              E-Commerce
-            </h3>
-          </div>
-          <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-            Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
-          </p>
-          <ul className="space-y-3 mb-6">
-            <li className="flex items-center">
-              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                <span className="material-symbols-outlined text-theme-main text-sm">
-            check_circle
-                </span>
-              </div>
-              <span className="text-gray-200">Qualified lead generation</span>
-            </li>
-            <li className="flex items-center">
-              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                <span className="material-symbols-outlined text-theme-main text-sm">
-            check_circle
-                </span>
-              </div>
-              <span className="text-gray-200">Personalized product recommendations</span>
-            </li>
-            <li className="flex items-center">
-              <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                <span className="material-symbols-outlined text-theme-main text-sm">
-            check_circle
-                </span>
-              </div>
-              <span className="text-gray-200">Consistent brand voice and messaging</span>
-            </li>
-          </ul>
-          <a
-            href="#"
-            className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
-            tabIndex={0}
-          >
-            Learn More
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
-            </svg>
-          </a>
+                <div className="flex items-center mb-5">
+                  <motion.div 
+                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    variants={iconVariants}
+                  >
+                    <Lottie
+                      animationData={sales}
+                      loop
+                      autoplay
+                      style={{ height: '48px', width: '48px' }}
+                    />
+                  </motion.div>
+                  <motion.h3 
+                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    variants={textRevealVariants}
+                  >
+                    E-Commerce
+                  </motion.h3>
+                </div>
+                
+                <motion.p 
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  variants={textRevealVariants}
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
+                  Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
+                </motion.p>
+                
+                <motion.ul 
+                  className="space-y-3 mb-6"
+                  variants={staggerContainer}
+                >
+                  {["Qualified lead generation", "Personalized product recommendations", "Consistent brand voice and messaging"].map((item, i) => (
+                    <motion.li 
+                      key={i} 
+                      className="flex items-center"
+                      variants={listItemVariants}
+                      custom={i}
+                    >
+                      <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-theme-main text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+                
+                <motion.a
+                  href="#"
+                  className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
+                  tabIndex={0}
+                  variants={linkVariants}
+                >
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
+                  </svg>
+                </motion.a>
               </motion.div>
+
               {/* Card 3: Healthcare */}
               <motion.div
-                initial={{ opacity: 0, y: 60, scale: 0.97 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                variants={cardVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
                 style={{ clipPath: 'polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%)' }}
               >
                 <div className="flex items-center mb-5">
-                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                  <motion.div 
+                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    variants={iconVariants}
+                  >
                     <Lottie
                       animationData={healthcare}
                       loop
                       autoplay
                       style={{ height: '48px', width: '48px' }}
                     />
-                  </div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                  </motion.div>
+                  <motion.h3 
+                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    variants={textRevealVariants}
+                  >
                     Healthcare
-                  </h3>
+                  </motion.h3>
                 </div>
-                <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                
+                <motion.p 
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  variants={textRevealVariants}
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
                   Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-200">Empathetic health guidance</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-200">Medication and appointment reminders</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-200">Wellness check-ins and monitoring</span>
-                  </li>
-                </ul>
-                <a
+                </motion.p>
+                
+                <motion.ul 
+                  className="space-y-3 mb-6"
+                  variants={staggerContainer}
+                >
+                  {["Empathetic health guidance", "Medication and appointment reminders", "Wellness check-ins and monitoring"].map((item, i) => (
+                    <motion.li 
+                      key={i} 
+                      className="flex items-center"
+                      variants={listItemVariants}
+                      custom={i}
+                    >
+                      <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-theme-main text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+                
+                <motion.a
                   href="#"
                   className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
                   tabIndex={0}
+                  variants={linkVariants}
                 >
                   Learn More
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1"
+                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -504,68 +603,76 @@ const Solutions: React.FC = () => {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
                   </svg>
-                </a>
+                </motion.a>
               </motion.div>
+
               {/* Card 4: Education & Online Learning */}
               <motion.div
-                initial={{ opacity: 0, y: 60, scale: 0.97 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
-                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-shadow duration-200 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg scroll-review"
+                variants={cardVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="relative bg-white/5 border border-white/20 p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
                 style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)' }}
               >
                 <div className="flex items-center mb-5">
-                  <div className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg">
+                  <motion.div 
+                    className="w-16 h-16 flex items-center justify-center mr-5 bg-theme-main/5 rounded-lg"
+                    variants={iconVariants}
+                  >
                     <Lottie
                       animationData={education}
                       loop
                       autoplay
                       style={{ height: '48px', width: '48px' }}
                     />
-                  </div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                  </motion.div>
+                  <motion.h3 
+                    className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
+                    variants={textRevealVariants}
+                  >
                     Education & Online Learning
-                  </h3>
+                  </motion.h3>
                 </div>
-                <p className="text-gray-200 font-sans mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                
+                <motion.p 
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  variants={textRevealVariants}
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
                   Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-200">Adaptive learning pathways</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-200">Personalized feedback and assessment</span>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
-                      <span className="material-symbols-outlined text-theme-main text-sm">
-                        check_circle
-                      </span>
-                    </div>
-                    <span className="text-gray-200">24/7 learning support</span>
-                  </li>
-                </ul>
-                <a
+                </motion.p>
+                
+                <motion.ul 
+                  className="space-y-3 mb-6"
+                  variants={staggerContainer}
+                >
+                  {["Adaptive learning pathways", "Personalized feedback and assessment", "24/7 learning support"].map((item, i) => (
+                    <motion.li 
+                      key={i} 
+                      className="flex items-center"
+                      variants={listItemVariants}
+                      custom={i}
+                    >
+                      <div className="h-6 w-6 rounded-full bg-theme-main/10 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-theme-main text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+                
+                <motion.a
                   href="#"
                   className="text-theme-main font-semibold flex items-center font-sans transition-colors duration-200 group-hover:text-theme-main group-focus-visible:text-theme-main"
                   tabIndex={0}
+                  variants={linkVariants}
                 >
                   Learn More
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-1"
+                    className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform duration-200"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -573,20 +680,21 @@ const Solutions: React.FC = () => {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7l7 7-7 7" />
                   </svg>
-                </a>
+                </motion.a>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
         </section>
+
         {/* INDUSTRIES SECTION */}
         <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
           <div className="container mx-auto px-6 sm:px-12">
             <motion.div
-              className="mb-20 text-center scroll-review"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="mb-20 text-center"
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
+              variants={fadeInUpVariants}
             >
               <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
                 Versatile Solutions
@@ -598,12 +706,13 @@ const Solutions: React.FC = () => {
                 Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
               </p>
             </motion.div>
+            
             {/* Normal neural timeline */}
             <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10 lg:ml-16">
               {additionalSolutions.map((item, index) => (
                 <motion.div
                   key={index}
-                  className="relative scroll-review"
+                  className="relative"
                   initial={{ opacity: 0, x: -40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -624,11 +733,12 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </section>
+
         {/* USE CASES SECTION */}
         <section id="use-cases" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-8">
           <div className="container mx-auto px-6 sm:px-12">
             <motion.h2
-              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent scroll-review"
+              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -640,7 +750,7 @@ const Solutions: React.FC = () => {
               {useCases.map((useCase, index) => (
                 <motion.div
                   key={index}
-                  className="relative bg-white/5 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl scroll-review"
+                  className="relative bg-white/5 p-6 md:p-8 transition-all duration-300 flex items-start border-b border-gray-200 rounded-2xl shadow-xl"
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -661,6 +771,7 @@ const Solutions: React.FC = () => {
             </div>
           </div>
         </section>
+
         <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0); }

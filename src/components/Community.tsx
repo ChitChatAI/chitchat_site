@@ -1,33 +1,25 @@
-import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const Community: React.FC<{ id?: string }> = ({ id }) => {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-slide-up');
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    const elements = document.querySelectorAll('.scroll-review');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
 
   return (
     <section
       id={id}
       className="relative py-20 md:py-32 bg-black text-white font-[Satoshi] overflow-hidden px-4 sm:px-8"
     >
-  
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10"></div>
       <div className="container mx-auto px-6 sm:px-12 relative z-20">
-        <div className="max-w-4xl mx-auto text-center scroll-review opacity-0 transform translate-y-10">
+        <motion.div
+          className="max-w-4xl mx-auto text-center opacity-0 transform translate-y-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeInVariants}
+        >
           <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 leading-tight tracking-tight drop-shadow-xl">
             Be Part of Our AI Revolution
           </h2>
@@ -49,13 +41,12 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
               Contact Us
             </a>
           </div>
-          {/* Animated dots for life */}
           <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center">
             <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
             <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
             <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

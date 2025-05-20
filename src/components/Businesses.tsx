@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Businesses: React.FC = () => {
   // Typing animation for AI intro text (used in first section)
@@ -14,6 +15,36 @@ const Businesses: React.FC = () => {
     }, 50);
     return () => clearInterval(typingInterval);
   }, [fullText]);
+
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const rotateInVariants = {
+    hidden: { opacity: 0, rotate: -30 },
+    visible: { opacity: 1, rotate: 0, transition: { duration: 1, ease: 'easeOut' } },
+  };
+
+  const scaleUpVariants = {
+    hidden: { opacity: 0, scale: 0.5 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 1, ease: 'easeOut' } },
+  };
+
+  const slideInVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } },
+  };
 
   const includedFeatures = [
     { 
@@ -131,82 +162,129 @@ const Businesses: React.FC = () => {
           </video>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10"></div>
           
-          <div className="relative z-20 max-w-7xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
+          <motion.div
+            className="relative z-20 max-w-7xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+          >
+            <motion.h2
+              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeInVariants}
+            >
               How ChitChat Adds Value to Your Business
-            </h2>
+            </motion.h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
               {businessValues.map((item, index) => (
-                <div
+                <motion.div
                   key={index}
                   className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 hover:bg-white/15 transition-all duration-300"
                   style={{ clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)' }}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={fadeInVariants}
                 >
-                  <span className="material-symbols-outlined text-theme-main text-5xl mb-4">
+                  <motion.span
+                    className="material-symbols-outlined text-theme-main text-5xl mb-4"
+                    variants={rotateInVariants}
+                  >
                     {item.icon}
-                  </span>
+                  </motion.span>
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {item.title}
                   </h3>
                   <p className="text-sm text-blue-300 font-bold uppercase tracking-wider mb-3">{item.metric}</p>
                   <p className="text-gray-300">{item.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* What's Included Section */}
         <section id="whats-included" className="relative py-20 md:py-32 bg-gradient-to-br from-gray-900 to-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
-          <div className="relative z-10 max-w-6xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
+          <motion.div
+            className="relative z-10 max-w-6xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+          >
+            <motion.h2
+              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
+              variants={scaleUpVariants}
+            >
               What's Included in Every ChitChat Package
-            </h2>
+            </motion.h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {includedFeatures.map((item, index) => (
-                <div
+                <motion.div
                   key={index}
                   className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 flex gap-6 items-start hover:bg-white/15 transition-all duration-300"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={scaleUpVariants}
                 >
-                  <span className="material-symbols-outlined text-theme-main text-4xl">
+                  <motion.span
+                    className="material-symbols-outlined text-theme-main text-4xl"
+                    variants={scaleUpVariants}
+                  >
                     {item.icon}
-                  </span>
+                  </motion.span>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">
                       {item.title}
                     </h3>
                     <p className="text-gray-300">{item.description}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Use Cases Section */}
         <section id="use-cases" className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
-          <div className="relative z-10 max-w-6xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
+          <motion.div
+            className="relative z-10 max-w-6xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+          >
+            <motion.h2
+              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
+              variants={slideInVariants}
+            >
               How Businesses Use ChitChat
-            </h2>
+            </motion.h2>
             
             <div className="space-y-8">
               {useCases.map((item, index) => (
-                <div
+                <motion.div
                   key={index}
                   className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-8 hover:bg-white/10 transition-all duration-300"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={slideInVariants}
                 >
                   <h3 className="text-2xl font-bold text-white mb-3">
                     {item.title}
                   </h3>
                   <p className="text-gray-300 text-lg">{item.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
       </div>
     </div>
