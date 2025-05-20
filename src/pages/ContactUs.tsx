@@ -4,15 +4,22 @@ import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Confetti from 'react-confetti';
-import emailjs from 'emailjs-com';
 import { useNavigate } from 'react-router-dom';
 
-// Updated input text color to white
 const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border border-gray-200 rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
 const inputError = "block w-full px-4 py-3 text-sm text-white bg-red-50/20 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300";
 
+// Add toast interface
+interface ToastMessage {
+  type: 'success' | 'error';
+  message: string;
+}
+
 const ContactUs: React.FC = () => {
   const navigate = useNavigate();
+
+  // Add toast state
+  const [toast, setToast] = useState<ToastMessage | null>(null);
 
   const [formData, setFormData] = useState<{
     name: string;
@@ -181,14 +188,11 @@ const ContactUs: React.FC = () => {
 
   const handlePrevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
-  // Updated the sendEmail function with the provided template ID, service ID, and public key
+  // Replace the simulation with actual form submission to Formspree
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const serviceID = 'service_ihcw9or';
-    const templateID = 'template_7n5qv2j';
-    const userID = 'ORC1Bf6tLenC_Wsui';
-
+    // Set up formdata to send to the specified email
     const formDataToSend = {
       name: formData.name,
       surname: formData.surname,
@@ -200,22 +204,38 @@ const ContactUs: React.FC = () => {
       goals: formData.goals,
       interests: formData.interests.join(', '),
       teamDescription: formData.teamDescription,
+      _replyto: formData.email, 
+      _subject: formData.subject || "New ChitChat AI Inquiry",
+      _cc: "hnengare@gmail.com", 
     };
 
     try {
-      await emailjs.send(serviceID, templateID, formDataToSend, userID);
-      alert('Message sent successfully!');
-      setShowConfetti(true); // Trigger confetti on successful email send
+      setIsSubmitting(true);
+
+      const response = await fetch('https://formspree.io/f/xanokvdw', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataToSend),
+      });
+      
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      // Remove success toast, just show form success message
+      setShowConfetti(true);
+      setIsSubmitted(true);
+      
       setTimeout(() => {
-        setShowConfetti(false); // Stop confetti after 5 seconds
-        navigate('/'); // Redirect to the home page
-      }, 5000);
+        setShowConfetti(false); 
+        navigate('/');
+      }, 3000);
     } catch (error) {
       console.error('Failed to send the message:', error);
-      alert('Failed to send the message. Please try again later.');
+      setToast({ type: 'error', message: 'Failed to send the message. Please try again later.' });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    e.currentTarget.reset();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -228,30 +248,19 @@ const ContactUs: React.FC = () => {
       return;
     }
 
-    setIsSubmitting(true);
-    setErrors({});
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          surname: '', // Reset surname field
-          email: '',
-          subject: '',
-          message: '',
-          companySize: '',
-          industry: '',
-          goals: '',
-          interests: [],
-          teamDescription: '',
-        });
-        setCurrentStep(1); // Reset to the first step
-      }, 4000);
-    }, 1500);
+    // Call the sendEmail function with the form data
+    await sendEmail(e as unknown as React.FormEvent<HTMLFormElement>);
   };
+
+  // Add auto-dismiss for toast after 5 seconds
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => {
+        setToast(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   const handleScrollToSection = (id: string) => {
     const section = document.getElementById(id);
@@ -284,6 +293,38 @@ const ContactUs: React.FC = () => {
     <>
       {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
       <NavBar />
+      
+      {/* Toast notification */}
+      {toast && toast.type === 'error' && (
+        <div className="fixed top-24 right-4 z-50 animate-fade-in-right">
+          <div className={`max-w-md w-full shadow-lg rounded-lg pointer-events-auto overflow-hidden transition-all transform-gpu bg-gradient-to-r from-red-500 to-pink-600`}>
+            <div className="p-4">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="ml-3 w-0 flex-1">
+                  <p className="text-base font-medium text-white">{toast.message}</p>
+                </div>
+                <div className="ml-4 flex-shrink-0 flex">
+                  <button
+                    className="inline-flex text-white focus:outline-none focus:ring-2 focus:ring-white"
+                    onClick={() => setToast(null)}
+                  >
+                    <span className="sr-only">Close</span>
+                    <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Modern dark video + image background */}
       <div className="fixed inset-0 z-[-2] pointer-events-none">
         <img
@@ -769,6 +810,13 @@ const ContactUs: React.FC = () => {
         }
         .animate-contact-hero-gradient-in {
           animation: contact-hero-gradient-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes fade-in-right {
+          0% { opacity: 0; transform: translateX(100px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-in-right {
+          animation: fade-in-right 0.4s cubic-bezier(0.4,0,0.2,1) both;
         }
         .delay-200 { animation-delay: 0.2s; }
         .delay-400 { animation-delay: 0.4s; }
