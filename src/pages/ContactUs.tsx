@@ -52,6 +52,7 @@ const ContactUs: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [showConfetti, setShowConfetti] = React.useState(false);
+  const [showLetsTalk, setShowLetsTalk] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -222,7 +223,7 @@ const ContactUs: React.FC = () => {
       
       if (!response.ok) throw new Error('Network response was not ok');
       
-      // Remove success toast, just show form success message
+      setToast({ type: 'success', message: 'Message sent successfully!' });
       setShowConfetti(true);
       setIsSubmitted(true);
       
@@ -289,21 +290,56 @@ const ContactUs: React.FC = () => {
     return () => cleanupCursor();
   }, []);
 
+  // Modal component for Let's Talk popup
+  const LetsTalkModal: React.FC<{ open: boolean; onClose: () => void; children: React.ReactNode }> = ({ open, onClose, children }) => {
+    return (
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-500 ${open ? 'visible bg-black/60' : 'invisible bg-transparent'}`}
+        style={{ pointerEvents: open ? 'auto' : 'none' }}
+        aria-modal="true"
+        role="dialog"
+      >
+        <div
+          className={`transform transition-all duration-500 ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'} bg-black/95 rounded-2xl shadow-2xl border border-white/20 p-2 sm:p-8 w-full max-w-2xl relative`}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-300 hover:text-white focus:outline-none text-2xl"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+          {children}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
       <NavBar />
       
       {/* Toast notification */}
-      {toast && toast.type === 'error' && (
+      {toast && (
         <div className="fixed top-24 right-4 z-50 animate-fade-in-right">
-          <div className={`max-w-md w-full shadow-lg rounded-lg pointer-events-auto overflow-hidden transition-all transform-gpu bg-gradient-to-r from-red-500 to-pink-600`}>
+          <div className={`max-w-md w-full shadow-lg rounded-lg pointer-events-auto overflow-hidden transition-all transform-gpu ${
+            toast.type === 'success' 
+              ? 'bg-gradient-to-r from-green-500 to-emerald-600' 
+              : 'bg-gradient-to-r from-red-500 to-pink-600'
+          }`}>
             <div className="p-4">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
-                  <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  {toast.type === 'success' ? (
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  ) : (
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  )}
                 </div>
                 <div className="ml-3 w-0 flex-1">
                   <p className="text-base font-medium text-white">{toast.message}</p>
@@ -419,14 +455,20 @@ const ContactUs: React.FC = () => {
               <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
               <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
             </div>
+            <button
+              className="mt-8 px-8 py-4 bg-theme-main text-white rounded-xl font-bold text-lg shadow-lg hover:bg-theme-dark transition-all duration-300 animate-fade-in-up"
+              onClick={() => setShowLetsTalk(true)}
+            >
+              Let's Talk
+            </button>
             </div>
         </div>
       </section>
 
       {/* Shifted Form Section */}
-      <section className="relative px-4 sm:px-10 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
+      <section className="relative px-4 sm:px-0 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
         <div className="container mx-auto">
-          <div className="w-full mx-auto bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
+          <div className="w-full mx-auto bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-6 sm:p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
             {/* Form steps container */}
             <div className="relative z-10">
               {/* Modern progress tracker */}
@@ -789,6 +831,123 @@ const ContactUs: React.FC = () => {
 
       <CookieConsent position="left" modalPosition="bottom" />
       <Footer />
+      <LetsTalkModal open={showLetsTalk} onClose={() => setShowLetsTalk(false)}>
+        <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
+          <h3 className="text-2xl font-semibold text-white mb-4 font-satoshi text-center">Let's Talk</h3>
+          <p className="text-base text-gray-200 mb-6 text-center">
+            We’re excited to connect with you! Please fill out the form below and our team will respond within <span className="text-theme-main font-semibold">48 hours</span>.<br/>
+            You’re welcome to ask anything or just say hello — we’re here to help and happy to have you!
+          </p>
+          {/* Only show the form if not submitted, else show the success message */}
+          {!isSubmitted ? (
+            <form onSubmit={sendEmail} className="space-y-6">
+              {/* Name, Surname, Email, Subject, Message fields (reuse as needed) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="relative group">
+                  <input
+                    type="text"
+                    id="modal-name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`${inputBase} ${errors.name ? inputError : ''}`}
+                    required
+                  />
+                  <label htmlFor="modal-name" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.name ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>First Name</label>
+                  {errors.name && <p className="mt-2 text-sm text-red-400">{errors.name}</p>}
+                </div>
+                <div className="relative group">
+                  <input
+                    type="text"
+                    id="modal-surname"
+                    name="surname"
+                    value={formData.surname}
+                    onChange={handleChange}
+                    className={`${inputBase} ${errors.surname ? inputError : ''}`}
+                    required
+                  />
+                  <label htmlFor="modal-surname" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.surname ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>Surname</label>
+                  {errors.surname && <p className="mt-2 text-sm text-red-400">{errors.surname}</p>}
+                </div>
+              </div>
+              <div className="relative group">
+                <input
+                  type="email"
+                  id="modal-email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`${inputBase} ${errors.email ? inputError : ''}`}
+                  required
+                />
+                <label htmlFor="modal-email" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.email ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>Email Address</label>
+                {errors.email && <p className="mt-2 text-sm text-red-400">{errors.email}</p>}
+              </div>
+              <div className="relative group">
+                <input
+                  type="text"
+                  id="modal-subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className={inputBase}
+                />
+                <label htmlFor="modal-subject" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.subject ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>Subject (Optional)</label>
+              </div>
+              <div className="relative group">
+                <textarea
+                  id="modal-message"
+                  name="message"
+                  rows={5}
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={`${inputBase} ${errors.message ? inputError : ''}`}
+                  required
+                />
+                <label htmlFor="modal-message" className="text-white">Your Message</label>
+                <p className="mt-2 text-sm text-gray-400">Tell us about your specific needs or questions</p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'}`}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <span>Send</span>
+                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 p-6 rounded-xl shadow-lg text-center">
+              <div className="flex flex-col items-center">
+                <div className="bg-green-100 p-3 rounded-full shadow-inner mb-4">
+                  <svg className="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h4 className="text-xl font-semibold text-green-800">Message Sent Successfully!</h4>
+                <p className="text-green-700">Thank you for reaching out. Our team will get back to you shortly.</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </LetsTalkModal>
       <style>{`
         @keyframes contact-hero-fade-in {
           0% { opacity: 0; transform: translateY(40px); }

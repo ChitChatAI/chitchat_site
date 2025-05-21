@@ -1,4 +1,9 @@
 export const initCustomCursor = () => {
+  // Prevent on mobile devices
+  if (typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches) {
+    return () => {};
+  }
+
   const cursor = document.createElement('div');
   cursor.classList.add('custom-cursor');
   document.body.appendChild(cursor);
