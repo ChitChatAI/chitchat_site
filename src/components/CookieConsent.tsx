@@ -15,7 +15,6 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
   const [cookiesAccepted, setCookiesAccepted] = useState(() => {
     return localStorage.getItem('cookieConsent') === 'accepted' || true; // Default to accepted
   });
-  const [showCookieInfoModal, setShowCookieInfoModal] = useState(false); // New state for cookie info modal
   // Banner is disabled - we only use the floating button
   useEffect(() => {
     // If cookies haven't been accepted yet, set them to accepted by default
@@ -186,57 +185,10 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
               <a
                 href="#"
                 className="text-theme-main underline hover:text-theme-dark ml-1"
-                onClick={e => {
-                  e.preventDefault();
-                  setShowCookieInfoModal(true);
-                }}
               >
                 Privacy Policy
               </a>
             </p>
-            {/* Cookie Info Modal */}
-            {showCookieInfoModal && (
-              <div className="fixed inset-0 z-[1100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                <div className="fixed inset-0 bg-white rounded-none shadow-none w-full h-full p-0 flex flex-col animate-fade-in z-[1101]">
-                  <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
-                    <h3 className="text-lg font-bold text-theme-main">How We Use Cookies at ChitChat AI</h3>
-                    <div className="flex items-center gap-2">
-                      <button
-                        className="text-gray-400 hover:text-theme-main text-xl"
-                        onClick={() => setShowCookieInfoModal(false)}
-                        aria-label="Minimize cookie info modal"
-                      >
-                        <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="4" y="9" width="12" height="2" rx="1" fill="currentColor"/></svg>
-                      </button>
-                      <button
-                        className="text-gray-400 hover:text-red-500 text-xl"
-                        onClick={() => setShowCookieInfoModal(false)}
-                        aria-label="Close cookie info modal"
-                      >
-                        <X size={20} />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex-1 overflow-y-auto px-6 py-8">
-                    <p className="text-gray-700 text-base mb-4">
-                      ChitChat AI uses cookies to enhance your browsing experience, analyze site usage, and support our marketing efforts. Cookies help us remember your preferences, keep you logged in, and understand how you interact with our website.
-                    </p>
-                    <p className="text-gray-700 text-base mb-4">
-                      We comply with the Protection of Personal Information Act (POPIA) and South African cookie laws. This means:
-                    </p>
-                    <ul className="list-disc pl-5 text-gray-700 text-base mb-4">
-                      <li>We only use essential cookies by default. Analytics and marketing cookies are optional and require your consent.</li>
-                      <li>Your cookie preferences are stored securely and can be changed at any time.</li>
-                      <li>We do not sell or share your personal data with third parties for advertising purposes.</li>
-                      <li>All data collected via cookies is processed in accordance with South African law and our privacy policy.</li>
-                    </ul>
-                    <p className="text-gray-700 text-base">
-                      For more information, please contact our support team or review our full privacy policy. By using our site, you agree to our use of cookies as described above.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
               {/* Technical cookies card */}

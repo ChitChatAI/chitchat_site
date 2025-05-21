@@ -637,9 +637,12 @@ const Solutions: React.FC = () => {
                   transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="flex flex-col sm:flex-row items-start gap-2">
+                  <div className="flex flex-col sm:flex-row items-start gap-6 bg-gradient-to-br from-white/5 via-white/10 to-white/5 p-6 md:p-8 rounded-2xl border border-white/10 hover:border-theme-main/30 shadow-xl hover:shadow-2xl transition-all duration-300">
                     <div className="w-full sm:w-1/3 mb-2 sm:mb-0">
-                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">{item.title}</h4>
+                      <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                        {item.title}
+                      </h4>
+                      <hr className="border-t border-white/10 w-12 mt-2 mb-4" />
                     </div>
                     <div className="w-full sm:w-2/3">
                       <p className="text-base text-gray-200 leading-relaxed">{item.text}</p>
@@ -667,15 +670,18 @@ const Solutions: React.FC = () => {
               {useCases.map((useCase, index) => (
                 <motion.div
                   key={index}
-                  className="relative bg-white/5 p-6 md:p-8 transition-all duration-300 flex flex-col sm:flex-row items-start border-b border-gray-200 rounded-2xl shadow-xl gap-2"
+                  className="relative bg-gradient-to-br from-white/5 via-white/10 to-white/5 p-6 md:p-8 flex flex-col sm:flex-row items-start border border-white/10 hover:border-theme-main/40 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 gap-4"
                   initial={{ opacity: 0, x: 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.08 }}
+                  transition={{ duration: 0.7, ease: 'easeOut', delay: index * 0.08 }}
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
                   <div className="w-full sm:w-1/3 mb-2 sm:mb-0">
-                    <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">{useCase.title}</h4>
+                    <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+                      {useCase.title}
+                    </h4>
+                    <hr className="border-t border-white/10 w-12 mt-2 mb-4" />
                   </div>
                   <div className="w-full sm:w-2/3">
                     <p className="text-base text-gray-200 leading-relaxed">{useCase.description}</p>

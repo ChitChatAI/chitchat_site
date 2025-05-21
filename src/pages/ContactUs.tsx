@@ -455,12 +455,6 @@ const ContactUs: React.FC = () => {
               <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
               <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
             </div>
-            <button
-              className="mt-8 px-8 py-4 bg-theme-main text-white rounded-xl font-bold text-lg shadow-lg hover:bg-theme-dark transition-all duration-300 animate-fade-in-up"
-              onClick={() => setShowLetsTalk(true)}
-            >
-              Let's Talk
-            </button>
             </div>
         </div>
       </section>

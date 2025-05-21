@@ -237,7 +237,7 @@ const VisionBoard: React.FC = () => {
                         <article className="prose prose-lg md:prose-xl prose-invert prose-slate mx-auto">
                             {/* Lead Paragraph with enhanced styling */}
                             <motion.p
-                                className="lead text-xl md:text-2xl text-gray-200 mb-10 font-light leading-relaxed tracking-wide"
+                                className="lead text-xl md:text-2xl text-white mb-10 font-light leading-relaxed tracking-wide"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -246,55 +246,55 @@ const VisionBoard: React.FC = () => {
                             </motion.p>
 
                             <div className="space-y-8"> {/* Added container with improved spacing */}
-                                <p className="text-gray-200 leading-relaxed">At ChitChat, we create AI personas that actually sound human. They don't just answer questions, they communicate like someone who understands what you're saying and why you're saying it.</p>
+                                <p className="text-white leading-relaxed">At ChitChat, we create AI personas that actually sound human. They don't just answer questions, they communicate like someone who understands what you're saying and why you're saying it.</p>
 
                                 {/* Section with styled heading */}
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         What Is a Persona?
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">We don't build the LLM itself, we work with existing ones. A persona is what you input into that model. It's the personality, tone, and communication style that shapes how the AI responds.</p>
+                                    <p className="text-white leading-relaxed">We don't build the LLM itself, we work with existing ones. A persona is what you input into that model. It's the personality, tone, and communication style that shapes how the AI responds.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">Think of it like this: the LLM is the engine, but the persona is the driver. Businesses bring their own model and we help give it a voice that actually fits their brand and knows how to talk to their customers.</p>
+                                    <p className="text-white leading-relaxed mt-4">Think of it like this: the LLM is the engine, but the persona is the driver. Businesses bring their own model and we help give it a voice that actually fits their brand and knows how to talk to their customers.</p>
                                 </div>
 
                                 {/* Pull Quote */}
-                                <div className="my-12 border-l-4 border-theme-main pl-6 py-2 italic text-xl text-gray-100">
+                                <div className="my-12 border-l-4 border-theme-main pl-6 py-2 italic text-xl text-white">
                                     "The LLM is the engine, but the persona is the driver."
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Our Prebuilt Set
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed mb-4">Right now, we've developed a small set of ready-to-use personas designed for key business functions:</p>
+                                    <p className="text-white leading-relaxed mb-4">Right now, we've developed a small set of ready-to-use personas designed for key business functions:</p>
                                     <ul className="space-y-2 ml-6">
                                         <li className="flex items-start">
                                             <span className="text-theme-main mr-2">•</span>
-                                            <span>One handles retention conversations clearly and confidently</span>
+                                            <span className="text-white">One handles retention conversations clearly and confidently</span>
                                         </li>
                                         <li className="flex items-start">
                                             <span className="text-theme-main mr-2">•</span>
-                                            <span>One helps with support in a calm, structured way</span>
+                                            <span className="text-white">One helps with support in a calm, structured way</span>
                                         </li>
                                         <li className="flex items-start">
                                             <span className="text-theme-main mr-2">•</span>
-                                            <span>One is soft-spoken, friendly, and great with billing questions</span>
+                                            <span className="text-white">One is soft-spoken, friendly, and great with billing questions</span>
                                         </li>
                                     </ul>
-                                    <p className="text-gray-200 leading-relaxed mt-4">They're all different, but the goal is the same: to make conversations smoother, quicker, and more human.</p>
+                                    <p className="text-white leading-relaxed mt-4">They're all different, but the goal is the same: to make conversations smoother, quicker, and more human.</p>
                                 </div>
 
                                 {/* Continue with more styled sections */}
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Why Prebuilt?
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">These personas are ready to go. They've been tested in real scenarios and are built to handle the kinds of customer interactions most businesses deal with daily. They're efficient and easy to plug in without needing to start from scratch.</p>
-                                    <p className="text-gray-200 leading-relaxed mt-4">But they're not where it ends…</p>
+                                    <p className="text-white leading-relaxed">These personas are ready to go. They've been tested in real scenarios and are built to handle the kinds of customer interactions most businesses deal with daily. They're efficient and easy to plug in without needing to start from scratch.</p>
+                                    <p className="text-white leading-relaxed mt-4">But they're not where it ends…</p>
                                 </div>
 
                                 {/* Enhanced callout boxes */}
@@ -307,84 +307,84 @@ const VisionBoard: React.FC = () => {
 
                                 {/* Continue with existing content but with enhanced formatting */}
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Custom Personas for Any Industry
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">We also create custom personas based on a business's tone, needs, and goals. Whether you need someone calm for the medical field, upbeat for hospitality, or no-nonsense for logistics - we can build a voice that fits.</p>
-                                    <p className="text-gray-200 leading-relaxed mt-4">The prebuilt ones are there if you need something fast. But long-term, we believe every business should have a voice that feels like its own.</p>
+                                    <p className="text-white leading-relaxed">We also create custom personas based on a business's tone, needs, and goals. Whether you need someone calm for the medical field, upbeat for hospitality, or no-nonsense for logistics - we can build a voice that fits.</p>
+                                    <p className="text-white leading-relaxed mt-4">The prebuilt ones are there if you need something fast. But long-term, we believe every business should have a voice that feels like its own.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Tone Changes Outcomes
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">The way an AI responds can completely change the outcome of a conversation. A frustrated customer might cancel their service if the chatbot sounds flat or unhelpful, but that same person might stay if the AI handles the situation with the right mix of empathy, clarity, and confidence.</p>
-                                    <p className="text-gray-200 leading-relaxed mt-4">Tone isn't just a decoration, it's a strategy.</p>
+                                    <p className="text-white leading-relaxed">The way an AI responds can completely change the outcome of a conversation. A frustrated customer might cancel their service if the chatbot sounds flat or unhelpful, but that same person might stay if the AI handles the situation with the right mix of empathy, clarity, and confidence.</p>
+                                    <p className="text-white leading-relaxed mt-4">Tone isn't just a decoration, it's a strategy.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Designed for Real Conversations
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">Every persona we build is designed to handle human situations, not just transactional ones. While we don't share our full process publicly, everything we do is backed by deep psychological theories, careful testing, and a clear understanding of how people actually communicate.</p>
-                                    <p className="text-gray-200 leading-relaxed mt-4">That's what makes our AI feel not just functional, but personal.</p>
+                                    <p className="text-white leading-relaxed">Every persona we build is designed to handle human situations, not just transactional ones. While we don't share our full process publicly, everything we do is backed by deep psychological theories, careful testing, and a clear understanding of how people actually communicate.</p>
+                                    <p className="text-white leading-relaxed mt-4">That's what makes our AI feel not just functional, but personal.</p>
                                 </div>
 
-                                <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                <div className="mt-14 mb-8 bg-black bg-opacity-50 backdrop-blur-md p-6 rounded-lg">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         Simulated Results: What Happens When AI Talks Like a Human?
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">When a customer reaches out with a complaint, a cancellation, or a moment of confusion, that interaction can go one of two ways.</p>
-                                    <p className="text-gray-200 leading-relaxed mt-4">With most standard chatbots, the path is usually rigid and frustrating. The customer gets a scripted response, limited options, and no real engagement. The result? Escalation, abandonment, or churn.</p>
-                                    <p className="text-gray-200 leading-relaxed mt-4">We wanted to see what would happen if that moment was handled differently.</p>
+                                    <p className="text-white leading-relaxed">When a customer reaches out with a complaint, a cancellation, or a moment of confusion, that interaction can go one of two ways.</p>
+                                    <p className="text-white leading-relaxed mt-4">With most standard chatbots, the path is usually rigid and frustrating. The customer gets a scripted response, limited options, and no real engagement. The result? Escalation, abandonment, or churn.</p>
+                                    <p className="text-white leading-relaxed mt-4">We wanted to see what would happen if that moment was handled differently.</p>
                                 </div>
 
                                 {/* Scenario Section */}
-                                <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">The Scenario</h3>
-                                    <p className="text-gray-200 leading-relaxed">A customer contacts support. They're upset. They've had an issue and they're either looking to cancel, file a complaint, or just vent.</p>
-                                    <p className="text-gray-200 leading-relaxed mt-4">Here's how most systems respond:</p>
+                                <div className="mt-14 mb-8 bg-black/50 backdrop-blur-md p-6 rounded-lg">
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">The Scenario</h3>
+                                    <p className="text-white leading-relaxed">A customer contacts support. They're upset. They've had an issue and they're either looking to cancel, file a complaint, or just vent.</p>
+                                    <p className="text-white leading-relaxed mt-4">Here's how most systems respond:</p>
 
                                     <blockquote className="italic bg-gray-100 px-6 py-3 border-l-4 border-gray-300 text-center text-gray-600">
                                         "Please confirm your ID and I'll process your request."
                                     </blockquote>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">That response is technically correct, but it doesn't move the conversation forward in any meaningful way.</p>
+                                    <p className="text-white leading-relaxed mt-4">That response is technically correct, but it doesn't move the conversation forward in any meaningful way.</p>
                                 </div>
 
                                 {/* With a ChitChat Persona Section */}
-                                <div className="my-10">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">With a ChitChat Persona</h3>
-                                    <p className="text-gray-200 leading-relaxed mb-4">In the same situation, one of our AI personas might respond with something more human:</p>
+                                <div className="my-10 bg-black/50 backdrop-blur-md p-6 rounded-lg">
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">With a ChitChat Persona</h3>
+                                    <p className="text-white leading-relaxed mb-4">In the same situation, one of our AI personas might respond with something more human:</p>
 
                                     <blockquote className="italic bg-gradient-to-r from-purple-50 to-purple-100 px-8 py-6 text-gray-700 leading-relaxed shadow-sm my-6">
                                         "I'm really sorry you've had a frustrating experience. Before we go ahead with anything, I want to make sure I understand what's happened and what we can do to make it right."
                                     </blockquote>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">It's simple. It doesn't try to fake empathy, it just uses tone, timing, and clarity to shift the dynamic.</p>
+                                    <p className="text-white leading-relaxed mt-4">It's simple. It doesn't try to fake empathy, it just uses tone, timing, and clarity to shift the dynamic.</p>
                                 </div>
 
-                                <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">So, What Changed?</h3>
-                                    <p className="text-gray-200 leading-relaxed">In simulations like this, here's what we saw:</p>
+                                <div className="mt-14 mb-8 bg-black/50 backdrop-blur-md p-6 rounded-lg">
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">So, What Changed?</h3>
+                                    <p className="text-white leading-relaxed">In simulations like this, here's what we saw:</p>
                                     <ul className="list-disc list-inside space-y-2 mt-4">
-                                        <li className="text-gray-200 leading-relaxed">Higher engagement - people opened up more and gave context.</li>
-                                        <li className="text-gray-200 leading-relaxed">More opportunities to offer tailored solutions (instead of defaulting to "cancel" or "escalate").</li>
-                                        <li className="text-gray-200 leading-relaxed">Less need for human intervention.</li>
+                                        <li className="text-white leading-relaxed">Higher engagement - people opened up more and gave context.</li>
+                                        <li className="text-white leading-relaxed">More opportunities to offer tailored solutions (instead of defaulting to "cancel" or "escalate").</li>
+                                        <li className="text-white leading-relaxed">Less need for human intervention.</li>
                                     </ul>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">No fancy gimmicks. Just better conversational design.</p>
+                                    <p className="text-white leading-relaxed mt-4">No fancy gimmicks. Just better conversational design.</p>
                                 </div>
 
-                                <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">Why It Works</h3>
-                                    <p className="text-gray-200 leading-relaxed">When an AI can manage tone, handle emotion, and guide the customer instead of reacting to them, it changes everything.</p>
+                                <div className="mt-14 mb-8 bg-black/50 backdrop-blur-md p-6 rounded-lg">
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">Why It Works</h3>
+                                    <p className="text-white leading-relaxed">When an AI can manage tone, handle emotion, and guide the customer instead of reacting to them, it changes everything.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">We're not replacing people. We're just making it easier to have human-quality conversations at scale.</p>
+                                    <p className="text-white leading-relaxed mt-4">We're not replacing people. We're just making it easier to have human-quality conversations at scale.</p>
                                 </div>
 
                                 <div className="my-12 p-6 bg-blue-50 rounded-lg">
@@ -396,58 +396,58 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         What is Human-Augmented AI? (And Why Should You Care?)
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">A lot of people are throwing around terms like "AI-powered" and "human-like," but no one really explains what it means or why it matters.</p>
+                                    <p className="text-white leading-relaxed">A lot of people are throwing around terms like "AI-powered" and "human-like," but no one really explains what it means or why it matters.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">At ChitChat, when we say "human-augmented AI", we mean AI that's been carefully shaped to talk like a person, not just in what it says, but how it says it. We design AI personas that know how to manage tone, emotion, and intent so conversations don't feel robotic, even if no human is involved.</p>
+                                    <p className="text-white leading-relaxed mt-4">At ChitChat, when we say "human-augmented AI", we mean AI that's been carefully shaped to talk like a person, not just in what it says, but how it says it. We design AI personas that know how to manage tone, emotion, and intent so conversations don't feel robotic, even if no human is involved.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">So…Is It Just a Chatbot?</h3>
-                                    <p className="text-gray-200 leading-relaxed">Not really. Most chatbots follow a script - they're limited, reactive, and often frustrating. Our personas, on the other hand, are built to carry real conversations. They understand emotional cues, respond in the right tone, and guide the conversation instead of just reacting to it.</p>
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">So…Is It Just a Chatbot?</h3>
+                                    <p className="text-white leading-relaxed">Not really. Most chatbots follow a script - they're limited, reactive, and often frustrating. Our personas, on the other hand, are built to carry real conversations. They understand emotional cues, respond in the right tone, and guide the conversation instead of just reacting to it.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">It's not about faking being human, it's about creating a better experience.</p>
+                                    <p className="text-white leading-relaxed mt-4">It's not about faking being human, it's about creating a better experience.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">What's Augmented About It?</h3>
-                                    <p className="text-gray-200 leading-relaxed">The "augmented" part means that businesses aren't just plugging in a generic model and hoping for the best. We work with them to shape how their AI sounds, feels, and interacts so it fits their brand, their customers, and the kind of experience they actually want to offer.</p>
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">What's Augmented About It?</h3>
+                                    <p className="text-white leading-relaxed">The "augmented" part means that businesses aren't just plugging in a generic model and hoping for the best. We work with them to shape how their AI sounds, feels, and interacts so it fits their brand, their customers, and the kind of experience they actually want to offer.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">You don't need to train a model from scratch. You bring the model, we bring the voice.</p>
+                                    <p className="text-white leading-relaxed mt-4">You don't need to train a model from scratch. You bring the model, we bring the voice.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">Why Does It Matter?</h3>
-                                    <p className="text-gray-200 leading-relaxed">When customers feel like they're being heard, they stay longer, trust more, and need less support overall. And when the AI is doing its job well, your human team can focus on higher-level work or, in some cases, you can run entire interactions without needing a person at all.</p>
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">Why Does It Matter?</h3>
+                                    <p className="text-white leading-relaxed">When customers feel like they're being heard, they stay longer, trust more, and need less support overall. And when the AI is doing its job well, your human team can focus on higher-level work or, in some cases, you can run entire interactions without needing a person at all.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-gray-100 mb-4 relative transition-all duration-700">
+                                    <h2 className="scroll-review opacity-0 transform translate-y-6 text-2xl md:text-3xl font-semibold text-white mb-4 relative transition-all duration-700">
                                         <span className="absolute -left-4 top-0 bottom-0 w-1 bg-theme-main rounded-full"></span>
                                         How Our Personas Integrate With Your Existing Systems
                                     </h2>
-                                    <p className="text-gray-200 leading-relaxed">One of the biggest questions we get is "Will this work with the platforms we already use?"<br />
+                                    <p className="text-white leading-relaxed">One of the biggest questions we get is "Will this work with the platforms we already use?"<br />
                                         Short answer: yes.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">ChitChat doesn't require you to rebuild your setup or change what's already working. We build AI personas that plug into your current systems, not ones that demand a whole new way of doing things.</p>
+                                    <p className="text-white leading-relaxed mt-4">ChitChat doesn't require you to rebuild your setup or change what's already working. We build AI personas that plug into your current systems, not ones that demand a whole new way of doing things.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">Our Personas are Built to Fit, Not to Replace Everything</h3>
-                                    <p className="text-gray-200 leading-relaxed">Whether you're using Zendesk, Freshdesk, Intercom, WhatsApp, or your own internal tools, our AI can be integrated to work alongside your team.</p>
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">Our Personas are Built to Fit, Not to Replace Everything</h3>
+                                    <p className="text-white leading-relaxed">Whether you're using Zendesk, Freshdesk, Intercom, WhatsApp, or your own internal tools, our AI can be integrated to work alongside your team.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">The integration process depends on your systems, but the goal is always the same:<br />
+                                    <p className="text-white leading-relaxed mt-4">The integration process depends on your systems, but the goal is always the same:<br />
                                         Get the persona live, fast, and functioning exactly where your customers are.</p>
                                 </div>
 
                                 <div className="mt-14 mb-8">
-                                    <h3 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">What Does the AI Actually See?</h3>
-                                    <p className="text-gray-200 leading-relaxed">Our AI personas don't need access to all your data to do their job. They only connect to what they need, like basic customer information, conversation history, or specific knowledge bases so they can respond with context and accuracy.</p>
+                                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">What Does the AI Actually See?</h3>
+                                    <p className="text-white leading-relaxed">Our AI personas don't need access to all your data to do their job. They only connect to what they need, like basic customer information, conversation history, or specific knowledge bases so they can respond with context and accuracy.</p>
 
-                                    <p className="text-gray-200 leading-relaxed mt-4">You stay in control of what's shared, what's stored, and how the AI is allowed to respond.</p>
+                                    <p className="text-white leading-relaxed mt-4">You stay in control of what's shared, what's stored, and how the AI is allowed to respond.</p>
                                 </div>
 
                                 <div className="my-12 p-6 bg-yellow-50 rounded-lg pb-24">

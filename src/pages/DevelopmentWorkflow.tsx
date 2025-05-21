@@ -522,6 +522,7 @@ const DevelopmentWorkflow: React.FC = () => {
           ))}
         </div>
       </motion.section>
+      
         {/* Advanced FAQ Section */}
       <section className="relative bg-black py-24 px-4 sm:px-10 lg:px-20 overflow-hidden">
         {/* Background pattern */}
@@ -567,7 +568,7 @@ const DevelopmentWorkflow: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.1 }}
-                className="bg-white/5 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-white/10"
+                className="bg-gradient-to-br from-white/5 via-white/10 to-white/5 backdrop-blur-lg rounded-2xl shadow-xl hover:shadow-2xl border border-white/10 hover:border-theme-main/30 overflow-hidden transition-all duration-300"
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
@@ -593,6 +594,7 @@ const DevelopmentWorkflow: React.FC = () => {
                     <p className="text-gray-300 text-sm leading-relaxed">
                       {faq.answer}
                     </p>
+                    <hr className="my-4 border-white/10 w-16" />
                   </div>
                 </div>
               </motion.div>

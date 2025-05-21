@@ -87,29 +87,23 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
         </div>
         <div className="space-y-10 max-w-5xl mx-auto">
           {features.map((feature, index) => (
-            <motion.div
+            <div
               key={index}
-              className="relative flex flex-col md:flex-row items-center md:items-start gap-8 border border-white/20 bg-white/5 backdrop-blur-md p-8 rounded-lg hover:bg-white/10 transition-all duration-300"
-              style={{ clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)' }}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={slideUpVariants}
+              className="relative flex flex-col md:flex-row items-center md:items-start gap-8 bg-gradient-to-br from-white/5 via-white/10 to-white/5 border border-white/10 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition duration-300 hover:bg-white/10"
             >
-              <div className="flex-shrink-0 text-center md:text-left">
-                <span className="material-symbols-outlined text-theme-main text-6xl">
-                  {feature.icon}
-                </span>
+              <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-theme-main/10 text-theme-main text-4xl border border-theme-main/30 shadow-inner">
+                <span className="material-symbols-outlined">{feature.icon}</span>
               </div>
               <div className="flex-grow">
                 <h3 className="text-2xl font-bold text-white leading-tight">
                   {feature.title}
                 </h3>
+                <hr className="border-t border-white/10 w-16 mb-4" />
                 <p className="text-lg text-gray-200 mt-4" style={{ lineHeight: '1.75' }}>
                   {feature.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

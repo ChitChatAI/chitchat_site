@@ -18,50 +18,33 @@ const Businesses: React.FC = () => {
 
   const fadeInVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
   };
 
   const staggerContainer = {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.18,
-        delayChildren: 0.09,
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
       },
     },
   };
 
   const rotateInVariants = {
     hidden: { opacity: 0, rotate: -30 },
-    visible: { opacity: 1, rotate: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, rotate: 0, transition: { duration: 1, ease: 'easeOut' } },
   };
 
   const scaleUpVariants = {
     hidden: { opacity: 0, scale: 0.5 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 1, ease: 'easeOut' } },
   };
 
   const slideInVariants = {
     hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } },
   };
-
-  // Mobile-specific animation variants
-  const mobileFadeInVariants = {
-    hidden: { opacity: 0, y: 80, scale: 0.98 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, type: 'spring', bounce: 0.18 } },
-  };
-  const mobileStaggerContainer = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.14,
-        delayChildren: 0.08,
-      },
-    },
-  };
-  // Detect if device is mobile
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches;
 
   const includedFeatures = [
     { 
@@ -184,14 +167,14 @@ const Businesses: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            variants={isMobile ? mobileStaggerContainer : staggerContainer}
+            variants={staggerContainer}
           >
             <motion.h2
               className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              variants={isMobile ? mobileFadeInVariants : fadeInVariants}
+              variants={fadeInVariants}
             >
               How ChitChat Adds Value to Your Business
             </motion.h2>
@@ -205,7 +188,7 @@ const Businesses: React.FC = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
-                  variants={isMobile ? mobileFadeInVariants : fadeInVariants}
+                  variants={fadeInVariants}
                 >
                   <motion.span
                     className="material-symbols-outlined text-theme-main text-5xl mb-4"
@@ -231,37 +214,33 @@ const Businesses: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            variants={isMobile ? mobileStaggerContainer : staggerContainer}
+            variants={staggerContainer}
           >
             <motion.h2
               className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
-              variants={isMobile ? mobileFadeInVariants : scaleUpVariants}
+              variants={scaleUpVariants}
             >
               What's Included in Every ChitChat Package
             </motion.h2>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {includedFeatures.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 flex gap-6 items-start hover:bg-white/15 transition-all duration-300"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  variants={isMobile ? mobileFadeInVariants : scaleUpVariants}
+                  className="bg-gradient-to-br from-white/5 via-white/10 to-white/5 border border-white/10 hover:border-theme-main/30 rounded-2xl shadow-xl hover:shadow-2xl p-8 flex gap-6 items-start transition-all duration-300"
                 >
-                  <motion.span
-                    className="material-symbols-outlined text-theme-main text-4xl"
-                    variants={scaleUpVariants}
-                  >
-                    {item.icon}
-                  </motion.span>
+                  <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-theme-main/10 text-theme-main text-3xl border border-theme-main/30 shadow-inner">
+                    <span className="material-symbols-outlined">{item.icon}</span>
+                  </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-gray-300">{item.description}</p>
+                    <p className="text-gray-300">
+                      {item.description}
+                    </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </motion.div>
@@ -274,14 +253,15 @@ const Businesses: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            variants={isMobile ? mobileStaggerContainer : staggerContainer}
+            variants={staggerContainer}
           >
             <motion.h2
               className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
-              variants={isMobile ? mobileFadeInVariants : slideInVariants}
+              variants={slideInVariants}
             >
               How Businesses Use ChitChat
             </motion.h2>
+            
             <div className="space-y-8">
               {useCases.map((item, index) => (
                 <motion.div
@@ -290,7 +270,7 @@ const Businesses: React.FC = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
-                  variants={isMobile ? mobileFadeInVariants : slideInVariants}
+                  variants={slideInVariants}
                 >
                   <h3 className="text-2xl font-bold text-white mb-3">
                     {item.title}

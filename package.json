@@ -11,6 +11,7 @@
     "start": "vite preview --port $PORT"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@ionic/react": "^7.7.3",
     "@tsparticles/engine": "^3.8.1",
     "@tsparticles/react": "^3.0.0",

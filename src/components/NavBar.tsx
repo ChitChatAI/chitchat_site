@@ -109,7 +109,7 @@ const NavBar: React.FC = () => {
               </button>
               <ul className="flex flex-col space-y-4">
                 {navLinks.map(({ path, label }) => (
-                  <li key={path} className="relative">
+                  <li key={path}>
                     <NavLink
                       to={path}
                       onClick={() => setIsMenuOpen(false)}
@@ -120,9 +120,6 @@ const NavBar: React.FC = () => {
                       }
                     >
                       {label}
-                      {label === 'Blog' && (
-                        <span className="ml-2 align-super inline-block px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-sm" style={{fontSize:'0.7rem',verticalAlign:'middle'}}>info</span>
-                      )}
                     </NavLink>
                   </li>
                 ))}
