@@ -8,7 +8,6 @@ import VisionBoard from './pages/VisionBoard';
 import Solutions from './pages/Solutions';
 import FeatureLearnMore from './pages/FeatureLearnMore';
 import DevelopmentWorkflow from './pages/DevelopmentWorkflow';
-import WhyChitChatAI from './pages/WhyChitChatAI';
 import './App.css';
 import useScrollAnimation from './hooks/useScrollAnimation';
 import Loader from './components/Loader';
@@ -75,7 +74,6 @@ const App: React.FC = () => {
             <Route path="/blog" element={<VisionBoard />} />
             <Route path="/features/:slug" element={<FeatureLearnMore />} />
             <Route path="/development-workflow" element={<DevelopmentWorkflow />} />
-            <Route path="/whychitchatai" element={<WhyChitChatAI />} />
           </Routes>
         </div>
       )}
