@@ -37,13 +37,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
         </h1>        
         <p className="text-lg md:text-2xl mb-8">
           Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
-        </p>        
-        <a
-          href="/whychitchatai"
-          className="mt-6 inline-block px-8 py-4 bg-gradient-to-r from-theme-main via-theme-main to-theme-main text-white font-semibold rounded-full shadow-lg hover:from-theme-main hover:via-theme-main hover:to-theme-main transition-all duration-300 transform hover:scale-105"
-        >
-          Why ChitChat AI?
-        </a>
+        </p>       
         
         {/* Animated dots for life */}
         <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center">

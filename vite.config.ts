@@ -2,11 +2,19 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: '/', // Adjust this if deploying to a subdirectory
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: './index.html',
+      },
+    },
+  },
   server: {
     port: process.env.PORT ? parseInt(process.env.PORT) : 5173, // Use environment port or default to 5173
     host: '0.0.0.0', // Bind to all network interfaces
-    allowedHosts: ['chitchat-site.onrender.com'], // Optional but fine to keep
+    allowedHosts: ['chitchat-site.onrender.com']// Optional but fine to keep
   },
   preview: {
     port: parseInt(process.env.PORT || '4173'), // Use environment port or default to 4173

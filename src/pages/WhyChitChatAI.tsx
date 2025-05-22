@@ -4,6 +4,8 @@ import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 
 const WhyChitChatAI = () => {
+    console.log("WhyChitChatAI component loaded");
+
     const { scrollYProgress } = useScroll();
     const isScrolled = scrollYProgress.get() > 0; // Adjusted logic to use get() for MotionValue
 
