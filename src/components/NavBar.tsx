@@ -21,7 +21,8 @@ const NavBar: React.FC = () => {
     { path: '/', label: 'About us' },
     { path: '/solutions', label: 'Solutions' },
     { path: '/development-workflow', label: 'Workflow' }, // Moved up for higher priority
-    { path: '/blog', label: 'Blog' },
+    { path: '/blog', label: 'Personas' },
+    {path: '/whychitchatai', label: 'Why?'},
   ];
 
   return (

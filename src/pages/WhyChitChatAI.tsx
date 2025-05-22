@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import { motion, useScroll } from 'framer-motion';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 
 const WhyChitChatAI = () => {
+    const { scrollYProgress } = useScroll();
+    const isScrolled = scrollYProgress.get() > 0; // Adjusted logic to use get() for MotionValue
+
     const slides = [
         {
             title: 'The Problem: Cold, Robotic, and Inconsistent Bots',
@@ -141,17 +144,66 @@ const WhyChitChatAI = () => {
     return (
         <>
             <NavBar />
+            {/* Restored the top progress bar */}
+            <motion.section
+                className="relative flex items-center justify-center min-h-[400px] md:min-h-[500px] bg-black bg-cover bg-center bg-no-repeat overflow-hidden py-24"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+            >
+                {/* Dark Overlay */}
+                <motion.div
+                    className="absolute inset-0 bg-black/70 z-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                />
+                {/* Content */}
+                <motion.div
+                    className="relative z-10 bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 shadow-lg max-w-2xl mx-auto"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5, type: "spring", stiffness: 100 }}
+                >
+                    <div className="max-w-4xl mx-auto text-center flex items-center justify-center h-full">
+                        <motion.h1
+                            className="scroll-review opacity-0 transform translate-y-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-theme-light to-primary-400 mb-6 leading-tight transition-all duration-700 py-6"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.7 }}
+                        >
+                            Why ChitChat AI?
+                        </motion.h1>
+                    </div>
+                </motion.div>
+                {/* Fade-out to black at bottom */}
+                <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                />
+            </motion.section>
+            <motion.div
+                className="fixed left-0 right-0 h-1 bg-gradient-to-r from-theme-main via-purple-500 to-theme-light z-40"
+                style={{
+                    top: "var(--navbar-height, 0px)",
+                    transformOrigin: "0%",
+                    scaleX: scrollYProgress,
+                    opacity: isScrolled ? 1 : 0,
+                    transition: "opacity 0.3s ease"
+                }}
+            />
             <div className="bg-black min-h-screen w-full px-6 py-16 space-y-24">
                 {slides.map((slide, index) => (
                     <section
                         key={index}
-                        className={`flex flex-col-reverse md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto ${
-                            slide.alignment === 'right'
+                        className={`flex flex-col-reverse md:flex-row items-center justify-center gap-12 max-w-6xl mx-auto ${slide.alignment === 'right'
                                 ? 'md:flex-row-reverse'
                                 : slide.alignment === 'center'
-                                ? 'flex-col text-center'
-                                : ''
-                        }`}
+                                    ? 'flex-col text-center'
+                                    : ''
+                            }`}
                     >
                         <div className="md:w-1/2 text-left animate-fade-in">
                             <h2 className="text-3xl md:text-4xl font-header font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-theme-light to-primary-400 mb-6 animate-fade-in-up">
@@ -179,13 +231,13 @@ const WhyChitChatAI = () => {
                             </div>
                         </div>
                         <div className="md:w-1/2 hidden md:block">
-                          
+
                             <div className="w-full h-64 bg-gradient-to-br from-purple-500 to-indigo-600 opacity-20 rounded-xl blur-xl animate-float"></div>
                         </div>
                     </section>
                 ))}
             </div>
-              <CookieConsent position="left" modalPosition="bottom" />
+            <CookieConsent position="left" modalPosition="bottom" />
             <Footer />
         </>
     );

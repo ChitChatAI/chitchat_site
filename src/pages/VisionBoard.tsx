@@ -145,15 +145,8 @@ const VisionBoard: React.FC = () => {
     return (
         <div className="vision-board-container bg-black min-h-screen text-white">
             {/* Complex Background Details */}
-            <div className="fixed inset-0 z-[100] pointer-events-none">
-                <img
-                    src="/solutionsPage/solutions.jpg"
-                    alt="Vision Board Background"
-                    className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
-                    draggable="false"
-                />
-            </div>
-            <div className="fixed inset-0 z-[-1] pointer-events-none">
+            {/* Removed the image background */}
+            <div className="fixed inset-0 z-[-1] pointer-events-none bg-black">
                 {/* Video or dark overlay background for new site look */}
                 <video
                     autoPlay
@@ -202,7 +195,7 @@ const VisionBoard: React.FC = () => {
                 >
                     <div className="max-w-4xl mx-auto text-center">
                         <motion.h1
-                            className="scroll-review opacity-0 transform translate-y-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight transition-all duration-700"
+                            className="scroll-review opacity-0 transform translate-y-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-theme-light to-primary-400 mb-6 leading-tight transition-all duration-700"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.7 }}
@@ -298,11 +291,10 @@ const VisionBoard: React.FC = () => {
                                 </div>
 
                                 {/* Enhanced callout boxes */}
-                                <div className="my-16 p-8 bg-purple-50 ">
+                                <div className="my-16 p-8 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg">
                                     <h2 className="text-2xl font-semibold text-purple-700 mb-4">What Makes AI Feel Human?</h2>
                                     <p className="text-gray-800 leading-relaxed">Most chatbots feel robotic because they are. They follow basic scripts, offer shallow replies, and don't respond in a way that reflects what the customer is actually feeling.</p>
                                     <p className="text-gray-800 leading-relaxed mt-4">At ChitChat, we do things differently.</p>
-                                    <p className="text-gray-800 leading-relaxed mt-4">Our focus isn't just on whether the AI works, it's on whether it connects. Whether it knows when to slow down. When to soften. When to keep things direct and efficient. That's where humanising AI makes the biggest difference.</p>
                                 </div>
 
                                 {/* Continue with existing content but with enhanced formatting */}
