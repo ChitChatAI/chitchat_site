@@ -22,7 +22,6 @@ const NavBar: React.FC = () => {
     { path: '/solutions', label: 'Solutions' },
     { path: '/development-workflow', label: 'Workflow' }, // Moved up for higher priority
     { path: '/blog', label: 'Blog' },
-    { path: '/contactus', label: "Let's talk" },
   ];
 
   return (
@@ -56,6 +55,16 @@ const NavBar: React.FC = () => {
               >
                 Chat
               </span>
+                <span
+                  className="text-gray-700 font-satoshi font-extrabold text-2xl sm:text-3xl relative z-10 transition-colors duration-300 pl-2"
+                  style={{
+                  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
+                  WebkitClipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
+                  textShadow: '0px 4px 12px rgba(0,0,0,0.1)',
+                  }}
+                >
+                  AI
+                </span>
             </span>
           </NavLink>
           {/* Hamburger Menu Toggle */}

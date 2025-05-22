@@ -97,6 +97,44 @@ const HomePage: React.FC = () => {
           font-weight: normal;
           margin-bottom: 1rem;
         }
+
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes scale-up {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes text-glow {
+          0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff; }
+          50% { text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 50px #ff00ff; }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 1s ease-out;
+        }
+
+        .animate-scale-up {
+          animation: scale-up 0.8s ease-out;
+        }
+
+        .animate-text-glow {
+          animation: text-glow 2s infinite alternate;
+        }
+
+        .loader {
+          border: 4px solid rgba(255, 255, 255, 0.2);
+          border-top-color: #6b46c1; /* Theme main color */
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
       `}</style>
     </>
   );

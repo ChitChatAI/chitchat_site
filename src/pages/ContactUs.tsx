@@ -322,7 +322,7 @@ const ContactUs: React.FC = () => {
       
       {/* Toast notification */}
       {toast && (
-        <div className="fixed top-24 right-4 z-50 animate-fade-in-right">
+        <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 animate-fade-in-right">
           <div className={`max-w-md w-full shadow-lg rounded-lg pointer-events-auto overflow-hidden transition-all transform-gpu ${
             toast.type === 'success' 
               ? 'bg-gradient-to-r from-green-500 to-emerald-600' 
@@ -697,7 +697,7 @@ const ContactUs: React.FC = () => {
                       <label className="block text-gray-100 font-medium mb-4 text-lg">What are you interested in?</label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
-                          <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-gray-50 transition-all duration-300 cursor-pointer">
+                          <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-black transition-all duration-300 cursor-pointer">
                             <input
                               type="checkbox"
                               name={interest}

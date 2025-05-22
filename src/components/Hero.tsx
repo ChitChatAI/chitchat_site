@@ -34,13 +34,15 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
       >
         <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
           Human Augmented AI in Customer Service
-        </h1>        <p className="text-lg md:text-2xl mb-8">
+        </h1>        
+        <p className="text-lg md:text-2xl mb-8">
           Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
-        </p>        <a
-          href="/contactus"
-          className="mt-6 inline-block px-6 py-3 bg-white text-theme-main font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-300"
+        </p>        
+        <a
+          href="/whychitchatai"
+          className="mt-6 inline-block px-8 py-4 bg-gradient-to-r from-theme-main via-theme-main to-theme-main text-white font-semibold rounded-full shadow-lg hover:from-theme-main hover:via-theme-main hover:to-theme-main transition-all duration-300 transform hover:scale-105"
         >
-          Get a demo
+          Why ChitChat AI?
         </a>
         
         {/* Animated dots for life */}
