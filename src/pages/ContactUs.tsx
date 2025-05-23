@@ -376,7 +376,8 @@ const ContactUs: React.FC = () => {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0 opacity-60"
+          preload="auto"
+          className="absolute inset-0 w-screen h-screen object-cover z-0 opacity-60"
         >
           <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
         </video>
@@ -428,7 +429,8 @@ const ContactUs: React.FC = () => {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover z-0 opacity-60"
+            preload="auto"
+            className="absolute inset-0 w-screen h-screen object-cover z-0 opacity-60"
           >
             <source src="/businessesPage/businessVideo.mp4" type="video/mp4" />
           </video>

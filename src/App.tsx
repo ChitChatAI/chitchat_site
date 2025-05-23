@@ -74,6 +74,7 @@ const App: React.FC = () => {
             <Route path="/blog" element={<VisionBoard />} />
             <Route path="/features/:slug" element={<FeatureLearnMore />} />
             <Route path="/development-workflow" element={<DevelopmentWorkflow />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </div>
       )}

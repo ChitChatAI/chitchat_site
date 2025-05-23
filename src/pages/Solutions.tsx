@@ -597,10 +597,7 @@ const Solutions: React.FC = () => {
               <p className="text-lg text-gray-300 mb-6">
                 Our adaptable AI solutions can be tailored for any business vertical, delivering personalized customer experiences that feel genuinely human — regardless of your industry's unique challenges.
               </p>
-              <a href="/contactus" className="inline-flex items-center justify-center px-6 py-3 bg-theme-main hover:bg-purple-700 text-white font-medium rounded-lg transition-all duration-300">
-                Discuss Your Industry Needs
-                <span className="material-symbols-outlined ml-2">arrow_forward</span>
-              </a>
+             
             </motion.div>
           </div>
         </section>

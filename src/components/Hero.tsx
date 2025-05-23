@@ -19,7 +19,8 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        preload="auto"
+        className="absolute inset-0 w-screen h-screen object-cover z-0"
       >
         <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
       </video>
@@ -33,7 +34,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
         variants={fadeInVariants}
       >
         <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
-          Human Augmented AI in Customer Service
+          Human Augmented AI For Real Connection
         </h1>        
         <p className="text-lg md:text-2xl mb-8">
           Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
