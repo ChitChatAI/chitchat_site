@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/NavBar';
 import Features from '../components/Features';
 import Community from '../components/Community';
@@ -6,26 +6,9 @@ import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
-import Solutions from './Solutions';
 import Hero from '../components/Hero';
 
 const HomePage: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>('hero');
-  const parallaxElements = useRef<HTMLElement[]>([]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      document.querySelectorAll('section.parallax-element').forEach((section, index) => {
-        const speed = -0.1 - index * 0.05; // Negative speed for opposite direction
-        (section as HTMLElement).style.transform = `translateY(${scrollPosition * speed}px)`;
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   useEffect(() => {
     // Remove scroll animation observer
     return () => { };
@@ -36,33 +19,23 @@ const HomePage: React.FC = () => {
     return () => cleanupCursor();
   }, []);
 
-  const handleScrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      const offset = section.getBoundingClientRect().top + window.scrollY - 70;
-      window.scrollTo({
-        top: offset,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
     <>
       <Navbar />
-      <main className="relative overflow-hidden min-h-screen bg-black">
-        <section id="hero" className="parallax-element mb-0 py-16 relative z-10">
-          <Hero />
-        </section>
-        <section id="features" className="parallax-element mb-0 py-16 relative z-10">
+      <main className="relative overflow-hidden w-full min-h-screen bg-black">
+        <Hero />
+
+        <div className="parallax-element mb-0 py-16 relative z-10">
           <Features />
-        </section>
-        <section id="businesses" className="parallax-element mb-0 py-16 relative z-10">
+        </div>
+
+        <div className="parallax-element mb-0 py-16 relative z-10">
           <Businesses />
-        </section>
-        <section id="community" className="parallax-element mb-0 py-16 relative z-10">
+        </div>
+
+        <div className="parallax-element mb-0 py-16 relative z-10">
           <Community />
-        </section>
+        </div>
       </main>
       <Footer />
 
@@ -134,6 +107,22 @@ const HomePage: React.FC = () => {
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+          section {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+
+          .p-4 {
+            padding: 1rem !important;
+          }
+
+          .md\\:animate-slide-up {
+            animation: none !important;
+          }
         }
       `}</style>
     </>

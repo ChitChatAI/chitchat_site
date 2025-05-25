@@ -91,7 +91,7 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
               key={index}
               className="relative flex flex-col md:flex-row items-center md:items-start gap-8 bg-gradient-to-br from-white/5 via-white/10 to-white/5 border border-white/10 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition duration-300 hover:bg-white/10"
             >
-              <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-theme-main/10 text-theme-main text-4xl border border-theme-main/30 shadow-inner">
+              <div className="aspect-square flex items-center justify-center rounded-xl bg-white/20 text-white text-4xl border border-white/30 shadow-inner">
                 <span className="material-symbols-outlined">{feature.icon}</span>
               </div>
               <div className="flex-grow">

@@ -371,17 +371,19 @@ const ContactUs: React.FC = () => {
         />
       </div>
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-screen h-screen object-cover z-0 opacity-60"
-        >
-          <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+        </div>
       </div>
       <div className="fixed inset-0 z-[-3] bg-black" />
 
@@ -424,17 +426,19 @@ const ContactUs: React.FC = () => {
             className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
             draggable="false"
           />
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-screen h-screen object-cover z-0 opacity-60"
-          >
-            <source src="/businessesPage/businessVideo.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+          <div className="absolute inset-0 w-full h-full">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+          </div>
           <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.04] parallax-el" data-speed="0.09"></div>
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-theme-main/30 rounded-full blur-3xl animate-float parallax-el" data-speed="0.15"></div>
           <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl animate-float-delayed parallax-el" data-speed="0.11"></div>
@@ -975,6 +979,13 @@ const ContactUs: React.FC = () => {
         }
         .delay-200 { animation-delay: 0.2s; }
         .delay-400 { animation-delay: 0.4s; }
+        @media (max-width: 768px) {
+          form {
+            margin: 2px; /* Add 2px margin */
+            width: calc(100% - 4px); /* Ensure the form fills the screen minus the margin */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+          }
+        }
       `}</style>
     </>
   );

@@ -36,14 +36,9 @@ const Businesses: React.FC = () => {
     visible: { opacity: 1, rotate: 0, transition: { duration: 1, ease: 'easeOut' } },
   };
 
-  const scaleUpVariants = {
-    hidden: { opacity: 0, scale: 0.5 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1, ease: 'easeOut' } },
-  };
-
   const slideInVariants = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } },
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
   };
 
   const includedFeatures = [
@@ -218,7 +213,7 @@ const Businesses: React.FC = () => {
           >
             <motion.h2
               className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
-              variants={scaleUpVariants}
+              variants={slideInVariants}
             >
               What's Included in Every ChitChat Package
             </motion.h2>
@@ -229,7 +224,7 @@ const Businesses: React.FC = () => {
                   key={index}
                   className="bg-gradient-to-br from-white/5 via-white/10 to-white/5 border border-white/10 hover:border-theme-main/30 rounded-2xl shadow-xl hover:shadow-2xl p-8 flex gap-6 items-start transition-all duration-300"
                 >
-                  <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-theme-main/10 text-theme-main text-3xl border border-theme-main/30 shadow-inner">
+                  <div className="aspect-square flex items-center justify-center rounded-xl bg-theme-main/10 text-white text-3xl border border-theme-main/30 shadow-inner">
                     <span className="material-symbols-outlined">{item.icon}</span>
                   </div>
                   <div>
@@ -248,38 +243,25 @@ const Businesses: React.FC = () => {
 
         {/* Use Cases Section */}
         <section id="use-cases" className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
-          <motion.div
-            className="relative z-10 max-w-6xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggerContainer}
-          >
-            <motion.h2
-              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
-              variants={slideInVariants}
-            >
+          <div className="relative z-10 max-w-6xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
               How Businesses Use ChitChat
-            </motion.h2>
+            </h2>
             
             <div className="space-y-8">
               {useCases.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-8 hover:bg-white/10 transition-all duration-300"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  variants={slideInVariants}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-8 hover:bg-white/10 transition-all duration-200"
                 >
                   <h3 className="text-2xl font-bold text-white mb-3">
                     {item.title}
                   </h3>
                   <p className="text-gray-300 text-lg">{item.description}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </section>
       </div>
     </div>

@@ -258,7 +258,7 @@ const Solutions: React.FC = () => {
     <Navbar />
       <main ref={parallaxRef} className="relative z-10 pt-14 overflow-hidden min-h-screen bg-black">
         {/* HERO SECTION */}
-        <section id="hero" className="parallax-element h-screen relative z-10 flex items-center px-4 sm:px-6 md:px-8">
+        <section id="hero" className="h-screen relative z-10 flex items-center px-4 sm:px-6 md:px-8">
           {/* Video Background */}
           <video
             autoPlay
@@ -340,20 +340,10 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg overflow-hidden"
+                className="relative bg-white/5 border border-theme-main/20 p-6 sm:p-8 shadow-[0_4px_40px_rgba(125,99,210,0.2)] group hover:shadow-[0_8px_60px_rgba(125,99,210,0.35)] transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-theme-main/5 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-                {/* Glow background effect */}
-                <motion.div 
-                  className="absolute -inset-2 bg-gradient-to-r from-theme-main/30 via-purple-700/20 to-pink-500/30 rounded-lg opacity-0 group-hover:opacity-100 blur-xl z-0"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 0 }}
-                  whileHover={{ 
-                    opacity: 0.7, 
-                    scale: 1.2, 
-                    transition: { duration: 0.4 }
-                  }}
-                ></motion.div>
+                <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-theme-main/20 via-purple-700/10 to-pink-500/20 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
                     className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
@@ -370,7 +360,9 @@ const Solutions: React.FC = () => {
                     className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
-                    Telecommunications
+                    <span className="inline-block bg-theme-main/10 text-theme-main font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      Telecommunications
+                    </span>
                   </motion.h3>
                 </div>
                 
@@ -401,6 +393,7 @@ const Solutions: React.FC = () => {
                       <span className="text-gray-200">{item}</span>
                     </motion.li>
                   ))}
+
                 </motion.ul>
                 
               </motion.div>
@@ -410,9 +403,10 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
+                className="relative bg-white/5 border border-theme-main/20 p-6 sm:p-8 shadow-[0_4px_40px_rgba(125,99,210,0.2)] group hover:shadow-[0_8px_60px_rgba(125,99,210,0.35)] transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-theme-main/5 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(12% 0%, 88% 0%, 100% 20%, 100% 80%, 88% 100%, 12% 100%, 0% 80%, 0% 20%)' }}
               >
+                <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-theme-main/20 via-purple-700/10 to-pink-500/20 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
                     className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
@@ -429,7 +423,9 @@ const Solutions: React.FC = () => {
                     className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
-                    E-Commerce
+                    <span className="inline-block bg-theme-main/10 text-theme-main font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      E-Commerce
+                    </span>
                   </motion.h3>
                 </div>
                 
@@ -469,9 +465,10 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
+                className="relative bg-white/5 border border-theme-main/20 p-6 sm:p-8 shadow-[0_4px_40px_rgba(125,99,210,0.2)] group hover:shadow-[0_8px_60px_rgba(125,99,210,0.35)] transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-theme-main/5 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%)' }}
               >
+                <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-theme-main/20 via-purple-700/10 to-pink-500/20 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
                     className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
@@ -488,7 +485,9 @@ const Solutions: React.FC = () => {
                     className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
-                    Healthcare
+                    <span className="inline-block bg-theme-main/10 text-theme-main font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      Healthcare
+                    </span>
                   </motion.h3>
                 </div>
                 
@@ -528,9 +527,10 @@ const Solutions: React.FC = () => {
                 variants={cardVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="relative bg-white/5 border border-white/20 p-5 sm:p-8 shadow-xl hover:shadow-theme transition-all duration-300 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full backdrop-blur-lg"
+                className="relative bg-white/5 border border-theme-main/20 p-6 sm:p-8 shadow-[0_4px_40px_rgba(125,99,210,0.2)] group hover:shadow-[0_8px_60px_rgba(125,99,210,0.35)] transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-theme-main/5 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-theme-main/60 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)' }}
               >
+                <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-theme-main/20 via-purple-700/10 to-pink-500/20 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <motion.div 
                     className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-theme-main/5 rounded-lg"
@@ -547,7 +547,9 @@ const Solutions: React.FC = () => {
                     className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent"
                     variants={textRevealVariants}
                   >
-                    Education & Online Learning
+                    <span className="inline-block bg-theme-main/10 text-theme-main font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      Education & Online Learning
+                    </span>
                   </motion.h3>
                 </div>
                 
@@ -585,7 +587,7 @@ const Solutions: React.FC = () => {
             
             {/* Industry-wide callout */}
             <motion.div 
-              className="mt-16 bg-white/5 border border-white/10 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md"
+              className="mt-16 bg-white/5 border border-white/10 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -718,6 +720,30 @@ const Solutions: React.FC = () => {
           animation: hero-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
         }
         .delay-200 { animation-delay: 0.2s; }
+
+        @media (max-width: 768px) {
+          #hero {
+            padding-top: 2rem; /* Increased padding-top for mobile devices */
+          }
+          #hero h1 {
+            padding-top: 3rem; /* Further increased padding-top for hero text on mobile devices */
+          }
+          * {
+            animation: none !important;
+            transition: none !important;
+          }
+          .parallax-element {
+            transform: none !important; /* Disable parallax effect for mobile and all devices */
+          }
+        }
+
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 4s ease-in-out infinite;
+        }
       `}</style>
       </main>
       <CookieConsent position="left" modalPosition="bottom" />
