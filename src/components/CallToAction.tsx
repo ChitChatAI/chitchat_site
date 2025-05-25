@@ -24,12 +24,18 @@ const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) 
         Discover how ChitChat can transform your customer experience with tailored AI solutions.
       </p>
       <div className="flex flex-wrap justify-center gap-6 mt-8">
-        <Link
-          to="/contactus"
-          className="px-10 py-4 rounded-full bg-theme-main text-white font-bold shadow-2xl hover:bg-theme-dark transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/40"
+        <a
+          href="mailto:jessicaclaireleighza@gmail.com"
+          className="px-10 py-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold shadow-lg hover:shadow-xl hover:from-purple-600 hover:to-indigo-600 transition-all duration-300 text-xl transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-300"
         >
-          Contact Us
-        </Link>
+          Email Us
+        </a>
+        <a
+          href="tel:+263726218719"
+          className="px-10 py-4 rounded-full bg-gradient-to-r from-green-500 to-teal-500 text-white font-bold shadow-lg hover:shadow-xl hover:from-green-600 hover:to-teal-600 transition-all duration-300 text-xl transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300"
+        >
+          Call Us
+        </a>
       </div>
       {/* Animated dots for life */}
       <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center">

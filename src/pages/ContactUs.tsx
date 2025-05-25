@@ -193,21 +193,14 @@ const ContactUs: React.FC = () => {
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Set up formdata to send to the specified email
+    // Combine all user text fields into a single message
+    const combinedMessage = `Name: ${formData.name} ${formData.surname}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage: ${formData.message}\nCompany Size: ${formData.companySize}\nIndustry: ${formData.industry}\nGoals: ${formData.goals}\nInterests: ${formData.interests.join(', ')}\nTeam Description: ${formData.teamDescription}`;
+
     const formDataToSend = {
-      name: formData.name,
-      surname: formData.surname,
-      email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-      companySize: formData.companySize,
-      industry: formData.industry,
-      goals: formData.goals,
-      interests: formData.interests.join(', '),
-      teamDescription: formData.teamDescription,
-      _replyto: formData.email, 
+      message: combinedMessage,
+      _replyto: formData.email,
       _subject: formData.subject || "New ChitChat AI Inquiry",
-      _cc: "hnengare@gmail.com", 
+      _cc: "hnengare@gmail.com",
     };
 
     try {
@@ -220,15 +213,15 @@ const ContactUs: React.FC = () => {
         },
         body: JSON.stringify(formDataToSend),
       });
-      
+
       if (!response.ok) throw new Error('Network response was not ok');
-      
+
       setToast({ type: 'success', message: 'Message sent successfully!' });
       setShowConfetti(true);
       setIsSubmitted(true);
-      
+
       setTimeout(() => {
-        setShowConfetti(false); 
+        setShowConfetti(false);
         navigate('/');
       }, 3000);
     } catch (error) {

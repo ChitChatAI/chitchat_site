@@ -20,9 +20,8 @@ const NavBar: React.FC = () => {
   const navLinks = [
     { path: '/', label: 'About us' },
     { path: '/solutions', label: 'Solutions' },
-    { path: '/development-workflow', label: 'Development Phases' }, // Moved up for higher priority
+    { path: '/development-workflow', label: 'Development Phases' },
     { path: '/blog', label: 'Personas' },
-    { path: '/contactus', label: 'Let\'s talk' },
   ];
 
   return (

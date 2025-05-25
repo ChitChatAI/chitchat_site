@@ -26,14 +26,19 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
           <p className="text-lg text-gray-300 mb-6 mx-auto font-medium">
         Join us in shaping the future of AI. Collaborate and innovate together.
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-6 mt-8">
+      
         <a
-          href="https://www.linkedin.com/company/chitchatai/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-10 py-4 rounded-full bg-theme-main text-white font-bold shadow-2xl hover:bg-theme-dark transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-theme-main/40"
+          href="mailto:jessicaclaireleighza@gmail.com"
+          className="px-10 py-4 rounded-full bg-purple-500 text-white font-bold shadow-2xl hover:bg-purple-600 transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-400"
         >
-          LinkedIn
+          Email Us
+        </a>
+        <a
+          href="tel:+263726218719"
+          className="px-10 py-4 rounded-full bg-green-500 text-white font-bold shadow-2xl hover:bg-green-600 transition-all duration-300 text-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          Call Us
         </a>
           </div>
           <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center">
