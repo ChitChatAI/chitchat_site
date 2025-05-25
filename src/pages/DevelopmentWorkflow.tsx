@@ -133,100 +133,92 @@ const DevelopmentWorkflow: React.FC = () => {
         </div>
       </section>
 
-      {/* Workflow Steps Section */}
-      <motion.section
-        className="relative bg-black py-24 px-6 sm:px-12 lg:px-20 overflow-hidden"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: {
-              staggerChildren: 0.2,
-              delayChildren: 0.3
-            }
-          }
-        }}
-      >
-        <div className="absolute inset-0">
-          <motion.div
-            className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-tr from-purple-500/30 via-violet-400/20 to-fuchsia-600/25 mix-blend-overlay filter blur-3xl"
-            animate={{
-              scale: [0.9, 1.3, 1, 1.2, 0.9],
-              opacity: [0.3, 0.6, 0.4, 0.5, 0.3],
-              rotate: [0, 15, 0, -15, 0]
-            }}
-            transition={{
-              duration: 15,
-              times: [0, 0.2, 0.5, 0.8, 1],
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut"
-            }}
-          />
+      {/* Tools We Work With Section */}
+      <section className="relative bg-black py-24 px-6 sm:px-12 lg:px-20 overflow-hidden">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-5xl font-bold text-white mb-12 text-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent animate-gradient-x">
+            Tools We Work With
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
+            { [
+              { name: 'Chatbot', icon: 'chatbot.svg' },
+              { name: 'Claude', icon: 'claude.svg' },
+              { name: 'HTML5', icon: 'html5.svg' },
+              { name: 'LangGraph', icon: 'langgraph.svg' },
+              { name: 'n8n', icon: 'n8n.svg' },
+              { name: 'Ollama', icon: 'ollama.svg' },
+              { name: 'OpenAI', icon: 'openai.svg' },
+              { name: 'Python', icon: 'python.svg' },
+            ].map((tool, index) => (
+              <motion.div
+                key={index}
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="w-24 h-24 flex items-center justify-center bg-white rounded-full mb-4">
+                  <img
+                    src={`/workflow/${tool.icon}`}
+                    alt={tool.name}
+                    className="w-16 h-16"
+                  />
+                </div>
+                <p className="text-lg font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent capitalize">
+                  {tool.name}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="max-w-4xl mx-auto relative z-10 space-y-16">
-          {workflowSteps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="relative shadow-lg rounded-lg p-8 border border-gray-700 hover:shadow-2xl transition-shadow duration-300"
-              style={{
-                clipPath: `polygon(
-                  10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%
-                )`,
-                background: `linear-gradient(135deg, rgba(72, 61, 139, 0.8), rgba(123, 104, 238, 0.8))`,
-              }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 30px 60px -12px rgba(0, 0, 0, 0.4), 0 4px 25px 0px rgba(0, 0, 0, 0.3)",
-                background: "linear-gradient(135deg, rgba(82, 71, 149, 0.9), rgba(133, 114, 248, 0.9))",
-                transition: { duration: 0.3 }
-              }}
-            >
-              <div className="flex items-center mb-6">
-                <span className="material-symbols-outlined text-purple-400 text-4xl mr-4">
-                  {step.icon}
-                </span>
-                <h2 className="text-2xl font-bold text-white">
+      {/* Workflow Steps Section */}
+      <section className="relative bg-black py-24 px-6 sm:px-12 lg:px-20 overflow-hidden">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-5xl font-bold text-white mb-12 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
+              Process Workflow
+            </h2>
+          </div>
+          <div className="max-w-4xl mx-auto relative z-10 space-y-16">
+            {workflowSteps.map((step, index) => (
+              <div key={index} className={`relative ${index === 0 ? '' : 'border-t border-gray-700'} pt-8`}>
+                <h2 className="text-3xl font-bold text-white mb-4">
                   {step.name}
                 </h2>
+                <p className="text-gray-200 mb-4">
+                  {step.description}
+                </p>
+                <p className="text-gray-300 mb-6">
+                  {step.story}
+                </p>
+                <ul className="list-disc list-inside text-gray-300 space-y-2">
+                  {step.features.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
               </div>
-              <p className="text-gray-200 mb-4">
-                {step.description}
-              </p>
-              <p className="text-gray-300 mb-6">
-                {step.story}
-              </p>
-              <ul className="list-disc list-inside text-gray-300 space-y-2">
-                {step.features.map((feature, i) => (
-                  <li key={i}>{feature}</li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Advanced FAQ Section */}
       <section className="relative bg-black py-24 px-4 sm:px-10 lg:px-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black opacity-90"></div>
+        <div className="absolute inset-0 bg-black opacity-95"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <span className="inline-block px-3 py-1 bg-theme-main/20 text-theme-main text-xs font-medium rounded-full mb-3">
+            <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white text-xs font-medium rounded-full mb-3">
               Process FAQ
             </span>
-            <h2 className="text-5xl font-header font-bold text-white mb-4">
+            <h2 className="text-5xl font-header font-bold text-white mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
               Common Questions
             </h2>
             <p className="text-gray-300 max-w-2xl mx-auto">
               Have more questions?
-              <Link to="/contact" className="text-theme-main font-medium mx-1 hover:underline">
+              <Link to="/contact" className="text-purple-400 font-medium mx-1 hover:underline">
                 Contact our team
               </Link>
               for detailed answers.
@@ -240,7 +232,7 @@ const DevelopmentWorkflow: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.1 }}
-                className="bg-gradient-to-br from-white/5 via-white/10 to-white/5 backdrop-blur-lg rounded-2xl shadow-xl hover:shadow-2xl border border-white/10 hover:border-theme-main/30 overflow-hidden transition-all duration-300"
+                className="bg-gradient-to-br from-gray-800 via-gray-900 to-black backdrop-blur-lg rounded-2xl shadow-xl hover:shadow-2xl border border-gray-700 overflow-hidden transition-all duration-300"
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
@@ -249,21 +241,18 @@ const DevelopmentWorkflow: React.FC = () => {
                   <h4 className="font-header font-semibold text-white pr-8">
                     {faq.question}
                   </h4>
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-colors duration-300 ${openFAQ === idx ? 'bg-theme-main border-theme-main' : 'border-theme-main/30'
-                    }`}>
-                    <span className={`material-symbols-outlined text-sm ${openFAQ === idx ? 'text-white' : 'text-theme-main'
-                      }`}>
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-colors duration-300 ${openFAQ === idx ? 'bg-purple-400 border-purple-400' : 'border-gray-700'}`}>                    
+                    <span className={`material-symbols-outlined text-sm ${openFAQ === idx ? 'text-white' : 'text-gray-400'}`}>
                       {openFAQ === idx ? 'remove' : 'add'}
                     </span>
                   </div>
                 </button>
-                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${openFAQ === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                  }`}>
-                  <div className="px-6 py-4 border-t border-white/10">
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${openFAQ === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="px-6 py-4 border-t border-gray-700">
                     <p className="text-gray-300 text-sm leading-relaxed">
                       {faq.answer}
                     </p>
-                    <hr className="my-4 border-white/10 w-16" />
+                    <hr className="my-4 border-gray-700 w-16" />
                   </div>
                 </div>
               </motion.div>
