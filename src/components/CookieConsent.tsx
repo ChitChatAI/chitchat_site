@@ -9,21 +9,19 @@ interface CookieConsentProps {
 const CookieConsent: React.FC<CookieConsentProps> = ({
   position = 'left',
   modalPosition = 'bottom',
-}) => {
-  const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
+}) => {  const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
   const [isModalExiting, setIsModalExiting] = useState(false);
-  const [showBanner, setShowBanner] = useState(false);
+  const [showBanner, setShowBanner] = useState(false); // Always false to keep banner hidden
   const [cookiesAccepted, setCookiesAccepted] = useState(() => {
-    return localStorage.getItem('cookieConsent') === 'accepted';
+    return localStorage.getItem('cookieConsent') === 'accepted' || true; // Default to accepted
   });
-
-  // Show banner after initial load
+  // Banner is disabled - we only use the floating button
   useEffect(() => {
+    // If cookies haven't been accepted yet, set them to accepted by default
+    // This prevents the banner from showing but keeps the floating button
     if (!cookiesAccepted) {
-      const timer = setTimeout(() => {
-        setShowBanner(true);
-      }, 1500);
-      return () => clearTimeout(timer);
+      localStorage.setItem('cookieConsent', 'accepted');
+      setCookiesAccepted(true);
     }
   }, [cookiesAccepted]);
 

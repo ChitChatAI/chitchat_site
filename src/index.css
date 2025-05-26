@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset styles for all devices */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a,
+img,
+input,
+strong,
+button,
+textarea,
+ion-icon {
+  display: block;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+/* Spacing for larger devices */
+@media (min-width: 1024px) {
+  :root {
+    --section-padding: 60px;
+  }
+}
+
 /* Additional custom styles */
 html {
   scroll-behavior: smooth;
@@ -11,6 +46,13 @@ html {
 body {
   @apply font-sans text-gray-800 antialiased bg-white;
   line-height: 150%; /* Set line height to 150% for better spacing */
+}
+
+/* Remove default margin and padding for html and body */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -151,8 +193,8 @@ button:hover, .button:hover {
   transform: translateY(-2px);
 }
 
-/* Custom Animated Cursor */
-.custom-cursor {
+/* Removed styles for the custom cursor */
+/* .custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
@@ -174,7 +216,7 @@ button:hover, .button:hover {
 
 .custom-cursor.click {
   transform: translate(-50%, -50%) scale(0.8);
-}
+} */
 
 /* 3D Card Hover Effects */
 .card-3d {
@@ -946,161 +988,46 @@ section.relative.overflow-hidden {
 /* Mobile Enhancements */
 @media (max-width: 640px) {
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 2px; /* Adjusted padding for mobile devices */
+    padding-right: 2px;
   }
 
-  .scroll-review {
-    margin-bottom: 1.5rem;
+  section {
+    padding: 3rem 0; /* Reduced padding for better spacing */
   }
 
-  .hero-heading {
-    font-size: 2rem;
-    line-height: 1.2;
+  h1, h2, h3 {
+    margin-bottom: 1rem; /* Increased spacing below headings */
   }
 
-  .hero-description {
-    font-size: 1rem;
-    line-height: 1.5;
+  p {
+    font-size: 1.125rem; /* Slightly larger font size for readability */
+    line-height: 1.75; /* Improved line height */
+    margin-bottom: 1.5rem; /* Increased spacing below paragraphs */
   }
 
-  .hero-button-primary,
-  .hero-button-secondary {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.875rem;
-  }
-}
-
-/* Vivid Backgrounds */
-.bg-gradient-to-b {
-  background: linear-gradient(to bottom, #ffffff, #f9fafb, #f3f4f6);
-}
-
-@layer utilities {
-  .animate-wiggle-slow {
-    animation: wiggle 2s infinite ease-in-out;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out both;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .animate-slide-in {
-    animation: slideInLeft 0.7s ease-out forwards;
-  }
-
-  .scroll-panel:nth-child(2).animate-slide-in {
-    animation: slideInRight 0.7s ease-out forwards;
-  }
-}
-
-/*-----------------------------------*\
-  #MEDIA QUERIES
-\*-----------------------------------*/
-
-/**
- * responsive for smaller than or equal to 768px screen
- */
-@media (max-width: 768px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  button, .button {
+    padding: 0.875rem 1.75rem; /* Larger buttons for better touch interaction */
+    font-size: 1rem; /* Increased font size */
+    border-radius: 0.5rem; /* Softer button corners */
   }
 
   .hero-heading {
-    font-size: 1.75rem;
+    font-size: 2.25rem; /* Slightly larger font size */
     line-height: 1.3;
   }
 
   .hero-description {
-    font-size: 0.875rem;
-    line-height: 1.4;
+    font-size: 1.125rem; /* Larger description text */
+    line-height: 1.6;
   }
 
-  .hero-button-primary,
-  .hero-button-secondary {
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
+  .card {
+    margin-bottom: 2rem; /* Increased spacing between cards */
   }
 
   .scroll-review {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem; /* Enhanced spacing for reviews */
   }
-}
-
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(3deg); }
-  75% { transform: rotate(-3deg); }
-}
-
-/* Remove dramatic scroll animations by neutralizing the classes */
-.animate-slide-up,
-.animate-slide-in-left,
-.animate-slide-in-right,
-.animate-slide-up-left,
-.animate-slide-up-right {
-  animation: none !important;
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-/* Optionally, you can also remove the animation keyframes if you want: */
-/*
-@keyframes slideUp {}
-@keyframes slideInLeft {}
-@keyframes slideInRight {}
-@keyframes slideUpLeft {}
-@keyframes slideUpRight {}
-*/
-
-.group:hover .group-hover\:after\:w-full::after,
-.group:focus-visible .group-focus-visible\:after\:w-full::after {
-  width: 100% !important;
-}
-a.relative::after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  height: 2px;
-  width: 0;
-  background: var(--theme-main, #5024ff);
-  border-radius: 2px;
-  transition: width 0.2s;
 }
 

@@ -460,7 +460,7 @@ affords us, and strive to improve things for others.`}
                 }
                 `}
             </style>
-            <style jsx>{`
+            <style>{`
     .values-section {
         padding: 16px;
     }

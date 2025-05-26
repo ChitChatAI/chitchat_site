@@ -166,7 +166,7 @@ const FeatureLearnMore: React.FC = () => {
           animation: float-delayed 7s ease-in-out 1s infinite;
         }
       `}</style>
-      <style jsx>{`
+      <style>{`
     .feature-details {
         padding: 16px;
     }

@@ -1,10 +1,10 @@
 export const initCustomCursor = () => {
   const cursor = document.createElement('div');
-  cursor.classList.add('custom-cursor');
+  // cursor.classList.add('custom-cursor');
   document.body.appendChild(cursor);
 
   const reactiveBg = document.querySelector('.mouse-reactive-bg');
-  const bgElements = reactiveBg?.querySelectorAll('.bg-element');
+  const bgElements = reactiveBg?.querySelectorAll('.bg-element') as NodeListOf<HTMLElement>;
 
   const updateCursor = (e: MouseEvent) => {
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
@@ -27,9 +27,11 @@ export const initCustomCursor = () => {
     setTimeout(() => cursor.classList.remove('click'), 150);
   };
 
-  document.addEventListener('mousemove', updateCursor);
-  document.addEventListener('mouseover', handleHover);
-  document.addEventListener('mousedown', handleClick);
+  if (window.innerWidth > 768) {
+    document.addEventListener('mousemove', updateCursor);
+    document.addEventListener('mouseover', handleHover);
+    document.addEventListener('mousedown', handleClick);
+  }
 
   return () => {
     document.removeEventListener('mousemove', updateCursor);

@@ -3,13 +3,24 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
+import Confetti from 'react-confetti';
+import { useNavigate } from 'react-router-dom';
 
-// Modern input styling with floating label support and improved states
-const inputBase = "peer w-full px-5 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-xl font-satoshi text-gray-200 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-theme-main/50 focus:border-theme-main transition-all duration-300 shadow-sm";
-const inputError = "border-red-400 bg-red-900/20 focus:border-red-400 focus:ring-red-300/40";
-const labelBase = "absolute left-5 -top-2.5 px-1 text-xs transition-all bg-black/80 font-satoshi font-medium peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-300 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-theme-main";
+const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border border-gray-200 rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
+const inputError = "block w-full px-4 py-3 text-sm text-white bg-red-50/20 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300";
+
+// Add toast interface
+interface ToastMessage {
+  type: 'success' | 'error';
+  message: string;
+}
 
 const ContactUs: React.FC = () => {
+  const navigate = useNavigate();
+
+  // Add toast state
+  const [toast, setToast] = useState<ToastMessage | null>(null);
+
   const [formData, setFormData] = useState<{
     name: string;
     surname: string;
@@ -40,6 +51,8 @@ const ContactUs: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const [showConfetti, setShowConfetti] = React.useState(false);
+  const [showLetsTalk, setShowLetsTalk] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -176,6 +189,66 @@ const ContactUs: React.FC = () => {
 
   const handlePrevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
+  // Replace the simulation with actual form submission to Formspree
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Build a single message with all fields
+    const fullMessage = `
+Name: ${formData.name} ${formData.surname}
+Email: ${formData.email}
+Subject: ${formData.subject || 'N/A'}
+
+Message:
+${formData.message}
+
+Company Size: ${formData.companySize}
+Industry: ${formData.industry}
+Goals: ${formData.goals}
+Interests: ${formData.interests.join(', ')}
+Team Description: ${formData.teamDescription}
+`;
+
+    const formDataToSend = {
+      name: `${formData.name} ${formData.surname}`,
+      email: formData.email,
+      message: fullMessage,
+    };
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch('https://formspree.io/f/xdkgrpqr', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataToSend),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setToast({ type: 'success', message: 'Message sent successfully!' });
+        setShowConfetti(true);
+        setIsSubmitted(true);
+
+        setTimeout(() => {
+          setShowConfetti(false);
+          navigate('/');
+        }, 3000);
+      } else {
+        throw new Error(data?.errors?.[0]?.message || 'Unknown error occurred');
+      }
+    } catch (error) {
+      console.error('Failed to send the message:', error);
+      setToast({ type: 'error', message: 'Failed to send the message. Please try again later.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.message.trim()) {
@@ -186,30 +259,19 @@ const ContactUs: React.FC = () => {
       return;
     }
 
-    setIsSubmitting(true);
-    setErrors({});
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          surname: '', // Reset surname field
-          email: '',
-          subject: '',
-          message: '',
-          companySize: '',
-          industry: '',
-          goals: '',
-          interests: [],
-          teamDescription: '',
-        });
-        setCurrentStep(1); // Reset to the first step
-      }, 4000);
-    }, 1500);
+    // Call the sendEmail function with the form data
+    await sendEmail(e as unknown as React.FormEvent<HTMLFormElement>);
   };
+
+  // Add auto-dismiss for toast after 5 seconds
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => {
+        setToast(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   const handleScrollToSection = (id: string) => {
     const section = document.getElementById(id);
@@ -238,25 +300,116 @@ const ContactUs: React.FC = () => {
     return () => cleanupCursor();
   }, []);
 
+  // Modal component for Let's Talk popup
+  const LetsTalkModal: React.FC<{ open: boolean; onClose: () => void; children: React.ReactNode }> = ({ open, onClose, children }) => {
+    return (
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-500 ${open ? 'visible bg-black/60' : 'invisible bg-transparent'}`}
+        style={{ pointerEvents: open ? 'auto' : 'none' }}
+        aria-modal="true"
+        role="dialog"
+      >
+        <div
+          className={`transform transition-all duration-500 ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'} bg-black/95 rounded-2xl shadow-2xl border border-white/20 p-2 sm:p-8 w-full max-w-2xl relative`}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-300 hover:text-white focus:outline-none text-2xl"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+          {children}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
+      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
       <NavBar />
-      {/* Modern dark video + image background */}
+
+      {toast && (
+        <div className="fixed top-6 sm:top-10 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 z-50 animate-fade-in-right px-2 sm:px-0">
+          <div
+            className={`w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl shadow-lg rounded-xl pointer-events-auto overflow-hidden backdrop-blur-md transition-all transform-gpu ${toast.type === 'success'
+                ? 'bg-gradient-to-r from-green-500 to-emerald-600'
+                : 'bg-gradient-to-r from-red-500 to-pink-600'
+              }`}
+          >
+            <div className="p-4">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  {toast.type === 'success' ? (
+                    <svg
+                      className="h-6 w-6 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="h-6 w-6 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  )}
+                </div>
+                <div className="ml-3 flex-1 min-w-0">
+                  <p className="text-sm sm:text-base font-medium text-white truncate">
+                    {toast.message}
+                  </p>
+                </div>
+                <div className="ml-4 flex-shrink-0 flex">
+                  <button
+                    className="inline-flex text-white hover:text-white/80 focus:outline-none focus:ring-2 focus:ring-white rounded"
+                    onClick={() => setToast(null)}
+                  >
+                    <span className="sr-only">Close</span>
+                    <svg
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+     
       <div className="fixed inset-0 z-[-2] pointer-events-none">
-        <img
-          src="/solutionsPage/solutions.jpg"
-          alt="Contact Us Background"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
-          draggable="false"
-        />
-      </div>
-      <div className="fixed inset-0 z-[-1] pointer-events-none">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0 opacity-60"
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
         </video>
@@ -294,7 +447,7 @@ const ContactUs: React.FC = () => {
       )}
 
       {/* Modern hero section */}
-      <section className="relative md:pt-48 pb-24 px-4 sm:px-8 bg-black bg-gradient-to-b from-black via-[#18132a] to-[#18132a] font-[Satoshi] overflow-hidden text-white border-b border-white/10 shadow-xl">
+      <section className="relative px-4 sm:px-8 bg-black bg-gradient-to-b from-black via-[#18132a] to-[#18132a] font-[Satoshi] overflow-hidden text-white border-b border-white/10 shadow-xl">
         {/* Video + image background handled globally */}
         <div className="absolute inset-0 pointer-events-none z-0">
           <img
@@ -303,46 +456,49 @@ const ContactUs: React.FC = () => {
             className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
             draggable="false"
           />
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover z-0 opacity-60"
-          >
-            <source src="/businessesPage/businessVideo.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+          <div className="absolute inset-0 w-full h-full">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+          </div>
           <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.04] parallax-el" data-speed="0.09"></div>
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-theme-main/30 rounded-full blur-3xl animate-float parallax-el" data-speed="0.15"></div>
           <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl animate-float-delayed parallax-el" data-speed="0.11"></div>
           <div className="absolute top-1/2 left-2/3 w-40 h-40 bg-purple-400/30 rounded-full blur-2xl animate-pulse parallax-el" data-speed="0.13"></div>
         </div>
         <div className="container mx-auto px-6 sm:px-12 relative z-10">
-            <div
-            className="flex flex-col items-center justify-center min-h-[500px] text-center"
+          <div
+            className="flex flex-col items-center justify-center min-h-screen text-center mx-auto"
             id="contact-hero-parallax-row"
             style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
-            >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-contact-hero-fade-in">
-              <span className="block animate-contact-hero-slide-in">Let's Build Your AI Solution</span>
+          >
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
+              <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">Let's Build Your AI Solution</span>
             </h1>
-            <p className="text-xl sm:text-2xl md:text-2xl text-gray-200 max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
-              Fill out the form below to get started with <span className="text-theme-main font-semibold animate-contact-hero-gradient-in delay-400">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
+            <p className="text-xl sm:text-2xl md:text-2xl text-white max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
+             Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
             </p>
             <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
               <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
               <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
               <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
             </div>
-            </div>
+          </div>
         </div>
       </section>
 
       {/* Shifted Form Section */}
-      <section className="relative px-4 sm:px-10 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
+      <section className="relative px-4 sm:px-0 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
         <div className="container mx-auto">
-          <div className="bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-8 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card w-full max-w-3xl mx-auto">
+          <div className="w-full mx-auto bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-6 sm:p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
             {/* Form steps container */}
             <div className="relative z-10">
               {/* Modern progress tracker */}
@@ -402,100 +558,91 @@ const ContactUs: React.FC = () => {
                 {/* Step 1: Contact Details */}
                 <div className={`${getStepClasses(1)}`}>
                   <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Your Contact Details</h3>
-                  <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-6" onSubmit={sendEmail}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* First name field with floating label */}
                       <div className="relative group">
                         <input
                           type="text"
                           id="name"
                           name="name"
-                          placeholder="First Name"
                           value={formData.name}
                           onChange={handleChange}
-                          className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.name ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
+                          className={`${inputBase} ${errors.name ? inputError : ''}`}
                           required
                         />
-                        <label htmlFor="name" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.name ? ' text-red-400' : ''}`}>First Name</label>
-                        {errors.name && (
-                          <p className="mt-2 text-sm text-red-400 flex items-center font-satoshi">
-                            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            {errors.name}
-                          </p>
-                        )}
+                        <label
+                          htmlFor="name"
+                          className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                            ${formData.name ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                        >
+                          First Name
+                        </label>
+                        {errors.name && <p className="mt-2 text-sm text-red-400">{errors.name}</p>}
                       </div>
-
-                      {/* Surname field with floating label */}
                       <div className="relative group">
                         <input
                           type="text"
                           id="surname"
                           name="surname"
-                          placeholder="Surname"
                           value={formData.surname}
                           onChange={handleChange}
-                          className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.surname ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
+                          className={`${inputBase} ${errors.surname ? inputError : ''}`}
                           required
                         />
-                        <label htmlFor="surname" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.surname ? ' text-red-400' : ''}`}>Surname</label>
-                        {errors.surname && (
-                          <p className="mt-2 text-sm text-red-400 flex items-center font-satoshi">
-                            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            {errors.surname}
-                          </p>
-                        )}
+                        <label
+                          htmlFor="surname"
+                          className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                            ${formData.surname ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                        >
+                          Surname
+                        </label>
+                        {errors.surname && <p className="mt-2 text-sm text-red-400">{errors.surname}</p>}
                       </div>
                     </div>
-
-                    {/* Email field with floating label */}
                     <div className="relative group">
                       <input
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Email Address"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`${inputBase.replace('bg-white/5', 'bg-black/30').replace('text-gray-700', 'text-gray-200').replace('border-gray-200', 'border-white/20')} ${errors.email ? inputError.replace('bg-red-50/20', 'bg-red-900/20').replace('border-red-300', 'border-red-400') : ''}`}
+                        className={`${inputBase} ${errors.email ? inputError : ''}`}
                         required
                       />
-                      <label htmlFor="email" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.email ? ' text-red-400' : ''}`}>Email Address</label>
-                      {formData.email && !errors.email && validateEmail(formData.email) && (
-                        <div className="absolute right-4 top-4">
-                          <svg className="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                      )}
-                      {errors.email && (
-                        <p className="mt-2 text-sm text-red-400 flex items-center">
-                          <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd" />
-                          </svg>
-                          {errors.email}
-                        </p>
-                      )}
+                      <label
+                        htmlFor="email"
+                        className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                          ${formData.email ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                      >
+                        Email Address
+                      </label>
+                      {errors.email && <p className="mt-2 text-sm text-red-400">{errors.email}</p>}
                     </div>
-
-                    {/* Subject field with floating label */}
                     <div className="relative group">
                       <input
                         type="text"
                         id="subject"
                         name="subject"
-                        placeholder="Subject"
                         value={formData.subject}
                         onChange={handleChange}
                         className={inputBase}
                       />
-                      <label htmlFor="subject" className={labelBase}>
+                      <label
+                        htmlFor="subject"
+                        className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                          ${formData.subject ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
+                      >
                         Subject (Optional)
                       </label>
                     </div>
+                    {currentStep === 1 && (
+                      <button
+                        type="submit"
+                        className="hidden"
+                      >
+                        Submit
+                      </button>
+                    )}
                   </form>
                 </div>
 
@@ -510,16 +657,16 @@ const ContactUs: React.FC = () => {
                         name="companySize"
                         value={formData.companySize}
                         onChange={handleChange}
-                        className={`${inputBase} appearance-none ${errors.companySize ? inputError : ''}`}
+                        className={`${inputBase} appearance-none text-white ${errors.companySize ? inputError : ''}`}
                         required
                       >
-                        <option value="" disabled></option>
-                        <option value="Solo">Solo</option>
-                        <option value="Startup">Startup (2-10)</option>
-                        <option value="SME">Small/Medium (11-100)</option>
-                        <option value="Enterprise">Enterprise (101+)</option>
+                        <option value="" disabled className="text-gray-400">Select Company Size</option>
+                        <option value="Solo" className="text-white">Solo</option>
+                        <option value="Startup" className="text-white">Startup (2-10)</option>
+                        <option value="SME" className="text-white">Small/Medium (11-100)</option>
+                        <option value="Enterprise" className="text-white">Enterprise (101+)</option>
                       </select>
-                      <label htmlFor="companySize" className={`${labelBase} ${errors.companySize ? 'text-red-500' : ''}`}>
+                      <label htmlFor="companySize" className="text-white">
                         Company Size
                       </label>
                       <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -542,7 +689,7 @@ const ContactUs: React.FC = () => {
                         className={`${inputBase} ${errors.industry ? inputError : ''}`}
                         required
                       />
-                      <label htmlFor="industry" className={`${labelBase} ${errors.industry ? 'text-red-500' : ''}`}>
+                      <label htmlFor="industry" className="text-white">
                         Industry
                       </label>
                       {errors.industry && <p className="mt-2 text-sm text-red-600">{errors.industry}</p>}
@@ -555,16 +702,16 @@ const ContactUs: React.FC = () => {
                         name="goals"
                         value={formData.goals}
                         onChange={handleChange}
-                        className={`${inputBase} appearance-none ${errors.goals ? inputError : ''}`}
+                        className={`${inputBase} appearance-none text-white ${errors.goals ? inputError : ''}`}
                         required
                       >
-                        <option value="" disabled></option>
-                        <option value="Customer Support AI">Customer Support AI</option>
-                        <option value="Sales Assistant">Sales Assistant</option>
-                        <option value="Internal Automation">Internal Automation</option>
-                        <option value="Other">Other</option>
+                        <option value="" disabled className="text-gray-400">Select Primary Goal</option>
+                        <option value="Customer Support AI" className="text-white">Customer Support AI</option>
+                        <option value="Sales Assistant" className="text-white">Sales Assistant</option>
+                        <option value="Internal Automation" className="text-white">Internal Automation</option>
+                        <option value="Other" className="text-white">Other</option>
                       </select>
-                      <label htmlFor="goals" className={`${labelBase} ${errors.goals ? 'text-red-500' : ''}`}>
+                      <label htmlFor="goals" className="text-white">
                         Primary Goal
                       </label>
                       <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -580,13 +727,13 @@ const ContactUs: React.FC = () => {
                 {/* Step 3: Additional Info */}
                 <div className={`${getStepClasses(3)}`}>
                   <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Additional Information</h3>
-                  <form onSubmit={handleSubmit} className="space-y-8">
+                  <form onSubmit={sendEmail} className="space-y-8">
                     {/* Interests checkboxes */}
                     <div className="space-y-4">
-                      <label className="block text-gray-200 font-medium mb-4">What are you interested in?</label>
+                      <label className="block text-gray-100 font-medium mb-4 text-lg">What are you interested in?</label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
-                          <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-gray-50 transition-all duration-300 cursor-pointer">
+                          <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-black transition-all duration-300 cursor-pointer">
                             <input
                               type="checkbox"
                               name={interest}
@@ -594,7 +741,7 @@ const ContactUs: React.FC = () => {
                               onChange={handleCheckboxChange}
                               className="w-5 h-5 text-theme-main rounded focus:ring-theme-main/40 focus:ring-offset-0 focus:ring-2 mr-3"
                             />
-                            <span className="text-gray-200">{interest}</span>
+                            <span className="text-white">{interest}</span>
                           </label>
                         ))}
                       </div>
@@ -611,7 +758,7 @@ const ContactUs: React.FC = () => {
                         onChange={handleChange}
                         className={inputBase}
                       />
-                      <label htmlFor="teamDescription" className={labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}>About Your Team (Optional)</label>
+                      <label htmlFor="teamDescription" className="text-white">About Your Team (Optional)</label>
                     </div>
 
                     {/* Message field */}
@@ -626,7 +773,7 @@ const ContactUs: React.FC = () => {
                         className={`${inputBase} ${errors.message ? inputError : ''}`}
                         required
                       />
-                      <label htmlFor="message" className={`${labelBase.replace('bg-white', 'bg-black/80').replace('text-gray-400', 'text-gray-300')}${errors.message ? ' text-red-400' : ''}`}>Your Message</label>
+                      <label htmlFor="message" className="text-white">Your Message</label>
                       <p className="mt-2 text-sm text-gray-400">Tell us about your specific needs or questions</p>
                     </div>
                   </form>
@@ -662,8 +809,8 @@ const ContactUs: React.FC = () => {
                       onClick={handleSubmit}
                       disabled={isSubmitting}
                       className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${isSubmitting
-                          ? 'bg-gray-400 cursor-not-allowed'
-                          : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'
+                        ? 'bg-gray-400 cursor-not-allowed'
+                        : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'
                         }`}
                     >
                       {isSubmitting ? (
@@ -700,45 +847,20 @@ const ContactUs: React.FC = () => {
         </div>
         <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
           <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.025 12.025 0 0112 0a12.025 12.025 0 018.618 3.924z" />
           </svg>
-          <span>100% Confidential</span>
+          <span>GDPR Compliant</span>
         </div>
         <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
           <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7l9 9 4-4 7 7M21 3l-9 9-4-4-7 7" />
           </svg>
-          <span>24-48 Hour Response</span>
+          <span>End-to-End Encrypted</span>
         </div>
       </div>
 
-      <CookieConsent position="left" modalPosition="bottom" />
       <Footer />
-      <style>{`
-        @keyframes contact-hero-fade-in {
-          0% { opacity: 0; transform: translateY(40px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-contact-hero-fade-in {
-          animation: contact-hero-fade-in 1.1s cubic-bezier(0.4,0,0.2,1) both;
-        }
-        @keyframes contact-hero-slide-in {
-          0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
-          100% { opacity: 1; transform: translateX(0) scale(1); }
-        }
-        .animate-contact-hero-slide-in {
-          animation: contact-hero-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
-        }
-        @keyframes contact-hero-gradient-in {
-          0% { opacity: 0; filter: blur(8px); }
-          100% { opacity: 1; filter: blur(0); }
-        }
-        .animate-contact-hero-gradient-in {
-          animation: contact-hero-gradient-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
-        }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-400 { animation-delay: 0.4s; }
-      `}</style>
+      <CookieConsent />
     </>
   );
 };
