@@ -171,216 +171,208 @@ const Solutions: React.FC = () => {
           <div className="container mx-auto">
             <div className="mb-12 text-center">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-          Explore Our Solutions
+                Explore Our Solutions
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
-          Discover how our AI solutions can transform your business across various industries.
+                Discover how our AI solutions can transform your business across various industries.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
-              {/* Card 1: Telecommunications */}              <div
-          className="relative bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 border border-gray-400 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-gray-400/50 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-gray-400/60 group w-full overflow-hidden"
-          style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
+              {/* Card 1: Telecommunications */}
+              <div
+                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-          <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
-          <div className="flex items-center mb-4 sm:mb-5">
-            <div
-              className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-300 rounded-lg"
-            >
-              <Lottie
-                animationData={customerService}
-                loop
-                autoplay
-                style={{ height: '40px', width: '40px' }}
-              />
-            </div>
-            <h3
-              className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800 bg-clip-text text-transparent"
-            >
-              <span className="inline-block bg-gray-300 text-gray-700 font-semibold text-xs px-3 py-1 rounded-full mb-2">
-                Telecommunications
-              </span>
-            </h3>
-          </div>
-
-          <p
-            className="text-black font-sans mb-4 text-lg"
-            style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-          >
-            Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
-          </p>
-
-          <ul className="space-y-3 mb-6">
-            {["24/7 emotionally responsive support", "Seamless handoff to human agents", "Context-aware conversation history"].map((item, i) => (
-              <li
-                key={i}
-                className="flex items-center"
-              >
-                <div className="h-6 w-6 rounded-full bg-gray-300 flex items-center justify-center mr-3">
-            <span className="material-symbols-outlined text-gray-700 text-sm">
-              check_circle
-            </span>
+                <div className="flex items-center mb-4 sm:mb-5">
+                  <div
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                  >
+                    <Lottie
+                      animationData={customerService}
+                      loop
+                      autoplay
+                      style={{ height: '40px', width: '40px' }}
+                    />
+                  </div>
+                  <h3
+                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
+                  >
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      Telecommunications
+                    </span>
+                  </h3>
                 </div>
-                <span className="text-black">{item}</span>
-              </li>
-            ))}
 
-          </ul>
+                <p
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
+                  Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
+                </p>
 
+                <ul className="space-y-3 mb-6">
+                  {["24/7 emotionally responsive support", "Seamless handoff to human agents", "Context-aware conversation history"].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center"
+                    >
+                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-gray-300 text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Card 2: E-Commerce */}
               <div
-          className="relative bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 border border-gray-400 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-gray-400/50 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-gray-400/60 group w-full overflow-hidden"
-          style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
+                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-          <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
-          <div className="flex items-center mb-4 sm:mb-5">
-            <div
-              className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-300 rounded-lg"
-            >
-              <Lottie
-                animationData={sales}
-                loop
-                autoplay
-                style={{ height: '40px', width: '40px' }}
-              />
-            </div>
-            <h3
-              className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800 bg-clip-text text-transparent"
-            >
-              <span className="inline-block bg-gray-300 text-gray-700 font-semibold text-xs px-3 py-1 rounded-full mb-2">
-                E-Commerce
-              </span>
-            </h3>
-          </div>
-
-          <p
-            className="text-black font-sans mb-4 text-lg"
-            style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-          >
-            Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
-          </p>
-
-          <ul className="space-y-3 mb-6">
-            {["Qualified lead generation", "Personalized product recommendations", "Consistent brand voice and messaging"].map((item, i) => (
-              <li
-                key={i}
-                className="flex items-center"
-              >
-                <div className="h-6 w-6 rounded-full bg-gray-300 flex items-center justify-center mr-3">
-            <span className="material-symbols-outlined text-gray-700 text-sm">
-              check_circle
-            </span>
+                <div className="flex items-center mb-4 sm:mb-5">
+                  <div
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                  >
+                    <Lottie
+                      animationData={sales}
+                      loop
+                      autoplay
+                      style={{ height: '40px', width: '40px' }}
+                    />
+                  </div>
+                  <h3
+                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
+                  >
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      E-Commerce
+                    </span>
+                  </h3>
                 </div>
-                <span className="text-black">{item}</span>
-              </li>
-            ))}
-          </ul>
 
+                <p
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
+                  Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
+                </p>
+
+                <ul className="space-y-3 mb-6">
+                  {["Qualified lead generation", "Personalized product recommendations", "Consistent brand voice and messaging"].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center"
+                    >
+                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-gray-300 text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Card 3: Healthcare */}
               <div
-          className="relative bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 border border-gray-400 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-gray-400/50 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-gray-400/60 group w-full overflow-hidden"
-          style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
+                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-          <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
-          <div className="flex items-center mb-4 sm:mb-5">
-            <div
-              className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-300 rounded-lg"
-            >
-              <Lottie
-                animationData={healthcare}
-                loop
-                autoplay
-                style={{ height: '40px', width: '40px' }}
-              />
-            </div>
-            <h3
-              className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800 bg-clip-text text-transparent"
-            >
-              <span className="inline-block bg-gray-300 text-gray-700 font-semibold text-xs px-3 py-1 rounded-full mb-2">
-                Healthcare
-              </span>
-            </h3>
-          </div>
-
-          <p
-            className="text-black font-sans mb-4 text-lg"
-            style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-          >
-            Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.
-          </p>
-
-          <ul className="space-y-3 mb-6">
-            {["Empathetic health guidance", "Medication and appointment reminders", "Wellness check-ins and monitoring"].map((item, i) => (
-              <li
-                key={i}
-                className="flex items-center"
-              >
-                <div className="h-6 w-6 rounded-full bg-gray-300 flex items-center justify-center mr-3">
-            <span className="material-symbols-outlined text-gray-700 text-sm">
-              check_circle
-            </span>
+                <div className="flex items-center mb-4 sm:mb-5">
+                  <div
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                  >
+                    <Lottie
+                      animationData={healthcare}
+                      loop
+                      autoplay
+                      style={{ height: '40px', width: '40px' }}
+                    />
+                  </div>
+                  <h3
+                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
+                  >
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      Healthcare
+                    </span>
+                  </h3>
                 </div>
-                <span className="text-black">{item}</span>
-              </li>
-            ))}
-          </ul>
 
+                <p
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
+                  Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.
+                </p>
+
+                <ul className="space-y-3 mb-6">
+                  {["Empathetic health guidance", "Medication and appointment reminders", "Wellness check-ins and monitoring"].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center"
+                    >
+                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-gray-300 text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Card 4: Education & Online Learning */}
               <div
-          className="relative bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 border border-gray-400 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-md after:absolute after:inset-0 after:rounded-2xl after:ring-1 after:ring-inset after:ring-gray-400/50 flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-gray-400/60 group w-full overflow-hidden"
-          style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
+                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
-          <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 blur-2xl animate-pulse-slow opacity-30 group-hover:opacity-80 transition-opacity"></div>
-          <div className="flex items-center mb-4 sm:mb-5">
-            <div
-              className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-300 rounded-lg"
-            >
-              <Lottie
-                animationData={education}
-                loop
-                autoplay
-                style={{ height: '40px', width: '40px' }}
-              />
-            </div>
-            <h3
-              className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800 bg-clip-text text-transparent"
-            >
-              <span className="inline-block bg-gray-300 text-gray-700 font-semibold text-xs px-3 py-1 rounded-full mb-2">
-                Education & Online Learning
-              </span>
-            </h3>
-          </div>
-
-          <p
-            className="text-black font-sans mb-4 text-lg"
-            style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-          >
-            Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.
-          </p>
-
-          <ul className="space-y-3 mb-6">
-            {["Adaptive learning pathways", "Personalized feedback and assessment", "24/7 learning support"].map((item, i) => (
-              <li
-                key={i}
-                className="flex items-center"
-              >
-                <div className="h-6 w-6 rounded-full bg-gray-300 flex items-center justify-center mr-3">
-            <span className="material-symbols-outlined text-gray-700 text-sm">
-              check_circle
-            </span>
+                <div className="flex items-center mb-4 sm:mb-5">
+                  <div
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                  >
+                    <Lottie
+                      animationData={education}
+                      loop
+                      autoplay
+                      style={{ height: '40px', width: '40px' }}
+                    />
+                  </div>
+                  <h3
+                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
+                  >
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                      Education & Online Learning
+                    </span>
+                  </h3>
                 </div>
-                <span className="text-black">{item}</span>
-              </li>
-            ))}
-          </ul>
 
+                <p
+                  className="text-gray-200 font-sans mb-4 text-lg"
+                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
+                >
+                  Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.
+                </p>
+
+                <ul className="space-y-3 mb-6">
+                  {["Adaptive learning pathways", "Personalized feedback and assessment", "24/7 learning support"].map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center"
+                    >
+                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
+                        <span className="material-symbols-outlined text-gray-300 text-sm">
+                          check_circle
+                        </span>
+                      </div>
+                      <span className="text-gray-200">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
@@ -389,10 +381,10 @@ const Solutions: React.FC = () => {
               className="mt-16 bg-white/5 border border-white/10 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300"
             >
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-          Not seeing your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We serve them all.</span>
+                Not seeing your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We serve them all.</span>
               </h3>
               <p className="text-lg text-gray-300 mb-6">
-          Our adaptable AI solutions can be tailored for any business vertical, delivering personalized customer experiences that feel genuinely human — regardless of your industry's unique challenges.
+                Our adaptable AI solutions can be tailored for any business vertical, delivering personalized customer experiences that feel genuinely human — regardless of your industry's unique challenges.
               </p>
 
             </div>
