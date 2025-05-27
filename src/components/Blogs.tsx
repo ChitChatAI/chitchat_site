@@ -34,7 +34,7 @@ const Blogs: React.FC = () => {
 
   return (
     <section className="relative pt-20 md:pt-20 px-4 sm:px-16 bg-black text-white overflow-hidden font-satoshi">
-      <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-center mb-8 sm:mb-12">Blogs</h2>
+      <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-center mb-8 sm:mb-12">Articles</h2>
 
       <div className="relative h-[24rem] sm:h-[28rem] flex items-center justify-center perspective-1000">
         {/* Blog Card 1 */}
