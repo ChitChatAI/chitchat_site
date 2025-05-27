@@ -11,12 +11,12 @@ const NavBar: React.FC = () => {
       if (window.innerWidth > 768) {
         setIsScrolled(window.scrollY > 100);
       } else {
-        setIsScrolled(true); // Always apply the scrolled state on mobile devices
+        setIsScrolled(window.scrollY > 0); // Ensure transparency at position 0 on mobile devices
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);z
   }, []);
 
   const modalVariants = {
