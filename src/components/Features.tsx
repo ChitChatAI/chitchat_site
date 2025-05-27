@@ -61,7 +61,7 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section
       id={id}
-      className="relative py-20 md:py-32 bg-black text-white font-sans overflow-hidden px-4 sm:px-8"
+      className="relative pb-16 md:py-6 bg-black text-white font-sans overflow-hidden px-4 sm:px-8"
     >
       <div className="container mx-auto px-6 sm:px-12">
         <div className="max-w-4xl mx-auto mb-12 text-center">

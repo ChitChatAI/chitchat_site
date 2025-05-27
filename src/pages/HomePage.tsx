@@ -7,6 +7,7 @@ import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
 import Hero from '../components/Hero';
+import Blogs from '../components/Blogs';
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -26,6 +27,9 @@ const HomePage: React.FC = () => {
         <Hero />
 
         <div className="parallax-element mb-0 py-16 relative z-10">
+          <Blogs />
+        </div>
+        <div className="parallax-element mb-0 py-16 relative z-10">
           <Features />
         </div>
 
@@ -36,6 +40,8 @@ const HomePage: React.FC = () => {
         <div className="parallax-element mb-0 py-16 relative z-10">
           <Community />
         </div>
+
+
       </main>
       <Footer />
 
