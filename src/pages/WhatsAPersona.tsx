@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import SectionDivider from '../components/SectionDivider';
 import CallToAction from '../components/CallToAction';
 
+const useParallax = (offset = 0.3) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ref.current) {
+        const { top } = ref.current.getBoundingClientRect();
+        ref.current.style.transform = `translateY(${top * offset}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [offset]);
+
+  return ref;
+};
+
 const WhatsAPersona: React.FC = () => {
+  const parallaxRef = useParallax(0.3);
   const glowHeadingClass = "relative text-white mb-6 after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-r after:from-theme-light after:to-transparent after:blur-md after:opacity-50";
 
   return (
@@ -14,7 +33,10 @@ const WhatsAPersona: React.FC = () => {
       <NavBar />
 
       {/* Hero Section */}
-      <section className="relative flex items-center justify-center min-h-[400px] md:min-h-[500px] bg-black bg-cover bg-center bg-no-repeat overflow-hidden py-24">
+      <section
+        ref={parallaxRef}
+        className="relative flex items-center justify-center min-h-[400px] md:min-h-[500px] bg-black bg-cover bg-center bg-no-repeat overflow-hidden py-24"
+      >
         <div className="relative z-10 bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 shadow-lg max-w-2xl mx-auto">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-theme-light to-primary-400 mb-6 leading-tight">
