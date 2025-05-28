@@ -87,23 +87,7 @@ const WhatsAPersona: React.FC = () => {
                 <div><strong className="text-theme-light font-semibold">Pain Points:</strong> What challenges or frustrations do they face?</div>
                 <div><strong className="text-theme-light font-semibold">Behavior:</strong> How do they interact with products or services?</div>
               </div>
-
-              <SectionDivider />
-
-              <motion.h2
-                className={glowHeadingClass}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                How to Create Effective Personas
-              </motion.h2>
-
-              <p className="text-lg text-gray-300 leading-relaxed mb-8 first-letter:text-2xl first-letter:font-bold first-letter:text-theme-light">
-                Building a persona involves research, analysis, and creativity. Start by gathering data through surveys, interviews, and analytics. Then, synthesize this information into a clear, relatable profile that represents a segment of your audience.
-              </p>
-
+              
               <SectionDivider />
 
               <motion.h2
@@ -140,46 +124,24 @@ const WhatsAPersona: React.FC = () => {
                 Whether it’s a helpful customer service rep or a savvy virtual tutor, AI personas are being studied from every angle: how to build them, how they impact us, and how to keep them ethical. Let’s explore what the research says.
               </p>
 
-              <h3 className="text-2xl font-semibold text-white mb-4">1. How Are AI Personas Created?</h3>
+              <h2 className="text-3xl font-bold text-theme-light mb-6">What AI Personas Do to User Experience</h2>
 
-              <h4 className="text-xl font-semibold text-theme-light mb-2">🧠 Prompt Engineering & LLMs</h4>
-              <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                One major area of study focuses on how we <strong>prompt large language models (LLMs)</strong> to behave like specific personas. Researchers experiment with prompt length, tone, and context to fine-tune how the AI responds. In short: the way we talk to AI shapes the way it talks back.
-              </p>
-
-              <h4 className="text-xl font-semibold text-theme-light mb-2">🛠 Persona Building Methods</h4>
-              <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                Personas aren’t just invented—they’re engineered. There are a few approaches:
-              </p>
-              <ul className="list-disc list-inside text-lg text-gray-300 leading-relaxed mb-8">
-                <li><span className="text-theme-light font-semibold">Data-Driven Personas:</span> By analyzing real conversations, researchers can teach AI how people naturally speak and behave.</li>
-                <li><span className="text-theme-light font-semibold">UX-Inspired Techniques:</span> Just like user personas in design, AI personas can be crafted from interviews, surveys, and expert input.</li>
-                <li><span className="text-theme-light font-semibold">Generative Personas:</span> Some are using AI to help build <em>other</em> personas—yes, it’s a bit meta.</li>
-              </ul>
-
-              <h4 className="text-xl font-semibold text-theme-light mb-2">🎤 Multimodal Personas</h4>
-              <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                With the rise of voice assistants, avatars, and even tactile feedback, researchers are exploring how AI personas extend beyond text—into tone of voice, facial expressions, and even the way a digital assistant “moves.”
-              </p>
-
-              <h3 className="text-2xl font-semibold text-white mb-4">2. What AI Personas Do to User Experience</h3>
-
-              <h4 className="text-xl font-semibold text-theme-light mb-2">🤝 Trust & Perception</h4>
+              <h3 className="text-2xl font-semibold text-white mb-4">🤝 Trust & Perception</h3>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
                 Research shows that the <strong>persona’s traits</strong>—like empathy, confidence, or humor—can influence how much we trust and enjoy using an AI. Want financial advice? A calm, competent persona works best. Casual chat? A friendly tone wins.
               </p>
 
-              <h4 className="text-xl font-semibold text-theme-light mb-2">📈 Engagement & Retention</h4>
+              <h3 className="text-2xl font-semibold text-white mb-4">📈 Engagement & Retention</h3>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
                 Personas directly impact how long users stay, how satisfied they feel, and whether they come back. A/B testing shows that different personas lead to very different outcomes—even if the information is the same.
               </p>
 
-              <h4 className="text-xl font-semibold text-theme-light mb-2">👤 Human Vibes Matter</h4>
+              <h3 className="text-2xl font-semibold text-white mb-4">👤 Human Vibes Matter</h3>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
                 Users often <strong>anthropomorphize</strong> AI—seeing it as more human than it is. Striking the right balance is key: too much realism can be misleading; too little, and the AI feels robotic.
               </p>
 
-              <h4 className="text-xl font-semibold text-theme-light mb-2">🎯 Personalized Interactions</h4>
+              <h3 className="text-2xl font-semibold text-white mb-4">🎯 Personalized Interactions</h3>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
                 The best personas adapt to <em>you</em>. Some AI agents can shift their tone or communication style over time based on your preferences—like tailoring a conversation to a “Life-Hacker” or “Tastemaker” persona.
               </p>

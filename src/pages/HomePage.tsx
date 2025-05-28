@@ -26,9 +26,8 @@ const HomePage: React.FC = () => {
       <main className="relative overflow-hidden w-full min-h-screen bg-black">
         <Hero />
 
-        <div className="parallax-element mb-0 py-16 relative z-10">
-          <Blogs />
-        </div>
+
+        <Blogs />
         <div className="parallax-element mb-0 py-16 relative z-10">
           <Features />
         </div>

@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);z
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const modalVariants = {

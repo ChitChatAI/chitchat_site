@@ -12,7 +12,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section
       id={id}
-      className="relative w-full min-h-screen bg-black text-white font-sans overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-screen text-white font-sans overflow-hidden flex items-center justify-center"
     >
       <div className="absolute inset-0 w-full h-full">
         <video
