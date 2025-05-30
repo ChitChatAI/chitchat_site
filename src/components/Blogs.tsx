@@ -34,17 +34,16 @@ const Blogs: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-20 md:pt-20 px-4 sm:px-16 bg-black text-white overflow-hidden font-satoshi">
+    <section className="relative pt-20 md:pt-20 px-4 sm:px-auto bg-black text-white overflow-hidden font-satoshi">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight text-center">Articles</h1>
 
       <div className="relative h-[28rem] sm:h-[30rem] flex items-center justify-center perspective-1000">        {/* Blog Card 1 */}
         <div
-          className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-sm sm:max-w-md ${getPositionStyles(0)}`}
+          className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-full sm:max-w-md ${getPositionStyles(0)}`}
         >
-          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-96 sm:h-96 w-[20rem] sm:w-[28rem] opacity-90 hover:opacity-100">
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[0].title}</h3>
+          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-96 sm:h-96 w-full sm:w-[28rem] opacity-90 hover:opacity-100">            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[0].title}</h3>
             <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
-              {blogs[0].content.substring(0, 140)}...
+              {blogs[0].content.substring(0, 200)}...
             </p>
             <Link
               to={blogs[0].link}
@@ -55,12 +54,11 @@ const Blogs: React.FC = () => {
           </div>
         </div>        {/* Blog Card 2 */}
         <div
-          className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-sm sm:max-w-md ${getPositionStyles(1)}`}
+          className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-full sm:max-w-md ${getPositionStyles(1)}`}
         >
-          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-96 sm:h-96 w-[20rem] sm:w-[28rem] opacity-90 hover:opacity-100">
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[1].title}</h3>
+          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-96 sm:h-96 w-full sm:w-[28rem] opacity-90 hover:opacity-100">            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[1].title}</h3>
             <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
-              {blogs[1].content.substring(0, 140)}...
+              {blogs[1].content.substring(0, 200)}...
             </p>
             <Link
               to={blogs[1].link}
@@ -72,13 +70,11 @@ const Blogs: React.FC = () => {
         </div>
 
         {/* Blog Card 3 */}
-        <div
-          className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-sm sm:max-w-md ${getPositionStyles(2)}`}
+        <div          className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-full sm:max-w-md ${getPositionStyles(2)}`}
         >
-          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-80 sm:h-96 w-[20rem] sm:w-[28rem] opacity-90 hover:opacity-100">
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[2].title}</h3>
+          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-80 sm:h-96 w-full sm:w-[28rem] opacity-90 hover:opacity-100">            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[2].title}</h3>
             <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
-              {blogs[2].content.substring(0, 140)}...
+              {blogs[2].content.substring(0, 200)}...
             </p>
             <Link
               to={blogs[2].link}

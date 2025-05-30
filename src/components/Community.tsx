@@ -9,7 +9,7 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section
       id={id}
-      className="relative py-20 md:py-32 bg-black text-white font-[Satoshi] overflow-hidden px-4 sm:px-8"
+      className="relative bg-black text-white font-[Satoshi] overflow-hidden px-4 sm:px-8"
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10"></div>
       <div className="container mx-auto px-6 sm:px-12 relative z-20">

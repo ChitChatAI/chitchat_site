@@ -414,8 +414,8 @@ const Solutions: React.FC = () => {
                   key={index}
                   className="relative"
                 >
-                  <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-gradient-to-br from-theme-main via-purple-700 to-pink-500 rounded-full"></span>
-                  <div className="flex flex-col gap-6 bg-gradient-to-br from-white/5 via-white/10 to-white/5 p-6 md:p-8 rounded-2xl border border-white/10 hover:border-theme-main/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+                  <div className="flex flex-col gap-6bg-black p-6 md:p-8 rounded-2xl border border-white/10 hover:border-theme-main/30 shadow-xl hover:shadow-2xl transition-all duration-300">
                     <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                       {item.title}
                     </h4>
@@ -442,8 +442,8 @@ const Solutions: React.FC = () => {
                   key={index}
                   className="relative"
                 >
-                  <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="flex flex-col gap-6 bg-black p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-white rounded-full"></span>
+                  <div className="flex flex-col gap-6 border border-white/10 bg-black p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
                     <h4 className="text-3xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                       {useCase.title}
                     </h4>
