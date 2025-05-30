@@ -14,24 +14,17 @@ import WhyAIPersonas from './pages/WhyAIPersonas';
 import WhatsAPersona from './pages/WhatsAPersona';
 
 const App: React.FC = () => {
-  // Initialize scroll animations
   useScrollAnimation();
 
-  const [isInitialLoading, setIsInitialLoading] = useState(() => {
-    const hasLoadedBefore = localStorage.getItem('hasLoadedBefore');
-    return !hasLoadedBefore; // Show loader only if not loaded before
-  });
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
-    if (isInitialLoading) {
-      const timer = setTimeout(() => {
-        setIsInitialLoading(false);
-        localStorage.setItem('hasLoadedBefore', 'true'); // Mark as loaded
-      }, 3000); // Show loader for 3 seconds
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 3000); // Loader shows for 3 seconds
 
-      return () => clearTimeout(timer);
-    }
-  }, [isInitialLoading]);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Router>
