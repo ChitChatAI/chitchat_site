@@ -37,28 +37,30 @@ const NavBar: React.FC = () => {
     { path: '/development-workflow', label: 'Development Phases' },
     {path: '/contactus', label: 'Contact Us' }
   ];
-
   return (    <nav
-      className={`fixed top-0 left-0 w-full z-50 px-0 transition-colors duration-300 ${
-        isScrolled ? 'bg-white border-b border-gray-200 shadow-sm' : 'bg-transparent'
+      className={`fixed top-0 left-0 w-full z-50 px-0 transition-all duration-300 ${
+        isScrolled ? 'bg-white border-b border-gray-200 shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-3">
-          {/* Logo and Brand */}          <NavLink to="/" className="flex items-center space-x-2 group">
-            <div
-              className={`flex items-center justify-center px-4 py-2 rounded-full transition-all duration-300 ${
+          {/* Logo and Brand */}          <NavLink to="/" className="flex items-center space-x-2 group">            <div
+              className={`flex items-center justify-center px-4 py-2 rounded-full transition-all duration-300 ease-out ${
                 isScrolled ? 'bg-white' : 'bg-transparent'
               }`}
             >              <img
                 src={isScrolled ? "/branding/chitchatAI.png" : "/branding/chitchatAILite.png"}
                 alt="ChitChat AI Logo"
-                className={`object-contain drop-shadow-md transition-all duration-300 ${
-                  isScrolled ? "w-8 h-8 sm:w-10 sm:h-10" : "w-7 h-7 sm:w-9 sm:h-9 rounded-full"
+                className={`object-contain drop-shadow-md transition-all duration-300 ease-out ${
+                  isScrolled 
+                    ? "w-8 h-8 sm:w-10 sm:h-10" 
+                    : "w-7 h-7 sm:w-9 sm:h-9 rounded-full"
                 }`}
-              /><span
-                className={`ml-2 text-lg sm:text-xl font-satoshi-rounded font-extrabold tracking-wide transition-colors duration-300 ${
-                  isScrolled ? 'text-gray-900 group-hover:text-theme-main' : 'text-white group-hover:text-theme-light'
+              />              <span
+                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide transition-all duration-300 ease-out ${
+                  isScrolled 
+                    ? 'text-xl sm:text-2xl text-gray-900 group-hover:text-theme-main' 
+                    : 'text-lg sm:text-xl text-white group-hover:text-theme-light'
                 }`}
               >
                 <span
@@ -80,7 +82,9 @@ const NavBar: React.FC = () => {
                 >
                   Chat
                 </span>                <span
-                  className="text-gray-700 font-satoshi font-extrabold text-lg sm:text-xl relative z-10 transition-colors duration-300"
+                  className={`text-gray-700 font-satoshi font-extrabold relative z-10 transition-all duration-300 ease-out ${
+                    isScrolled ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
+                  }`}
                   style={{
                     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
                     WebkitClipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
@@ -93,7 +97,7 @@ const NavBar: React.FC = () => {
             </div>
           </NavLink>          {/* Hamburger Menu Toggle */}
           <button
-            className={`p-2 rounded-full transition-colors duration-300 ${
+            className={`p-2 rounded-full transition-all duration-300 ease-out ${
               isScrolled 
                 ? 'text-theme-main hover:bg-theme-main/10' 
                 : 'text-white hover:bg-white/10'
@@ -102,7 +106,9 @@ const NavBar: React.FC = () => {
             aria-label="Toggle menu"
           ><svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className={`transition-all duration-300 ease-out ${
+                isScrolled ? 'h-6 w-6' : 'h-5 w-5'
+              }`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

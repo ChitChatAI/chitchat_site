@@ -42,7 +42,7 @@ const Blogs: React.FC = () => {
           className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-full sm:max-w-md ${getPositionStyles(0)}`}
         >
           <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-96 sm:h-96 w-full sm:w-[28rem] opacity-90 hover:opacity-100">            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[0].title}</h3>
-            <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
+            <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6 drop-shadow-md">
               {blogs[0].content.substring(0, 200)}...
             </p>
             <Link
@@ -57,7 +57,7 @@ const Blogs: React.FC = () => {
           className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-full sm:max-w-md ${getPositionStyles(1)}`}
         >
           <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-96 sm:h-96 w-full sm:w-[28rem] opacity-90 hover:opacity-100">            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[1].title}</h3>
-            <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
+            <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6 drop-shadow-lg">
               {blogs[1].content.substring(0, 200)}...
             </p>
             <Link
@@ -72,8 +72,7 @@ const Blogs: React.FC = () => {
         {/* Blog Card 3 */}
         <div          className={`absolute transform-gpu transition-all duration-700 ease-in-out w-full max-w-full sm:max-w-md ${getPositionStyles(2)}`}
         >
-          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-80 sm:h-96 w-full sm:w-[28rem] opacity-90 hover:opacity-100">            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[2].title}</h3>
-            <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
+          <div className="p-6 sm:p-8 bg-white/10 backdrop-blur-md border border-white/10 shadow-[0_8px_80px_rgba(0,0,0,0.5)] rounded-3xl text-center hover:scale-105 transition-transform duration-500 flex flex-col justify-between h-80 sm:h-96 w-full sm:w-[28rem] opacity-90 hover:opacity-100">            <h3 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">{blogs[2].title}</h3>            <p className="text-sm sm:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6 drop-shadow-lg">
               {blogs[2].content.substring(0, 200)}...
             </p>
             <Link
