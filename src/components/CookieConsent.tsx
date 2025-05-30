@@ -99,7 +99,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
         >
           <button
             onClick={() => setCookiePolicyOpen(!cookiePolicyOpen)}
-            className="bg-white/10 backdrop-blur-md border border-white/20 text-white p-3 rounded-full shadow-[0_8px_40px_rgba(0,0,0,0.3)] hover:bg-white/20 transition-all flex items-center justify-center group hover:scale-110"
+            className="bg-white/10 backdrop-blur-md border border-white/20 text-theme-main p-3 rounded-full shadow-[0_8px_40px_rgba(0,0,0,0.3)] hover:bg-white/20 transition-all flex items-center justify-center group hover:scale-110"
             aria-label="Cookie Policy"
           >
             <div className="transform transition-transform duration-300 group-hover:rotate-90">
