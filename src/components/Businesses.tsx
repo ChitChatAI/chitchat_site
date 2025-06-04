@@ -178,7 +178,7 @@ const Businesses: React.FC = () => {
               {businessValues.map((item, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 hover:bg-white/15 transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-md rounded-lg p-8 hover:bg-white/15 transition-all duration-300"
                   style={{ clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)' }}
                   initial="hidden"
                   whileInView="visible"
@@ -186,7 +186,7 @@ const Businesses: React.FC = () => {
                   variants={fadeInVariants}
                 >
                   <motion.span
-                    className="material-symbols-outlined text-theme-main text-5xl mb-4"
+                    className="material-symbols-outlined text-white text-5xl mb-4"
                     variants={rotateInVariants}
                   >
                     {item.icon}
@@ -203,7 +203,7 @@ const Businesses: React.FC = () => {
         </section>
 
         {/* What's Included Section */}
-        <section id="whats-included" className="relative py-20 md:py-32 bg-gradient-to-br from-gray-900 to-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
+        <section id="whats-included" className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
           <motion.div
             className="relative z-10 max-w-6xl mx-auto"
             initial="hidden"
@@ -222,10 +222,10 @@ const Businesses: React.FC = () => {
               {includedFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-white/5 via-white/10 to-white/5 border border-white/10 hover:border-theme-main/30 rounded-2xl shadow-xl hover:shadow-2xl p-8 flex gap-6 items-start transition-all duration-300"
+                  className="bg-white/10  hover:border-theme-main/30 rounded-2xl shadow-xl hover:shadow-2xl p-8 flex gap-6 items-start transition-all duration-300"
                 >
-                  <div className="aspect-square flex items-center justify-center rounded-xl bg-theme-main/10 text-white text-3xl border border-theme-main/30 shadow-inner">
-                    <span className="material-symbols-outlined">{item.icon}</span>
+                  <div className="aspect-square flex items-center justify-center text-white text-3xl shadow-inner">
+                    <span className="material-symbols-outlined text-white">{item.icon}</span>
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">
@@ -252,7 +252,7 @@ const Businesses: React.FC = () => {
               {useCases.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-8 hover:bg-white/10 transition-all duration-200"
+                  className="bg-white/10 rounded-lg p-8 transition-all duration-200"
                 >
                   <h3 className="text-2xl font-bold text-white mb-3">
                     {item.title}

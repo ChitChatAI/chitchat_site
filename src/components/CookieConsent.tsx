@@ -126,12 +126,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <button
-                onClick={() => setCookiePolicyOpen(true)}
-                className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-xs font-medium text-white hover:bg-white/20 transition-all"
-              >
-                Customize
-              </button>
+
               <button
                 onClick={rejectCookies}
                 className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-xs font-medium text-white hover:bg-white/20 transition-all"
@@ -230,19 +225,13 @@ const CookieConsent: React.FC<CookieConsentProps> = ({
                   onClick={rejectCookies}
                   className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-all"
                 >
-                  Reject All
+                  Reject
                 </button>
                 <button
                   onClick={acceptCookies}
                   className="px-6 py-3 bg-gradient-to-r from-theme-main to-theme-light text-white rounded-lg text-sm font-medium hover:opacity-90 transition-all shadow-[0_4px_20px_rgba(75,35,107,0.3)]"
                 >
-                  Accept All
-                </button>
-                <button
-                  onClick={acceptCookies}
-                  className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-all"
-                >
-                  Save Preferences
+                  Accept
                 </button>
               </div>
             </div>

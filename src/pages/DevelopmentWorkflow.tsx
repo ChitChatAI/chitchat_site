@@ -181,7 +181,7 @@ const DevelopmentWorkflow: React.FC = () => {
                     className="w-16 h-16"
                   />
                 </div>
-                <p className="text-lg font-semibold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent capitalize">
+                <p className="text-lg font-semibold bg-white bg-clip-text text-transparent capitalize">
                   {tool.name}
                 </p>
               </motion.div>
@@ -191,7 +191,7 @@ const DevelopmentWorkflow: React.FC = () => {
       </section>
 
       {/* Workflow Steps Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-black to-gray-800 py-24 px-6 sm:px-12 lg:px-20 overflow-hidden">
+      <section className="relative bg-black py-24 px-6 sm:px-12 lg:px-20 overflow-hidden">
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-extrabold text-white mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
@@ -205,9 +205,9 @@ const DevelopmentWorkflow: React.FC = () => {
             {workflowSteps.map((step, index) => (
               <div
                 key={index}
-                className={`relative bg-gradient-to-br from-gray-800 via-gray-900 to-black p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 ${index !== 0 ? 'mt-8' : ''}`}
+                className={`relative bg-gradient-to-br from-white/10 to-black p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 ${index !== 0 ? 'mt-8' : ''}`}
               >
-                <div className="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-full flex items-center justify-center shadow-md">
+                <div className="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-r from-purple-400 to-theme-main rounded-full flex items-center justify-center shadow-md">
                   <span className="text-white font-bold text-lg">{index + 1}</span>
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-4">
@@ -231,7 +231,7 @@ const DevelopmentWorkflow: React.FC = () => {
       </section>
 
       {/* Advanced FAQ Section */}
-      <section className="relative bg-gradient-to-b from-gray-900 to-black py-20 px-6 sm:px-10 lg:px-20 overflow-hidden">
+      <section className="relative bg-black py-20 px-6 sm:px-10 lg:px-20 overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
@@ -249,7 +249,7 @@ const DevelopmentWorkflow: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.1 }}
-                className="bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+                className="bg-white/10 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
               >
                 <button
                   onClick={() => toggleFAQ(idx)}

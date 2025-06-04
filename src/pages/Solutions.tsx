@@ -181,12 +181,12 @@ const Solutions: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
               {/* Card 1: Telecommunications */}
               <div
-                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                className="relative bg-white/10  p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 "
                   >
                     <Lottie
                       animationData={customerService}
@@ -230,12 +230,12 @@ const Solutions: React.FC = () => {
 
               {/* Card 2: E-Commerce */}
               <div
-                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 "
                   >
                     <Lottie
                       animationData={sales}
@@ -279,12 +279,12 @@ const Solutions: React.FC = () => {
 
               {/* Card 3: Healthcare */}
               <div
-                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5"
                   >
                     <Lottie
                       animationData={healthcare}
@@ -328,12 +328,12 @@ const Solutions: React.FC = () => {
 
               {/* Card 4: Education & Online Learning */}
               <div
-                className="relative bg-white/10 border border-white/20 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
+                className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
               >
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 bg-gray-700/30 rounded-lg"
+                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 "
                   >
                     <Lottie
                       animationData={education}
@@ -378,7 +378,7 @@ const Solutions: React.FC = () => {
 
             {/* Industry-wide callout */}
             <div
-              className="mt-16 bg-white/5 border border-white/10 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="mt-16 bg-white/5 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300"
             >
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 Not seeing your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We serve them all.</span>
@@ -408,18 +408,17 @@ const Solutions: React.FC = () => {
               </p>
             </div>
 
-            <div className="relative border-l-2 border-dotted border-gradient-to-b from-theme-main via-purple-700 to-pink-500 pl-6 sm:pl-12 space-y-20">
+            <div className="relative pl-6 sm:pl-12 space-y-20">
               {additionalSolutions.map((item, index) => (
                 <div
                   key={index}
                   className="relative"
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="flex flex-col gap-6bg-black p-6 md:p-8 rounded-2xl border border-white/10 hover:border-theme-main/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="flex flex-col gap-6 bg-white/5 p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
                     <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                       {item.title}
                     </h4>
-                    <hr className="border-t border-white/10 w-12 mt-2 mb-4" />
                     <p className="text-base text-gray-200 leading-relaxed">
                       {item.text}
                     </p>
@@ -436,18 +435,17 @@ const Solutions: React.FC = () => {
             <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
               Use Cases
             </h2>
-            <div className="relative border-l-2 border-dotted border-theme-main pl-6 sm:pl-12 space-y-20">
+            <div className="relative pl-6 sm:pl-12 space-y-20">
               {useCases.map((useCase, index) => (
                 <div
                   key={index}
                   className="relative"
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-white rounded-full"></span>
-                  <div className="flex flex-col gap-6 border border-white/10 bg-black p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="flex flex-col gap-6 bg-white/5 p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
                     <h4 className="text-3xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                       {useCase.title}
                     </h4>
-                    <hr className="border-t border-white w-12 mt-2 mb-4" />
                     <p className="text-base text-gray-200 leading-relaxed">
                       {useCase.description}
                     </p>
