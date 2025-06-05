@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 import { ChevronDown, X, Menu, Cookie } from 'lucide-react';
 import NavBar from '../components/NavBar';
-import CookieConsent from '../components/CookieConsent';
+import CookieConsent from '../components/ContactModal';
 import { initCustomCursor } from '../utils/cursorEffects';
 import SideNavigationDots from '../components/SideNavigationDots';
 

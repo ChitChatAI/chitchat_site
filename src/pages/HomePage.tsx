@@ -3,7 +3,7 @@ import Navbar from '../components/NavBar';
 import Features from '../components/Features';
 import Community from '../components/Community';
 import Footer from '../components/Footer';
-import CookieConsent from '../components/CookieConsent';
+import CookieConsent from '../components/ContactModal';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
 import Hero from '../components/Hero';

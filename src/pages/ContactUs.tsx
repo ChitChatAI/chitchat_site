@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
-import CookieConsent from '../components/CookieConsent';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Confetti from 'react-confetti';
 import { useNavigate } from 'react-router-dom';
 
-const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border border-gray-200 rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
+const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
 const inputError = "block w-full px-4 py-3 text-sm text-white bg-red-50/20 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300";
 
 // Add toast interface
@@ -47,12 +44,10 @@ const ContactUs: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const fullText = 'Contact Us';
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [showConfetti, setShowConfetti] = React.useState(false);
-  const [showLetsTalk, setShowLetsTalk] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -263,6 +258,7 @@ Team Description: ${formData.teamDescription}
     await sendEmail(e as unknown as React.FormEvent<HTMLFormElement>);
   };
 
+  
   // Add auto-dismiss for toast after 5 seconds
   useEffect(() => {
     if (toast) {
@@ -310,7 +306,7 @@ Team Description: ${formData.teamDescription}
         role="dialog"
       >
         <div
-          className={`transform transition-all duration-500 ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'} bg-black/95 rounded-2xl shadow-2xl border border-white/20 p-2 sm:p-8 w-full max-w-2xl relative`}
+          className={`transform transition-all duration-500 ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'} bg-black/95 rounded-2xl shadow-2xl p-2 sm:p-8 w-full max-w-2xl relative`}
         >
           <button
             onClick={onClose}
@@ -328,14 +324,13 @@ Team Description: ${formData.teamDescription}
   return (
     <>
       {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
-      <NavBar />
 
       {toast && (
         <div className="fixed top-6 sm:top-10 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 z-50 animate-fade-in-right px-2 sm:px-0">
           <div
             className={`w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl shadow-lg rounded-xl pointer-events-auto overflow-hidden backdrop-blur-md transition-all transform-gpu ${toast.type === 'success'
-                ? 'bg-gradient-to-r from-green-500 to-emerald-600'
-                : 'bg-gradient-to-r from-red-500 to-pink-600'
+              ? 'bg-gradient-to-r from-green-500 to-emerald-600'
+              : 'bg-gradient-to-r from-red-500 to-pink-600'
               }`}
           >
             <div className="p-4">
@@ -401,20 +396,7 @@ Team Description: ${formData.teamDescription}
         </div>
       )}
 
-     
-      <div className="fixed inset-0 z-[-2] pointer-events-none">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
-      </div>
+
       <div className="fixed inset-0 z-[-3] bg-black" />
 
       {/* Modern floating alert with animation */}
@@ -445,60 +427,10 @@ Team Description: ${formData.teamDescription}
           </div>
         </div>
       )}
-
-      {/* Modern hero section */}
-      <section className="relative px-4 sm:px-8 bg-black bg-gradient-to-b from-black via-[#18132a] to-[#18132a] font-[Satoshi] overflow-hidden text-white border-b border-white/10 shadow-xl">
-        {/* Video + image background handled globally */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <img
-            src="/solutionsPage/solutions.jpg"
-            alt="Contact Us Background"
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
-            draggable="false"
-          />
-          <div className="absolute inset-0 w-full h-full">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
-          </div>
-          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.04] parallax-el" data-speed="0.09"></div>
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-theme-main/30 rounded-full blur-3xl animate-float parallax-el" data-speed="0.15"></div>
-          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl animate-float-delayed parallax-el" data-speed="0.11"></div>
-          <div className="absolute top-1/2 left-2/3 w-40 h-40 bg-purple-400/30 rounded-full blur-2xl animate-pulse parallax-el" data-speed="0.13"></div>
-        </div>
-        <div className="container mx-auto px-6 sm:px-12 relative z-10">
-          <div
-            className="flex flex-col items-center justify-center min-h-screen text-center mx-auto"
-            id="contact-hero-parallax-row"
-            style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
-          >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
-              <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">Let's Build Your AI Solution</span>
-            </h1>
-            <p className="text-xl sm:text-2xl md:text-2xl text-white max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
-             Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
-            </p>
-            <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
-              <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
-              <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
-              <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Shifted Form Section */}
-      <section className="relative px-4 sm:px-0 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
-        <div className="container mx-auto">
-          <div className="w-full mx-auto bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-6 sm:p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
+      <section className="w-full h-screen flex items-center justify-center px-4 sm:px-8 lg:px-20 relative z-10 py-32">
+     
+          <div className="w-full mx-auto rounded-2xl shadow-2xl p-6 sm:p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
             {/* Form steps container */}
             <div className="relative z-10">
               {/* Modern progress tracker */}
@@ -647,7 +579,7 @@ Team Description: ${formData.teamDescription}
                 </div>
 
                 {/* Step 2: Company & Goals */}
-                <div className={`${getStepClasses(2)}`}>
+                <div className={`${getStepClasses(2)} `}>
                   <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Company & Goals</h3>
                   <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                     {/* Company size selection */}
@@ -733,7 +665,7 @@ Team Description: ${formData.teamDescription}
                       <label className="block text-gray-100 font-medium mb-4 text-lg">What are you interested in?</label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
-                          <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-black transition-all duration-300 cursor-pointer">
+                          <label key={interest} className="flex items-center p-4 border rounded-xl hover:border-theme-main/30 hover:bg-black transition-all duration-300 cursor-pointer">
                             <input
                               type="checkbox"
                               name={interest}
@@ -780,11 +712,11 @@ Team Description: ${formData.teamDescription}
                 </div>
 
                 {/* Navigation buttons */}
-                <div className="mt-12 flex justify-between items-center">
+                <div className="pb-16 pt-3 flex justify-between items-center">
                   {currentStep > 1 ? (
                     <button
                       onClick={handlePrevStep}
-                      className="inline-flex items-center px-5 py-3 rounded-xl font-medium transition-all duration-300 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:shadow-md active:scale-95 space-x-2"
+                      className="inline-flex items-center px-5 py-3 rounded-xl font-medium transition-all duration-300 bg-white border text-gray-700 hover:bg-gray-50 hover:shadow-md active:scale-95 space-x-2"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -835,32 +767,8 @@ Team Description: ${formData.teamDescription}
               </div>
             </div>
           </div>
-        </div>
       </section>
-      {/* Trust indicators */}
-      <div className="mt-10 flex flex-wrap justify-center items-center gap-5 text-gray-300 text-sm bg-black/90 py-8 border-t border-white/10">
-        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
-          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-          </svg>
-          <span>SSL Secured</span>
-        </div>
-        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
-          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.025 12.025 0 0112 0a12.025 12.025 0 018.618 3.924z" />
-          </svg>
-          <span>GDPR Compliant</span>
-        </div>
-        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
-          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7l9 9 4-4 7 7M21 3l-9 9-4-4-7 7" />
-          </svg>
-          <span>End-to-End Encrypted</span>
-        </div>
-      </div>
 
-      <Footer />
-      <CookieConsent />
     </>
   );
 };

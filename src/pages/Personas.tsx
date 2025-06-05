@@ -5,7 +5,7 @@ import { motion, useScroll } from 'framer-motion';
 import { ChevronDown, X, Menu, Cookie } from 'lucide-react';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
-import CookieConsent from '../components/CookieConsent';
+import CookieConsent from '../components/ContactModal';
 import { initCustomCursor } from '../utils/cursorEffects';
 
 const VisionBoard: React.FC = () => {

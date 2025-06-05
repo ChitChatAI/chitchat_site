@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
-import CookieConsent from '../components/CookieConsent';
+import CookieConsent from '../components/ContactModal';
 
 const DevelopmentWorkflow: React.FC = () => {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
