@@ -162,7 +162,7 @@ const VisionBoard: React.FC = () => {
             {/* Navigation Bar */}
             <NavBar />
             {/* Scroll Progress Bar - Positioned directly under navbar */}
-            <motion.div
+            <div
                 className="fixed left-0 right-0 h-1 bg-gradient-to-r from-theme-main via-purple-500 to-theme-light z-40"
                 style={{
                     top: "var(--navbar-height, 0px)",
@@ -180,14 +180,14 @@ const VisionBoard: React.FC = () => {
                 transition={{ duration: 0.8 }}
             >
                 {/* Dark Overlay */}
-                <motion.div
+                <div
                     className="absolute inset-0 bg-black/70 z-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 />
                 {/* Content */}
-                <motion.div
+                <div
                     className="relative z-10 bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 shadow-lg max-w-2xl mx-auto"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -203,9 +203,9 @@ const VisionBoard: React.FC = () => {
                             Our Personas (And Why They're Just the Start)
                         </motion.h1>
                     </div>
-                </motion.div>
+                </div>
                 {/* Fade-out to black at bottom */}
-                <motion.div
+                <div
                     className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -217,7 +217,7 @@ const VisionBoard: React.FC = () => {
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto">
                         {/* Reading Progress Bar - Improved positioning and visibility */}
-                        <motion.div
+                        <div
                             className="fixed left-0 right-0 h-1.5 bg-gradient-to-r from-theme-main via-purple-500 to-theme-light z-40"
                             style={{
                                 top: "var(--navbar-height, 70px)",

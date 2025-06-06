@@ -12,7 +12,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section
       id={id}
-      className="relative w-full min-h-screen text-white font-sans overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-screen text-white  overflow-hidden flex items-center justify-center"
     >
       <div className="absolute inset-0 w-full h-full">
         <video
@@ -28,7 +28,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10"></div>
       </div>
 
-      <motion.div
+      <div
         className="relative z-20 container mx-auto text-center px-4"
         initial="hidden"
         animate="visible"
@@ -48,7 +48,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
           <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
         </div>
-      </motion.div>
+      </div>
       <style>{`
         @keyframes pulse {
           0%, 100% { opacity: 1; transform: scale(1); }

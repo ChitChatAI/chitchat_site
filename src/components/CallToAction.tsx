@@ -31,12 +31,7 @@ const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) 
           Get In Touch
         </a>
       </div>
-      {/* Animated dots for life */}
-      <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700 justify-center">
-        <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
-        <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
-        <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
-      </div>
+     
     </div>
   </section>
 );

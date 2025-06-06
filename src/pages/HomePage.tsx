@@ -30,13 +30,11 @@ const HomePage: React.FC = () => {
           <Features />
         </div>
 
-        <div className="parallax-element mb-0 py-16 relative z-10">
+        <div className="parallax-element mb-0 pt-16 relative z-10">
           <Businesses />
         </div>
 
-        <div className="parallax-element mb-0 py-16 relative z-10">
-          <Community />
-        </div>
+        <Community />
 
 
       </main>

@@ -99,7 +99,7 @@ const FeatureLearnMore: React.FC = () => {
 
   if (!feature) {
     return (
-      <motion.div
+      <div
         className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4"
         initial="hidden"
         animate="visible"
@@ -108,7 +108,7 @@ const FeatureLearnMore: React.FC = () => {
         <h1 className="text-3xl font-bold text-theme-main mb-4">Feature Not Found</h1>
         <p className="text-gray-600 mb-6">Sorry, we couldn't find details for this feature.</p>
         <Link to="/#features" className="text-theme-main underline">Back to Home</Link>
-      </motion.div>
+      </div>
     );
   }
 
@@ -118,7 +118,7 @@ const FeatureLearnMore: React.FC = () => {
       <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-theme-main/10 rounded-full blur-3xl animate-float"></div>
       <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl animate-float-delayed"></div>
       <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-pink-200/30 rounded-full blur-2xl animate-pulse"></div>
-      <motion.div
+      <div
         className="max-w-2xl mx-auto w-full bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-10 relative z-10"
         initial="hidden"
         animate="visible"
@@ -142,7 +142,7 @@ const FeatureLearnMore: React.FC = () => {
         <div className="prose prose-lg text-gray-800 mx-auto transition-all duration-300 feature-details">
           <ReactMarkdown>{feature.details}</ReactMarkdown>
         </div>
-      </motion.div>
+      </div>
       <div className="relative border-l-2 border-dotted border-theme-main pl-12 space-y-20 ml-6 md:ml-10">
         <div className="relative">
           <span className="absolute -left-[42px] top-1 w-4 h-4 bg-theme-main border-4 border-white rounded-full"></span>

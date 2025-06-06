@@ -44,7 +44,7 @@ html {
 }
 
 body {
-  @apply font-sans text-gray-800 antialiased bg-white;
+  @apply  text-gray-800 antialiased bg-white;
   line-height: 150%; /* Set line height to 150% for better spacing */
 }
 

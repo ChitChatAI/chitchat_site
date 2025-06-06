@@ -137,7 +137,7 @@ const Values: React.FC = () => {
             {/* Hero Section */}
             <section
                 id="climbers"
-                className="relative bg-cover bg-center font-sans"
+                className="relative bg-cover bg-center "
                 style={{
                     backgroundImage: "url('/valuesPage/valuesBg.png')",
                     backgroundAttachment: "fixed",

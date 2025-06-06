@@ -1,23 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
+  // Scroll state
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerWidth > 768) {
-        setIsScrolled(window.scrollY > 100);
-      } else {
-        setIsScrolled(window.scrollY > 0);
-      }
+      if (!isMenuOpen) setIsScrolled(window.scrollY > 100);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMenuOpen]);
+
+  // Lock scroll
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
+  // Click outside to close
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMenuOpen]);
 
   const navLinks = [
     { path: '/', label: 'About us' },
@@ -28,83 +48,43 @@ const NavBar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 px-0 transition-all duration-300 ${
-        isScrolled ? 'bg-white border-b border-gray-200 shadow-lg' : 'bg-transparent'
+      className={`fixed top-0 left-0 w-full z-[10000] transition-all duration-300 ${
+        isScrolled && !isMenuOpen ? 'backdrop-blur-md bg-white/70 dark:bg-black/50 shadow-md' : ''
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-3">
-          {/* Brand Logo */}
+          {/* Logo */}
           <NavLink to="/" className="flex items-center space-x-2 group">
-            <div
-              className={`flex items-center justify-center px-4 py-2 rounded-full transition-all duration-300 ease-out ${
-                isScrolled ? 'bg-white' : 'bg-transparent'
-              }`}
-            >
+            <div className="flex items-center justify-center px-4 py-2">
               <img
-                src={isScrolled ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
+                src={isScrolled && !isMenuOpen ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
                 alt="ChitChat AI Logo"
-                className={`object-contain drop-shadow-md transition-all duration-300 ease-out ${
-                  isScrolled
-                    ? 'w-8 h-8 sm:w-10 sm:h-10'
-                    : 'w-7 h-7 sm:w-9 sm:h-9 rounded-full'
-                }`}
+                className={`object-contain transition-all duration-300 ${
+                  isScrolled && !isMenuOpen ? 'w-8 h-8' : 'w-7 h-7'
+                } rounded-full`}
               />
               <span
-                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide transition-all duration-300 ease-out ${
-                  isScrolled
-                    ? 'text-xl sm:text-2xl text-gray-900 group-hover:text-theme-main'
-                    : 'text-lg sm:text-xl text-white group-hover:text-theme-light'
+                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide ${
+                  isScrolled && !isMenuOpen ? 'text-xl text-gray-900' : 'text-lg text-white'
                 }`}
               >
-                <span
-                  className="relative z-10 font-satoshi"
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)',
-                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)',
-                  }}
-                >
-                  Chit
-                </span>
-                <span
-                  className="text-theme-main relative z-10 transition-colors duration-300 font-satoshi"
-                  style={{
-                    clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
-                    WebkitClipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
-                    textShadow: '0px 4px 12px rgba(80,36,255,0.15)',
-                  }}
-                >
-                  Chat
-                </span>
-                <span
-                  className={`text-gray-700 font-satoshi font-extrabold relative z-10 transition-all duration-300 ease-out ${
-                    isScrolled ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
-                  }`}
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
-                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
-                    textShadow: '0px 4px 12px rgba(0,0,0,0.1)',
-                  }}
-                >
-                  AI
-                </span>
+                <span className="font-satoshi">Chit</span>
+                <span className="text-theme-main font-satoshi">Chat</span>
+                <span className="text-gray-700 font-satoshi font-extrabold">AI</span>
               </span>
             </div>
           </NavLink>
 
-          {/* Hamburger Toggle */}
+          {/* Hamburger */}
           <button
-            className={`p-2 rounded-full transition-all duration-300 ease-out ${
-              isScrolled ? 'text-theme-main hover:bg-theme-main/10' : 'text-white hover:bg-white/10'
-            }`}
+            className="p-2 rounded-full text-white hover:bg-white/10 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={`transition-all duration-300 ease-out ${
-                isScrolled ? 'h-6 w-6' : 'h-5 w-5'
-              }`}
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -120,54 +100,47 @@ const NavBar: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Slide Menu */}
+      {/* Modal & Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            className="fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-lg p-6 overflow-y-auto"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.3 }}
-          >
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-              aria-label="Close menu"
+          <>
+            {/* Dimmed Background */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/40 backdrop-blur-md z-[9998]"
+            />
+
+            {/* Fullscreen Modal */}
+            <motion.div
+              ref={modalRef}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-20 left-1/2 transform -translate-x-1/2 w-[90%] sm:w-2/3 md:w-1/2 z-[9999] rounded-2xl bg-white/20 dark:bg-black/30 backdrop-blur-xl shadow-2xl border border-white/30"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <ul className="flex flex-col space-y-6 mt-14">
-              {navLinks.map(({ path, label }) => (
-                <li key={path}>
-                  <NavLink
-                    to={path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `block text-lg font-medium text-gray-700 hover:text-theme-main ${
-                        isActive ? 'text-theme-main' : ''
-                      }`
-                    }
-                  >
-                    {label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+              <ul className="flex flex-col px-6 py-8 space-y-6">
+                {navLinks.map(({ path, label }) => (
+                  <li key={path}>
+                    <NavLink
+                      to={path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={({ isActive }) =>
+                        `block text-lg font-semibold text-gray-900 dark:text-white transition duration-200 ${
+                          isActive ? 'text-theme-main' : 'hover:text-theme-main'
+                        }`
+                      }
+                    >
+                      {label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

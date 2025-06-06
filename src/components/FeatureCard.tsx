@@ -10,7 +10,7 @@ interface FeatureCardProps {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon }) => {
   return (
-    <motion.div
+    <div
       className="scroll-review rounded-xl p-6 border border-gray-300 opacity-0 transform translate-y-10 hover:bg-gray-100 transition-all duration-300 flex flex-col justify-between h-full min-h-[340px]"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon }) =
         Learn More
         <IoArrowForward className="text-lg" />
       </a>
-    </motion.div>
+    </div>
   );
 };
 

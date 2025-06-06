@@ -44,7 +44,7 @@ const WhyAIPersonas: React.FC = () => {
       <NavBar />
 
       {/* Scroll Progress Bar */}
-      <motion.div
+      <div
         className="fixed left-0 right-0 h-1 bg-gradient-to-r from-theme-main via-purple-500 to-theme-light z-40"
         style={{
           top: "var(--navbar-height, 0px)",
@@ -62,7 +62,7 @@ const WhyAIPersonas: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <motion.div
+        <div
           className="relative z-10 bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 shadow-lg max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,8 +78,8 @@ const WhyAIPersonas: React.FC = () => {
               Why Every Business Needs an AI Persona — Now More Than Ever
             </motion.h1>
           </div>
-        </motion.div>
-        <motion.div
+        </div>
+        <div
           className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

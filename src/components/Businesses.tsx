@@ -76,8 +76,19 @@ const Businesses: React.FC = () => {
       title: 'Human Testing & QA',
       description: 'Rigorous quality assurance by our psychology specialists.',
       icon: 'bug_report'
+    },
+    {
+      title: 'End-to-End Setup & Training',
+      description: 'We configure, train, and refine each persona for your environment — no heavy lifting needed.',
+      icon: 'construction',
+    },
+    {
+      title: 'Advanced Reporting & Insights',
+      description: 'Access real-time analytics on conversations, sentiment, and engagement trends.',
+      icon: 'analytics',
     }
   ];
+
 
   const businessValues = [
     {
@@ -110,41 +121,21 @@ const Businesses: React.FC = () => {
       icon: 'sentiment_satisfied',
       metric: '95% positive feedback from users',
     },
+    {
+      title: 'Unlock 24/7 Availability',
+      description: 'Offer round-the-clock support without burnout, delays, or staffing overhead.',
+      icon: 'schedule_send',
+      metric: '100% uptime across all channels',
+    },
   ];
 
-  const useCases = [
-    {
-      title: 'Instant Support That Feels Personal',
-      description:
-        'No more long wait times or robotic replies. Our AI personas handle customer queries immediately, 24/7, while sounding human, warm, and helpful.',
-    },
-    {
-      title: 'Customer Retention, Reinvented',
-      description:
-        'Catch cancellations before they happen. Our AI personas are trained in subtle psychological techniques to calm, connect, and convince.',
-    },
-    {
-      title: 'Humanised Automation for Every Department',
-      description:
-        'From tech support to billing, we tailor the tone. Each persona is custom-built to match your brand and department needs.',
-    },
-    {
-      title: 'Never Sound Generic Again',
-      description:
-        'Say goodbye to copy-paste chatbot templates. ChitChat personas are deeply humanised, each with unique quirks, tone, and emotional intelligence.',
-    },
-    {
-      title: 'Custom Chatbots for Any Industry',
-      description:
-        'Whether you\'re in telecoms, healthcare, finance, or e-commerce - we design personas that fit right in with deep context training and real conversational nuance.',
-    },
-  ];
+
 
   return (
-    <div className="font-sans relative">
+    <div className="relative">
       <div className="relative z-10">
         {/* Business Values Section */}
-        <section id="value" className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
+        <section id="value" className="relative bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
           {/* Video Background for Business Values Section */}
           <video
             autoPlay
@@ -157,7 +148,7 @@ const Businesses: React.FC = () => {
           </video>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10"></div>
 
-          <motion.div
+          <div
             className="relative z-20 max-w-7xl mx-auto"
             initial="hidden"
             whileInView="visible"
@@ -176,93 +167,94 @@ const Businesses: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
               {businessValues.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
                   className="bg-white/10 backdrop-blur-md rounded-lg p-8 hover:bg-white/15 transition-all duration-300"
-                  style={{ clipPath: 'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)' }}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
-                  variants={fadeInVariants}
+                  style={{
+                    clipPath:
+                      'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
+                  }}
                 >
-                  <motion.span
-                    className="material-symbols-outlined text-white text-5xl mb-4"
-                    variants={rotateInVariants}
-                  >
+                  {/* Icon with glassy feel */}
+                  <span className="material-symbols-outlined text-white/90 drop-shadow-sm text-5xl mb-4">
                     {item.icon}
-                  </motion.span>
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  </span>
+
+                  {/* Title */}
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white/90 tracking-tight mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-blue-300 font-bold uppercase tracking-wider mb-3">{item.metric}</p>
-                  <p className="text-gray-300">{item.description}</p>
-                </motion.div>
+
+                  {/* Metric (meta-style) */}
+                  <p className="text-xs sm:text-sm font-semibold text-theme-main/80 uppercase tracking-tight mb-2">
+                    {item.metric}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed tracking-wide">
+                    {item.description}
+                  </p>
+                </div>
               ))}
             </div>
-          </motion.div>
+
+          </div>
         </section>
 
-        {/* What's Included Section */}
-        <section id="whats-included" className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
-          <motion.div
-            className="relative z-10 max-w-6xl mx-auto"
+        <section
+          id="whats-included"
+          className="relative py-20 md:py-32 bg-black text-white overflow-hidden sm:px-8 lg:px-20"
+        >
+          <div
+            className="relative z-10 max-w-7xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
           >
-            <h2
-              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
-
-            >
-              What's Included in Every ChitChat Package
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
+              What’s Included in Every ChitChat Package
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
               {includedFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white/10  hover:border-theme-main/30 rounded-2xl shadow-xl hover:shadow-2xl p-8 flex gap-6 items-start transition-all duration-300"
+                  className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
+                     border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
+                     transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
                 >
-                  <div className="aspect-square flex items-center justify-center text-white text-3xl shadow-inner">
-                    <span className="material-symbols-outlined text-white">{item.icon}</span>
+                  {/* Icon */}
+                  <div className="w-16 h-16 flex items-center justify-center rounded-2xl 
+                        bg-white/10 backdrop-blur-lg border border-white/20 
+                        text-white/90 shadow-inner shadow-white/10">
+                    <span
+                      className="material-symbols-outlined text-4xl"
+                      style={{ fontVariationSettings: '"wght" 700' }}
+                    >
+                      {item.icon}
+                    </span>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-300">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
 
-        {/* Use Cases Section */}
-        <section id="use-cases" className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
-          <div className="relative z-10 max-w-6xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
-              How Businesses Use ChitChat
-            </h2>
-
-            <div className="space-y-8">
-              {useCases.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white/10 rounded-lg p-8 transition-all duration-200"
-                >
-                  <h3 className="text-2xl font-bold text-white mb-3">
+                  {/* Title */}
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-satoshi">
                     {item.title}
                   </h3>
-                  <p className="text-gray-300 text-lg">{item.description}</p>
+
+                  {/* Accent Line */}
+                  <div className="h-1 w-10 bg-theme-main rounded-full"></div>
+
+                  {/* Description */}
+                  <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed tracking-wide">
+                    {item.description}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+
       </div>
     </div>
   );

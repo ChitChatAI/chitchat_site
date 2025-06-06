@@ -119,7 +119,7 @@ const DevelopmentWorkflow: React.FC = () => {
 
       {/* Hero Section */}
       <section
-        className="relative min-h-screen py-20 md:py-32 bg-gradient-to-br from-black via-gray-900 to-[#1a1a2e] text-white font-sans overflow-hidden px-4 sm:px-8 flex items-center justify-center"
+        className="relative min-h-screen py-20 md:py-32 bg-gradient-to-br from-black via-gray-900 to-[#1a1a2e] text-white  overflow-hidden px-4 sm:px-8 flex items-center justify-center"
       >
         <div className="absolute inset-0 w-full h-full">
           <video
@@ -156,7 +156,7 @@ const DevelopmentWorkflow: React.FC = () => {
             Tools We Work With
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
-            { [
+            {[
               { name: 'Chatbot', icon: 'chatbot.svg' },
               { name: 'Claude', icon: 'claude.svg' },
               { name: 'HTML5', icon: 'html5.svg' },
@@ -166,7 +166,7 @@ const DevelopmentWorkflow: React.FC = () => {
               { name: 'OpenAI', icon: 'openai.svg' },
               { name: 'Python', icon: 'python.svg' },
             ].map((tool, index) => (
-              <motion.div
+              <div
                 key={index}
                 className="flex flex-col items-center"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -184,7 +184,7 @@ const DevelopmentWorkflow: React.FC = () => {
                 <p className="text-lg font-semibold bg-white bg-clip-text text-transparent capitalize">
                   {tool.name}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -195,12 +195,13 @@ const DevelopmentWorkflow: React.FC = () => {
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-extrabold text-white mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
-              Process Workflow
+              Our Development Workflow
             </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              A step-by-step guide to how we bring your AI persona to life, ensuring precision, professionalism, and innovation at every phase.
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              From discovery to deployment, here’s how we craft AI personas that don’t just function — they resonate. Every step is driven by clarity, innovation, and intent.
             </p>
           </div>
+
           <div className="space-y-16">
             {workflowSteps.map((step, index) => (
               <div
@@ -210,16 +211,20 @@ const DevelopmentWorkflow: React.FC = () => {
                 <div className="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-r from-purple-400 to-theme-main rounded-full flex items-center justify-center shadow-md">
                   <span className="text-white font-bold text-lg">{index + 1}</span>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-4">
+
+                <h3 className="text-3xl font-bold text-white mb-4 tracking-tight leading-snug">
                   {step.name}
                 </h3>
-                <p className="text-gray-300 mb-4 leading-relaxed">
+
+                <p className="text-gray-300 mb-4 text-base leading-relaxed">
                   {step.description}
                 </p>
-                <p className="text-gray-400 mb-6 leading-relaxed">
+
+                <p className="text-gray-400 mb-6 text-sm leading-loose">
                   {step.story}
                 </p>
-                <ul className="list-disc list-inside text-gray-400 space-y-2">
+
+                <ul className="list-disc list-inside text-gray-400 space-y-2 text-sm">
                   {step.features.map((feature, i) => (
                     <li key={i}>{feature}</li>
                   ))}
@@ -238,13 +243,13 @@ const DevelopmentWorkflow: React.FC = () => {
               Common Questions
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Have more questions? <Link to="/contact" className="text-purple-400 font-medium hover:underline">Contact our team</Link> for detailed answers.
+              Have more questions? <Link to="/contactus" className="text-purple-400 font-medium hover:underline">Contact our team</Link> for detailed answers.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {faqs.map((faq, idx) => (
-              <motion.div
+              <div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -258,7 +263,7 @@ const DevelopmentWorkflow: React.FC = () => {
                   <h4 className="text-lg font-semibold text-white">
                     {faq.question}
                   </h4>
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-colors duration-300 ${openFAQ === idx ? 'bg-purple-400 border-purple-400' : 'border-gray-600'}`}>                    
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-colors duration-300 ${openFAQ === idx ? 'bg-purple-400 border-purple-400' : 'border-gray-600'}`}>
                     <span className={`material-symbols-outlined text-sm ${openFAQ === idx ? 'text-white' : 'text-gray-400'}`}>
                       {openFAQ === idx ? 'remove' : 'add'}
                     </span>
@@ -271,7 +276,7 @@ const DevelopmentWorkflow: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

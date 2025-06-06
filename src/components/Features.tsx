@@ -25,6 +25,33 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
+  const useCases = [
+    {
+      title: 'Instant Support That Feels Personal',
+      description:
+        'No more long wait times or robotic replies. Our AI personas handle customer queries immediately, 24/7, while sounding human, warm, and helpful.',
+    },
+    {
+      title: 'Customer Retention, Reinvented',
+      description:
+        'Catch cancellations before they happen. Our AI personas are trained in subtle psychological techniques to calm, connect, and convince.',
+    },
+    {
+      title: 'Humanised Automation for Every Department',
+      description:
+        'From tech support to billing, we tailor the tone. Each persona is custom-built to match your brand and department needs.',
+    },
+    {
+      title: 'Never Sound Generic Again',
+      description:
+        'Say goodbye to copy-paste chatbot templates. ChitChat personas are deeply humanised, each with unique quirks, tone, and emotional intelligence.',
+    },
+    {
+      title: 'Custom Chatbots for Any Industry',
+      description:
+        'Whether you\'re in telecoms, healthcare, finance, or e-commerce - we design personas that fit right in with deep context training and real conversational nuance.',
+    },
+  ];
   const features = [
     {
       title: "Ongoing Optimisation",
@@ -59,27 +86,21 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
   ];
 
   return (
-    <section
-      id={id}
-      className="relative pb-16 md:py-0 bg-black text-white font-sans overflow-hidden px-4 sm:px-8"
-    >
-      <div className="container mx-auto px-6 sm:px-12">
-        <div className="max-w-4xl mx-auto mb-12 text-center">
-          <motion.h2
-            className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-            }}
-          >
-            What Sets Us Apart
-          </motion.h2>
+    <> {/* Use Cases Section */}
+      <section
+        id="use-cases"
+        className="relative py-20 md:py-32 bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20"
+      >
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Section Title */}
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white leading-tight tracking-tight mb-8">
+            How Businesses Use ChitChat AI
+          </h2>
+
+          {/* Subtitle */}
           <motion.p
-            className="text-xl sm:text-2xl text-gray-200 mb-12 font-medium"
-            style={{ lineHeight: '1.5' }}
+            className="text-lg sm:text-xl text-gray-300 mb-16 font-medium text-center max-w-3xl mx-auto"
+            style={{ lineHeight: '1.6' }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -87,29 +108,125 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
           >
             Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalized, human-like customer interactions at scale.
           </motion.p>
-        </div>
-        <div className="space-y-10 max-w-5xl mx-auto">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="relative flex flex-col md:flex-row items-center md:items-start gap-6 bg-white/10 rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300"
-            >
-              <div className="aspect-square flex items-center justify-center text-white text-3xl">
-                <span className="material-symbols-outlined">{feature.icon}</span>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10">
+            {useCases.slice(0, 4).map((item, index) => (
+              <div className="relative group" key={index}>
+                {/* Holder Base */}
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[90%] h-4 
+                          bg-gradient-to-r from-purple-700/30 via-theme-main/50 to-purple-700/30 
+                          blur-md rounded-full z-0 opacity-50 transition-all duration-300 
+                          group-hover:opacity-80 group-hover:blur-lg" />
+
+                {/* Card */}
+                <div
+                  className="relative z-10 bg-white/5 backdrop-blur-xl border border-white/10 
+                       rounded-2xl p-8 h-full shadow-[0_8px_24px_rgba(0,0,0,0.2)] 
+                       transition-all duration-300 hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)] 
+                       hover:bg-white/10"
+                >
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white/90 tracking-tight leading-snug font-satoshi">
+                    {item.title}
+                  </h3>
+                  <div className="h-1 w-10 bg-theme-main rounded-full my-4"></div>
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed tracking-wide">
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <div className="flex-grow">
-                <h3 className="text-xl font-semibold text-white leading-tight">
-                  {feature.title}
-                </h3>
-                <p className="text-base text-gray-300 mt-2" style={{ lineHeight: '1.6' }}>
-                  {feature.description}
-                </p>
+            ))}
+
+            {/* Centered Final Card */}
+            <div className="sm:col-span-2 flex justify-center">
+              <div className="relative group w-full sm:w-3/4">
+                {/* Holder Base */}
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[90%] h-4 
+                          bg-gradient-to-r from-purple-700/30 via-theme-main/50 to-purple-700/30 
+                          blur-md rounded-full z-0 opacity-50 transition-all duration-300 
+                          group-hover:opacity-80 group-hover:blur-lg" />
+
+                {/* Card */}
+                <div
+                  className="relative z-10 bg-white/5 backdrop-blur-xl border border-white/10 
+                       rounded-2xl p-8 h-full shadow-[0_8px_24px_rgba(0,0,0,0.2)] 
+                       transition-all duration-300 hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)] 
+                       hover:bg-white/10"
+                >
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white/90 tracking-tight leading-snug font-satoshi">
+                    {useCases[4].title}
+                  </h3>
+                  <div className="h-1 w-10 bg-theme-main rounded-full my-4"></div>
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed tracking-wide">
+                    {useCases[4].description}
+                  </p>
+                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+
+
+      <section
+        id={id}
+        className="relative pb-16 md:py-0 bg-black text-white overflow-hidden px-4 sm:px-8"
+      >
+        <div className="container mx-auto px-6 sm:px-12">
+          <div className="max-w-4xl mx-auto mb-12 text-center">
+            <motion.h2
+              className="text-4xl sm:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+              }}
+            >
+              What Sets Us Apart
+            </motion.h2>
+
+          </div>
+          <div className="space-y-10 max-w-5xl mx-auto">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="relative flex flex-col md:flex-row items-center md:items-start gap-6 
+             bg-white/70 dark:bg-black/50 backdrop-blur-md rounded-2xl p-6 
+             shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
+             transition-all duration-300 "
+              >
+                <div className="w-14 h-14 flex items-center justify-center rounded-xl 
+                bg-white/10 backdrop-blur-md border border-white/20 
+                text-white/80 shadow-inner shadow-white/5">
+                  <span
+                    className="material-symbols-outlined text-3xl"
+                    style={{ fontVariationSettings: '"wght" 700' }}  // Bolder weight
+                  >
+                    {feature.icon}
+                  </span>
+                </div>
+
+
+
+                <div className="flex-grow">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white/90 tracking-tight leading-snug font-satoshi">
+                    {feature.title}
+                  </h3>
+                  <div className="h-1 w-10 bg-theme-main rounded-full mb-4"></div>
+                  <p className="text-md sm:text-lg text-gray-300 mt-3 font-light leading-relaxed tracking-wide">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+
   );
 };
 

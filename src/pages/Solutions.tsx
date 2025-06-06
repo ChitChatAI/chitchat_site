@@ -166,61 +166,43 @@ const Solutions: React.FC = () => {
           </div>
         </section>
 
-        {/* CARDS SECTION */}
         <section className="relative z-10 py-16 bg-black px-4 sm:px-6 md:px-8">
           <div className="container mx-auto">
             <div className="mb-12 text-center">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-                Explore Our Solutions
+                Explore Our AI-Powered Solutions
               </h2>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
-                Discover how our AI solutions can transform your business across various industries.
+                Unlock the power of emotionally intelligent AI — built to elevate customer experiences across industries.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
               {/* Card 1: Telecommunications */}
-              <div
-                className="relative bg-white/10  p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
-              >
+              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
-                  <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 "
-                  >
-                    <Lottie
-                      animationData={customerService}
-                      loop
-                      autoplay
-                      style={{ height: '40px', width: '40px' }}
-                    />
+                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
+                    <Lottie animationData={customerService} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3
-                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
-                  >
+                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
                     <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
                       Telecommunications
                     </span>
                   </h3>
                 </div>
-
-                <p
-                  className="text-gray-200 font-sans mb-4 text-lg"
-                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-                >
-                  Handle network support, router setup, billing queries, and cancellations — all through emotionally aware AI that actually listens.
+                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Automate SIM support, router setups, billing issues, and service queries through human-like AI that understands tone, context, and frustration — and responds like a pro.
                 </p>
-
                 <ul className="space-y-3 mb-6">
-                  {["24/7 emotionally responsive support", "Seamless handoff to human agents", "Context-aware conversation history"].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center"
-                    >
+                  {[
+                    "24/7 intelligent, tone-aware support",
+                    "Seamless escalation to live agents",
+                    "Remembers user context across chats"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center">
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">
-                          check_circle
-                        </span>
+                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
                       <span className="text-gray-200">{item}</span>
                     </li>
@@ -229,47 +211,30 @@ const Solutions: React.FC = () => {
               </div>
 
               {/* Card 2: E-Commerce */}
-              <div
-                className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
-              >
+              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
-                  <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 "
-                  >
-                    <Lottie
-                      animationData={sales}
-                      loop
-                      autoplay
-                      style={{ height: '40px', width: '40px' }}
-                    />
+                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
+                    <Lottie animationData={sales} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3
-                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
-                  >
+                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
                     <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
                       E-Commerce
                     </span>
                   </h3>
                 </div>
-
-                <p
-                  className="text-gray-200 font-sans mb-4 text-lg"
-                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-                >
-                  Convert more browsers into buyers with AI that feels like a helpful, friendly shopping assistant — available 24/7.
+                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Transform casual shoppers into loyal customers with AI that acts like a digital salesperson — always on, always ready to recommend, and always brand-aligned.
                 </p>
-
                 <ul className="space-y-3 mb-6">
-                  {["Qualified lead generation", "Personalized product recommendations", "Consistent brand voice and messaging"].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center"
-                    >
+                  {[
+                    "Smart lead capture & qualification",
+                    "Hyper-personalized product suggestions",
+                    "Consistent brand voice at every touchpoint"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center">
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">
-                          check_circle
-                        </span>
+                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
                       <span className="text-gray-200">{item}</span>
                     </li>
@@ -278,47 +243,30 @@ const Solutions: React.FC = () => {
               </div>
 
               {/* Card 3: Healthcare */}
-              <div
-                className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
-              >
+              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
-                  <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5"
-                  >
-                    <Lottie
-                      animationData={healthcare}
-                      loop
-                      autoplay
-                      style={{ height: '40px', width: '40px' }}
-                    />
+                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
+                    <Lottie animationData={healthcare} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3
-                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
-                  >
+                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
                     <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
                       Healthcare
                     </span>
                   </h3>
                 </div>
-
-                <p
-                  className="text-gray-200 font-sans mb-4 text-lg"
-                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-                >
-                  Support appointment booking, patient onboarding, medical FAQs, and follow-ups with a calm, patient persona that builds trust.
+                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Deliver compassionate, responsive healthcare support through AI that feels human — ideal for appointment handling, medical questions, onboarding, and patient follow-up.
                 </p>
-
                 <ul className="space-y-3 mb-6">
-                  {["Empathetic health guidance", "Medication and appointment reminders", "Wellness check-ins and monitoring"].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center"
-                    >
+                  {[
+                    "Patient-first conversational tone",
+                    "Timely reminders for meds & visits",
+                    "Gentle daily check-ins and wellness tracking"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center">
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">
-                          check_circle
-                        </span>
+                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
                       <span className="text-gray-200">{item}</span>
                     </li>
@@ -327,47 +275,30 @@ const Solutions: React.FC = () => {
               </div>
 
               {/* Card 4: Education & Online Learning */}
-              <div
-                className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 group w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}
-              >
+              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
-                  <div
-                    className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5 "
-                  >
-                    <Lottie
-                      animationData={education}
-                      loop
-                      autoplay
-                      style={{ height: '40px', width: '40px' }}
-                    />
+                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
+                    <Lottie animationData={education} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3
-                    className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
-                  >
+                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
                     <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
                       Education & Online Learning
                     </span>
                   </h3>
                 </div>
-
-                <p
-                  className="text-gray-200 font-sans mb-4 text-lg"
-                  style={{ lineHeight: '1.5', maxWidth: '100ch' }}
-                >
-                  Provide tutoring, course navigation, enrollment support, and mental health check-ins — all with personalities that adapt to age and tone.
+                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                  Empower students of all ages with 24/7 AI mentors that provide tutoring, course guidance, and emotional support — customized by learner profile and tone.
                 </p>
-
                 <ul className="space-y-3 mb-6">
-                  {["Adaptive learning pathways", "Personalized feedback and assessment", "24/7 learning support"].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center"
-                    >
+                  {[
+                    "Adapts teaching style per learner",
+                    "Real-time feedback and encouragement",
+                    "Always-on support for students & parents"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center">
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">
-                          check_circle
-                        </span>
+                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
                       <span className="text-gray-200">{item}</span>
                     </li>
@@ -377,19 +308,17 @@ const Solutions: React.FC = () => {
             </div>
 
             {/* Industry-wide callout */}
-            <div
-              className="mt-16 bg-white/5 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300"
-            >
+            <div className="mt-16 bg-white/5 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300">
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                Not seeing your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We serve them all.</span>
+                Don’t see your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We cover it too.</span>
               </h3>
               <p className="text-lg text-gray-300 mb-6">
-                Our adaptable AI solutions can be tailored for any business vertical, delivering personalized customer experiences that feel genuinely human — regardless of your industry's unique challenges.
+                From finance to hospitality, our adaptable AI personas are fine-tuned for your exact customer needs — bringing empathy, context-awareness, and scalability to any sector.
               </p>
-
             </div>
           </div>
         </section>
+
 
         {/* INDUSTRIES SECTION */}
         <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-6 md:px-8">
@@ -408,21 +337,28 @@ const Solutions: React.FC = () => {
               </p>
             </div>
 
-            <div className="relative pl-6 sm:pl-12 space-y-20">
+            <div className="relative pl-6 sm:pl-12 space-y-20 ">
               {additionalSolutions.map((item, index) => (
                 <div
                   key={index}
-                  className="relative"
+                  className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
+                     border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
+                     transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
+
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
-                  <div className="flex flex-col gap-6 bg-white/5 p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                    <h4 className="text-2xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-                      {item.title}
-                    </h4>
-                    <p className="text-base text-gray-200 leading-relaxed">
-                      {item.text}
-                    </p>
-                  </div>
+                  {/* Title */}
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-satoshi">
+                    {item.title}
+                  </h3>
+
+                  {/* Accent Line */}
+                  <div className="h-1 w-10 bg-theme-main rounded-full"></div>
+
+                  {/* Description */}
+                  <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed tracking-wide">
+                    {item.text}
+                  </p>
                 </div>
               ))}
             </div>
@@ -439,17 +375,24 @@ const Solutions: React.FC = () => {
               {useCases.map((useCase, index) => (
                 <div
                   key={index}
-                  className="relative"
-                >
+                  className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
+                     border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
+                     transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]">
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-white rounded-full"></span>
-                  <div className="flex flex-col gap-6 bg-white/5 p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                    <h4 className="text-3xl font-bold bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-                      {useCase.title}
-                    </h4>
-                    <p className="text-base text-gray-200 leading-relaxed">
-                      {useCase.description}
-                    </p>
-                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-satoshi">
+                    {useCase.title}
+                  </h3>
+
+                  {/* Accent Line */}
+                  <div className="h-1 w-10 bg-theme-main rounded-full"></div>
+
+                  {/* Description */}
+                  <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed tracking-wide">
+                    {useCase.description}
+                  </p>
+
                 </div>
               ))}
             </div>

@@ -33,7 +33,7 @@ const Header: React.FC = () => {
             <NavBar />
 
             {/* Header Section */}
-            <header className="section_header relative overflow-hidden min-h-screen flex items-center justify-center font-sans">
+            <header className="section_header relative overflow-hidden min-h-screen flex items-center justify-center ">
                 <div className="padding-global w-full">
                     <div className="container-large mx-auto px-20 py-28 text-left relative z-10">
                         <div className="header_content flex flex-col items-center sm:items-start justify-center w-full text-center sm:text-left animate-fade-in">
@@ -43,7 +43,7 @@ const Header: React.FC = () => {
                                     <span className="block mb-4 animate-header-slide-in delay-150">So Real, You'll Forget It's Not.</span>
                                     <span className="hero-gradient-text block text-[clamp(1.25rem,4vw,2.25rem)] mt-6 drop-shadow-lg animate-header-gradient-in delay-300">Human Augmented AI by ChitChat</span>
                                 </h1>
-                                <p className="text-white/80 font-sans text-base sm:text-lg mt-4 max-w-3xl drop-shadow-sm leading-[150%]">
+                                <p className="text-white/80  text-base sm:text-lg mt-4 max-w-3xl drop-shadow-sm leading-[150%]">
                                     Custom-built AI personas that think, feel, and respond like real people – tailored for your business.
                                 </p>
                                 <div className="join-us_buttons-wrapper flex flex-col sm:flex-row justify-center sm:justify-start items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full mt-10 animate-fade-in delay-500">
