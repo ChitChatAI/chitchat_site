@@ -985,49 +985,64 @@ section.relative.overflow-hidden {
   animation: pulseGlow 1.5s infinite ease-in-out;
 }
 
-/* Mobile Enhancements */
 @media (max-width: 640px) {
-  .container {
-    padding-left: 2px; /* Adjusted padding for mobile devices */
-    padding-right: 2px;
+  html {
+    font-size: 18px; /* Slightly increase base size for mobile */
   }
 
-  section {
-    padding: 3rem 0; /* Reduced padding for better spacing */
-  }
-
-  h1, h2, h3 {
-    margin-bottom: 1rem; /* Increased spacing below headings */
-  }
-
-  p {
-    font-size: 1.125rem; /* Slightly larger font size for readability */
-    line-height: 1.75; /* Improved line height */
-    margin-bottom: 1.5rem; /* Increased spacing below paragraphs */
-  }
-
-  button, .button {
-    padding: 0.875rem 1.75rem; /* Larger buttons for better touch interaction */
-    font-size: 1rem; /* Increased font size */
-    border-radius: 0.5rem; /* Softer button corners */
-  }
-
-  .hero-heading {
-    font-size: 2.25rem; /* Slightly larger font size */
+  h1 {
+    font-size: 2.75rem; /* ~44px */
     line-height: 1.3;
   }
 
-  .hero-description {
-    font-size: 1.125rem; /* Larger description text */
-    line-height: 1.6;
+  h2 {
+    font-size: 2.25rem; /* ~36px */
+    line-height: 1.35;
+  }
+
+  h3 {
+    font-size: 1.875rem; /* ~30px */
+    line-height: 1.4;
+  }
+
+  p, li, span, a {
+    font-size: 1.25rem; /* ~20px */
+    line-height: 1.75;
+  }
+
+  button, .button {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    border-radius: 0.625rem;
   }
 
   .card {
-    margin-bottom: 2rem; /* Increased spacing between cards */
+    padding: 1.75rem; /* ~28px */
+    margin-bottom: 2.5rem;
+    border-radius: 1rem;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  section {
+    padding: 3.5rem 0;
+  }
+
+  .hero-heading {
+    font-size: 2.5rem;
+    line-height: 1.35;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    line-height: 1.7;
   }
 
   .scroll-review {
-    margin-bottom: 2rem; /* Enhanced spacing for reviews */
+    margin-bottom: 2.5rem;
   }
 }
 

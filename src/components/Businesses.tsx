@@ -156,7 +156,7 @@ const Businesses: React.FC = () => {
             variants={staggerContainer}
           >
             <motion.h2
-              className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
+              className="text-5xl sm:text-6xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -175,32 +175,32 @@ const Businesses: React.FC = () => {
                       'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
                   }}
                 >
-                  {/* Icon with glassy feel */}
-                  <span className="material-symbols-outlined text-white/90 drop-shadow-sm text-5xl mb-4">
+                  {/* Icon */}
+                  <span className="material-symbols-outlined text-white/90 drop-shadow-sm text-6xl sm:text-5xl mb-4">
                     {item.icon}
                   </span>
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white/90 tracking-tight mb-2">
+                  <h3 className="text-2xl sm:text-3xl font-semibold text-white/90 tracking-tight mb-2">
                     {item.title}
                   </h3>
 
-                  {/* Metric (meta-style) */}
-                  <p className="text-xs sm:text-sm font-semibold text-theme-main/80 uppercase tracking-tight mb-2">
+                  {/* Metric */}
+                  <p className="text-sm sm:text-base font-semibold text-theme-main/80 uppercase tracking-tight mb-2">
                     {item.metric}
                   </p>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed tracking-wide">
+                  <p className="text-lg sm:text-xl text-gray-300 leading-relaxed tracking-wide">
                     {item.description}
                   </p>
                 </div>
               ))}
             </div>
-
           </div>
         </section>
 
+        {/* What's Included Section */}
         <section
           id="whats-included"
           className="relative py-20 md:py-32 bg-black text-white overflow-hidden sm:px-8 lg:px-20"
@@ -212,7 +212,7 @@ const Businesses: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
           >
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
+            <h2 className="text-5xl sm:text-6xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
               What’s Included in Every ChitChat Package
             </h2>
 
@@ -220,16 +220,13 @@ const Businesses: React.FC = () => {
               {includedFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
-                     border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
-                     transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
+                  className="relative flex flex-col gap-6 backdrop-blur-xl rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
+                transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
                 >
                   {/* Icon */}
-                  <div className="w-16 h-16 flex items-center justify-center rounded-2xl 
-                        bg-white/10 backdrop-blur-lg border border-white/20 
-                        text-white/90 shadow-inner shadow-white/10">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-2xl text-white/90 shadow-inner shadow-white/10">
                     <span
-                      className="material-symbols-outlined text-4xl"
+                      className="material-symbols-outlined text-6xl sm:text-5xl"
                       style={{ fontVariationSettings: '"wght" 700' }}
                     >
                       {item.icon}
@@ -237,7 +234,7 @@ const Businesses: React.FC = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-satoshi">
+                  <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight leading-snug font-satoshi">
                     {item.title}
                   </h3>
 
@@ -245,7 +242,7 @@ const Businesses: React.FC = () => {
                   <div className="h-1 w-10 bg-theme-main rounded-full"></div>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed tracking-wide">
+                  <p className="text-lg sm:text-xl text-gray-300 font-light leading-relaxed tracking-wide">
                     {item.description}
                   </p>
                 </div>
@@ -253,10 +250,9 @@ const Businesses: React.FC = () => {
             </div>
           </div>
         </section>
-
-
       </div>
     </div>
+
   );
 };
 

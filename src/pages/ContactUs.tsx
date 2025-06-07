@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
-const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
-const inputError = "block w-full px-4 py-3 text-sm text-white bg-red-50/20 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300";
+const inputBase = "block w-full px-4 py-3 text-lg sm:text-base text-white bg-gray-800 border rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
+const inputError = "block w-full px-4 py-3 text-lg sm:text-base text-white bg-red-50/20 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300";
 
 // Add toast interface
 interface ToastMessage {
@@ -371,7 +371,7 @@ Team Description: ${formData.teamDescription}
                   )}
                 </div>
                 <div className="ml-3 flex-1 min-w-0">
-                  <p className="text-sm sm:text-base font-medium text-white truncate">
+                  <p className="text-lg sm:text-base sm:text-2xl font-medium text-white truncate">
                     {toast.message}
                   </p>
                 </div>
@@ -414,7 +414,7 @@ Team Description: ${formData.teamDescription}
                 </svg>
               </div>
               <div className="ml-3">
-                <p className="text-sm text-gray-700">{alertMessage}</p>
+                <p className="text-lg sm:text-base text-gray-700">{alertMessage}</p>
               </div>
               <div className="ml-auto pl-3">
                 <button
@@ -468,7 +468,8 @@ Team Description: ${formData.teamDescription}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 animate-fade-in">
            ChitChat Ai
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 animate-fade-in">
+          <p className="text-xl sm:text-2xl
+md:text-xl lg:text-2xl mb-8 animate-fade-in">
 
             ...please fill out the form below to get in touch with us.
           </p>
@@ -501,11 +502,11 @@ Team Description: ${formData.teamDescription}
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                         </svg>
                       ) : (
-                        <span className="text-sm font-semibold">{step}</span>
+                        <span className="text-lg sm:text-base font-semibold">{step}</span>
                       )}
                     </div>
                     <span
-                      className={`text-sm font-satoshi font-medium transition-all duration-300 
+                      className={`text-lg sm:text-base font-satoshi font-medium transition-all duration-300 
                         ${currentStep >= step ? 'text-theme-main' : 'text-gray-400'}`}
                     >
                       {step === 1 ? 'Your Details' : step === 2 ? 'Company' : 'Additional Info'}
@@ -553,12 +554,12 @@ Team Description: ${formData.teamDescription}
                       />
                       <label
                         htmlFor="name"
-                        className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                        className={`absolute left-4 text-lg sm:text-base text-gray-400 transition-all duration-300
                             ${formData.name ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
                       >
                         First Name
                       </label>
-                      {errors.name && <p className="mt-2 text-sm text-red-400">{errors.name}</p>}
+                      {errors.name && <p className="mt-2 text-lg sm:text-base text-red-400">{errors.name}</p>}
                     </div>
                     <div className="relative group">
                       <input
@@ -572,12 +573,12 @@ Team Description: ${formData.teamDescription}
                       />
                       <label
                         htmlFor="surname"
-                        className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                        className={`absolute left-4 text-lg sm:text-base text-gray-400 transition-all duration-300
                             ${formData.surname ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
                       >
                         Surname
                       </label>
-                      {errors.surname && <p className="mt-2 text-sm text-red-400">{errors.surname}</p>}
+                      {errors.surname && <p className="mt-2 text-lg sm:text-base text-red-400">{errors.surname}</p>}
                     </div>
                   </div>
                   <div className="relative group">
@@ -592,12 +593,12 @@ Team Description: ${formData.teamDescription}
                     />
                     <label
                       htmlFor="email"
-                      className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                      className={`absolute left-4 text-lg sm:text-base text-gray-400 transition-all duration-300
                           ${formData.email ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
                     >
                       Email Address
                     </label>
-                    {errors.email && <p className="mt-2 text-sm text-red-400">{errors.email}</p>}
+                    {errors.email && <p className="mt-2 text-lg sm:text-base text-red-400">{errors.email}</p>}
                   </div>
                   <div className="relative group">
                     <input
@@ -610,7 +611,7 @@ Team Description: ${formData.teamDescription}
                     />
                     <label
                       htmlFor="subject"
-                      className={`absolute left-4 text-sm text-gray-400 transition-all duration-300
+                      className={`absolute left-4 text-lg sm:text-base text-gray-400 transition-all duration-300
                           ${formData.subject ? 'top-1 text-xs text-theme-main' : 'top-3'}`}
                     >
                       Subject (Optional)
@@ -655,7 +656,7 @@ Team Description: ${formData.teamDescription}
                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
                       </svg>
                     </div>
-                    {errors.companySize && <p className="mt-2 text-sm text-red-600">{errors.companySize}</p>}
+                    {errors.companySize && <p className="mt-2 text-lg sm:text-base text-red-600">{errors.companySize}</p>}
                   </div>
 
                   {/* Industry field */}
@@ -673,7 +674,7 @@ Team Description: ${formData.teamDescription}
                     <label htmlFor="industry" className="text-white">
                       Industry
                     </label>
-                    {errors.industry && <p className="mt-2 text-sm text-red-600">{errors.industry}</p>}
+                    {errors.industry && <p className="mt-2 text-lg sm:text-base text-red-600">{errors.industry}</p>}
                   </div>
 
                   {/* Goals selection */}
@@ -700,7 +701,7 @@ Team Description: ${formData.teamDescription}
                         <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
                       </svg>
                     </div>
-                    {errors.goals && <p className="mt-2 text-sm text-red-600">{errors.goals}</p>}
+                    {errors.goals && <p className="mt-2 text-lg sm:text-base text-red-600">{errors.goals}</p>}
                   </div>
                 </form>
               </div>
@@ -755,7 +756,7 @@ Team Description: ${formData.teamDescription}
                       required
                     />
                     <label htmlFor="message" className="text-white">Your Message</label>
-                    <p className="mt-2 text-sm text-gray-400">Tell us about your specific needs or questions</p>
+                    <p className="mt-2 text-lg sm:text-base text-gray-400">Tell us about your specific needs or questions</p>
                   </div>
                 </form>
               </div>

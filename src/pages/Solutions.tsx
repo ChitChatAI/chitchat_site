@@ -135,10 +135,8 @@ const Solutions: React.FC = () => {
             <div className="flex flex-col md:flex-row items-stretch justify-between gap-20 md:gap-40 scroll-review pt-24">
               <div className="flex-1 flex flex-col items-center justify-center text-center">
                 {showHero && (
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
-                    <span className="block text-white font-extrabold animate-gradient-x py-4 animate-hero-slide-in">
-                      Built for Every Business to Feel Human
-                    </span>
+                  <h1 className="text-5xl text-white md:text-7xl font-extrabold mb-6 animate-hero-fade-in">
+                    Built for Every Business to Feel Human
                   </h1>
                 )}
                 {!showHero && (
@@ -177,21 +175,22 @@ const Solutions: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto px-2 sm:px-0">
               {/* Card 1: Telecommunications */}
-              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={customerService} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
                       Telecommunications
                     </span>
                   </h3>
                 </div>
-                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                <p className="text-xl sm:text-2xl
+text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   Automate SIM support, router setups, billing issues, and service queries through human-like AI that understands tone, context, and frustration — and responds like a pro.
                 </p>
                 <ul className="space-y-3 mb-6">
@@ -204,26 +203,27 @@ const Solutions: React.FC = () => {
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
                         <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
-                      <span className="text-gray-200">{item}</span>
+                      <span className="text-lg sm:text-base text-gray-200">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Card 2: E-Commerce */}
-              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={sales} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
                       E-Commerce
                     </span>
                   </h3>
                 </div>
-                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                <p className="text-xl sm:text-2xl
+text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   Transform casual shoppers into loyal customers with AI that acts like a digital salesperson — always on, always ready to recommend, and always brand-aligned.
                 </p>
                 <ul className="space-y-3 mb-6">
@@ -236,26 +236,27 @@ const Solutions: React.FC = () => {
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
                         <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
-                      <span className="text-gray-200">{item}</span>
+                      <span className="text-sm sm:text-base text-gray-200">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Card 3: Healthcare */}
-              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={healthcare} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
                       Healthcare
                     </span>
                   </h3>
                 </div>
-                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                <p className="text-xl sm:text-2xl
+text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   Deliver compassionate, responsive healthcare support through AI that feels human — ideal for appointment handling, medical questions, onboarding, and patient follow-up.
                 </p>
                 <ul className="space-y-3 mb-6">
@@ -268,26 +269,27 @@ const Solutions: React.FC = () => {
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
                         <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
-                      <span className="text-gray-200">{item}</span>
+                      <span className="text-sm sm:text-base text-gray-200">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Card 4: Education & Online Learning */}
-              <div className="relative bg-white/10 p-6 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
+              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
                 style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={education} loop autoplay style={{ height: '40px', width: '40px' }} />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-xs px-3 py-1 rounded-full mb-2">
+                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
                       Education & Online Learning
                     </span>
                   </h3>
                 </div>
-                <p className="text-gray-200 mb-4 text-lg" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
+                <p className="text-xl sm:text-2xl
+text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   Empower students of all ages with 24/7 AI mentors that provide tutoring, course guidance, and emotional support — customized by learner profile and tone.
                 </p>
                 <ul className="space-y-3 mb-6">
@@ -300,16 +302,17 @@ const Solutions: React.FC = () => {
                       <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
                         <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
                       </div>
-                      <span className="text-gray-200">{item}</span>
+                      <span className="text-sm sm:text-base text-gray-200">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
 
+
             {/* Industry-wide callout */}
             <div className="mt-16 bg-white/5 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300">
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl sm:text-4xl font-bold text-white mb-4">
                 Don’t see your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We cover it too.</span>
               </h3>
               <p className="text-lg text-gray-300 mb-6">
@@ -320,35 +323,32 @@ const Solutions: React.FC = () => {
         </section>
 
 
-        {/* INDUSTRIES SECTION */}
         <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-6 md:px-8">
           <div className="container mx-auto">
-            <div
-              className="mb-20 text-center"
-            >
+            <div className="mb-20 text-center">
               <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
                 Versatile Solutions
               </span>
-              <h3 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+              <h3 className="text-5xl sm:text-6xl font-extrabold text-center text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
                 More Industries We Serve
               </h3>
-              <p className="text-xl sm:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto font-medium drop-shadow">
+              <p className="text-2xl sm:text-3xl text-gray-200 mb-12 max-w-2xl mx-auto font-medium drop-shadow">
                 Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
               </p>
             </div>
 
-            <div className="relative pl-6 sm:pl-12 space-y-20 ">
+            <div className="relative pl-4 sm:pl-12 space-y-20">
               {additionalSolutions.map((item, index) => (
                 <div
                   key={index}
                   className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
-                     border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
-                     transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
-
+            border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
+            transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
+
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-satoshi">
+                  <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight leading-snug font-satoshi">
                     {item.title}
                   </h3>
 
@@ -356,7 +356,7 @@ const Solutions: React.FC = () => {
                   <div className="h-1 w-10 bg-theme-main rounded-full"></div>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed tracking-wide">
+                  <p className="text-lg sm:text-xl text-gray-300 font-light leading-relaxed tracking-wide">
                     {item.text}
                   </p>
                 </div>
@@ -368,20 +368,22 @@ const Solutions: React.FC = () => {
         {/* USE CASES SECTION */}
         <section id="use-cases" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-6 md:px-8">
           <div className="container mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
+            <h2 className="text-5xl sm:text-6xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
               Use Cases
             </h2>
-            <div className="relative pl-6 sm:pl-12 space-y-20">
+
+            <div className="relative pl-4 sm:pl-12 space-y-20">
               {useCases.map((useCase, index) => (
                 <div
                   key={index}
                   className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
-                     border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
-                     transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]">
+            border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
+            transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
+                >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-white rounded-full"></span>
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-satoshi">
+                  <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight leading-snug font-satoshi">
                     {useCase.title}
                   </h3>
 
@@ -389,15 +391,15 @@ const Solutions: React.FC = () => {
                   <div className="h-1 w-10 bg-theme-main rounded-full"></div>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed tracking-wide">
+                  <p className="text-lg sm:text-xl text-gray-300 font-light leading-relaxed tracking-wide">
                     {useCase.description}
                   </p>
-
                 </div>
               ))}
             </div>
           </div>
         </section>
+
 
         <style>{`
         @keyframes float {
@@ -454,7 +456,7 @@ const Solutions: React.FC = () => {
         }
       `}</style>
       </main >
-      <CookieConsent position="left" modalPosition="bottom" />
+      <CookieConsent />
       <CallToAction />
       <Footer />
     </>

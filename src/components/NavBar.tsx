@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMenuOpen]);
 
-  // Lock scroll
+  // Lock scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => {
@@ -24,7 +24,7 @@ const NavBar: React.FC = () => {
     };
   }, [isMenuOpen]);
 
-  // Click outside to close
+  // Click outside to close menu
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -48,9 +48,8 @@ const NavBar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-[10000] transition-all duration-300 ${
-        isScrolled && !isMenuOpen ? 'backdrop-blur-md bg-white/70 dark:bg-black/50 shadow-md' : ''
-      }`}
+      className={`fixed top-0 left-0 w-full z-[10000] transition-all duration-300 ${isScrolled && !isMenuOpen ? 'backdrop-blur-md dark:bg-black/50 shadow-md' : ''
+        }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-3">
@@ -58,16 +57,18 @@ const NavBar: React.FC = () => {
           <NavLink to="/" className="flex items-center space-x-2 group">
             <div className="flex items-center justify-center px-4 py-2">
               <img
-                src={isScrolled && !isMenuOpen ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
+                src={
+                  isScrolled && !isMenuOpen
+                    ? '/branding/chitchatAI.png'
+                    : '/branding/chitchatAILite.png'
+                }
                 alt="ChitChat AI Logo"
-                className={`object-contain transition-all duration-300 ${
-                  isScrolled && !isMenuOpen ? 'w-8 h-8' : 'w-7 h-7'
-                } rounded-full`}
+                className={`object-contain transition-all duration-300 ${isScrolled && !isMenuOpen ? 'w-8 h-8' : 'w-7 h-7'
+                  } rounded-full`}
               />
               <span
-                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide ${
-                  isScrolled && !isMenuOpen ? 'text-xl text-gray-900' : 'text-lg text-white'
-                }`}
+                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide ${isScrolled && !isMenuOpen ? 'text-xl text-gray-900' : 'text-lg text-white'
+                  }`}
               >
                 <span className="font-satoshi">Chit</span>
                 <span className="text-theme-main font-satoshi">Chat</span>
@@ -76,7 +77,7 @@ const NavBar: React.FC = () => {
             </div>
           </NavLink>
 
-          {/* Hamburger */}
+          {/* Hamburger Button */}
           <button
             className="p-2 rounded-full text-white hover:bg-white/10 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -93,7 +94,11 @@ const NavBar: React.FC = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d={isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}
+                d={
+                  isMenuOpen
+                    ? 'M6 18L18 6M6 6l12 12'
+                    : 'M4 6h16M4 12h16m-7 6h7'
+                }
               />
             </svg>
           </button>
@@ -104,7 +109,7 @@ const NavBar: React.FC = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Dimmed Background */}
+            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -113,33 +118,37 @@ const NavBar: React.FC = () => {
               className="fixed inset-0 bg-black/40 backdrop-blur-md z-[9998]"
             />
 
-            {/* Fullscreen Modal */}
-            <motion.div
-              ref={modalRef}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="fixed top-20 left-1/2 transform -translate-x-1/2 w-[90%] sm:w-2/3 md:w-1/2 z-[9999] rounded-2xl bg-white/20 dark:bg-black/30 backdrop-blur-xl shadow-2xl border border-white/30"
-            >
-              <ul className="flex flex-col px-6 py-8 space-y-6">
-                {navLinks.map(({ path, label }) => (
-                  <li key={path}>
-                    <NavLink
-                      to={path}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={({ isActive }) =>
-                        `block text-lg font-semibold text-gray-900 dark:text-white transition duration-200 ${
-                          isActive ? 'text-theme-main' : 'hover:text-theme-main'
-                        }`
-                      }
-                    >
-                      {label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            {/* Menu Modal */}
+            <div className="fixed top-20 w-full flex justify-center z-[9999]">
+              <motion.div
+                ref={modalRef}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="w-[90vw] sm:w-2/3 md:w-1/2 max-w-md
+               rounded-2xl bg-white/20 dark:bg-black/30
+               backdrop-blur-xl shadow-2xl border border-white/30 px-4"
+              >
+
+                <ul className="flex flex-col px-6 py-8 space-y-6 max-sm:items-center max-sm:text-center">
+                  {navLinks.map(({ path, label }) => (
+                    <li key={path}>
+                      <NavLink
+                        to={path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={({ isActive }) =>
+                          `block text-lg font-semibold text-white transition duration-200 ${isActive ? 'text-theme-main' : 'hover:text-theme-main'
+                          }`
+                        }
+                      >
+                        {label}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>

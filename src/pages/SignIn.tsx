@@ -5,7 +5,7 @@ const SignIn: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4 sm:px-6">
       <div className="max-w-md w-full bg-white p-6 sm:p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6">
+        <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 text-center mb-6">
           Sign In to Your Account
         </h2>
         <form className="space-y-4">

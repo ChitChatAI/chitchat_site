@@ -216,13 +216,14 @@ const DevelopmentWorkflow: React.FC = () => {
                   {step.name}
                 </h3>
 
-                <p className="text-gray-300 mb-4 text-base leading-relaxed">
+                <p className="text-lg sm:text-xl text-gray-300 mb-4 leading-relaxed">
                   {step.description}
                 </p>
 
-                <p className="text-gray-400 mb-6 text-sm leading-loose">
+                <p className="text-lg sm:text-md text-gray-400 mb-6 leading-loose">
                   {step.story}
                 </p>
+
 
                 <ul className="list-disc list-inside text-gray-400 space-y-2 text-sm">
                   {step.features.map((feature, i) => (
@@ -271,7 +272,7 @@ const DevelopmentWorkflow: React.FC = () => {
                 </button>
                 <div className={`transition-all duration-300 ease-in-out overflow-hidden ${openFAQ === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                   <div className="px-5 py-4 border-t border-gray-700">
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-400 text-lg sm:text-base leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
