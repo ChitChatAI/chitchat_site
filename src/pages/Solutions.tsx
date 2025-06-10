@@ -177,8 +177,7 @@ const Solutions: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto px-2 sm:px-0">
               {/* Card 1: Telecommunications */}
-              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
+              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={customerService} loop autoplay style={{ height: '40px', width: '40px' }} />
@@ -210,8 +209,7 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
               </div>
 
               {/* Card 2: E-Commerce */}
-              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
+              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={sales} loop autoplay style={{ height: '40px', width: '40px' }} />
@@ -243,8 +241,7 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
               </div>
 
               {/* Card 3: Healthcare */}
-              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
+              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={healthcare} loop autoplay style={{ height: '40px', width: '40px' }} />
@@ -276,8 +273,7 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
               </div>
 
               {/* Card 4: Education & Online Learning */}
-              <div className="relative bg-white/10 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden"
-                style={{ clipPath: 'polygon(8% 0%, 92% 0%, 100% 12%, 100% 88%, 92% 100%, 8% 100%, 0% 88%, 0% 12%)' }}>
+              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
                 <div className="flex items-center mb-4 sm:mb-5">
                   <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
                     <Lottie animationData={education} loop autoplay style={{ height: '40px', width: '40px' }} />
@@ -341,9 +337,9 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
               {additionalSolutions.map((item, index) => (
                 <div
                   key={index}
-                  className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
-            border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
-            transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
+                  className="relative flex flex-col md:flex-row items-center md:items-start gap-6 dark:bg-black/50 backdrop-blur-md rounded-2xl p-6 
+             shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
+             transition-all duration-300"
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
 
@@ -353,7 +349,7 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   </h3>
 
                   {/* Accent Line */}
-                  <div className="h-1 w-10 bg-theme-main rounded-full"></div>
+                  <div className="h-1 w-10 bg-theme-main rounded-full lg:hidden"></div>
 
                   {/* Description */}
                   <p className="text-lg sm:text-xl text-gray-300 font-light leading-relaxed tracking-wide">
@@ -376,10 +372,9 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
               {useCases.map((useCase, index) => (
                 <div
                   key={index}
-                  className="relative flex flex-col gap-6 bg-white/5 backdrop-blur-xl 
-            border border-white/10 rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
-            transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
-                >
+                  className="relative flex flex-col md:flex-row items-center md:items-start gap-6 dark:bg-black/50 backdrop-blur-md rounded-2xl p-6 
+             shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
+             transition-all duration-300 ">
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-white rounded-full"></span>
 
                   {/* Title */}
@@ -388,7 +383,7 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                   </h3>
 
                   {/* Accent Line */}
-                  <div className="h-1 w-10 bg-theme-main rounded-full"></div>
+                  <div className="h-1 w-10 bg-theme-main rounded-full lg:hidden"></div>
 
                   {/* Description */}
                   <p className="text-lg sm:text-xl text-gray-300 font-light leading-relaxed tracking-wide">

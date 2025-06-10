@@ -182,7 +182,7 @@ const Features: React.FC<{ id?: string }> = ({ id }) => {
                 key={index}
                 className="relative flex flex-col md:flex-row items-center md:items-start gap-6 dark:bg-black/50 backdrop-blur-md rounded-2xl p-6 
              shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
-             transition-all duration-300 "
+             transition-all duration-300"
               >
                 <div className="w-16 h-16 flex items-center justify-center rounded-xl backdrop-blur-md 
   text-white/90 shadow-inner">

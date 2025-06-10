@@ -67,13 +67,11 @@ const NavBar: React.FC = () => {
                   } rounded-full`}
               />
               <span
-                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide ${isScrolled && !isMenuOpen ? 'text-xl text-gray-900' : 'text-lg text-white'
+                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide ${isScrolled && !isMenuOpen ? 'text-xl text-theme-main' : 'text-lg text-white'
                   }`}
               >
-                <span className="font-satoshi">Chit</span>
-                <span className="text-theme-main font-satoshi">Chat</span>
-                <span className="text-gray-700 font-satoshi font-extrabold">AI</span>
-              </span>
+                <span className="font-satoshi">ChitChat AI</span>
+                </span>
             </div>
           </NavLink>
 

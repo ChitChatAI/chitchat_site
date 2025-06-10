@@ -201,38 +201,50 @@ const DevelopmentWorkflow: React.FC = () => {
               From discovery to deployment, here’s how we craft AI personas that don’t just function — they resonate. Every step is driven by clarity, innovation, and intent.
             </p>
           </div>
-
           <div className="space-y-16">
             {workflowSteps.map((step, index) => (
               <div
                 key={index}
-                className={`relative bg-gradient-to-br from-white/10 to-black p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 ${index !== 0 ? 'mt-8' : ''}`}
+                className={`relative flex flex-col md:flex-row items-start gap-6 dark:bg-black/50 backdrop-blur-md rounded-2xl p-6 
+      shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
+      transition-all duration-300 ${index !== 0 ? 'mt-8' : ''}`}
               >
+                {/* Step Icon */}
                 <div className="absolute -top-6 left-6 w-12 h-12 bg-gradient-to-r from-purple-400 to-theme-main rounded-full flex items-center justify-center shadow-md">
                   <span className="text-white font-bold text-lg">{index + 1}</span>
                 </div>
 
-                <h3 className="text-3xl font-bold text-white mb-4 tracking-tight leading-snug">
-                  {step.name}
-                </h3>
+                {/* Text Content Block */}
+                <div className="flex flex-col">
+                  <h3 className="text-3xl font-bold text-white mb-4 tracking-tight leading-snug">
+                    {step.name}
+                  </h3>
 
-                <p className="text-lg sm:text-xl text-gray-300 mb-4 leading-relaxed">
-                  {step.description}
-                </p>
+                  <p className="text-lg sm:text-xl text-gray-300 mb-4 leading-relaxed">
+                    {step.description}
+                  </p>
 
-                <p className="text-lg sm:text-md text-gray-400 mb-6 leading-loose">
-                  {step.story}
-                </p>
+                  <p className="text-lg sm:text-md text-gray-400 mb-6 leading-loose">
+                    {step.story}
+                  </p>
 
-
-                <ul className="list-disc list-inside text-gray-400 space-y-2 text-sm">
-                  {step.features.map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                  ))}
-                </ul>
+                  {/* Custom Bulleted Features */}
+                  <ul className="space-y-2 text-base text-white">
+                    {step.features.map((feature, i) => (
+                      <li
+                        key={i}
+                        className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2 before:w-3 before:h-3 before:rounded-full before:bg-theme-main"
+                      >
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
+
+
         </div>
       </section>
 
