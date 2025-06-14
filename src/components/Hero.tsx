@@ -1,9 +1,13 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const Hero: React.FC<{ id?: string }> = ({ id }) => {
+  const { scrollY } = useScroll();
+  // Create a subtle parallax effect for the video background
+  const y = useTransform(scrollY, [0, 300], [0, 100]);
+  
   const fadeInVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -12,23 +16,28 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section
       id={id}
-      className="relative w-full min-h-screen text-white  overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-screen text-white overflow-hidden flex items-center justify-center"
     >
       <div className="absolute inset-0 w-full h-full">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover z-0"
+        <motion.div 
+          style={{ y }} // Apply the parallax effect here
+          className="absolute inset-0 w-full h-full"
         >
-          <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
-        </video>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          >
+            <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10"></div>
       </div>
 
-      <div
+      <motion.div
         className="relative z-20 container mx-auto text-center px-4"
         initial="hidden"
         animate="visible"
@@ -48,7 +57,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
           <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
         </div>
-      </div>
+      </motion.div>
       <style>{`
         @keyframes pulse {
           0%, 100% { opacity: 1; transform: scale(1); }

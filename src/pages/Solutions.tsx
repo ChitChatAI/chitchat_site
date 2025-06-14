@@ -164,163 +164,204 @@ const Solutions: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative z-10 py-16 bg-black px-4 sm:px-6 md:px-8">
-          <div className="container mx-auto">
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
-                Explore Our AI-Powered Solutions
+        <section className="relative z-10 py-20 bg-black px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-16 text-center">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tighter bg-gradient-to-r from-theme-main via-purple-600 to-pink-500 bg-clip-text text-transparent">
+                AI Solutions That Understand Humans
               </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto font-medium drop-shadow">
-                Unlock the power of emotionally intelligent AI — built to elevate customer experiences across industries.
+              <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto font-medium">
+                Emotionally intelligent AI designed to deliver exceptional customer experiences across every industry vertical.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto px-2 sm:px-0">
-              {/* Card 1: Telecommunications */}
-              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
-                <div className="flex items-center mb-4 sm:mb-5">
-                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
-                    <Lottie animationData={customerService} loop autoplay style={{ height: '40px', width: '40px' }} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto">
+              {/* Telecommunications Card */}
+              <div className="relative bg-black border border-white/10 p-6 sm:p-8 group hover:border-theme-main/50 transition-all duration-500 rounded-3xl backdrop-blur-xl flex flex-col cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-theme-main/10">
+                <div className="flex items-start mb-6">
+                  <div className="w-20 h-20 flex-shrink-0 flex items-center justify-center mr-5 bg-theme-main/10 rounded-xl p-2">
+                    <Lottie
+                      animationData={customerService}
+                      loop
+                      autoplay
+                      style={{ height: '60px', width: '60px' }}
+                      className="transform group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
+                  <div>
+                    <span className="inline-block bg-theme-main/20 text-theme-main font-medium text-xs uppercase tracking-wider px-3 py-1 rounded-full mb-2">
                       Telecommunications
                     </span>
-                  </h3>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                      Intelligent Customer Support
+                    </h3>
+                  </div>
                 </div>
-                <p className="text-xl sm:text-2xl
-text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-                  Automate SIM support, router setups, billing issues, and service queries through human-like AI that understands tone, context, and frustration — and responds like a pro.
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  Automate SIM support, router setups, and billing issues through AI that understands frustration and responds with human-like empathy.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mt-auto">
                   {[
-                    "24/7 intelligent, tone-aware support",
-                    "Seamless escalation to live agents",
-                    "Remembers user context across chats"
+                    "24/7 tone-aware virtual agents",
+                    "Context-aware troubleshooting",
+                    "Seamless live agent handoff"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center">
-                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
+                      <div className="h-5 w-5 rounded-full bg-theme-main/20 flex items-center justify-center mr-3 flex-shrink-0">
+                        <span className="material-symbols-outlined text-white text-xs">check</span>
                       </div>
-                      <span className="text-lg sm:text-base text-gray-200">{item}</span>
+                      <span className="text-base text-gray-300">{item}</span>
                     </li>
                   ))}
                 </ul>
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-theme-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
 
-              {/* Card 2: E-Commerce */}
-              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
-                <div className="flex items-center mb-4 sm:mb-5">
-                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
-                    <Lottie animationData={sales} loop autoplay style={{ height: '40px', width: '40px' }} />
+              {/* E-Commerce Card */}
+              <div className="relative bg-black border border-white/10 p-6 sm:p-8 group hover:border-theme-main/50 transition-all duration-500 rounded-3xl backdrop-blur-xl flex flex-col cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-theme-main/10">
+                <div className="flex items-start mb-6">
+                  <div className="w-20 h-20 flex-shrink-0 flex items-center justify-center mr-5 bg-theme-main/10 rounded-xl p-2">
+                    <Lottie
+                      animationData={sales}
+                      loop
+                      autoplay
+                      style={{ height: '60px', width: '60px' }}
+                      className="transform group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
+                  <div>
+                    <span className="inline-block bg-theme-main/20 text-theme-main font-medium text-xs uppercase tracking-wider px-3 py-1 rounded-full mb-2">
                       E-Commerce
                     </span>
-                  </h3>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                      Personalized Shopping Assistant
+                    </h3>
+                  </div>
                 </div>
-                <p className="text-xl sm:text-2xl
-text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-                  Transform casual shoppers into loyal customers with AI that acts like a digital salesperson — always on, always ready to recommend, and always brand-aligned.
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  Convert browsers to buyers with AI that remembers preferences, suggests products, and guides customers like your best salesperson.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mt-auto">
                   {[
-                    "Smart lead capture & qualification",
-                    "Hyper-personalized product suggestions",
-                    "Consistent brand voice at every touchpoint"
+                    "Hyper-personalized recommendations",
+                    "Abandoned cart recovery",
+                    "Brand-aligned conversational style"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center">
-                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
+                      <div className="h-5 w-5 rounded-full bg-theme-main/20 flex items-center justify-center mr-3 flex-shrink-0">
+                        <span className="material-symbols-outlined text-white text-xs">check</span>
                       </div>
-                      <span className="text-sm sm:text-base text-gray-200">{item}</span>
+                      <span className="text-base text-gray-300">{item}</span>
                     </li>
                   ))}
                 </ul>
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-theme-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
 
-              {/* Card 3: Healthcare */}
-              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
-                <div className="flex items-center mb-4 sm:mb-5">
-                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
-                    <Lottie animationData={healthcare} loop autoplay style={{ height: '40px', width: '40px' }} />
+              {/* Healthcare Card */}
+              <div className="relative bg-black border border-white/10 p-6 sm:p-8 group hover:border-theme-main/50 transition-all duration-500 rounded-3xl backdrop-blur-xl flex flex-col cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-theme-main/10">
+                <div className="flex items-start mb-6">
+                  <div className="w-20 h-20 flex-shrink-0 flex items-center justify-center mr-5 bg-theme-main/10 rounded-xl p-2">
+                    <Lottie
+                      animationData={healthcare}
+                      loop
+                      autoplay
+                      style={{ height: '60px', width: '60px' }}
+                      className="transform group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
+                  <div>
+                    <span className="inline-block bg-theme-main/20 text-theme-main font-medium text-xs uppercase tracking-wider px-3 py-1 rounded-full mb-2">
                       Healthcare
                     </span>
-                  </h3>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                      Compassionate Patient Support
+                    </h3>
+                  </div>
                 </div>
-                <p className="text-xl sm:text-2xl
-text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-                  Deliver compassionate, responsive healthcare support through AI that feels human — ideal for appointment handling, medical questions, onboarding, and patient follow-up.
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  Deliver 24/7 healthcare assistance with AI that shows empathy, handles appointments, and provides medication reminders.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mt-auto">
                   {[
-                    "Patient-first conversational tone",
-                    "Timely reminders for meds & visits",
-                    "Gentle daily check-ins and wellness tracking"
+                    "HIPAA-compliant interactions",
+                    "Personalized health reminders",
+                    "Emotionally-aware responses"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center">
-                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
+                      <div className="h-5 w-5 rounded-full bg-theme-main/20 flex items-center justify-center mr-3 flex-shrink-0">
+                        <span className="material-symbols-outlined text-white text-xs">check</span>
                       </div>
-                      <span className="text-sm sm:text-base text-gray-200">{item}</span>
+                      <span className="text-base text-gray-300">{item}</span>
                     </li>
                   ))}
                 </ul>
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-theme-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
 
-              {/* Card 4: Education & Online Learning */}
-              <div className="relative bg-white/5 p-5 sm:p-8 shadow-lg group hover:shadow-xl transition-all duration-300 rounded-2xl backdrop-blur-lg flex flex-col cursor-pointer focus-visible:ring-2 focus-visible:ring-white/50 w-full overflow-hidden">
-                <div className="flex items-center mb-4 sm:mb-5">
-                  <div className="w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mr-3 sm:mr-5">
-                    <Lottie animationData={education} loop autoplay style={{ height: '40px', width: '40px' }} />
+              {/* Education Card */}
+              <div className="relative bg-black border border-white/10 p-6 sm:p-8 group hover:border-theme-main/50 transition-all duration-500 rounded-3xl backdrop-blur-xl flex flex-col cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-theme-main/10">
+                <div className="flex items-start mb-6">
+                  <div className="w-20 h-20 flex-shrink-0 flex items-center justify-center mr-5 bg-theme-main/10 rounded-xl p-2">
+                    <Lottie
+                      animationData={education}
+                      loop
+                      autoplay
+                      style={{ height: '60px', width: '60px' }}
+                      className="transform group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
-                    <span className="inline-block bg-white/20 text-gray-300 font-semibold text-sm sm:text-xs px-3 py-1 rounded-full mb-2">
-                      Education & Online Learning
+                  <div>
+                    <span className="inline-block bg-theme-main/20 text-theme-main font-medium text-xs uppercase tracking-wider px-3 py-1 rounded-full mb-2">
+                      Education
                     </span>
-                  </h3>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                      Adaptive Learning Companion
+                    </h3>
+                  </div>
                 </div>
-                <p className="text-xl sm:text-2xl
-text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
-                  Empower students of all ages with 24/7 AI mentors that provide tutoring, course guidance, and emotional support — customized by learner profile and tone.
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  Personalized tutoring and educational support that adapts to each student's learning style and emotional needs.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mt-auto">
                   {[
-                    "Adapts teaching style per learner",
-                    "Real-time feedback and encouragement",
-                    "Always-on support for students & parents"
+                    "Learning style adaptation",
+                    "Real-time progress feedback",
+                    "24/7 homework assistance"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center">
-                      <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                        <span className="material-symbols-outlined text-gray-300 text-sm">check_circle</span>
+                      <div className="h-5 w-5 rounded-full bg-theme-main/20 flex items-center justify-center mr-3 flex-shrink-0">
+                        <span className="material-symbols-outlined text-white text-xs">check</span>
                       </div>
-                      <span className="text-sm sm:text-base text-gray-200">{item}</span>
+                      <span className="text-base text-gray-300">{item}</span>
                     </li>
                   ))}
                 </ul>
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-theme-main/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             </div>
 
-
             {/* Industry-wide callout */}
-            <div className="mt-16 bg-white/5 rounded-xl p-8 max-w-4xl mx-auto text-center backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300">
-              <h3 className="text-2xl sm:text-4xl font-bold text-white mb-4">
-                Don’t see your industry? <span className="bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">We cover it too.</span>
+            <div className="mt-20 bg-black border border-white/10 rounded-3xl p-8 sm:p-10 max-w-4xl mx-auto text-center backdrop-blur-lg hover:shadow-2xl hover:shadow-theme-main/10 transition-all duration-500">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-5">
+                Custom AI Solutions for <span className="bg-gradient-to-r from-theme-main to-purple-500 bg-clip-text text-transparent">Your Industry</span>
               </h3>
-              <p className="text-lg text-gray-300 mb-6">
-                From finance to hospitality, our adaptable AI personas are fine-tuned for your exact customer needs — bringing empathy, context-awareness, and scalability to any sector.
+              <p className="text-lg text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed">
+                Our AI platform adapts to your specific business needs with consistent, on-brand interactions powered by our proprietary emotion-aware technology.
               </p>
+              <button className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-theme-main to-purple-600 hover:from-theme-main/90 hover:to-purple-600/90 text-white font-medium rounded-full transition-all duration-300 group shadow-lg hover:shadow-theme-main/20">
+                Request Custom Demo
+                <span className="ml-2 material-symbols-outlined group-hover:translate-x-1 transition-transform duration-300">
+                  arrow_forward
+                </span>
+              </button>
             </div>
           </div>
         </section>
 
 
         <section id="industries" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-6 md:px-8">
-          <div className="container mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="mb-20 text-center">
               <span className="inline-block px-3 py-1 bg-theme-main/10 text-theme-main text-xs font-medium rounded-full mb-3">
                 Versatile Solutions
@@ -338,8 +379,8 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                 <div
                   key={index}
                   className="relative flex flex-col md:flex-row items-center md:items-start gap-6 dark:bg-black/50 backdrop-blur-md rounded-2xl p-6 
-             shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
-             transition-all duration-300"
+       shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
+       transition-all duration-300"
                 >
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-theme-main rounded-full"></span>
 
@@ -360,10 +401,9 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
             </div>
           </div>
         </section>
-
         {/* USE CASES SECTION */}
         <section id="use-cases" className="relative py-16 bg-black text-white overflow-hidden px-4 sm:px-6 md:px-8">
-          <div className="container mx-auto">
+          <div className="max-w-5xl mx-auto"> {/* Changed from container mx-auto */}
             <h2 className="text-5xl sm:text-6xl font-extrabold text-center text-white mb-4 pb-6 leading-tight tracking-tight drop-shadow-xl bg-gradient-to-r from-theme-main via-purple-700 to-pink-500 bg-clip-text text-transparent">
               Use Cases
             </h2>
@@ -373,8 +413,8 @@ text-gray-200 mb-4" style={{ lineHeight: '1.5', maxWidth: '100ch' }}>
                 <div
                   key={index}
                   className="relative flex flex-col md:flex-row items-center md:items-start gap-6 dark:bg-black/50 backdrop-blur-md rounded-2xl p-6 
-             shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
-             transition-all duration-300 ">
+       shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] 
+       transition-all duration-300">
                   <span className="absolute -left-6 sm:-left-14 top-3 w-3 h-3 bg-white rounded-full"></span>
 
                   {/* Title */}
