@@ -106,29 +106,45 @@ const DevelopmentWorkflow: React.FC = () => {
       <NavBar />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gray-900 text-white">
-        {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full">
-        <img
-          src="/homePage/hero-banner.png"
-          alt="Human Augmented AI Background"
-          className="w-full h-full object-cover object-center opacity-70"
-        />
-      </div>
 
-      {/* Glassmorphic overlay */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-full h-full backdrop-blur-[4px] rounded-none shadow-[inset_0_0_0.5px_rgba(255,255,255,0.2)] border-t border-white/10" />
-      </div>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+      <section
+        className="relative w-full min-h-screen flex items-center justify-center bg-gray-900 text-white overflow-hidden"
+        aria-label="Development Workflow Hero Section"
+      >
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover object-center opacity-70"
+          >
+            <source src="/homePage/hero-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+        </div>
+
+        {/* Glassmorphic overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-full h-full backdrop-blur-[5px] bg-[hsla(270,80%,30%,0.25)] shadow-[inset_0_0_0.5px_rgba(255,255,255,0.1)]" />
+        </div>
+        {/* Section Content */}
+        <div className="relative z-20 max-w-5xl w-full px-6 text-center">
+
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
             Development Workflow
           </h1>
-          <p className="text-xl text-gray-300 mb-8">
+
+          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-20">
             A comprehensive journey from concept to deployment, ensuring your AI persona perfectly embodies your brand.
           </p>
         </div>
+
+
       </section>
+
+
 
       {/* Tools Section */}
       <section className="py-16 bg-white">
@@ -166,7 +182,7 @@ const DevelopmentWorkflow: React.FC = () => {
               From discovery to deployment, here's how we craft AI personas that don't just function — they resonate.
             </p>
           </div>
-          
+
           <div className="space-y-8">
             {workflowSteps.map((step, index) => (
               <div key={index} className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
@@ -178,15 +194,15 @@ const DevelopmentWorkflow: React.FC = () => {
                     {step.name}
                   </h3>
                 </div>
-                
+
                 <p className="text-lg text-gray-700 mb-4">
                   {step.description}
                 </p>
-                
+
                 <p className="text-gray-600 mb-6">
                   {step.story}
                 </p>
-                
+
                 <ul className="space-y-3">
                   {step.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
@@ -216,7 +232,7 @@ const DevelopmentWorkflow: React.FC = () => {
               Have more questions? <Link to="/contactus" className="text-blue-600 hover:underline">Contact our team</Link>
             </p>
           </div>
-          
+
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
@@ -227,10 +243,10 @@ const DevelopmentWorkflow: React.FC = () => {
                   <h4 className="text-lg font-medium text-gray-900">
                     {faq.question}
                   </h4>
-                  <svg 
+                  <svg
                     className={`w-5 h-5 text-gray-500 transition-transform ${openFAQ === idx ? 'transform rotate-180' : ''}`}
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />

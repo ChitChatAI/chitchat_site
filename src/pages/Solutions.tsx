@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/NavBar';
 import Lottie from 'lottie-react';
 import customerService from '../assets/lottie/customerService.json';
@@ -10,6 +10,24 @@ import CookieConsent from '../components/ContactModal';
 import Footer from '../components/Footer';
 
 const Solutions: React.FC = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Replace these with your actual image paths
+  const carouselImages = [
+    "/homePage/businessBG.png",
+    "/homePage/thinking.png"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   const additionalSolutions = [
     {
       title: 'Insurance',
@@ -110,18 +128,57 @@ const Solutions: React.FC = () => {
   return (
     <>
       <Navbar />
+
       <main className="bg-white text-gray-900">
         {/* Hero Section */}
-        <section className="relative py-20 md:py-32 bg-gray-900 text-white">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              Built for Every Business to Feel Human
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
-            </p>
+
+        <section
+          className="relative w-full min-h-screen flex items-center bg-white text-gray-900 overflow-hidden"
+          aria-label="Built for Every Business Hero Section"
+        >
+          {/* Content Container */}
+          <div className="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            {/* Text Content - Left Side */}
+            <div className="md:w-1/2 md:pr-10 text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
+                Built for Every Business to Feel Human
+              </h1>
+
+              {/* Branded Dots */}
+              <div className="flex gap-3 my-6 md:my-10">
+                <span className="w-3 h-3 rounded-full bg-theme-main/30" />
+                <span className="w-3 h-3 rounded-full bg-theme-main/50" />
+                <span className="w-3 h-3 rounded-full bg-theme-main/70" />
+              </div>
+
+              <p className="text-lg md:text-xl text-gray-700 max-w-2xl mb-10">
+                Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
+              </p>
+            </div>
+
+            {/* Carousel - Right Side */}
+            <div className="md:w-1/2 mt-10 md:mt-0 relative h-[500px]">
+              <div className="relative w-full h-full overflow-hidden rounded-lg">
+                {carouselImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}
+                  >
+                    <div className="w-full h-full flex items-center justify-center bg-white rounded-lg overflow-hidden">
+                      <img
+                        src={image}
+                        alt={`Business Illustration ${index + 1}`}
+                        className="max-h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            
+            </div>
           </div>
         </section>
+
 
         {/* Industries Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -139,7 +196,7 @@ const Solutions: React.FC = () => {
               {industries.map((industry, index) => (
                 <div key={index} className="bg-gray-50 rounded-xl border border-gray-200 p-6">
                   <div className="flex items-start mb-6">
-                    <div className="w-16 h-16 flex-shrink-0 flex items-center justify-center mr-5 bg-theme-main/10 rounded-lg p-2">
+                    <div className="w-16 h-16 flex-shrink-0 flex items-center justify-center mr-5 rounded-lg p-2">
                       <Lottie
                         animationData={industry.icon}
                         loop
@@ -152,10 +209,10 @@ const Solutions: React.FC = () => {
                         {industry.title}
                       </span>
                       <h3 className="text-xl font-semibold text-gray-900">
-                        {industry.title === 'Telecommunications' ? 'Intelligent Customer Support' : 
-                         industry.title === 'E-Commerce' ? 'Personalized Shopping Assistant' :
-                         industry.title === 'Healthcare' ? 'Compassionate Patient Support' :
-                         'Adaptive Learning Companion'}
+                        {industry.title === 'Telecommunications' ? 'Intelligent Customer Support' :
+                          industry.title === 'E-Commerce' ? 'Personalized Shopping Assistant' :
+                            industry.title === 'Healthcare' ? 'Compassionate Patient Support' :
+                              'Adaptive Learning Companion'}
                       </h3>
                     </div>
                   </div>

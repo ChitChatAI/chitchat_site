@@ -94,7 +94,7 @@ const ContactUs: React.FC = () => {
     e.preventDefault();
     if (validateStep(3)) {
       setIsSubmitting(true);
-      
+
       try {
         // Simulate form submission
         await new Promise(resolve => setTimeout(resolve, 1500));
@@ -114,26 +114,80 @@ const ContactUs: React.FC = () => {
   return (
     <>
       <NavBar />
-      
+
       {toast && (
-        <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-4 py-2 rounded-md ${
-          toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'
-        } text-white shadow-lg`}>
+        <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-4 py-2 rounded-md ${toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+          } text-white shadow-lg`}>
           {toast.message}
         </div>
       )}
+      <section
+        className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-100 to-white text-gray-900 px-6 md:px-12 overflow-hidden"
+        aria-label="Get in Touch Hero Section"
+      >
+        {/* Background Image with subtle parallax effect */}
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src="./homePage/hero-banner.png"
+            alt="Contact Us Background"
+            className="w-full h-full object-cover object-center scale-105"
+            style={{ transform: 'translateZ(0)' }}
+          />
+        </div>
 
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-6">
-            Get in Touch with Us
-          </h1>
-          <p className="text-xl text-gray-300 mb-8">
-            We typically respond within 48 hours. Thank you for reaching out.
-          </p>
+        {/* Enhanced Glassmorphic Overlay */}
+<div className="absolute inset-0">
+  <div
+    className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
+    style={{
+      background:
+        'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
+      boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
+    }}
+  />
+</div>
+
+
+        {/* Content Layer with refined spacing */}
+        <div className="relative z-10 max-w-7xl w-full px-4 flex flex-col items-center justify-center py-24">
+          {/* Text Content with improved typography */}
+          <div className="text-center max-w-3xl space-y-8 px-4">
+            <h1
+              className="text-5xl text-white md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight"
+              style={{
+                textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                lineHeight: '1.1'
+              }}
+            >
+              Get in Touch With Us
+            </h1>
+
+            {/* Animated Branded Dots */}
+            <div className="flex justify-center gap-4">
+              <span
+                className="w-4 h-4 rounded-full bg-theme-main/30 animate-pulse"
+                style={{ animationDuration: '2s' }}
+              />
+              <span
+                className="w-4 h-4 rounded-full bg-theme-main/50 animate-pulse delay-75"
+                style={{ animationDuration: '2.2s' }}
+              />
+              <span
+                className="w-4 h-4 rounded-full bg-theme-main/80 animate-pulse delay-150"
+                style={{ animationDuration: '2.4s' }}
+              />
+            </div>
+
+            <p
+              className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-2xl mx-auto"
+              style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}
+            >
+              We typically respond within <span className="font-semibold text-white">48 hours</span>.
+              Our team is ready to assist you with any inquiries.
+            </p>
+          </div>
         </div>
       </section>
-
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gray-50 rounded-xl p-8 shadow-sm">
@@ -141,18 +195,16 @@ const ContactUs: React.FC = () => {
             <div className="flex justify-between mb-8">
               {[1, 2, 3].map(step => (
                 <div key={step} className="flex flex-col items-center">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
-                    currentStep >= step 
-                      ? 'bg-theme-main/95 text-white' 
-                      : 'bg-gray-200 text-gray-600'
-                  }`}>
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${currentStep >= step
+                    ? 'bg-theme-main/95 text-white'
+                    : 'bg-gray-200 text-gray-600'
+                    }`}>
                     {step}
                   </div>
-                  <span className={`text-sm ${
-                    currentStep >= step 
-                      ? 'text-blue-600 font-medium' 
-                      : 'text-gray-500'
-                  }`}>
+                  <span className={`text-sm ${currentStep >= step
+                    ? 'text-theme-main font-medium'
+                    : 'text-gray-500'
+                    }`}>
                     {step === 1 ? 'Your Details' : step === 2 ? 'Company' : 'Message'}
                   </span>
                 </div>
@@ -163,7 +215,7 @@ const ContactUs: React.FC = () => {
             {currentStep === 1 && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Details</h2>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
@@ -176,7 +228,7 @@ const ContactUs: React.FC = () => {
                     />
                     {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
                     <input
@@ -229,7 +281,7 @@ const ContactUs: React.FC = () => {
             {currentStep === 2 && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Company Information</h2>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Company Size</label>
                   <select
@@ -299,7 +351,7 @@ const ContactUs: React.FC = () => {
             {currentStep === 3 && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Additional Information</h2>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Interests</label>
                   <div className="space-y-2">
@@ -310,7 +362,7 @@ const ContactUs: React.FC = () => {
                           name={interest}
                           checked={formData.interests.includes(interest)}
                           onChange={handleCheckboxChange}
-                          className="h-4 w-4 text-blue-600 rounded"
+                          className="h-4 w-4 text-theme-main rounded"
                         />
                         <span className="ml-2 text-gray-700">{interest}</span>
                       </label>
@@ -353,9 +405,8 @@ const ContactUs: React.FC = () => {
                     type="submit"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className={`px-6 py-3 bg-theme-main/95 text-white rounded-lg hover:bg-theme-main/60 transition-colors ${
-                      isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-                    }`}
+                    className={`px-6 py-3 bg-theme-main/95 text-white rounded-lg hover:bg-theme-main/60 transition-colors ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                      }`}
                   >
                     {isSubmitting ? 'Sending...' : 'Submit'}
                   </button>
@@ -365,6 +416,8 @@ const ContactUs: React.FC = () => {
           </div>
         </div>
       </section>
+
+
 
       <Footer />
     </>
