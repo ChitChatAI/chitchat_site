@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 
 const Businesses: React.FC = () => {
   // Typing animation for AI intro text (used in first section)
@@ -15,31 +14,6 @@ const Businesses: React.FC = () => {
     }, 50);
     return () => clearInterval(typingInterval);
   }, [fullText]);
-
-  const fadeInVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
-  };
-
-  const staggerContainer = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const rotateInVariants = {
-    hidden: { opacity: 0, rotate: -30 },
-    visible: { opacity: 1, rotate: 0, transition: { duration: 1, ease: 'easeOut' } },
-  };
-
-  const slideInVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-  };
 
   const includedFeatures = [
     {
@@ -89,7 +63,6 @@ const Businesses: React.FC = () => {
     }
   ];
 
-
   const businessValues = [
     {
       title: 'Reduce Support Costs',
@@ -129,130 +102,68 @@ const Businesses: React.FC = () => {
     },
   ];
 
-
-
   return (
-    <div className="relative">
-      <div className="relative z-10">
-        {/* Business Values Section */}
-        <section id="value" className="relative bg-black text-white overflow-hidden px-4 sm:px-8 lg:px-20">
-          {/* Video Background for Business Values Section */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          >
-            <source src="/businessesPage/businessVideo.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10"></div>
+    <div className="bg-white text-gray-900">
+      {/* Value Section */}
+      <section id="value" className="py-20 px-4 sm:px-8 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-8">
+            How ChitChat Adds Value to Your Business
+          </h2>
 
-          <div
-            className="relative z-20 max-w-7xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggerContainer}
-          >
-            <motion.h2
-              className="text-5xl sm:text-6xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeInVariants}
-            >
-              How ChitChat Adds Value to Your Business
-            </motion.h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {businessValues.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white/10 backdrop-blur-md rounded-lg p-8 hover:bg-white/15 transition-all duration-300"
-                  style={{
-                    clipPath:
-                      'polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%)',
-                  }}
-                >
-                  {/* Icon */}
-                  <span className="material-symbols-outlined text-white/90 drop-shadow-sm text-6xl sm:text-5xl mb-4">
-                    {item.icon}
-                  </span>
-
-                  {/* Title */}
-                  <h3 className="text-2xl sm:text-3xl font-semibold text-white/90 tracking-tight mb-2">
-                    {item.title}
-                  </h3>
-
-                  {/* Metric */}
-                  <p className="text-sm sm:text-base font-semibold text-theme-main/80 uppercase tracking-tight mb-2">
-                    {item.metric}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-lg sm:text-xl text-gray-300 leading-relaxed tracking-wide">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {businessValues.map((item, index) => (
+              <div key={index} className="bg-gray-50 rounded-lg border border-gray-200 p-6">
+                <span className="material-symbols-outlined text-4xl text-theme-main mb-4">
+                  {item.icon}
+                </span>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm font-medium text-theme-main mb-2">
+                  {item.metric}
+                </p>
+                <p className="text-base text-gray-700">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* What's Included Section */}
-        <section
-          id="whats-included"
-          className="relative py-20 md:py-32 bg-black text-white overflow-hidden sm:px-8 lg:px-20"
-        >
-          <div
-            className="relative z-10 max-w-7xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggerContainer}
-          >
-            <h2 className="text-5xl sm:text-6xl font-extrabold text-center text-white mb-16 leading-tight tracking-tight">
-              What’s Included in Every ChitChat Package
-            </h2>
+      {/* Included Features Section */}
+      <section id="whats-included" className="py-20 px-4 sm:px-8 lg:px-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-8">
+            What's Included in Every ChitChat Package
+          </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-              {includedFeatures.map((item, index) => (
-                <div
-                  key={index}
-                  className="relative flex flex-col gap-6 backdrop-blur-xl rounded-2xl p-8 shadow-[0_8px_24px_rgba(0,0,0,0.3)] 
-                transition-all duration-300 hover:shadow-[0_12px_28px_rgba(0,0,0,0.4)]"
-                >
-                  {/* Icon */}
-                  <div className="w-16 h-16 flex items-center justify-center rounded-2xl text-white/90 shadow-inner shadow-white/10">
-                    <span
-                      className="material-symbols-outlined text-6xl sm:text-5xl"
-                      style={{ fontVariationSettings: '"wght" 700' }}
-                    >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {includedFeatures.map((item, index) => (
+              <div key={index} className="bg-white rounded-lg border border-gray-200 p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-theme-main/10 text-theme-main">
+                    <span className="material-symbols-outlined text-2xl">
                       {item.icon}
                     </span>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight leading-snug font-satoshi">
-                    {item.title}
-                  </h3>
-
-                  {/* Accent Line */}
-                  <div className="h-1 w-10 bg-theme-main rounded-full"></div>
-
-                  {/* Description */}
-                  <p className="text-lg sm:text-xl text-gray-300 font-light leading-relaxed tracking-wide">
-                    {item.description}
-                  </p>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                      {item.title}
+                    </h3>
+                    <div className="h-1 w-10 bg-theme-main/50 rounded-full mb-2"></div>
+                    <p className="text-base text-gray-700">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
-
   );
 };
 

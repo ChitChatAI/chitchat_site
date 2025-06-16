@@ -3,7 +3,6 @@ import Navbar from '../components/NavBar';
 import Features from '../components/Features';
 import Community from '../components/Community';
 import Footer from '../components/Footer';
-import CookieConsent from '../components/ContactModal';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
 import Hero from '../components/Hero';
@@ -25,23 +24,14 @@ const HomePage: React.FC = () => {
       <main className="relative overflow-hidden w-full min-h-screen bg-black">
         <Hero />
 
-     
-        <div className="parallax-element mb-0 py-16 relative z-10">
-          <Features />
-        </div>
-
-        <div className="parallax-element mb-0 pt-16 relative z-10">
-          <Businesses />
-        </div>
-
+        <Features />
+        <Businesses />
         <Community />
 
 
       </main>
       <Footer />
 
-      {/* Cookie Policy Floating Button */}
-      <CookieConsent position="left" modalPosition="bottom" />      {/* Keyframe Animations */}
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0); }

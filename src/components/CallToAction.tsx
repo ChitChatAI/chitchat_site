@@ -9,29 +9,26 @@ interface CallToActionProps {
 const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) => (
   <section
     id="cta"
-    className={`relative py-20 md:py-32 bg-black text-white font-[Satoshi] overflow-hidden px-4 sm:px-8 ${className}`}
+    className={`py-16 bg-gray-900 text-white px-4 sm:px-6 ${className}`}
   >
-    {/* Optional video or dark overlay background can be added here if desired */}
-    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
-    <div className="relative z-20 max-w-3xl mx-auto text-center">
-      <div className="inline-block mb-8 px-4 py-1 bg-theme-main/10 text-theme-main backdrop-blur-sm rounded-full text-sm font-medium animate-fade-in">
+    <div className="max-w-3xl mx-auto text-center">
+      <div className="inline-block mb-6 px-4 py-1 bg-theme-main/45 text-white/90 rounded-full text-sm font-medium">
         Get Started
       </div>
-      <h2 className="scroll-review opacity-0 transform translate-y-6 text-4xl md:text-5xl font-extrabold text-white whitespace-pre-line leading-tight tracking-tight drop-shadow-xl">
+      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
         Ready to Elevate Your Business?
       </h2>
-      <p className="text-xl sm:text-2xl text-gray-200 max-w-2xl mx-auto mb-8 leading-relaxed font-medium drop-shadow mt-6">
+      <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
         Discover how ChitChat can transform your customer experience with tailored AI solutions.
       </p>
-      <div className="flex flex-wrap justify-center gap-6 mt-8">
+      <div className="flex justify-center">
         <a
           href="mailto:jessicaclaireleighza@gmail.com"
-          className="px-10 py-4 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold shadow-lg hover:shadow-xl hover:from-purple-600 hover:to-indigo-600 transition-all duration-300 text-xl transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-300"
+          className="px-8 py-3 rounded-lg bg-theme-main/50 text-white font-medium hover:bg-theme-main/30 transition-colors"
         >
           Get In Touch
         </a>
       </div>
-     
     </div>
   </section>
 );
