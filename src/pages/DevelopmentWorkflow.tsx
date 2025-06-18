@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+// Updated DevelopmentWorkflow.tsx with professional scroll animations
+
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/ContactModal';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 
 const DevelopmentWorkflow: React.FC = () => {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-
-  const toggleFAQ = (index: number) => {
-    setOpenFAQ(openFAQ === index ? null : index);
-  };
-
+  const toggleFAQ = (index: number) => setOpenFAQ(openFAQ === index ? null : index);
   const workflowSteps = [
     {
       name: 'Phase 1: Conceptualization and Persona Development',
@@ -101,108 +100,105 @@ const DevelopmentWorkflow: React.FC = () => {
     { name: 'Python', icon: 'python.svg' },
   ];
 
+  const heroRef = useRef<HTMLDivElement>(null);
+  const toolsRef = useRef<HTMLDivElement>(null);
+  const workflowRef = useRef<HTMLDivElement>(null);
+  const faqRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll();
+  const yHero = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
+  const opacityHero = useTransform(scrollYProgress, [0, 0.2], [1, 0.7]);
+
+  const isInViewTools = useInView(toolsRef, { once: true, margin: '-100px' });
+  const isInViewWorkflow = useInView(workflowRef, { once: true, margin: '-100px' });
+  const isInViewFAQ = useInView(faqRef, { once: true, margin: '-100px' });
+
   return (
     <>
       <NavBar />
 
       {/* Hero Section */}
-
-      <section
+      <motion.section
+        ref={heroRef}
         className="relative w-full min-h-screen flex items-center justify-center bg-gray-900 text-white overflow-hidden"
+        style={{ y: yHero, opacity: opacityHero }}
         aria-label="Development Workflow Hero Section"
       >
         <div className="absolute inset-0 w-full h-full">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover object-center opacity-70"
-          >
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover object-center opacity-70">
             <source src="/homePage/hero-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-
         </div>
-
-        {/* Glassmorphic overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-full h-full backdrop-blur-[5px] bg-[hsla(270,80%,30%,0.25)] shadow-[inset_0_0_0.5px_rgba(255,255,255,0.1)]" />
         </div>
-        {/* Section Content */}
         <div className="relative z-20 max-w-5xl w-full px-6 text-center">
-
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
             Development Workflow
           </h1>
-
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-20">
             A comprehensive journey from concept to deployment, ensuring your AI persona perfectly embodies your brand.
           </p>
         </div>
-
-
-      </section>
-
-
+      </motion.section>
 
       {/* Tools Section */}
-      <section className="py-16 bg-white">
+      <motion.section
+        ref={toolsRef}
+        initial={{ opacity: 0, y: 60 }}
+        animate={isInViewTools ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="py-16 bg-white"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Tools We Work With
-          </h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Tools We Work With</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             {tools.map((tool, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-full mb-4">
-                  <img
-                    src={`/workflow/${tool.icon}`}
-                    alt={tool.name}
-                    className="w-10 h-10"
-                  />
+                  <img src={`/workflow/${tool.icon}`} alt={tool.name} className="w-10 h-10" />
                 </div>
-                <p className="text-lg font-medium text-gray-800">
-                  {tool.name}
-                </p>
+                <p className="text-lg font-medium text-gray-800">{tool.name}</p>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Workflow Steps */}
-      <section className="py-16 bg-gray-50">
+      {/* Workflow Steps Section */}
+      <motion.section
+        ref={workflowRef}
+        initial={{ opacity: 0, y: 60 }}
+        animate={isInViewWorkflow ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="py-16 bg-gray-50"
+      >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">
-              Our Development Workflow
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">Our Development Workflow</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               From discovery to deployment, here's how we craft AI personas that don't just function — they resonate.
             </p>
           </div>
-
           <div className="space-y-8">
             {workflowSteps.map((step, index) => (
-              <div key={index} className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm"
+              >
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-theme-main/40 text-white rounded-full flex items-center justify-center mr-4">
                     <span className="font-bold text-lg">{index + 1}</span>
                   </div>
-                  <h3 className="text-2xl font-semibold text-gray-900">
-                    {step.name}
-                  </h3>
+                  <h3 className="text-2xl font-semibold text-gray-900">{step.name}</h3>
                 </div>
-
-                <p className="text-lg text-gray-700 mb-4">
-                  {step.description}
-                </p>
-
-                <p className="text-gray-600 mb-6">
-                  {step.story}
-                </p>
-
+                <p className="text-lg text-gray-700 mb-4">{step.description}</p>
+                <p className="text-gray-600 mb-6">{step.story}</p>
                 <ul className="space-y-3">
                   {step.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
@@ -215,24 +211,27 @@ const DevelopmentWorkflow: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-white">
+      <motion.section
+        ref={faqRef}
+        initial={{ opacity: 0, y: 60 }}
+        animate={isInViewFAQ ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="py-16 bg-white"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              Common Questions
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">Common Questions</h2>
             <p className="text-gray-600">
               Have more questions? <Link to="/contactus" className="text-blue-600 hover:underline">Contact our team</Link>
             </p>
           </div>
-
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
@@ -240,30 +239,21 @@ const DevelopmentWorkflow: React.FC = () => {
                   onClick={() => toggleFAQ(idx)}
                   className="w-full px-6 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100"
                 >
-                  <h4 className="text-lg font-medium text-gray-900">
-                    {faq.question}
-                  </h4>
-                  <svg
-                    className={`w-5 h-5 text-gray-500 transition-transform ${openFAQ === idx ? 'transform rotate-180' : ''}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                  <h4 className="text-lg font-medium text-gray-900">{faq.question}</h4>
+                  <svg className={`w-5 h-5 text-gray-500 transition-transform ${openFAQ === idx ? 'transform rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 {openFAQ === idx && (
                   <div className="px-6 py-4 bg-white">
-                    <p className="text-gray-700">
-                      {faq.answer}
-                    </p>
+                    <p className="text-gray-700">{faq.answer}</p>
                   </div>
                 )}
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <CallToAction />
       <CookieConsent />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import ContactHeroSection from '../components/ContactUsHero';
 
 interface ToastMessage {
   type: 'success' | 'error';
@@ -121,73 +122,7 @@ const ContactUs: React.FC = () => {
           {toast.message}
         </div>
       )}
-      <section
-        className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-100 to-white text-gray-900 px-6 md:px-12 overflow-hidden"
-        aria-label="Get in Touch Hero Section"
-      >
-        {/* Background Image with subtle parallax effect */}
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="./homePage/hero-banner.png"
-            alt="Contact Us Background"
-            className="w-full h-full object-cover object-center scale-105"
-            style={{ transform: 'translateZ(0)' }}
-          />
-        </div>
-
-        {/* Enhanced Glassmorphic Overlay */}
-<div className="absolute inset-0">
-  <div
-    className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
-    style={{
-      background:
-        'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
-      boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
-    }}
-  />
-</div>
-
-
-        {/* Content Layer with refined spacing */}
-        <div className="relative z-10 max-w-7xl w-full px-4 flex flex-col items-center justify-center py-24">
-          {/* Text Content with improved typography */}
-          <div className="text-center max-w-3xl space-y-8 px-4">
-            <h1
-              className="text-5xl text-white md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight"
-              style={{
-                textShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                lineHeight: '1.1'
-              }}
-            >
-              Get in Touch With Us
-            </h1>
-
-            {/* Animated Branded Dots */}
-            <div className="flex justify-center gap-4">
-              <span
-                className="w-4 h-4 rounded-full bg-theme-main/30 animate-pulse"
-                style={{ animationDuration: '2s' }}
-              />
-              <span
-                className="w-4 h-4 rounded-full bg-theme-main/50 animate-pulse delay-75"
-                style={{ animationDuration: '2.2s' }}
-              />
-              <span
-                className="w-4 h-4 rounded-full bg-theme-main/80 animate-pulse delay-150"
-                style={{ animationDuration: '2.4s' }}
-              />
-            </div>
-
-            <p
-              className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-2xl mx-auto"
-              style={{ textShadow: '0 1px 2px rgba(0,0,0,0.2)' }}
-            >
-              We typically respond within <span className="font-semibold text-white">48 hours</span>.
-              Our team is ready to assist you with any inquiries.
-            </p>
-          </div>
-        </div>
-      </section>
+    <ContactHeroSection />
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gray-50 rounded-xl p-8 shadow-sm">

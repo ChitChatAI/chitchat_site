@@ -1,20 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 
 const Businesses: React.FC = () => {
-  // Typing animation for AI intro text (used in first section)
   const [headerText, setHeaderText] = useState('');
+  const [valueTransform, setValueTransform] = useState(0);
+  const [featuresTransform, setFeaturesTransform] = useState(0);
+
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
 
+  const valueSectionRef = useRef<HTMLDivElement>(null);
+  const featuresSectionRef = useRef<HTMLDivElement>(null);
+
+  const controls1 = useAnimation();
+  const controls2 = useAnimation();
+  const isInView1 = useInView(valueSectionRef, { once: false, margin: "-100px" });
+  const isInView2 = useInView(featuresSectionRef, { once: false, margin: "-100px" });
   useEffect(() => {
-    let i = 0;
-    const typingInterval = setInterval(() => {
-      setHeaderText(fullText.substring(0, i + 1));
-      i++;
-      if (i > fullText.length) clearInterval(typingInterval);
-    }, 50);
-    return () => clearInterval(typingInterval);
+    const typingEffect = () => {
+      let i = 0;
+      const typingInterval = setInterval(() => {
+        setHeaderText(fullText.substring(0, i + 1));
+        i++;
+        if (i > fullText.length) clearInterval(typingInterval);
+      }, 50);
+      return typingInterval;
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const interval = typingEffect();
+            return () => clearInterval(interval);
+          }
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% of element is visible
+    );
+
+    if (valueSectionRef.current) {
+      observer.observe(valueSectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
   }, [fullText]);
 
+  useEffect(() => {
+    let animationFrame: number;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const isMobile = window.innerWidth < 768;
+
+      if (!isMobile) {
+        setValueTransform(scrollY * 0.05);
+        setFeaturesTransform(scrollY * 0.1);
+      } else {
+        setValueTransform(0);
+        setFeaturesTransform(0);
+      }
+
+      animationFrame = requestAnimationFrame(handleScroll);
+    };
+
+    animationFrame = requestAnimationFrame(handleScroll);
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
+  useEffect(() => {
+    if (isInView1) controls1.start({ opacity: 1, y: 0 });
+    if (isInView2) controls2.start({ opacity: 1, y: 0 });
+  }, [isInView1, isInView2]);
   const includedFeatures = [
     {
       title: 'Custom Persona Design',
@@ -103,66 +161,135 @@ const Businesses: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white text-gray-900">
-      {/* Value Section */}
-      <section id="value" className="py-20 px-4 sm:px-8 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-8">
-            How ChitChat Adds Value to Your Business
-          </h2>
+    <div className="bg-white text-gray-900 overflow-hidden">
+      {/* Hero Section with Typing Animation */}
+      <motion.section
+        id="value"
+        ref={valueSectionRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={controls1}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        style={{ transform: `translateY(${valueTransform}px)` }}
+        className="py-32 px-4 sm:px-8 lg:px-20 bg-gradient-to-br from-gray-50 to-white">
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-8">
+            <span className="font-extrabold text-black">EVERYONE</span> is trying to make AI agents{' '}
+            <span className="italic font-semibold text-gray-900">sound</span> like humans.
+            <br className="hidden sm:block" />
+            <span className="font-bold text-gray-900 block mt-4">
+              We are building ones that <span className="italic font-semibold">think</span> like humans.
+            </span>
+          </h1>
+          <div className="text-2xl sm:text-3xl font-mono text-gray-600 h-20 whitespace-pre-wrap">
+            {headerText}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Value Proposition Section */}
+      <motion.section
+        id="value"
+        ref={valueSectionRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={controls1}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        style={{ transform: `translateY(${valueTransform}px)` }}
+        className="py-28 px-4 sm:px-8 lg:px-20 will-change-transform bg-white"
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+            >
+              How ChitChat Adds Value to Your Business
+            </motion.h2>
+            
+          </div>
+
+          <div className="space-y-24">
             {businessValues.map((item, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg border border-gray-200 p-6">
-                <span className="material-symbols-outlined text-4xl text-theme-main mb-4">
-                  {item.icon}
-                </span>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm font-medium text-theme-main mb-2">
-                  {item.metric}
-                </p>
-                <p className="text-base text-gray-700">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Included Features Section */}
-      <section id="whats-included" className="py-20 px-4 sm:px-8 lg:px-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-8">
-            What's Included in Every ChitChat Package
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {includedFeatures.map((item, index) => (
-              <div key={index} className="bg-white rounded-lg border border-gray-200 p-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-theme-main/10 text-theme-main">
-                    <span className="material-symbols-outlined text-2xl">
-                      {item.icon}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {item.title}
-                    </h3>
-                    <div className="h-1 w-10 bg-theme-main/50 rounded-full mb-2"></div>
-                    <p className="text-base text-gray-700">
-                      {item.description}
-                    </p>
-                  </div>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`flex flex-col items-center text-center gap-8 pb-20 ${index !== businessValues.length - 1 ? "border-b border-gray-100" : ""
+                  }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-4 h-4 bg-theme-main rounded-sm transform rotate-45" />
+                  <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-800">
+                    {item.title}
+                  </h3>
                 </div>
-              </div>
+                <div className="text-xl text-gray-600 leading-relaxed max-w-4xl">
+                  <p>{item.description}</p>
+                  {item.metric && (
+                    <div className="mt-4 text-theme-main font-bold tracking-wide">
+                      {item.metric}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Features Section */}
+      <motion.section
+        id="whats-included"
+        ref={featuresSectionRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={controls2}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        style={{ transform: `translateY(${featuresTransform}px)` }}
+        className="py-28 px-4 sm:px-8 lg:px-20 bg-gray-50 will-change-transform"
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+            >
+              Comprehensive ChitChat Package Features
+            </motion.h2>
+           
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-16">
+            {includedFeatures.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-4 h-4 bg-theme-main rounded-full flex-shrink-0" />
+                  <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-800">
+                    {item.title}
+                  </h3>
+                </div>
+                <div className="text-lg text-gray-600 leading-relaxed">
+                  <p>{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+
     </div>
   );
 };

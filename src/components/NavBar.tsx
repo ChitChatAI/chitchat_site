@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const atTop = window.scrollY <= 80;
-      const transparentRoutes = ["/", "/development-workflow", "/contactus"];
+      const transparentRoutes = ["/", "/development-workflow"];
       const isTransparentRoute = transparentRoutes.includes(location.pathname);
       setIsScrolled(!isTransparentRoute || !atTop);
     };
@@ -67,7 +67,7 @@ const NavBar: React.FC = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "text-gray-900 bg-white shadow-sm" : "text-white bg-transparent"
+        isScrolled ? "text-gray-900 bg-white" : "text-white bg-transparent"
       }`}
       aria-label="Main Navigation"
     >
