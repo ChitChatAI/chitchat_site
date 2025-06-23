@@ -511,7 +511,6 @@ const Solutions: React.FC = () => {
         }
       `}</style>
       </main >
-      <CookieConsent position="left" modalPosition="bottom" />
       <CallToAction />
       <Footer />
     </>

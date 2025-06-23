@@ -16,22 +16,11 @@ import WhatsAPersona from './pages/WhatsAPersona';
 const App: React.FC = () => {
   useScrollAnimation();
 
-  const [isInitialLoading, setIsInitialLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitialLoading(false);
-    }, 3000); // Loader shows for 3 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
+ 
 
   return (
     <Router>
       <ScrollToTop />
-      {isInitialLoading ? (
-        <Loader />
-      ) : (
         <div className="app">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -45,7 +34,6 @@ const App: React.FC = () => {
             <Route path="*" element={<HomePage />} />
           </Routes>
         </div>
-      )}
     </Router>
   );
 };

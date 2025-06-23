@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Confetti from 'react-confetti';
 import { useNavigate } from 'react-router-dom';
 
-const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
+const inputBase = "block w-full px-4 py-3 text-sm text-white bg-gray-800 border border-gray-200 rounded-lg focus:ring-2 focus:ring-theme-main focus:outline-none transition-all duration-300";
 const inputError = "block w-full px-4 py-3 text-sm text-white bg-red-50/20 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all duration-300";
 
 // Add toast interface
@@ -44,10 +46,12 @@ const ContactUs: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const fullText = 'Contact Us';
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [showConfetti, setShowConfetti] = React.useState(false);
+  const [showLetsTalk, setShowLetsTalk] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -188,54 +192,37 @@ const ContactUs: React.FC = () => {
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Build a single message with all fields
-    const fullMessage = `
-Name: ${formData.name} ${formData.surname}
-Email: ${formData.email}
-Subject: ${formData.subject || 'N/A'}
-
-Message:
-${formData.message}
-
-Company Size: ${formData.companySize}
-Industry: ${formData.industry}
-Goals: ${formData.goals}
-Interests: ${formData.interests.join(', ')}
-Team Description: ${formData.teamDescription}
-`;
+    // Combine all user text fields into a single message
+    const combinedMessage = `Name: ${formData.name} ${formData.surname}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage: ${formData.message}\nCompany Size: ${formData.companySize}\nIndustry: ${formData.industry}\nGoals: ${formData.goals}\nInterests: ${formData.interests.join(', ')}\nTeam Description: ${formData.teamDescription}`;
 
     const formDataToSend = {
-      name: `${formData.name} ${formData.surname}`,
-      email: formData.email,
-      message: fullMessage,
+      message: combinedMessage,
+      _replyto: formData.email,
+      _subject: formData.subject || "New ChitChat AI Inquiry",
+      _cc: "hnengare@gmail.com",
     };
 
     try {
       setIsSubmitting(true);
 
-      const response = await fetch('https://formspree.io/f/xdkgrpqr', {
+      const response = await fetch('https://formspree.io/f/xanokvdw', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formDataToSend),
       });
 
-      const data = await response.json();
+      if (!response.ok) throw new Error('Network response was not ok');
 
-      if (response.ok) {
-        setToast({ type: 'success', message: 'Message sent successfully!' });
-        setShowConfetti(true);
-        setIsSubmitted(true);
+      setToast({ type: 'success', message: 'Message sent successfully!' });
+      setShowConfetti(true);
+      setIsSubmitted(true);
 
-        setTimeout(() => {
-          setShowConfetti(false);
-          navigate('/');
-        }, 3000);
-      } else {
-        throw new Error(data?.errors?.[0]?.message || 'Unknown error occurred');
-      }
+      setTimeout(() => {
+        setShowConfetti(false);
+        navigate('/');
+      }, 3000);
     } catch (error) {
       console.error('Failed to send the message:', error);
       setToast({ type: 'error', message: 'Failed to send the message. Please try again later.' });
@@ -258,7 +245,6 @@ Team Description: ${formData.teamDescription}
     await sendEmail(e as unknown as React.FormEvent<HTMLFormElement>);
   };
 
-  
   // Add auto-dismiss for toast after 5 seconds
   useEffect(() => {
     if (toast) {
@@ -306,7 +292,7 @@ Team Description: ${formData.teamDescription}
         role="dialog"
       >
         <div
-          className={`transform transition-all duration-500 ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'} bg-black/95 rounded-2xl shadow-2xl p-2 sm:p-8 w-full max-w-2xl relative`}
+          className={`transform transition-all duration-500 ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'} bg-black/95 rounded-2xl shadow-2xl border border-white/20 p-2 sm:p-8 w-full max-w-2xl relative`}
         >
           <button
             onClick={onClose}
@@ -324,69 +310,40 @@ Team Description: ${formData.teamDescription}
   return (
     <>
       {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
-
+      <NavBar />
+      
+      {/* Toast notification */}
       {toast && (
-        <div className="fixed top-6 sm:top-10 left-4 right-4 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 z-50 animate-fade-in-right px-2 sm:px-0">
-          <div
-            className={`w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl shadow-lg rounded-xl pointer-events-auto overflow-hidden backdrop-blur-md transition-all transform-gpu ${toast.type === 'success'
-              ? 'bg-gradient-to-r from-green-500 to-emerald-600'
+        <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 animate-fade-in-right">
+          <div className={`max-w-md w-full shadow-lg rounded-lg pointer-events-auto overflow-hidden transition-all transform-gpu ${
+            toast.type === 'success' 
+              ? 'bg-gradient-to-r from-green-500 to-emerald-600' 
               : 'bg-gradient-to-r from-red-500 to-pink-600'
-              }`}
-          >
+          }`}>
             <div className="p-4">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
                   {toast.type === 'success' ? (
-                    <svg
-                      className="h-6 w-6 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   ) : (
-                    <svg
-                      className="h-6 w-6 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
+                    <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   )}
                 </div>
-                <div className="ml-3 flex-1 min-w-0">
-                  <p className="text-sm sm:text-base font-medium text-white truncate">
-                    {toast.message}
-                  </p>
+                <div className="ml-3 w-0 flex-1">
+                  <p className="text-base font-medium text-white">{toast.message}</p>
                 </div>
                 <div className="ml-4 flex-shrink-0 flex">
                   <button
-                    className="inline-flex text-white hover:text-white/80 focus:outline-none focus:ring-2 focus:ring-white rounded"
+                    className="inline-flex text-white focus:outline-none focus:ring-2 focus:ring-white"
                     onClick={() => setToast(null)}
                   >
                     <span className="sr-only">Close</span>
-                    <svg
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
+                    <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </button>
                 </div>
@@ -396,7 +353,30 @@ Team Description: ${formData.teamDescription}
         </div>
       )}
 
-
+      {/* Modern dark video + image background */}
+      <div className="fixed inset-0 z-[-2] pointer-events-none">
+        <img
+          src="/solutionsPage/solutions.jpg"
+          alt="Contact Us Background"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
+          draggable="false"
+        />
+      </div>
+      <div className="fixed inset-0 z-[-1] pointer-events-none">
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+        </div>
+      </div>
       <div className="fixed inset-0 z-[-3] bg-black" />
 
       {/* Modern floating alert with animation */}
@@ -427,10 +407,60 @@ Team Description: ${formData.teamDescription}
           </div>
         </div>
       )}
+
+      {/* Modern hero section */}
+      <section className="relative px-4 sm:px-8 bg-black bg-gradient-to-b from-black via-[#18132a] to-[#18132a] font-[Satoshi] overflow-hidden text-white border-b border-white/10 shadow-xl">
+        {/* Video + image background handled globally */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <img
+            src="/solutionsPage/solutions.jpg"
+            alt="Contact Us Background"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
+            draggable="false"
+          />
+          <div className="absolute inset-0 w-full h-full">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-10"></div>
+          </div>
+          <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-[0.04] parallax-el" data-speed="0.09"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-theme-main/30 rounded-full blur-3xl animate-float parallax-el" data-speed="0.15"></div>
+          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-pink-400/20 rounded-full blur-3xl animate-float-delayed parallax-el" data-speed="0.11"></div>
+          <div className="absolute top-1/2 left-2/3 w-40 h-40 bg-purple-400/30 rounded-full blur-2xl animate-pulse parallax-el" data-speed="0.13"></div>
+        </div>
+        <div className="container mx-auto px-6 sm:px-12 relative z-10">
+            <div
+            className="flex flex-col items-center justify-center min-h-screen text-center mx-auto"
+            id="contact-hero-parallax-row"
+            style={{ willChange: 'transform', opacity: 0, transform: 'translateY(60px)' }}
+            >
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-xl animate-hero-fade-in">
+              <span className="block text-white font-extrabold animate-gradient-x pb-4 animate-hero-slide-in">Let's Build Your AI Solution</span>
+            </h1>
+            <p className="text-xl sm:text-2xl md:text-2xl text-white max-w-2xl mb-12 leading-relaxed font-medium drop-shadow animate-contact-hero-fade-in delay-200">
+              Fill out the form below to get started with <span className="text-theme-main font-semibold animate-contact-hero-gradient-in delay-400">ChitChat AI</span>. Our team will reach out to discuss how we can help you implement AI solutions tailored to your business needs.
+            </p>
+            <div className="flex space-x-3 mt-10 animate-fade-in-up delay-700">
+              <span className="w-4 h-4 rounded-full bg-theme-main animate-pulse"></span>
+              <span className="w-4 h-4 rounded-full bg-purple-400 animate-pulse delay-150"></span>
+              <span className="w-4 h-4 rounded-full bg-pink-400 animate-pulse delay-300"></span>
+            </div>
+            </div>
+        </div>
+      </section>
+
       {/* Shifted Form Section */}
-      <section className="w-full h-screen flex items-center justify-center px-4 sm:px-8 lg:px-20 relative z-10 py-32">
-     
-          <div className="w-full mx-auto rounded-2xl shadow-2xl p-6 sm:p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
+      <section className="relative px-4 sm:px-0 lg:px-20 bg-black bg-gradient-to-b from-[#18132a] via-black/90 to-black/95">
+        <div className="container mx-auto">
+          <div className="w-full mx-auto bg-black/80 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 p-6 sm:p-12 relative overflow-hidden transition-all duration-500 hover:shadow-2xl transform perspective-card">
             {/* Form steps container */}
             <div className="relative z-10">
               {/* Modern progress tracker */}
@@ -579,7 +609,7 @@ Team Description: ${formData.teamDescription}
                 </div>
 
                 {/* Step 2: Company & Goals */}
-                <div className={`${getStepClasses(2)} `}>
+                <div className={`${getStepClasses(2)}`}>
                   <h3 className="text-2xl font-semibold text-white mb-8 font-satoshi">Company & Goals</h3>
                   <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                     {/* Company size selection */}
@@ -665,7 +695,7 @@ Team Description: ${formData.teamDescription}
                       <label className="block text-gray-100 font-medium mb-4 text-lg">What are you interested in?</label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {['SDK Integration', 'Custom Persona', 'AI Strategy Call'].map((interest) => (
-                          <label key={interest} className="flex items-center p-4 border rounded-xl hover:border-theme-main/30 hover:bg-black transition-all duration-300 cursor-pointer">
+                          <label key={interest} className="flex items-center p-4 border border-gray-200 rounded-xl hover:border-theme-main/30 hover:bg-black transition-all duration-300 cursor-pointer">
                             <input
                               type="checkbox"
                               name={interest}
@@ -712,11 +742,11 @@ Team Description: ${formData.teamDescription}
                 </div>
 
                 {/* Navigation buttons */}
-                <div className="pb-16 pt-3 flex justify-between items-center">
+                <div className="mt-12 flex justify-between items-center">
                   {currentStep > 1 ? (
                     <button
                       onClick={handlePrevStep}
-                      className="inline-flex items-center px-5 py-3 rounded-xl font-medium transition-all duration-300 bg-white border text-gray-700 hover:bg-gray-50 hover:shadow-md active:scale-95 space-x-2"
+                      className="inline-flex items-center px-5 py-3 rounded-xl font-medium transition-all duration-300 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:shadow-md active:scale-95 space-x-2"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -741,8 +771,8 @@ Team Description: ${formData.teamDescription}
                       onClick={handleSubmit}
                       disabled={isSubmitting}
                       className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${isSubmitting
-                        ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'
+                          ? 'bg-gray-400 cursor-not-allowed'
+                          : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'
                         }`}
                     >
                       {isSubmitting ? (
@@ -767,8 +797,187 @@ Team Description: ${formData.teamDescription}
               </div>
             </div>
           </div>
+        </div>
       </section>
+      {/* Trust indicators */}
+      <div className="mt-10 flex flex-wrap justify-center items-center gap-5 text-gray-300 text-sm bg-black/90 py-8 border-t border-white/10">
+        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
+          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>SSL Secured</span>
+        </div>
+        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
+          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <span>100% Confidential</span>
+        </div>
+        <div className="flex items-center bg-black/60 px-4 py-2 rounded-full shadow-sm border border-white/10">
+          <svg className="w-5 h-5 mr-2 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>24-48 Hour Response</span>
+        </div>
+      </div>
 
+      <Footer />
+      <LetsTalkModal open={showLetsTalk} onClose={() => setShowLetsTalk(false)}>
+        <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
+          <h3 className="text-2xl font-semibold text-white mb-4 font-satoshi text-center">Let's Talk</h3>
+          <p className="text-base text-gray-200 mb-6 text-center">
+            We’re excited to connect with you! Please fill out the form below and our team will respond within <span className="text-theme-main font-semibold">48 hours</span>.<br/>
+            You’re welcome to ask anything or just say hello — we’re here to help and happy to have you!
+          </p>
+          {/* Only show the form if not submitted, else show the success message */}
+          {!isSubmitted ? (
+            <form onSubmit={sendEmail} className="space-y-6">
+              {/* Name, Surname, Email, Subject, Message fields (reuse as needed) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="relative group">
+                  <input
+                    type="text"
+                    id="modal-name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`${inputBase} ${errors.name ? inputError : ''}`}
+                    required
+                  />
+                  <label htmlFor="modal-name" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.name ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>First Name</label>
+                  {errors.name && <p className="mt-2 text-sm text-red-400">{errors.name}</p>}
+                </div>
+                <div className="relative group">
+                  <input
+                    type="text"
+                    id="modal-surname"
+                    name="surname"
+                    value={formData.surname}
+                    onChange={handleChange}
+                    className={`${inputBase} ${errors.surname ? inputError : ''}`}
+                    required
+                  />
+                  <label htmlFor="modal-surname" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.surname ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>Surname</label>
+                  {errors.surname && <p className="mt-2 text-sm text-red-400">{errors.surname}</p>}
+                </div>
+              </div>
+              <div className="relative group">
+                <input
+                  type="email"
+                  id="modal-email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`${inputBase} ${errors.email ? inputError : ''}`}
+                  required
+                />
+                <label htmlFor="modal-email" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.email ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>Email Address</label>
+                {errors.email && <p className="mt-2 text-sm text-red-400">{errors.email}</p>}
+              </div>
+              <div className="relative group">
+                <input
+                  type="text"
+                  id="modal-subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className={inputBase}
+                />
+                <label htmlFor="modal-subject" className={`absolute left-4 text-sm text-gray-400 transition-all duration-300 ${formData.subject ? 'top-1 text-xs text-theme-main' : 'top-3'}`}>Subject (Optional)</label>
+              </div>
+              <div className="relative group">
+                <textarea
+                  id="modal-message"
+                  name="message"
+                  rows={5}
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={`${inputBase} ${errors.message ? inputError : ''}`}
+                  required
+                />
+                <label htmlFor="modal-message" className="text-white">Your Message</label>
+                <p className="mt-2 text-sm text-gray-400">Tell us about your specific needs or questions</p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 text-white ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-theme-main hover:bg-theme-dark hover:shadow-lg active:scale-95'}`}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <span>Send</span>
+                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 p-6 rounded-xl shadow-lg text-center">
+              <div className="flex flex-col items-center">
+                <div className="bg-green-100 p-3 rounded-full shadow-inner mb-4">
+                  <svg className="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h4 className="text-xl font-semibold text-green-800">Message Sent Successfully!</h4>
+                <p className="text-green-700">Thank you for reaching out. Our team will get back to you shortly.</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </LetsTalkModal>
+      <style>{`
+        @keyframes contact-hero-fade-in {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-contact-hero-fade-in {
+          animation: contact-hero-fade-in 1.1s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes contact-hero-slide-in {
+          0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+          100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-contact-hero-slide-in {
+          animation: contact-hero-slide-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes contact-hero-gradient-in {
+          0% { opacity: 0; filter: blur(8px); }
+          100% { opacity: 1; filter: blur(0); }
+        }
+        .animate-contact-hero-gradient-in {
+          animation: contact-hero-gradient-in 1.2s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        @keyframes fade-in-right {
+          0% { opacity: 0; transform: translateX(100px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-in-right {
+          animation: fade-in-right 0.4s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        @media (max-width: 768px) {
+          form {
+            margin: 2px; /* Add 2px margin */
+            width: calc(100% - 4px); /* Ensure the form fills the screen minus the margin */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+          }
+        }
+      `}</style>
     </>
   );
 };

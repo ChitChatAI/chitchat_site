@@ -278,7 +278,6 @@ const DevelopmentWorkflow: React.FC = () => {
       </section>
 
       <CallToAction bgImage="/solutionsPage/solutions.jpg" />
-      <CookieConsent position="left" modalPosition="bottom" />
       <Footer />
     </>
   );
