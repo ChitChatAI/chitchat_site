@@ -161,7 +161,7 @@ const Businesses: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white text-gray-900 overflow-hidden">
+    <div className="bg-gray-900 text-white overflow-hidden">
       {/* Hero Section with Typing Animation */}
       <motion.section
         id="value"
