@@ -81,7 +81,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
           style={{
             background:
-              'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
+              'linear-gradient(135deg, rgba(202, 195, 216, 0.15) 0%, rgba(60,30,120,0.1) 100%)',
             boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
           }}
         />
