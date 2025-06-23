@@ -43,7 +43,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   // Preload the video when component mounts
   useEffect(() => {
     const video = document.createElement('video');
-    video.src = '/homePage/hero-video.mp4';
+    video.src = '/homePage/chitchat_bg.mp4';
     video.preload = 'auto';
   }, []);
 
@@ -54,7 +54,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
       aria-label="ChitChat AI Hero Section"
     >
       {/* Background Image */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 w-full h-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.7 }}
@@ -69,20 +69,23 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           preload="auto"
           aria-label="Background video showing AI technology in action"
         >
-          <source src="/homePage/hero-video.mp4" type="video/mp4" />
+          <source src="/homePage/chitchat_bg.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </motion.div>
 
-      {/* Glassmorphic overlay */}
-      <motion.div 
-        className="absolute inset-0 flex items-center justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
-      >
-        <div className="w-full h-full backdrop-blur-[5px] bg-[hsla(270,80%,30%,0.25)] shadow-[inset_0_0_0.5px_rgba(255,255,255,0.1)]" />
-      </motion.div>
+
+      {/* Enhanced Glassmorphic Overlay */}
+      <div className="absolute inset-0">
+        <div
+          className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
+            boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
+          }}
+        />
+      </div>
 
       {/* Content Layer */}
       <motion.div
@@ -92,14 +95,14 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
         variants={containerVariants}
         className="relative z-10 max-w-5xl w-full px-6 text-center"
       >
-        <motion.h1 
+        <motion.h1
           variants={itemVariants}
           className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
         >
           Human Augmented AI For Real Connection
         </motion.h1>
-    
-        <motion.p 
+
+        <motion.p
           variants={itemVariants}
           className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10"
         >
