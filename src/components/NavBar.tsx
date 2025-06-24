@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const atTop = window.scrollY <= 80;
-      const transparentRoutes = ["/", "/development-workflow"];
+      const transparentRoutes = ["/", "/development-workflow", "/contactus"];
       const isTransparentRoute = transparentRoutes.includes(location.pathname);
       setIsScrolled(!isTransparentRoute || !atTop);
     };
