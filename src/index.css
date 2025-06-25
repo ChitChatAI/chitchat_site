@@ -1,14 +1,24 @@
+/* ===== BASE & RESET ===== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Reset styles for all devices */
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  @apply font-sans text-gray-800 antialiased bg-white;
+  line-height: 150%;
 }
 
 a,
@@ -30,68 +40,41 @@ textarea {
   width: 100%;
 }
 
-/* Spacing for larger devices */
-@media (min-width: 1024px) {
-  :root {
-    --section-padding: 60px;
-  }
-}
-
-/* Additional custom styles */
-html {
-  scroll-behavior: smooth;
-  font-size: 16px; /* Base font size */
-}
-
-body {
-  @apply font-sans text-gray-800 antialiased bg-white;
-  line-height: 150%; /* Set line height to 150% for better spacing */
-}
-
-/* Remove default margin and padding for html and body */
-html, body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* ===== TYPOGRAPHY ===== */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Be Vietnam Pro', sans-serif; /* Keep existing font family */
-  font-weight: 700; /* Bold headers for hierarchy */
-  letter-spacing: -0.01em; /* Slightly tighter letter spacing for elegance */
+  font-weight: 700; 
+  letter-spacing: -0.01em; 
 }
 
 p, span, li, a {
-  font-family: 'Satoshi', sans-serif; /* Keep existing font family */
-  font-weight: 400; /* Regular weight for readability */
-  max-width: 100ch; /* Limit line length to 100 characters */
+  font-weight: 400; 
+  max-width: 100ch; 
 }
 
-/* Refined font sizes with improved hierarchy */
 h1 {
-  font-size: 2.5rem; /* 40px */
+  font-size: 2.5rem;
   line-height: 1.2;
   margin-bottom: 0.7em;
 }
 
 h2 {
-  font-size: 2rem; /* 32px */
+  font-size: 2rem;
   line-height: 1.25;
   margin-bottom: 0.6em;
 }
 
 h3 {
-  font-size: 1.5rem; /* 24px */
+  font-size: 1.5rem;
   line-height: 1.3;
   margin-bottom: 0.5em;
 }
 
 p {
-  font-size: 1rem; /* 16px */
+  font-size: 1rem;
   margin-bottom: 1em;
 }
 
-/* Professional styling for sections */
+/* ===== LAYOUT & COMPONENTS ===== */
 section {
   position: relative;
   overflow: hidden;
@@ -99,7 +82,11 @@ section {
   transition: background-color 0.3s ease;
 }
 
-/* Enhanced Hero Styles - keeping the existing structure */
+.container {
+  @apply mx-auto px-4;
+}
+
+/* ===== HERO STYLES ===== */
 .hero-gradient-text {
   background: linear-gradient(90deg, #a78bfa 0%, #c084fc 50%, #e879f9 100%);
   -webkit-background-clip: text;
@@ -111,67 +98,33 @@ section {
 .hero-heading {
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   letter-spacing: -0.02em;
-  font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive larger font size */
+  font-size: clamp(2.5rem, 5vw, 4rem);
 }
 
 .hero-subheading {
   letter-spacing: 0.01em;
-  font-size: clamp(1.1rem, 2vw, 1.5rem); /* Increased */
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
 }
 
 .hero-description {
   letter-spacing: 0.01em;
   line-height: 1.5;
-  font-size: clamp(1rem, 1.5vw, 1.25rem); /* Increased */
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
 }
 
-/* Improved button styling */
+/* ===== BUTTONS ===== */
 button, .button {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  font-family: 'Satoshi', sans-serif;
   font-weight: 500;
-}
-
-button:after, .button:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: currentColor;
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
 button:hover, .button:hover {
   transform: translateY(-2px);
 }
 
-/* Refined Neural Dot Timeline */
-.neural-dot {
-  position: relative;
-  border-radius: 50%;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.neural-dot:before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  opacity: 0;
-  background: radial-gradient(circle at center, currentColor 0%, transparent 70%);
-  transition: opacity 0.3s ease;
-}
-
-.neural-dot:hover:before {
-  opacity: 0.5;
-}
-
-/* Refined card styling */
+/* ===== CARDS ===== */
 .card {
   position: relative;
   overflow: hidden;
@@ -193,377 +146,8 @@ button:hover, .button:hover {
   transform: translateY(-2px);
 }
 
-/* Removed styles for the custom cursor */
-/* .custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  background-color: var(--theme-main, #c084fc);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
-}
-
-.custom-cursor.hover {
-  width: 40px;
-  height: 40px;
-  background-color: rgba(80, 36, 255, 0.3);
-}
-
-.custom-cursor.click {
-  transform: translate(-50%, -50%) scale(0.8);
-} */
-
-/* 3D Card Hover Effects */
-.card-3d {
-  position: relative;
-  perspective: 1000px;
-}
-
-.card-3d .card-content {
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-3d:hover .card-content {
-  transform: rotateX(10deg) rotateY(10deg);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-/* Mouse-Position Reactive Background Elements */
-.mouse-reactive-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.mouse-reactive-bg .bg-element {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, rgba(80, 36, 255, 0.3), transparent);
-  border-radius: 50%;
-  transition: transform 0.1s ease;
-}
-
-/* Perspective Transform Effects for Hero Elements */
-.hero-perspective {
-  perspective: 1200px;
-}
-
-.hero-perspective .hero-content {
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease;
-}
-
-.hero-perspective:hover .hero-content {
-  transform: rotateX(5deg) rotateY(-5deg);
-}
-
-/* Enhanced animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* ===== ADVANCED SCROLL ANIMATIONS ===== */
-
-/* Scroll-triggered reveal animations with various effects */
-.reveal-fade {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-slide-left {
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-slide-right {
-  opacity: 0;
-  transform: translateX(50px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-rotate {
-  opacity: 0;
-  transform: rotate(5deg) translateY(30px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Active state when element is in view */
-.reveal-visible {
-  opacity: 1;
-  transform: translate(0) scale(1) rotate(0);
-}
-
-/* Staggered animation delays for groups */
-.stagger-item:nth-child(1) { transition-delay: 0s; }
-.stagger-item:nth-child(2) { transition-delay: 0.1s; }
-.stagger-item:nth-child(3) { transition-delay: 0.2s; }
-.stagger-item:nth-child(4) { transition-delay: 0.3s; }
-.stagger-item:nth-child(5) { transition-delay: 0.4s; }
-.stagger-item:nth-child(6) { transition-delay: 0.5s; }
-.stagger-item:nth-child(7) { transition-delay: 0.6s; }
-.stagger-item:nth-child(8) { transition-delay: 0.7s; }
-
-/* 3D perspective animations */
-.perspective-container {
-  perspective: 1000px;
-  perspective-origin: center;
-}
-
-.perspective-element {
-  opacity: 0;
-  transform-style: preserve-3d;
-  transform: translateZ(-100px) rotateX(10deg);
-  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.perspective-element.reveal-visible {
-  opacity: 1;
-  transform: translateZ(0) rotateX(0);
-}
-
-/* Text reveal animations */
-.text-reveal {
-  position: relative;
-  overflow: hidden;
-}
-
-.text-reveal span {
-  display: block;
-  transform: translateY(100%);
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.text-reveal.reveal-visible span {
-  transform: translateY(0);
-}
-
-/* Mask reveal effect */
-.mask-reveal {
-  position: relative;
-  overflow: hidden;
-}
-
-.mask-reveal::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--theme-main, #5024ff);
-  transform: scaleX(1);
-  transform-origin: right;
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.mask-reveal.reveal-visible::after {
-  transform: scaleX(0);
-}
-
-/* Scroll-triggered counter */
-.count-up {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-out;
-}
-
-.count-up.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Scroll-driven parallax sections */
-.parallax-section {
-  position: relative;
-  overflow: hidden;
-  transform-style: preserve-3d;
-}
-
-.parallax-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 120%;
-  background-size: cover;
-  background-position: center;
-  transform: translateZ(-10px) scale(2);
-  z-index: -1;
-}
-
-.parallax-content {
-  transform: translateZ(0);
-  position: relative;
-  z-index: 1;
-}
-
-/* Scroll-driven progress bar */
-.progress-bar-container {
-  width: 100%;
-  height: 4px;
-  background-color: rgba(80, 36, 255, 0.1);
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0;
-  background-color: var(--theme-main, #5024ff);
-  transition: width 0.2s ease;
-}
-
-/* Scroll snap sections */
-.snap-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-
-.snap-section {
-  height: 100vh;
-  scroll-snap-align: start;
-  position: relative;
-}
-
-/* Advanced neural timeline with animated connectors */
-.neural-timeline-advanced {
-  position: relative;
-}
-
-.neural-timeline-advanced::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 8px;
-  width: 2px;
-  background: linear-gradient(to bottom, 
-    transparent, 
-    var(--theme-main, #5024ff), 
-    var(--theme-main, #5024ff), 
-    transparent);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.neural-timeline-advanced.reveal-visible::before {
-  transform: scaleY(1);
-}
-
-.neural-item {
-  opacity: 0;
-  transform: translateX(20px);
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.neural-timeline-advanced.reveal-visible .neural-item {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.neural-timeline-advanced.reveal-visible .neural-item:nth-child(2) { transition-delay: 0.15s; }
-.neural-timeline-advanced.reveal-visible .neural-item:nth-child(3) { transition-delay: 0.3s; }
-.neural-timeline-advanced.reveal-visible .neural-item:nth-child(4) { transition-delay: 0.45s; }
-.neural-timeline-advanced.reveal-visible .neural-item:nth-child(5) { transition-delay: 0.6s; }
-
-.neural-dot-advanced {
-  position: relative;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: white;
-  border: 2px solid var(--theme-main, #5024ff);
-  z-index: 2;
-  transform: scale(0);
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.neural-timeline-advanced.reveal-visible .neural-dot-advanced {
-  transform: scale(1);
-}
-
-/* Text split effect on scroll */
-.text-split {
-  overflow: hidden;
-  position: relative;
-}
-
-.text-split span {
-  display: inline-block;
-  transform: translateY(100%);
-  opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), 
-              opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.text-split.reveal-visible span {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* Advanced hover effects for cards */
-.hover-card {
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(to right, var(--theme-main, #5024ff), #a78bfa);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.hover-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.hover-card:hover::before {
-  opacity: 1;
-}
-
-/* Existing animations */
+/* ===== ANIMATIONS ===== */
+/* Fade In */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -579,163 +163,7 @@ button:hover, .button:hover {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-.animate-fade-in-delay {
-  animation: fadeIn 0.6s ease-out 0.3s forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-delay-2 {
-  animation: fadeIn 0.6s ease-out 0.6s forwards;
-  opacity: 0;
-}
-
-/* Scroll review animation */
-@keyframes slideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.7s ease-out forwards;
-  opacity: 1 !important; /* Ensure visibility */
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.7s ease-out forwards;
-  opacity: 1 !important; /* Ensure visibility */
-}
-
-/* Scroll animations */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideUpLeft {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) translateX(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) translateX(0);
-  }
-}
-
-@keyframes slideUpRight {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) translateX(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) translateX(0);
-  }
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.7s ease-out forwards;
-}
-
-.animate-slide-up-left {
-  animation: slideUpLeft 0.7s ease-out forwards;
-}
-
-.animate-slide-up-right {
-  animation: slideUpRight 0.7s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.7s ease-out forwards;
-}
-
-/* Dot Triangle Animation */
-@keyframes triangleMotion {
-  0% {
-    transform: translate(0, 0);
-  }
-  33% {
-    transform: translate(4px, -3px);
-  }
-  66% {
-    transform: translate(-2px, 2px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-.dot-animation {
-  animation: triangleMotion 1.2s ease-in-out;
-  animation-iteration-count: 1;
-  animation-fill-mode: both;
-}
-
-.dot-container {
-  position: relative;
-}
-
-.dot-container:hover .dot-animation {
-  animation-iteration-count: 2;
-}
-
-.animated-dot {
-  animation-name: dotBounce;
-  animation-duration: 12s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-@keyframes dotBounce {
-  0%, 10%, 90%, 100% {
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    transform: translate(0, 0);
-  }
-  15%, 25% {
-    animation-name: triangleMotion;
-    animation-duration: 1.2s;
-    animation-iteration-count: 2;
-  }
-  80%, 85% {
-    animation-name: triangleMotion;
-    animation-duration: 1.2s;
-    animation-iteration-count: 2;
-  }
-}
-
-/* Professional Bouncing Dots Animation */
+/* Bounce */
 @keyframes bounce {
   0%, 80%, 100% {
     transform: scale(0.8);
@@ -751,38 +179,50 @@ button:hover, .button:hover {
   animation: bounce 1.2s infinite ease-in-out;
 }
 
-.animate-bounce.delay-200 {
-  animation-delay: 0.2s;
+/* Scroll Reveal Animations */
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.animate-bounce.delay-400 {
-  animation-delay: 0.4s;
+.reveal-visible {
+  opacity: 1;
+  transform: translate(0) scale(1) rotate(0);
 }
 
-/* Bounce Once Animation */
-@keyframes bounceOnce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
+/* Staggered animations */
+.stagger-item:nth-child(1) { transition-delay: 0s; }
+.stagger-item:nth-child(2) { transition-delay: 0.1s; }
+.stagger-item:nth-child(3) { transition-delay: 0.2s; }
+.stagger-item:nth-child(4) { transition-delay: 0.3s; }
+.stagger-item:nth-child(5) { transition-delay: 0.4s; }
+
+/* ===== SPECIAL EFFECTS ===== */
+/* Neural Dot */
+.neural-dot {
+  position: relative;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.animate-bounce-once {
-  animation: bounceOnce 1s ease;
+.neural-dot:before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(circle at center, currentColor 0%, transparent 70%);
+  transition: opacity 0.3s ease;
 }
 
-/* Code block styling */
+.neural-dot:hover:before {
+  opacity: 0.5;
+}
+
+/* ===== CODE BLOCKS ===== */
 .code-block {
   @apply bg-gray-50 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-gray-200;
-}
-
-.code-line {
-  @apply block;
 }
 
 .code-comment {
@@ -801,233 +241,31 @@ button:hover, .button:hover {
   @apply text-blue-600;
 }
 
-/* Vignette effect for video overlays */
-.bg-radial-gradient {
-  background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.3) 80%);
-}
-
-/* Typing animation */
-.animate-typing::after {
-  content: '';
-  display: inline-block;
-  animation: typing 1.5s steps(3, end) infinite;
-}
-
-@keyframes typing {
-  0% { content: ''; }
-  33% { content: '.'; }
-  66% { content: '..'; }
-  100% { content: '...'; }
-}
-
-/* Typing Dots Animation */
-@keyframes typing-dots {
-  0% { content: ''; opacity: 0.6; }
-  33% { content: '.'; opacity: 0.8; }
-  66% { content: '..'; opacity: 1; }
-  100% { content: '...'; opacity: 0.6; }
-}
-
-.animate-typing-dots::after {
-  content: '';
-  display: inline-block;
-  animation: typing-dots 1.5s steps(3, end) infinite;
-}
-
-/* Chat bubble styling */
-.bg-theme-light {
-  background-color: #f3f4f6; /* Light gray for chat bubbles */
-}
-
-/* Scrollable panel styling */
-.h-64 {
-  height: 16rem; /* Fixed height for panels */
-}
-
-.overflow-y-auto {
-  overflow-y: auto; /* Enable vertical scrolling */
-}
-
-/* Parallax Layer Animations */
-@keyframes parallax1 {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-15px); opacity: 0.9; }
-}
-
-@keyframes parallax2 {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(15px); opacity: 0.9; }
-}
-
-@keyframes parallax3 {
-  0% { transform: translateX(0); opacity: 1; }
-  100% { transform: translateX(-15px); opacity: 0.9; }
-}
-
-.animate-parallax-layer-1 {
-  animation: parallax1 2.5s infinite alternate ease-in-out;
-}
-
-.animate-parallax-layer-2 {
-  animation: parallax2 2.5s infinite alternate ease-in-out;
-}
-
-.animate-parallax-layer-3 {
-  animation: parallax3 2.5s infinite alternate ease-in-out;
-}
-
-/* Faster rotation animation */
-@keyframes rotateFast {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.animate-rotate-fast {
-  animation: rotateFast 1.5s linear infinite; /* Faster rotation */
-}
-
-/* Business-Oriented Parallax Effect */
-@keyframes horizontalParallax {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
-}
-
-.parallax {
-  position: relative;
-  animation: horizontalParallax 6s infinite ease-in-out;
-  will-change: transform;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/* Optional: Add a subtle shadow for depth */
-.parallax::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
-  z-index: -1;
-}
-
-/* Subtle Parallax Effect */
-@keyframes subtleParallax {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-
-.subtle-parallax {
-  animation: subtleParallax 6s infinite ease-in-out;
-  will-change: transform;
-}
-
-/* Professional Parallax Effect */
-.parallax-element {
-  will-change: transform;
-  transition: transform 0.05s linear;
-}
-
-/* Ensure proper overflow handling for parallax parent containers */
-section.relative.overflow-hidden {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* Pulse animation for icons */
-@keyframes pulse-icon {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.9;
-  }
-}
-
-.icon-pulse {
-  animation: pulse-icon 2s ease-in-out infinite;
-}
-
-/* Zoom Bounce Animation */
-@keyframes zoomBounce {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.animate-zoom-bounce {
-  animation: zoomBounce 1.5s ease-in-out;
-}
-
-/* Pulse Glow Animation */
-@keyframes pulseGlow {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-  }
-  50% {
-    transform: scale(1.1);
-    box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 1.5s infinite ease-in-out;
-}
-
-/* Mobile Enhancements */
+/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 640px) {
-  .container {
-    padding-left: 2px; /* Adjusted padding for mobile devices */
-    padding-right: 2px;
-  }
-
   section {
-    padding: 3rem 0; /* Reduced padding for better spacing */
+    padding: 3rem 0;
   }
 
-  h1, h2, h3 {
-    margin-bottom: 1rem; /* Increased spacing below headings */
+  h1 {
+    font-size: 2.25rem;
   }
 
   p {
-    font-size: 1.125rem; /* Slightly larger font size for readability */
-    line-height: 1.75; /* Improved line height */
-    margin-bottom: 1.5rem; /* Increased spacing below paragraphs */
+    font-size: 1.125rem;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
   }
 
   button, .button {
-    padding: 0.875rem 1.75rem; /* Larger buttons for better touch interaction */
-    font-size: 1rem; /* Increased font size */
-    border-radius: 0.5rem; /* Softer button corners */
-  }
-
-  .hero-heading {
-    font-size: 2.25rem; /* Slightly larger font size */
-    line-height: 1.3;
-  }
-
-  .hero-description {
-    font-size: 1.125rem; /* Larger description text */
-    line-height: 1.6;
-  }
-
-  .card {
-    margin-bottom: 2rem; /* Increased spacing between cards */
-  }
-
-  .scroll-review {
-    margin-bottom: 2rem; /* Enhanced spacing for reviews */
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
   }
 }
 
+@media (min-width: 1024px) {
+  :root {
+    --section-padding: 60px;
+  }
+}

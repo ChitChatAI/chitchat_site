@@ -8,165 +8,109 @@ const NavBar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerWidth > 768) {
-        setIsScrolled(window.scrollY > 100);
-      } else {
-        setIsScrolled(window.scrollY > 0);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { path: '/', label: 'About us' },
+    { path: '/', label: 'About' },
     { path: '/solutions', label: 'Solutions' },
-    { path: '/development-workflow', label: 'Development Phases' },
-    { path: '/contactus', label: 'Contact Us' },
+    { path: '/development-workflow', label: 'Workflow' },
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 px-0 transition-all duration-300 ${
-        isScrolled ? 'bg-white border-b border-gray-200 shadow-lg' : 'bg-transparent'
-      }`}
-    >
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-sm py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-3">
-          {/* Brand Logo */}
-          <NavLink to="/" className="flex items-center space-x-2 group">
-            <div
-              className={`flex items-center justify-center px-4 py-2 rounded-full transition-all duration-300 ease-out ${
-                isScrolled ? 'bg-white' : 'bg-transparent'
-              }`}
-            >
-              <img
-                src={isScrolled ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
-                alt="ChitChat AI Logo"
-                className={`object-contain drop-shadow-md transition-all duration-300 ease-out ${
-                  isScrolled
-                    ? 'w-8 h-8 sm:w-10 sm:h-10'
-                    : 'w-7 h-7 sm:w-9 sm:h-9 rounded-full'
-                }`}
-              />
-              <span
-                className={`ml-2 font-satoshi-rounded font-extrabold tracking-wide transition-all duration-300 ease-out ${
-                  isScrolled
-                    ? 'text-xl sm:text-2xl text-gray-900 group-hover:text-theme-main'
-                    : 'text-lg sm:text-xl text-white group-hover:text-theme-light'
-                }`}
-              >
-                <span
-                  className="relative z-10 font-satoshi"
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)',
-                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)',
-                  }}
-                >
-                  Chit
-                </span>
-                <span
-                  className="text-theme-main relative z-10 transition-colors duration-300 font-satoshi"
-                  style={{
-                    clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
-                    WebkitClipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 85%)',
-                    textShadow: '0px 4px 12px rgba(80,36,255,0.15)',
-                  }}
-                >
-                  Chat
-                </span>
-                <span
-                  className={`text-gray-700 font-satoshi font-extrabold relative z-10 transition-all duration-300 ease-out ${
-                    isScrolled ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
-                  }`}
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
-                    WebkitClipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 85%)',
-                    textShadow: '0px 4px 12px rgba(0,0,0,0.1)',
-                  }}
-                >
-                  AI
-                </span>
-              </span>
-            </div>
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <NavLink 
+            to="/" 
+            className="flex items-center gap-2 z-10 focus:outline-none"
+            aria-label="Home"
+          >
+            <img
+              src={isScrolled ? '/branding/chitchatAI.png' : '/branding/chitchatAILite.png'}
+              alt="ChitChat AI Logo"
+              className="w-8 h-8 transition-all"
+            />
+            <span className={`text-xl font-semibold ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
+              ChitChat<span className="text-theme-main">AI</span>
+            </span>
           </NavLink>
 
-          {/* Hamburger Toggle */}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map(({ path, label }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) => 
+                  `text-sm font-medium transition-colors ${isActive ? 'text-theme-main/90' : isScrolled ? 'text-gray-600 hover:text-theme-main/90' : 'text-white hover:text-theme-main/90'}`
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+            
+            <NavLink
+              to="/contactus"
+              className={`ml-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                isScrolled 
+                  ? 'bg-theme-main text-white hover:bg-theme-main/60' 
+                  : 'bg-white text-gray-900 hover:bg-gray-100'
+              }`}
+            >
+              Contact
+            </NavLink>
+          </div>
+
+          {/* Mobile Menu Button */}
           <button
-            className={`p-2 rounded-full transition-all duration-300 ease-out ${
-              isScrolled ? 'text-theme-main hover:bg-theme-main/10' : 'text-white hover:bg-white/10'
-            }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={`md:hidden p-2 rounded-md focus:outline-none ${isScrolled ? 'text-gray-600' : 'text-white'}`}
             aria-label="Toggle menu"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className={`transition-all duration-300 ease-out ${
-                isScrolled ? 'h-6 w-6' : 'h-5 w-5'
-              }`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d={isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}
-              />
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} />
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Right Slide Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-lg p-6 overflow-y-auto"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed inset-0 bg-white z-40 pt-20 px-6"
           >
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <ul className="flex flex-col space-y-6 mt-14">
+            <div className="flex flex-col gap-4">
               {navLinks.map(({ path, label }) => (
-                <li key={path}>
-                  <NavLink
-                    to={path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `block text-lg font-medium text-gray-700 hover:text-theme-main ${
-                        isActive ? 'text-theme-main' : ''
-                      }`
-                    }
-                  >
-                    {label}
-                  </NavLink>
-                </li>
+                <NavLink
+                  key={path}
+                  to={path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) => 
+                    `py-3 px-4 rounded-lg text-base font-medium ${isActive ? 'bg-purple-50 text-theme-main/90' : 'text-gray-700 hover:bg-gray-50'}`
+                  }
+                >
+                  {label}
+                </NavLink>
               ))}
-            </ul>
+              
+              <NavLink
+                to="/contactus"
+                onClick={() => setIsMenuOpen(false)}
+                className="mt-4 py-3 px-4 bg-theme-main text-white rounded-lg text-base font-medium text-center hover:bg-theme-main/60"
+              >
+                Contact
+              </NavLink>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

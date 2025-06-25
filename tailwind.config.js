@@ -71,7 +71,7 @@ export default {
           dark: '#1A202C',
           gray: '#4A5568',
         },
-        'orange-yellow-crayola': 'hsl(0, 0%, 70%)', // ✅ Custom color added here
+        'orange-yellow-crayola': 'hsl(0, 0%, 70%)',
       },
       blur: {
         '3xl': '64px',
