@@ -47,7 +47,8 @@ const NavBar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-theme-main'
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gradient-to-br from-gray-950 to-gray-950
+ shadow-md' : 'bg-theme-main'
         }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,7 +93,8 @@ const NavBar: React.FC = () => {
             <button
               className={`flex items-center space-x-2 font-['Clash_Display'] font-medium transition-colors duration-200 px-4 py-2 rounded-md ${isScrolled
                   ? 'text-gray-700 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/10'
+                  : 'text-white hover:bg-gradient-to-br from-gray-950 to-gray-950
+/10'
                 }`}
               onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
             >
@@ -114,7 +116,8 @@ const NavBar: React.FC = () => {
 
             {/* Desktop dropdown menu */}
             {isDesktopMenuOpen && (
-              <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 animate-fade-in-down">
+              <div className="absolute top-full right-0 mt-2 w-64 bg-gradient-to-br from-gray-950 to-gray-950
+ rounded-md shadow-lg py-2 animate-fade-in-down">
                 {navLinks.map(({ path, label, badge }) => (
                   <NavLink
                     key={path}
@@ -157,7 +160,8 @@ const NavBar: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden mt-2 bg-white rounded-md shadow-lg animate-slide-up">
+          <div className="lg:hidden mt-2 bg-gradient-to-br from-gray-950 to-gray-950
+ rounded-md shadow-lg animate-slide-up">
             {navLinks.map(({ path, label, badge }) => (
               <NavLink
                 key={path}

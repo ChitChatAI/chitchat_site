@@ -11,14 +11,18 @@ const PersonaToggle: React.FC<PersonaToggleProps> = ({ active, onChange }) => {
       <button
         onClick={() => onChange('samantha')}
         className={`px-4 py-2 rounded-lg font-medium transition-all duration-200
-          ${active === 'samantha' ? 'bg-purple-600 text-white' : 'bg-white/10 text-white hover:bg-white/20'}`}
+          ${active === 'samantha' ? 'bg-purple-600 text-white' : 'bg-gradient-to-br from-gray-950 to-gray-950
+/10 text-white hover:bg-gradient-to-br from-gray-950 to-gray-950
+/20'}`}
       >
         Samantha
       </button>
       <button
         onClick={() => onChange('arin')}
         className={`px-4 py-2 rounded-lg font-medium transition-all duration-200
-          ${active === 'arin' ? 'bg-fuchsia-600 text-white' : 'bg-white/10 text-white hover:bg-white/20'}`}
+          ${active === 'arin' ? 'bg-fuchsia-600 text-white' : 'bg-gradient-to-br from-gray-950 to-gray-950
+/10 text-white hover:bg-gradient-to-br from-gray-950 to-gray-950
+/20'}`}
       >
         Arin
       </button>

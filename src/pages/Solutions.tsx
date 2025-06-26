@@ -9,6 +9,7 @@ import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/ContactModal';
 import Footer from '../components/Footer';
 import { useScroll, motion, useTransform, AnimatePresence } from 'framer-motion';
+import Hero from '../components/SolutionsHero';
 
 const Solutions: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -27,8 +28,9 @@ const Solutions: React.FC = () => {
 
   // Replace these with your actual image paths
   const carouselImages = [
-    "/homePage/businessesBG.png",
-    "/homePage/Support.png",
+    "/homePage/Arin.png",
+    "/homePage/Arin.png"
+
   ];
 
   useEffect(() => {
@@ -142,106 +144,12 @@ const Solutions: React.FC = () => {
     <>
       <Navbar />
 
-      <main className="bg-white text-gray-900" ref={containerRef}>
+      <main className="bg-gradient-to-br from-gray-950 to-gray-950" ref={containerRef}>
         {/* Hero Section with Parallax */}
-        <section className="relative w-full min-h-screen flex items-center justify-center bg-white text-gray-900 overflow-hidden">
-          {/* Decorative background elements */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-theme-main/5 to-theme-secondary/5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-          />
-
-          {/* Content Container */}
-          <div className="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center relative z-10">
-            {/* Text Content - Left Side with animation */}
-            <motion.div
-              className="md:w-1/2 md:pr-12 text-left"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-              >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
-                  Built for Every Business to Feel <span className="text-theme-main">Human</span>
-                </h1>
-
-              </motion.div>
-
-              {/* Branded Dots */}
-              <motion.div
-                className="flex gap-3 my-6 md:my-8"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                <span className="w-3 h-3 rounded-full bg-theme-main/30" />
-                <span className="w-3 h-3 rounded-full bg-theme-main/50" />
-                <span className="w-3 h-3 rounded-full bg-theme-main/70" />
-              </motion.div>
-
-              <motion.p
-                className="text-lg md:text-xl text-gray-700 max-w-2xl mb-10 leading-relaxed"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-              >
-                Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9, duration: 0.5 }}
-              >
-
-              </motion.div>
-            </motion.div>
-
-            {/* Carousel - Right Side with parallax */}
-            <motion.div
-              className="hidden md:block md:w-1/2 mt-16 md:mt-0 relative h-[500px]"
-              style={{ y: y2 }}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              <div className="relative w-full h-full overflow-hidden rounded-xl">
-                <AnimatePresence mode="wait">
-                  {carouselImages.map((image, index) => (
-                    index === currentImageIndex && (
-                      <motion.div
-                        key={index}
-                        className="absolute inset-0"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1, ease: "easeInOut" }}
-                      >
-                        <div className="w-full h-full flex items-center justify-center bg-white rounded-lg overflow-hidden">
-                          <img
-                            src={image}
-                            alt={`Business Illustration ${index + 1}`}
-                            className="max-h-full object-contain"
-                          />
-                        </div>
-                      </motion.div>
-                    )
-                  ))}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-          </div>
-        </section>
+        <Hero />
 
         {/* Industries Section */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
+        <section className="px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-950 to-gray-950">
           <div className="max-w-7xl mx-auto">
             <motion.div
               className="text-center mb-20"
@@ -250,14 +158,14 @@ const Solutions: React.FC = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-sm font-semibold tracking-wider text-theme-main uppercase">
+              <span className="text-sm font-semibold tracking-wider text-gray-200 uppercase">
                 Industry Solutions
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold mt-4 mb-6">
+              <h2 className="text-gray-200 text-3xl sm:text-4xl font-bold mt-4 mb-6">
                 AI That Understands Humans
               </h2>
-              <div className="mx-auto h-1 w-20 bg-theme-main/30 mb-8 rounded-full" />
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <div className="mx-auto h-1 w-20 bg-gray-600 mb-8 rounded-full" />
+              <p className="text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed">
                 Emotionally intelligent AI designed to deliver exceptional customer experiences across every industry vertical.
               </p>
             </motion.div>
@@ -266,7 +174,7 @@ const Solutions: React.FC = () => {
               {industries.map((industry, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-xl p-8 hover:shadow-lg transition-all duration-300"
+                  className="p-10 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -283,10 +191,10 @@ const Solutions: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <span className="inline-block bg-theme-main/10 text-theme-main text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full mb-3">
+                      <span className="inline-block bg-theme-main/10 text-gray-200 text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full mb-3">
                         {industry.title}
                       </span>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      <h3 className="text-xl font-semibold text-gray-100 mb-2">
                         {industry.title === 'Telecommunications' ? 'Intelligent Customer Support' :
                           industry.title === 'E-Commerce' ? 'Personalized Shopping Assistant' :
                             industry.title === 'Healthcare' ? 'Compassionate Patient Support' :
@@ -294,7 +202,7 @@ const Solutions: React.FC = () => {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
+                  <p className="text-gray-100 mb-6 leading-relaxed">
                     {industry.description}
                   </p>
                   <ul className="space-y-3">
@@ -308,11 +216,12 @@ const Solutions: React.FC = () => {
                         transition={{ delay: i * 0.05 + index * 0.1 }}
                       >
                         <div className="w-5 h-5 rounded-full bg-theme-main/10 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                          <svg className="w-3 h-3 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3 h-3 text-gray-200
+" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                        <span className="text-gray-700">{feature}</span>
+                        <span className="text-gray-200">{feature}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -323,7 +232,7 @@ const Solutions: React.FC = () => {
         </section>
 
         {/* Additional Solutions Section */}
-        <section className="py-24 bg-gray-50 px-4 sm:px-6 lg:px-8">
+        <section className="py-24 bg-gray-950 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <motion.div
               className="text-center mb-20"
@@ -332,14 +241,15 @@ const Solutions: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-sm font-semibold tracking-wider text-theme-main uppercase">
+              <span className="text-sm font-semibold tracking-wider text-gray-200
+ uppercase">
                 Expanded Offerings
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold mt-4 mb-6">
+              <h2 className="text-white text-3xl sm:text-4xl font-bold mt-4 mb-6">
                 More Industries We Serve
               </h2>
-              <div className="mx-auto h-1 w-20 bg-theme-main/30 mb-8 rounded-full" />
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              <div className="mx-auto h-1 w-20 bg-black mb-8 rounded-full" />
+              <p className="text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed">
                 Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
               </p>
             </motion.div>
@@ -348,7 +258,7 @@ const Solutions: React.FC = () => {
               {additionalSolutions.map((solution, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-300 hover:border-theme-main/30"
+                  className="p-10 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -356,14 +266,18 @@ const Solutions: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <div className="w-10 h-10 rounded-lg bg-theme-main/10 flex items-center justify-center mb-4">
-                    <svg className="w-5 h-5 text-theme-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <svg
+                      className="w-5 h-5 text-gray-200"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <circle cx="12" cy="12" r="8" /> {/* Bullet point SVG */}
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  <h3 className="text-xl font-semibold text-gray-100 mb-3">
                     {solution.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-200 leading-relaxed"> {/* Slightly lighter gray */}
                     {solution.text}
                   </p>
                 </motion.div>
@@ -373,7 +287,7 @@ const Solutions: React.FC = () => {
         </section>
 
         {/* Use Cases Section */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-950 to-gray-950">
           <div className="max-w-5xl mx-auto">
             <motion.div
               className="text-center mb-20"
@@ -382,20 +296,23 @@ const Solutions: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-sm font-semibold tracking-wider text-theme-main uppercase">
+              <span className="text-sm font-semibold tracking-wider text-gray-200
+ uppercase">
                 Implementation Scenarios
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold mt-4 mb-6">
+              <div className="mx-auto h-1 w-20 bg-black my-8 rounded-full" />
+              <h2 className="text-white text-3xl sm:text-4xl font-bold mt-4 mb-6">
                 Practical Use Cases
               </h2>
-              <div className="mx-auto h-1 w-20 bg-theme-main/30 mb-8 rounded-full" />
+              
             </motion.div>
 
             <div className="space-y-8">
               {useCases.map((useCase, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-xl p-8 hover:shadow-md transition-all duration-300 group"
+                  className="bg-gradient-to-br from-gray-950 to-gray-950
+ rounded-xl p-8 hover:shadow-md transition-all duration-300 group"
                   initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -404,15 +321,16 @@ const Solutions: React.FC = () => {
                 >
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mr-6">
-                      <div className="w-12 h-12 rounded-full bg-theme-main/10 flex items-center justify-center group-hover:bg-theme-main/20 transition-colors">
-                        <span className="text-theme-main font-bold text-lg">{index + 1}</span>
+                      <div className="w-12 h-12 rounded-full overflow-hidden shadow-smbg-black flex items-center justify-center group-hover:bg-theme-main/20 transition-colors">
+                        <span className="text-gray-200
+ font-bold text-lg">{index + 1}</span>
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                      <h3 className="text-xl font-semibold text-gray-200 mb-3">
                         {useCase.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-200 leading-relaxed">
                         {useCase.description}
                       </p>
                     </div>
@@ -425,7 +343,7 @@ const Solutions: React.FC = () => {
 
         {/* Stats Section */}
         <motion.section
-          className="py-16 bg-white/30 text-gray-900"
+          className="py-16 bg-gradient-to-br from-gray-950 to-gray-950/30 text-gray-200"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

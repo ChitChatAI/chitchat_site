@@ -119,7 +119,8 @@ const FeatureLearnMore: React.FC = () => {
       <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl animate-float-delayed"></div>
       <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-pink-200/30 rounded-full blur-2xl animate-pulse"></div>
       <div
-        className="max-w-2xl mx-auto w-full bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-10 relative z-10"
+        className="max-w-2xl mx-auto w-full bg-gradient-to-br from-gray-950 to-gray-950
+/70 backdrop-blur-lg rounded-2xl shadow-2xl p-10 relative z-10"
         initial="hidden"
         animate="visible"
         variants={fadeInVariants}

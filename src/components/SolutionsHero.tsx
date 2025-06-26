@@ -99,15 +99,14 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           variants={itemVariants}
           className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
         >
-          Human Augmented AI For Real  <span>Connection</span>
+         Built for Every Business to Feel <span>Human</span>
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
           className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10"
         >
-          Custom-built AI personas that think, feel, and respond like real people
-          – tailored for your business.
+         Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
         </motion.p>
       </motion.div>
     </section>

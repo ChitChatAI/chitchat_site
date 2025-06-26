@@ -8,7 +8,8 @@ const GetStarted: React.FC = () => {
       <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-theme-main/10 rounded-full blur-3xl animate-float"></div>
       <div className="absolute bottom-10 right-1/4 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl animate-float-delayed"></div>
       <div className="absolute top-1/2 left-2/3 w-32 h-32 bg-pink-200/30 rounded-full blur-2xl animate-pulse"></div>
-      <div className="max-w-md w-full bg-white/70 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/30 relative z-10">
+      <div className="max-w-md w-full bg-gradient-to-br from-gray-950 to-gray-950
+/70 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/30 relative z-10">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-6 font-header tracking-tight">
           Create Your Account
         </h2>

@@ -161,7 +161,7 @@ const Businesses: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gray-900 text-white overflow-hidden">
+    <div className="overflow-hidden">
       {/* Hero Section with Typing Animation */}
       <motion.section
         id="value"
@@ -170,18 +170,72 @@ const Businesses: React.FC = () => {
         animate={controls1}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         style={{ transform: `translateY(${valueTransform}px)` }}
-        className="py-32 px-4 sm:px-8 lg:px-20 bg-gradient-to-br from-gray-50 to-white">
+        className="py-32 px-4 sm:px-8 lg:px-20 bg-gradient-to-br from-gray-950 to-gray-950">
 
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-8">
-            <span className="font-extrabold text-black">EVERYONE</span> is trying to make AI agents{' '}
-            <span className="italic font-semibold text-gray-900">sound</span> like humans.
+          <motion.h1
+            className="text-white text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.span
+              className="font-extrabold text-white"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              EVERYONE
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              {' '}is trying to make AI agents{' '}
+            </motion.span>
+            <motion.span
+              className="italic font-semibold text-gray-200"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              sound
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              {' '}like humans.
+            </motion.span>
             <br className="hidden sm:block" />
-            <span className="font-bold text-gray-900 block mt-4">
-              We are building ones that <span className="italic font-semibold">think</span> like humans.
-            </span>
-          </h1>
-          <div className="text-2xl sm:text-3xl font-mono text-gray-600 h-20 whitespace-pre-wrap">
+
+            <motion.span
+              className="font-bold text-gray-200 block mt-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.7 }}
+            >
+              We are building ones that{' '}
+              <motion.span
+                className="italic font-semibold"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  delay: 1.1,
+                  duration: 0.8,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  repeatDelay: 1
+                }}
+              >
+                think
+              </motion.span>{' '}
+              like humans.
+            </motion.span>
+          </motion.h1>
+          <div className="text-2xl sm:text-3xl font-mono text-gray-300 h-20 whitespace-pre-wrap">
             {headerText}
           </div>
         </div>
@@ -195,7 +249,8 @@ const Businesses: React.FC = () => {
         animate={controls1}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         style={{ transform: `translateY(${valueTransform}px)` }}
-        className="py-28 px-4 sm:px-8 lg:px-20 will-change-transform bg-white"
+        className="py-28 px-4 sm:px-8 lg:px-20 will-change-transform bg-gradient-to-br from-gray-950 to-gray-950
+"
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
@@ -203,11 +258,11 @@ const Businesses: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+              className="text-4xl sm:text-5xl font-bold text-gray-200 mb-6 leading-tight"
             >
               How ChitChat Adds Value to Your Business
             </motion.h2>
-            
+
           </div>
 
           <div className="space-y-24">
@@ -218,19 +273,19 @@ const Businesses: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`flex flex-col items-center text-center gap-8 pb-20 ${index !== businessValues.length - 1 ? "border-b border-gray-100" : ""
+                className={`flex flex-col items-center text-center gap-8 pb-20 ${index !== businessValues.length - 1 ? "border-b border-gray-900" : ""
                   }`}
               >
                 <div className="flex items-center gap-4">
                   <div className="w-4 h-4 bg-theme-main rounded-sm transform rotate-45" />
-                  <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-800">
+                  <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-200">
                     {item.title}
                   </h3>
                 </div>
-                <div className="text-xl text-gray-600 leading-relaxed max-w-4xl">
+                <div className="text-xl text-gray-300 leading-relaxed max-w-4xl">
                   <p>{item.description}</p>
                   {item.metric && (
-                    <div className="mt-4 text-theme-main font-bold tracking-wide">
+                    <div className="mt-4 text-white font-bold tracking-wide">
                       {item.metric}
                     </div>
                   )}
@@ -249,7 +304,7 @@ const Businesses: React.FC = () => {
         animate={controls2}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         style={{ transform: `translateY(${featuresTransform}px)` }}
-        className="py-28 px-4 sm:px-8 lg:px-20 bg-gray-50 will-change-transform"
+        className="py-28 px-4 sm:px-8 lg:px-20 bg-gray-950 will-change-transform"
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
@@ -257,11 +312,11 @@ const Businesses: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+              className="text-4xl sm:text-5xl font-bold text-gray-200 mb-6 leading-tight"
             >
               Comprehensive ChitChat Package Features
             </motion.h2>
-           
+
           </div>
 
           <div className="grid md:grid-cols-2 gap-16">
@@ -272,15 +327,15 @@ const Businesses: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                className="p-10 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
               >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-4 h-4 bg-theme-main rounded-full flex-shrink-0" />
-                  <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-800">
+                  <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-300">
                     {item.title}
                   </h3>
                 </div>
-                <div className="text-lg text-gray-600 leading-relaxed">
+                <div className="text-lg text-gray-300 leading-relaxed">
                   <p>{item.description}</p>
                 </div>
               </motion.div>

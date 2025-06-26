@@ -123,21 +123,22 @@ const ContactUs: React.FC = () => {
         </div>
       )}
     <ContactHeroSection />
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-br from-gray-950 to-gray-950
+">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gray-50 rounded-xl p-8 shadow-sm">
+          <div className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-gray-950 z-500 py-10 px-10 rounded-xl p-8 shadow-sm">
             {/* Progress Steps */}
             <div className="flex justify-between mb-8">
               {[1, 2, 3].map(step => (
                 <div key={step} className="flex flex-col items-center">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${currentStep >= step
                     ? 'bg-theme-main/95 text-white'
-                    : 'bg-gray-200 text-gray-600'
+                    : 'bg-theme-main/40 text-gray-200'
                     }`}>
                     {step}
                   </div>
                   <span className={`text-sm ${currentStep >= step
-                    ? 'text-theme-main font-medium'
+                    ? 'text-gray-200 font-medium'
                     : 'text-gray-500'
                     }`}>
                     {step === 1 ? 'Your Details' : step === 2 ? 'Company' : 'Message'}
@@ -149,11 +150,11 @@ const ContactUs: React.FC = () => {
             {/* Step 1: Personal Details */}
             {currentStep === 1 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Details</h2>
+                <h2 className="text-2xl font-bold text-gray-100 mb-6">Your Details</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                    <label className="block text-sm font-medium text-gray-200 mb-1">First Name</label>
                     <input
                       type="text"
                       name="name"
@@ -165,7 +166,7 @@ const ContactUs: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                    <label className="block text-sm font-medium text-gray-200 mb-1">Last Name</label>
                     <input
                       type="text"
                       name="surname"
@@ -178,7 +179,7 @@ const ContactUs: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Email</label>
                   <input
                     type="email"
                     name="email"
@@ -190,7 +191,7 @@ const ContactUs: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Subject (Optional)</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Subject (Optional)</label>
                   <input
                     type="text"
                     name="subject"
@@ -215,10 +216,10 @@ const ContactUs: React.FC = () => {
             {/* Step 2: Company Details */}
             {currentStep === 2 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Company Information</h2>
+                <h2 className="text-2xl font-bold text-gray-200 mb-6">Company Information</h2>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Company Size</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Company Size</label>
                   <select
                     name="companySize"
                     value={formData.companySize}
@@ -235,7 +236,7 @@ const ContactUs: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Industry</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Industry</label>
                   <input
                     type="text"
                     name="industry"
@@ -247,7 +248,7 @@ const ContactUs: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Primary Goal</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Primary Goal</label>
                   <select
                     name="goals"
                     value={formData.goals}
@@ -267,7 +268,7 @@ const ContactUs: React.FC = () => {
                   <button
                     type="button"
                     onClick={handlePrevStep}
-                    className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                    className="px-6 py-3 bg-theme-main text-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
                   >
                     Back
                   </button>
@@ -285,10 +286,10 @@ const ContactUs: React.FC = () => {
             {/* Step 3: Additional Info */}
             {currentStep === 3 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Additional Information</h2>
+                <h2 className="text-2xl font-bold text-gray-200 mb-6">Additional Information</h2>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Interests</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Interests</label>
                   <div className="space-y-2">
                     {['SDK Integration', 'Custom Persona', 'AI Strategy'].map(interest => (
                       <label key={interest} className="flex items-center">
@@ -299,14 +300,14 @@ const ContactUs: React.FC = () => {
                           onChange={handleCheckboxChange}
                           className="h-4 w-4 text-theme-main rounded"
                         />
-                        <span className="ml-2 text-gray-700">{interest}</span>
+                        <span className="ml-2 text-gray-200">{interest}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Team Description (Optional)</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Team Description (Optional)</label>
                   <textarea
                     name="teamDescription"
                     rows={3}
@@ -317,7 +318,7 @@ const ContactUs: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+                  <label className="block text-sm font-medium text-gray-200 mb-1">Your Message</label>
                   <textarea
                     name="message"
                     rows={5}
@@ -332,7 +333,7 @@ const ContactUs: React.FC = () => {
                   <button
                     type="button"
                     onClick={handlePrevStep}
-                    className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                    className="px-6 py-3 bg-theme-main text-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
                   >
                     Back
                   </button>

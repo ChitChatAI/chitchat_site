@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main className="relative overflow-hidden w-full min-h-screen bg-black">
+      <main className="relative overflow-hidden w-full min-h-screen bg-gray-950">
         <Hero />
 
         <Features />

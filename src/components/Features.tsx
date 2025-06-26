@@ -100,10 +100,12 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
       >
         <div className="absolute top-1/4 left-0 w-64 h-64 rounded-full bg-theme-main/20 blur-3xl"></div>
         <div className="absolute bottom-1/3 right-0 w-96 h-96 rounded-full bg-theme-secondary/20 blur-3xl"></div>
+     
       </motion.div>
 
       {/* WHY CHITCHAT */}
-      <section id="why-chitchat" className="bg-gray-950 text-white px-4 sm:px-10 lg:px-24 py-24 relative overflow-hidden">
+      <section id="why-chitchat" className="bg-gradient-to-br from-gray-950 to-gray-950
+ text-white px-4 sm:px-10 lg:px-24 py-24 relative overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
           initial={{ opacity: 0 }}
@@ -124,7 +126,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
           </motion.div>
 
           <motion.h2
-            className="text-4xl sm:text-5xl font-light leading-tight max-w-4xl"
+            className="text-4xl sm:text-5xl font-bold leading-tight max-w-4xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -137,18 +139,19 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-8 max-w-3xl text-gray-300 leading-relaxed">
-              Our intelligent, <span className="text-white font-semibold">human-like agents</span> handle customer inquiries effortlessly, keeping conversations engaging, natural, and persuasive.
+            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-8 max-w-3xl text-gray-200 leading-relaxed">
+              Our intelligent, <span className="text-white font-semibold text-white">human-like agents</span> handle customer inquiries effortlessly, keeping conversations engaging, natural, and persuasive.
             </p>
 
-            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-6 max-w-3xl text-gray-300 leading-relaxed">
-              <span className="text-white font-medium">Faster</span> than human support, <span className="text-white font-medium">smarter</span> than traditional AI — <span className="text-white font-semibold">ChitChat AI builds relationships</span>, not just answers.
+            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-6 max-w-3xl text-gray-200 leading-relaxed">
+              <span className="text-white font-medium">Faster</span> than human support, <span className="text-white font-medium">smarter</span> than traditional AI — <span className="text-white font-semibold text-white">ChitChat AI builds relationships</span>, not just answers.
             </p>
 
             <div className="mt-10">
               <Link
                 to="/contactus"
-                className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 rounded-md text-white hover:bg-white/10 transition-all duration-300 hover:gap-3"
+                className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 rounded-md text-white hover:bg-gradient-to-br from-gray-950 to-gray-950
+/10 transition-all duration-300 hover:gap-3"
               >
                 Request Demo
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -159,11 +162,12 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
           </motion.div>
         </div>
       </section>
- 
+
       {/* WHY US */}
       <section
         id="why-us"
-        className="relative bg-white py-24 px-4 sm:px-10 lg:px-24 text-gray-900 overflow-hidden"
+        className="relative bg-gradient-to-br from-gray-950 to-gray-950
+ py-24 px-4 sm:px-10 lg:px-24 text-white overflow-hidden"
       >
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
@@ -192,31 +196,31 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
               transition={{ duration: 0.6 }}
             >
               <motion.h2
-                className="text-4xl md:text-5xl font-medium leading-tight"
+                className="text-4xl md:text-5xl font-bold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                No more shallow AI. Just real emotional intelligence.
+                No more shallow AI. Just real <span className="font-medium">emotional</span> intelligence.
               </motion.h2>
 
               <motion.p
-                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-700 leading-relaxed"
+                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                We have an <span className="font-semibold">extensive background in psychology</span>, with training in behavioural science, emotional theory, and cognitive development.
-                We have <span className="font-semibold">studied real human conversations</span> – what makes people feel heard, connected, safe, and understood.
+                We have an <span className="font-semibold text-white">extensive background in psychology</span>, with training in behavioural science, emotional theory, and cognitive development.
+                We have <span className="font-semibold text-white">studied real human conversations</span> – what makes people feel heard, connected, safe, and understood.
               </motion.p>
 
               <motion.p
-                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-700 leading-relaxed"
+                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                We have used our training to <span className="font-semibold">design agents</span> that replicate personality layers, emotional triggers, and conversational flow.
+                We have used our training to <span className="font-semibold text-white">design agents</span> that replicate personality layers, emotional triggers, and conversational flow.
                 Most dev teams try to humanise AI through surface-level engineering.<br />
                 <span className="italic font-medium">We build the person first – then the logic.</span>
               </motion.p>
@@ -239,8 +243,12 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
-                    className="bg-gray-100 text-gray-900 px-5 py-3 rounded-md text-sm font-medium shadow-sm hover:bg-theme-main/10 hover:text-theme-main transition-colors duration-300"
-                    whileHover={{ scale: 1.05 }}
+                    className="bg-gray-800 text-gray-100 px-5 py-3 rounded-md text-sm font-medium shadow-sm hover:bg-theme-main/20 hover:text-gray-400 transition-colors duration-300 border border-gray-700"
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "#1e293b", // slate-800
+                      borderColor: "#3b82f6" // theme-main blue-500
+                    }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
                     {item}
@@ -251,11 +259,13 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
           </div>
         </div>
       </section>
+
       {/* USE CASES */}
       <div ref={containerRef} className="relative overflow-x-hidden">
         <motion.section
           id="use-cases"
-          className="relative z-20 bg-white text-gray-900 px-4 sm:px-8 lg:px-20 py-24"
+          className="relative z-20 bg-gradient-to-br from-gray-950 to-gray-950
+ text-white px-4 sm:px-8 lg:px-20 py-24"
           style={{
             y: topSectionY,
             opacity: topSectionOpacity
@@ -273,10 +283,10 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
                   Why ChitChat AI?
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold leading-snug text-gray-900 mb-6">
+                <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white mb-6">
                   How Businesses Use ChitChat AI
                 </h2>
-                <p className="text-[1.25rem] sm:text-[1.3125rem] text-gray-600 mb-8 max-w-xl leading-relaxed">
+                <p className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 mb-8 max-w-xl leading-relaxed">
                   Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalized, human-like customer interactions at scale.
                 </p>
               </motion.div>
@@ -285,7 +295,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 {useCases.map((item, index) => (
                   <motion.div
                     key={index}
-                    className="border border-gray-200 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md"
+                    className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.4 }}
@@ -294,17 +304,17 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   >
                     <button
                       onClick={() => toggleCard(index)}
-                      className="w-full flex justify-between items-center px-6 py-4 bg-gray-50 hover:bg-gray-100 text-left transition-colors duration-200"
+                      className="w-full flex justify-between items-center px-6 py-4 bg-gray-900 hover:bg-gray-800 text-left transition-colors duration-200"
                     >
-                      <span className="text-lg font-medium text-gray-800">{item.title}</span>
-                      <span className="material-symbols-outlined text-xl transition-transform duration-200">
+                      <span className="text-lg font-medium text-gray-100">{item.title}</span>
+                      <span className="material-symbols-outlined text-xl transition-transform duration-200 text-gray-400">
                         {expandedIndex === index ? 'expand_less' : 'expand_more'}
                       </span>
                     </button>
                     <div
                       className={`px-6 overflow-hidden transition-all duration-300 text-base ${expandedIndex === index ? 'max-h-40 py-4' : 'max-h-0 py-0'}`}
                     >
-                      <p className="text-gray-700">{item.description}</p>
+                      <p className="text-gray-300">{item.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -314,7 +324,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
             {/* Image Column */}
             <div className="relative w-full h-full min-h-[500px] flex items-center">
               <motion.div
-                className="rounded-xl overflow-hidden h-full w-full flex items-center justify-center bg-gray-50"
+                className="rounded-xl overflow-hidden h-full w-full flex items-center justify-center"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
@@ -334,7 +344,8 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
         {/* WHAT SETS US APART */}
         <motion.section
           id={id}
-          className="relative z-10 bg-white px-4 sm:px-8 lg:px-20 py-24"
+          className="relative z-10 bg-gradient-to-br from-gray-950 to-gray-950
+ px-4 sm:px-8 lg:px-20 py-24"
           style={{
             y: bottomSectionY,
             opacity: bottomSectionOpacity
@@ -344,7 +355,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
             {/* Image Column */}
             <div className="relative w-full h-full min-h-[400px] lg:min-h-[500px]">
               <motion.div
-                className="rounded-xl overflow-hidden h-full w-full flex items-center justify-center bg-gray-50"
+                className="rounded-xl overflow-hidden h-full w-full flex items-center justify-center"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
@@ -370,10 +381,10 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
                   Why ChitChat AI?
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold leading-snug text-gray-900 mb-6">
+                <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white mb-6">
                   What Sets Us Apart
                 </h2>
-                <p className="text-[1.25rem] sm:text-[1.3125rem] text-gray-600 mb-8 max-w-xl leading-relaxed">
+                <p className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 mb-8 max-w-xl leading-relaxed">
                   These features make ChitChat not just functional, but transformational — delivering emotionally intelligent automation at scale.
                 </p>
 
@@ -381,7 +392,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   {features.map((feature, index) => (
                     <motion.div
                       key={index}
-                      className="border border-gray-200 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col"
+                      className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-black"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index, duration: 0.4 }}
@@ -389,12 +400,12 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                     >
                       <button
                         onClick={() => toggleFeatureCard(index)}
-                        className="w-full flex justify-between items-center px-6 py-4 bg-gray-50 hover:bg-gray-100 text-left transition-colors duration-200"
+                        className="w-full flex justify-between items-center px-6 py-4 bg-gray-900 hover:bg-gray-800 text-left transition-colors duration-200"
                       >
                         <div className="flex items-center gap-4">
                           {feature.icon && (
                             <motion.div
-                              className="w-10 h-10 flex items-center justify-center rounded-lg bg-theme-main/10 text-theme-main"
+                              className="w-10 h-10 flex items-center justify-center rounded-lg bg-theme-main/20 text-theme-main"
                               whileHover={{ scale: 1.05 }}
                               transition={{ duration: 0.2 }}
                             >
@@ -403,18 +414,18 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                               </span>
                             </motion.div>
                           )}
-                          <span className="text-lg font-medium text-gray-800">
+                          <span className="text-lg font-medium text-gray-100">
                             {feature.title}
                           </span>
                         </div>
-                        <span className="material-symbols-outlined text-xl transition-transform duration-200">
+                        <span className="material-symbols-outlined text-xl transition-transform duration-200 text-gray-400">
                           {featuresExpandedIndex === index ? 'expand_less' : 'expand_more'}
                         </span>
                       </button>
                       <div
                         className={`px-6 overflow-hidden transition-all duration-300 text-base ${featuresExpandedIndex === index ? 'max-h-[500px] py-4' : 'max-h-0 py-0'}`}
                       >
-                        <p className="text-gray-700">{feature.description}</p>
+                        <p className="text-gray-300">{feature.description}</p>
                       </div>
                     </motion.div>
                   ))}

@@ -28,10 +28,11 @@ const ScrollToTop: React.FC = () => {
         <div className="fixed bottom-6 right-6 z-50">
           <button
             onClick={scrollToTop}
-            className="bg-white/10 backdrop-blur-md border border-white/20 text-theme-main p-3 rounded-full shadow-[0_8px_40px_rgba(0,0,0,0.3)] hover:bg-white/20 transition-all flex items-center justify-center group hover:scale-110"
+            className="border border-gray-700 shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black p-3 rounded-full shadow-[0_8px_40px_rgba(0,0,0,0.3)] hover:bg-gradient-to-br from-gray-950 to-gray-950
+/20 transition-all flex items-center justify-center group hover:scale-110"
             aria-label="Scroll to top"
           >
-            <div className="transform transition-transform duration-300 group-hover:-translate-y-1">
+            <div className="text-white transform transition-transform duration-300 group-hover:-translate-y-1">
               <ChevronUp size={22} strokeWidth={1.5} />
             </div>
           </button>

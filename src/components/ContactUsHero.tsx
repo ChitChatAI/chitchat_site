@@ -1,82 +1,152 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+"use client";
 
-const ContactHeroSection: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
+import React, { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-  const yHeading = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const yParagraph = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const yDots = useTransform(scrollYProgress, [0, 1], [0, -20]);
+const ContactHeroSection: React.FC<{ id?: string }> = ({ id }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resizeCanvas();
+
+    const dots = [];
+    const dotCount = 120;
+    const connectionDistance = 180;
+    const dotRadius = 2.5;
+    const dotSpeed = 0.3;
+    const purpleHues = [270, 280, 290];
+
+    for (let i = 0; i < dotCount; i++) {
+      dots.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * dotSpeed * (0.7 + Math.random() * 0.6),
+        vy: (Math.random() - 0.5) * dotSpeed * (0.7 + Math.random() * 0.6),
+        radius: dotRadius * (0.8 + Math.random() * 0.4),
+        hue: purpleHues[Math.floor(Math.random() * purpleHues.length)],
+        saturation: 70 + Math.random() * 30,
+        lightness: 50 + Math.random() * 30,
+        alpha: 0.7 + Math.random() * 0.3,
+      });
+    }
+
+    let animationId: number;
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, "hsla(270, 20%, 10%, 1)");
+      gradient.addColorStop(1, "hsla(280, 25%, 12%, 1)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      dots.forEach(dot => {
+        dot.x += dot.vx;
+        dot.y += dot.vy;
+
+        if (dot.x < 0 || dot.x > canvas.width) dot.vx *= -1 * (0.9 + Math.random() * 0.2);
+        if (dot.y < 0 || dot.y > canvas.height) dot.vy *= -1 * (0.9 + Math.random() * 0.2);
+
+        const glow = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 3);
+        glow.addColorStop(0, `hsla(${dot.hue}, ${dot.saturation}%, ${dot.lightness}%, ${dot.alpha})`);
+        glow.addColorStop(1, `hsla(${dot.hue}, ${dot.saturation}%, ${dot.lightness}%, 0)`);
+
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius * 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = `hsla(${dot.hue}, ${dot.saturation}%, ${dot.lightness}%, ${dot.alpha})`;
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      for (let i = 0; i < dots.length; i++) {
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x;
+          const dy = dots[i].y - dots[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < connectionDistance) {
+            const opacity = 1 - distance / connectionDistance;
+            const midHue = (dots[i].hue + dots[j].hue) / 2;
+
+            ctx.strokeStyle = `hsla(${midHue}, 60%, 70%, ${opacity * 0.3})`;
+            ctx.lineWidth = 0.5 + opacity * 1.5;
+
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+    window.addEventListener("resize", resizeCanvas);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, []);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-100 to-white text-gray-900 px-6 md:px-12 overflow-hidden"
-      aria-label="Get in Touch Hero Section"
+      id={id}
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden text-white"
     >
-      {/* Background Image with subtle parallax effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        <img
-          src="./homePage/contactUS.png"
-          alt="Contact Us Background"
-          className="w-full h-full object-cover object-center scale-105"
-          style={{ transform: 'translateZ(0)' }}
-        />
-      </div>
+      {/* Canvas background */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-gray-950 z-10" />
 
-      {/* Enhanced Glassmorphic Overlay */}
-      <div className="absolute inset-0">
-        <div
-          className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
-          style={{
-            background:
-              'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
-            boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
-          }}
-        />
-      </div>
+      {/* Main content */}
+      <motion.div
+        className="relative z-20 w-full max-w-4xl mx-auto px-6 text-center"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+      >
+        <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
+           Get in Touch With <span className="text-gray-100">Us</span>
+        </motion.h1>
 
-      {/* Content Layer with refined spacing */}
-      <div className="relative z-10 max-w-7xl w-full px-4 flex flex-col items-center justify-center py-24">
-        {/* Text Content with scroll animation */}
-        <div className="text-center max-w-3xl space-y-8 px-4">
-          <motion.h1
-            style={{ y: yHeading }}
-            className="text-5xl text-white md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight"
-          >
-            Get in Touch With Us
-          </motion.h1>
-
-          {/* Animated Branded Dots */}
-          <motion.div style={{ y: yDots }} className="flex justify-center gap-4">
-            <span
-              className="w-4 h-4 rounded-full bg-theme-main/30 animate-pulse"
-              style={{ animationDuration: '2s' }}
-            />
-            <span
-              className="w-4 h-4 rounded-full bg-theme-main/50 animate-pulse delay-75"
-              style={{ animationDuration: '2.2s' }}
-            />
-            <span
-              className="w-4 h-4 rounded-full bg-theme-main/80 animate-pulse delay-150"
-              style={{ animationDuration: '2.4s' }}
-            />
-          </motion.div>
-
-          <motion.p
-            style={{ y: yParagraph }}
-            className="text-xl md:text-2xl text-theme-main leading-relaxed max-w-2xl mx-auto"
-          >
-            We typically respond within <span className="font-semibold text-gray-900">48 hours</span>. Our team is ready to assist you with any inquiries.
-          </motion.p>
-        </div>
-      </div>
+        <motion.p
+          className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+        >
+          We typically respond within <span className="font-semibold text-gray-200">48 hours</span>. Our team is ready to assist you with any inquiries.
+        </motion.p>
+      </motion.div>
     </section>
   );
 };
+
 
 export default ContactHeroSection;

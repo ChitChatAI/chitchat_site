@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const atTop = window.scrollY <= 80;
-      const transparentRoutes = ["/", "/development-workflow", "/contactus"];
+      const transparentRoutes = ["/", "/solutions", "/development-workflow", "/contactus"];
       const isTransparentRoute = transparentRoutes.includes(location.pathname);
       setIsScrolled(!isTransparentRoute || !atTop);
     };
@@ -67,7 +67,7 @@ const NavBar: React.FC = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "text-gray-900 bg-white" : "text-white bg-transparent"
+        isScrolled ? "text-gray-300 bg-gradient-to-br from-gray-950 to-gray-950" : "text-white bg-transparent"
       }`}
       aria-label="Main Navigation"
     >
@@ -92,7 +92,7 @@ const NavBar: React.FC = () => {
               />
             </div>
             <span className={`ml-2 text-lg font-medium transition-colors ${
-              isScrolled ? "text-gray-900" : "text-white"
+              isScrolled ? "text-gray" : "text-white"
             }`}>
               ChitChat <span className="font-bold">AI</span>
             </span>
@@ -103,7 +103,7 @@ const NavBar: React.FC = () => {
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className={`flex items-center px-4 py-2 text-base font-medium transition-colors ${
-                isScrolled ? "text-gray-700 hover:text-gray-900" : "text-white hover:text-white/80"
+                isScrolled ? "text-gray hover:text-white/80" : "text-white hover:text-white/80"
               }`}
               aria-haspopup="true"
               aria-expanded={isDropdownOpen}
@@ -122,7 +122,7 @@ const NavBar: React.FC = () => {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+              <div className="absolute right-0 mt-2 w-56 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-gray-950 z-500 py-10 px-10">
                 <div className="py-1">
                   {navLinks.map(({ path, label }) => (
                     <NavLink
@@ -133,7 +133,7 @@ const NavBar: React.FC = () => {
                         `block px-4 py-2 text-sm ${
                           isActive
                             ? "bg-theme-main/90 text-white"
-                            : "text-gray-700 hover:bg-gray-100"
+                            : "text-gray-200 hover:bg-theme-main/45"
                         }`
                       }
                     >
@@ -150,7 +150,7 @@ const NavBar: React.FC = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 rounded-md transition-colors ${
-                isScrolled ? "text-gray-700 hover:text-gray-900" : "text-white hover:text-white/80"
+                isScrolled ? "text-gray-100 hover:text-gray-200" : "text-white hover:text-white/80"
               }`}
               aria-label="Menu"
               aria-expanded={isMobileMenuOpen}
@@ -177,7 +177,7 @@ const NavBar: React.FC = () => {
             </button>
 
             {isMobileMenuOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+              <div className="absolute right-0 mt-2 w-56 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-gray-950 z-500 py-10 px-10 z-50">
                 <div className="py-1">
                   {navLinks.map(({ path, label }) => (
                     <NavLink
@@ -188,7 +188,7 @@ const NavBar: React.FC = () => {
                         `block px-4 py-2 text-sm ${
                           isActive
                             ? "bg-theme-main/90 text-white"
-                            : "text-gray-700 hover:bg-gray-100"
+                            : "text-gray-200 hover:bg-theme-main/45"
                         }`
                       }
                     >
