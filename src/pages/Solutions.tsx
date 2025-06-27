@@ -10,10 +10,19 @@ import CookieConsent from '../components/ContactModal';
 import Footer from '../components/Footer';
 import { useScroll, motion, useTransform, AnimatePresence } from 'framer-motion';
 import Hero from '../components/SolutionsHero';
+import SeoHelmet from '../components/SEOHelmet';
 
 const Solutions: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+
+   // SEO Configuration
+  const seoConfig = {
+    title: "ChitChat AI Solutions | Industry-Specific AI Personas for Business",
+    description: "Discover our psychology-driven AI solutions tailored for customer service, sales, healthcare, education and more. Emotionally intelligent digital humans for your industry.",
+    keywords: "AI solutions, industry-specific AI, customer service AI, sales AI assistant, healthcare AI, education AI, emotionally intelligent chatbots, business AI applications",
+    path: "/solutions"
+  };
 
   // Scroll progress for parallax effects
   const { scrollYProgress } = useScroll({
@@ -142,6 +151,13 @@ const Solutions: React.FC = () => {
 
   return (
     <>
+     <SeoHelmet
+        title={seoConfig.title}
+        description={seoConfig.description}
+        keywords={seoConfig.keywords}
+        path={seoConfig.path}
+      />
+      
       <Navbar />
 
       <main className="bg-gradient-to-br from-gray-950 to-gray-950" ref={containerRef}>

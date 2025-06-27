@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import ContactHeroSection from '../components/ContactUsHero';
+import SeoHelmet from '../components/SEOHelmet';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -17,6 +18,14 @@ const ContactUs: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // SEO Configuration
+  const seoConfig = {
+    title: "Contact ChitChat AI | AI Solutions Inquiry & Support",
+    description: "Get in touch with our AI experts to discuss custom digital human solutions for your business. Contact us for consultations, support, and partnership opportunities.",
+    keywords: "contact AI experts, AI solutions inquiry, digital human consultation, business AI support, ChitChat AI contact",
+    path: "/contactus"
+  };
 
   const [formData, setFormData] = useState({
     name: '',
@@ -127,6 +136,14 @@ const ContactUs: React.FC = () => {
 
   return (
     <>
+
+      <SeoHelmet
+        title={seoConfig.title}
+        description={seoConfig.description}
+        keywords={seoConfig.keywords}
+        path={seoConfig.path}
+      />
+
       <NavBar />
 
       {toast && (

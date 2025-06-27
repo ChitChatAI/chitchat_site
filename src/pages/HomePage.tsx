@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SeoHelmet from '../components/SEOHelmet';
 import Navbar from '../components/NavBar';
 import Features from '../components/Features';
 import Community from '../components/Community';
@@ -9,26 +10,25 @@ import Hero from '../components/Hero';
 
 const HomePage: React.FC = () => {
   useEffect(() => {
-    // Remove scroll animation observer
-    return () => { };
-  }, []);
-
-  useEffect(() => {
     const cleanupCursor = initCustomCursor();
     return () => cleanupCursor();
   }, []);
 
   return (
     <>
+      <SeoHelmet
+        title="ChitChat AI | Psychology-Driven AI Personas & Digital Humans"
+        description="ChitChat AI creates hyper-realistic, psychology-driven AI personas for customer service and business solutions. Experience emotionally intelligent digital humans powered by advanced AI."
+        keywords="ChitChat AI, ChitChat, ChitChat AI South Africa, AI personas, psychology-driven AI, digital humans, customer service AI, sales AI assistant, emotionally intelligent chatbots, South Africa AI technology"
+        path="/"
+      />
+
       <Navbar />
       <main className="relative overflow-hidden w-full min-h-screen bg-gray-950">
         <Hero />
-
         <Features />
         <Businesses />
         <Community />
-
-
       </main>
       <Footer />
 
@@ -49,7 +49,6 @@ const HomePage: React.FC = () => {
           opacity: 1 !important;
           transform: none !important;
           transition: none !important;
-          /* Remove forced padding reset so component padding applies */
         }
         section.animate-in-view {
           opacity: 1 !important;
@@ -91,7 +90,7 @@ const HomePage: React.FC = () => {
 
         .loader {
           border: 4px solid rgba(255, 255, 255, 0.2);
-          border-top-color: #6b46c1; /* Theme main color */
+          border-top-color: #6b46c1;
           animation: spin 1s linear infinite;
         }
 
@@ -100,7 +99,6 @@ const HomePage: React.FC = () => {
           to { transform: rotate(360deg); }
         }
 
-        /* Responsive Styles */
         @media (max-width: 768px) {
           section {
             padding-left: 1rem;

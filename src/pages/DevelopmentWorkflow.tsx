@@ -1,5 +1,3 @@
-// Updated DevelopmentWorkflow.tsx with professional scroll animations
-
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
@@ -7,10 +5,20 @@ import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
 import CookieConsent from '../components/ContactModal';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import SeoHelmet from '../components/SEOHelmet';
 
 const DevelopmentWorkflow: React.FC = () => {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const toggleFAQ = (index: number) => setOpenFAQ(openFAQ === index ? null : index);
+
+  // SEO Configuration
+  const seoConfig = {
+    title: "ChitChat AI | Our AI Development Process - Psychology + Technology",
+    description: "Discover our comprehensive AI persona development workflow from concept to deployment. Psychology-driven approach for creating emotionally intelligent digital humans.",
+    keywords: "Persona, Persona Development, Personas, AI development process, psychology-driven AI, persona creation workflow, AI deployment, continuous AI optimization, digital human development",
+    path: "/development-workflow"
+  };
+
   const workflowSteps = [
     {
       name: 'Phase 1: Conceptualization and Persona Development',
@@ -115,6 +123,14 @@ const DevelopmentWorkflow: React.FC = () => {
 
   return (
     <>
+    
+      <SeoHelmet
+        title={seoConfig.title}
+        description={seoConfig.description}
+        keywords={seoConfig.keywords}
+        path={seoConfig.path}
+      />
+
       <NavBar />
 
       {/* Hero Section */}
