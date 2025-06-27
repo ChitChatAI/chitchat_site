@@ -25,16 +25,16 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-    > 
-    
+    >
+
       {/* Background orb 1 */}
       <motion.div
-        className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/20 blur-xl"
+        className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/20 blur-xl -z-10"
         style={{ y: bgY1, x: bgX1 }}
       />
       {/* Background orb 2 */}
       <motion.div
-        className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main/10 blur-xl"
+        className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main/90 blur-xl -z-10"
         style={{ y: bgY2, x: bgX2 }}
       />
 

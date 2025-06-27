@@ -145,7 +145,7 @@ const ContactUs: React.FC = () => {
         />
         {/* Background orb 2 */}
         <motion.div
-          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black/90 blur-xl"
+          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black/90 blur-xl -z-10"
           style={{ y: bgY2, x: bgX2 }}
         />
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

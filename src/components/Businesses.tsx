@@ -186,12 +186,12 @@ const Businesses: React.FC = () => {
         className="py-32 px-4 sm:px-8 lg:px-20 bg-gradient-to-br from-gray-950 to-gray-950 z-10">
         {/* Background orb 1 */}
         <motion.div
-          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl"
+          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl -z-10"
           style={{ y: bgY1, x: bgX1 }}
         />
         {/* Background orb 2 */}
         <motion.div
-          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black/90 blur-xl"
+          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black/90 blur-xl -z-10"
           style={{ y: bgY2, x: bgX2 }}
         />
         <div className="max-w-6xl mx-auto text-center">
@@ -276,12 +276,12 @@ const Businesses: React.FC = () => {
       >
         {/* Background orb 1 */}
         <motion.div
-          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl"
+          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl -z-10"
           style={{ y: bgY1, x: bgX1 }}
         />
         {/* Background orb 2 */}
         <motion.div
-          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black blur-xl"
+          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black blur-xl -z-10"
           style={{ y: bgY2, x: bgX2 }}
         />
         <div className="max-w-6xl mx-auto">
@@ -342,12 +342,12 @@ const Businesses: React.FC = () => {
 
          {/* Background orb 1 */}
                 <motion.div
-                  className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl"
+                  className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl -z-10"
                   style={{ y: bgY1, x: bgX1 }}
                 />
                 {/* Background orb 2 */}
                 <motion.div
-                  className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl"
+                  className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl -z-10"
                   style={{ y: bgY2, x: bgX2 }}
                 />
         <div className="max-w-6xl mx-auto">
@@ -371,7 +371,7 @@ const Businesses: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-10 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
+                className="p-10 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black z-100"
               >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-4 h-4 bg-theme-main rounded-full flex-shrink-0" />
