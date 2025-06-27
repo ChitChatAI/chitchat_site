@@ -6,7 +6,9 @@ interface CallToActionProps {
   bgImage?: string;
 }
 
-const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) => (
+const CallToAction: React.FC<CallToActionProps> = ({ 
+  className = '', 
+  bgImage }) => (
   <section
     id="cta"
     className={`relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-gray-900 to-black text-white px-4 sm:px-6 ${className}`}
@@ -58,7 +60,7 @@ const CallToAction: React.FC<CallToActionProps> = ({ className = '', bgImage }) 
         viewport={{ once: true }}
       >
         <a
-          href="mailto:jessicaclaireleighza@gmail.com"
+          href="mailto:jessica@chitchatai.co.za"
           className="px-10 py-4 rounded-xl bg-gradient-to-r from-theme-main to-theme-main text-white font-semibold hover:from-theme-main/90 hover:to-theme-main/90 transition-all duration-300 shadow-lg hover:shadow-theme-main/20 hover:scale-[1.02] active:scale-95"
         >
           Get In Touch

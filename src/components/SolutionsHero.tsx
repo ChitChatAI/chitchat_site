@@ -99,7 +99,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           variants={itemVariants}
           className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
         >
-         Built for Every Business to Feel <span>Human</span>
+         Built for Every Business to Feel <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Human</span>
         </motion.h1>
 
         <motion.p

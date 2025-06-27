@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import ContactHeroSection from '../components/ContactUsHero';
+
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface ToastMessage {
   type: 'success' | 'error';
@@ -81,6 +83,17 @@ const ContactUs: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start']
+  });
+  // Background blobs
+  const bgY1 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const bgY2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const bgX1 = useTransform(scrollYProgress, [0, 1], [0, 20]);
+  const bgX2 = useTransform(scrollYProgress, [0, 1], [0, -15]);
+
   const handleNextStep = () => {
     if (validateStep(currentStep)) {
       setCurrentStep(prev => Math.min(prev + 1, 3));
@@ -122,9 +135,19 @@ const ContactUs: React.FC = () => {
           {toast.message}
         </div>
       )}
-    <ContactHeroSection />
+      <ContactHeroSection />
       <section className="py-16 bg-gradient-to-br from-gray-950 to-gray-950
 ">
+        {/* Background orb 1 */}
+        <motion.div
+          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl"
+          style={{ y: bgY1, x: bgX1 }}
+        />
+        {/* Background orb 2 */}
+        <motion.div
+          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black/90 blur-xl"
+          style={{ y: bgY2, x: bgX2 }}
+        />
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-gray-950 z-500 py-10 px-10 rounded-xl p-8 shadow-sm">
             {/* Progress Steps */}

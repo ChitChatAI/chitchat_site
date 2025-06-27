@@ -91,17 +91,15 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
     setFeaturesExpandedIndex(prev => (prev === index ? null : index));
   };
 
+  // Background blobs
+  const bgY1 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const bgY2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const bgX1 = useTransform(scrollYProgress, [0, 1], [0, 20]);
+  const bgX2 = useTransform(scrollYProgress, [0, 1], [0, -15]);
+
   return (
     <>
-      {/* Background Layer */}
-      <motion.div
-        className="fixed inset-0 -z-10 opacity-10"
-        style={{ y: bgLayerY }}
-      >
-        <div className="absolute top-1/4 left-0 w-64 h-64 rounded-full bg-theme-main/20 blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-0 w-96 h-96 rounded-full bg-theme-secondary/20 blur-3xl"></div>
-     
-      </motion.div>
+      
 
       {/* WHY CHITCHAT */}
       <section id="why-chitchat" className="bg-gradient-to-br from-gray-950 to-gray-950
@@ -112,6 +110,17 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
         />
+
+          {/* Background orb 1 */}
+              <motion.div
+                className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/20 blur-xl"
+                style={{ y: bgY1, x: bgX1 }}
+              />
+              {/* Background orb 2 */}
+              <motion.div
+                className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl"
+                style={{ y: bgY2, x: bgX2 }}
+              />
 
         <div className="max-w-6xl mx-auto relative">
           <motion.div
@@ -169,6 +178,16 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
         className="relative bg-gradient-to-br from-gray-950 to-gray-950
  py-24 px-4 sm:px-10 lg:px-24 text-white overflow-hidden"
       >
+          {/* Background orb 1 */}
+              <motion.div
+                className="absolute top-20 left-20 w-40 h-40 rounded-full bg-black blur-xl"
+                style={{ y: bgY1, x: bgX1 }}
+              />
+              {/* Background orb 2 */}
+              <motion.div
+                className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main/20 blur-xl"
+                style={{ y: bgY2, x: bgX2 }}
+              />
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
           initial={{ opacity: 0 }}
@@ -271,6 +290,16 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
             opacity: topSectionOpacity
           }}
         >
+            {/* Background orb 1 */}
+                <motion.div
+                  className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/20 blur-xl"
+                  style={{ y: bgY1, x: bgX1 }}
+                />
+                {/* Background orb 2 */}
+                <motion.div
+                  className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main/90 blur-xl"
+                  style={{ y: bgY2, x: bgX2 }}
+                />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-7xl mx-auto items-center">
             {/* Accordion Column */}
             <div className="flex flex-col h-full justify-center">
@@ -350,7 +379,13 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
             y: bottomSectionY,
             opacity: bottomSectionOpacity
           }}
-        >
+        >  {/* Background orb 1 */}
+              <motion.div
+                className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/90 blur-xl"
+                style={{ y: bgY1, x: bgX1 }}
+              />
+              {/* Background orb 2 */}
+             
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-7xl mx-auto items-start">
             {/* Image Column */}
             <div className="relative w-full h-full min-h-[400px] lg:min-h-[500px]">
@@ -387,6 +422,10 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 <p className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 mb-8 max-w-xl leading-relaxed">
                   These features make ChitChat not just functional, but transformational — delivering emotionally intelligent automation at scale.
                 </p>
+                 <motion.div
+                className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl"
+                style={{ y: bgY2, x: bgX2 }}
+              />
 
                 <div className="grid grid-cols-1 gap-4">
                   {features.map((feature, index) => (

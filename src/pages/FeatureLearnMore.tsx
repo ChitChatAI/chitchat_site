@@ -17,7 +17,7 @@ Our Human Augmented Intelligence approach means AI doesn't just automate tasksâ€
 
 - **Empowers staff** with real-time suggestions and empathy cues.
 - **Improves customer satisfaction** by understanding intent and emotion.
-- **Designed for industries** where human touch is critical (healthcare, support, etc.).
+- **Designed for industries** where human touch is critical such as healthcare, support and so.
     `,
     icon: 'psychology_alt'
   },

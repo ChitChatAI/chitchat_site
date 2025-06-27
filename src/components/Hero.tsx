@@ -99,7 +99,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           variants={itemVariants}
           className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
         >
-          Human Augmented AI For Real  <span>Connection</span>
+          Human Augmented AI For Real <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Connection</span>
         </motion.h1>
 
         <motion.p

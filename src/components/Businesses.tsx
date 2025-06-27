@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation, useInView, useTransform, useScroll } from 'framer-motion';
 
 const Businesses: React.FC = () => {
   const [headerText, setHeaderText] = useState('');
@@ -91,7 +91,7 @@ const Businesses: React.FC = () => {
     },
     {
       title: 'Integration Support',
-      description: 'Works with your existing tech stack (chat, WhatsApp, voice, etc.).',
+      description: 'Works with your existing tech stack such as chat, WhatsApp, voice and more.',
       icon: 'integration_instructions'
     },
     {
@@ -160,6 +160,19 @@ const Businesses: React.FC = () => {
     },
   ];
 
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start']
+  });
+
+  // Background blobs
+  const bgY1 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const bgY2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const bgX1 = useTransform(scrollYProgress, [0, 1], [0, 20]);
+  const bgX2 = useTransform(scrollYProgress, [0, 1], [0, -15]);
+
   return (
     <div className="overflow-hidden">
       {/* Hero Section with Typing Animation */}
@@ -170,8 +183,17 @@ const Businesses: React.FC = () => {
         animate={controls1}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         style={{ transform: `translateY(${valueTransform}px)` }}
-        className="py-32 px-4 sm:px-8 lg:px-20 bg-gradient-to-br from-gray-950 to-gray-950">
-
+        className="py-32 px-4 sm:px-8 lg:px-20 bg-gradient-to-br from-gray-950 to-gray-950 z-10">
+        {/* Background orb 1 */}
+        <motion.div
+          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl"
+          style={{ y: bgY1, x: bgX1 }}
+        />
+        {/* Background orb 2 */}
+        <motion.div
+          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black/90 blur-xl"
+          style={{ y: bgY2, x: bgX2 }}
+        />
         <div className="max-w-6xl mx-auto text-center">
           <motion.h1
             className="text-white text-5xl sm:text-6xl md:text-7xl font-light leading-tight mb-8"
@@ -252,6 +274,16 @@ const Businesses: React.FC = () => {
         className="py-28 px-4 sm:px-8 lg:px-20 will-change-transform bg-gradient-to-br from-gray-950 to-gray-950
 "
       >
+        {/* Background orb 1 */}
+        <motion.div
+          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl"
+          style={{ y: bgY1, x: bgX1 }}
+        />
+        {/* Background orb 2 */}
+        <motion.div
+          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-black blur-xl"
+          style={{ y: bgY2, x: bgX2 }}
+        />
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2
@@ -305,7 +337,19 @@ const Businesses: React.FC = () => {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         style={{ transform: `translateY(${featuresTransform}px)` }}
         className="py-28 px-4 sm:px-8 lg:px-20 bg-gray-950 will-change-transform"
+        
       >
+
+         {/* Background orb 1 */}
+                <motion.div
+                  className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/40 blur-xl"
+                  style={{ y: bgY1, x: bgX1 }}
+                />
+                {/* Background orb 2 */}
+                <motion.div
+                  className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl"
+                  style={{ y: bgY2, x: bgX2 }}
+                />
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <motion.h2

@@ -135,7 +135,7 @@ const DevelopmentWorkflow: React.FC = () => {
         </div>
         <div className="relative z-20 max-w-5xl w-full px-6 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
-            Development <span>Workflow</span>
+            Development <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Workflow</span>
           </h1>
           <p className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
             A comprehensive journey from concept to deployment, ensuring your AI persona perfectly embodies your brand.

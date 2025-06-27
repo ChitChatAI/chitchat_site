@@ -17,8 +17,13 @@ input,
 strong,
 button,
 textarea,
+input,
 ion-icon {
   display: block;
+}
+
+input {
+  outline: none;
 }
 
 button {

@@ -56,7 +56,7 @@ const ContactHeroSection: React.FC<{ id?: string }> = ({ id }) => {
 
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       gradient.addColorStop(0, "hsla(270, 20%, 10%, 1)");
-      gradient.addColorStop(1, "hsla(280, 25%, 12%, 1)");
+      gradient.addColorStop(1, "rgb(79, 7, 114)");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -132,7 +132,7 @@ const ContactHeroSection: React.FC<{ id?: string }> = ({ id }) => {
         variants={fadeInVariants}
       >
         <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
-           Get in Touch With <span className="text-gray-100">Us</span>
+           Get in Touch With <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Us</span>
         </motion.h1>
 
         <motion.p

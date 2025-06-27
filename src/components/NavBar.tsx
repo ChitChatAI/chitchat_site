@@ -92,7 +92,7 @@ const NavBar: React.FC = () => {
               />
             </div>
             <span className={`ml-2 text-lg font-medium transition-colors ${
-              isScrolled ? "text-gray" : "text-white"
+              isScrolled ? "text-gray-100" : "text-white"
             }`}>
               ChitChat <span className="font-bold">AI</span>
             </span>
@@ -177,7 +177,7 @@ const NavBar: React.FC = () => {
             </button>
 
             {isMobileMenuOpen && (
-              <div className="absolute right-0 mt-2 w-56 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-gray-950 z-500 py-10 px-10 z-50">
+              <div className="absolute right-0 mt-2 w-56 border border-gray-700 rounded-lg shadow-sm transition-all duration-300 flex flex-col bg-gray-950 z-500 py-10 px-10 z-50">
                 <div className="py-1">
                   {navLinks.map(({ path, label }) => (
                     <NavLink

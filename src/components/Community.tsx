@@ -25,15 +25,16 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-    >
+    > 
+    
       {/* Background orb 1 */}
       <motion.div
-        className="absolute top-20 left-20 w-40 h-40 rounded-full bg-blue-500/10 blur-xl"
+        className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/20 blur-xl"
         style={{ y: bgY1, x: bgX1 }}
       />
       {/* Background orb 2 */}
       <motion.div
-        className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-purple-500/10 blur-xl"
+        className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main/10 blur-xl"
         style={{ y: bgY2, x: bgX2 }}
       />
 
@@ -74,7 +75,7 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
             viewport={{ once: true }}
           >
             <a
-              href="mailto:jessicaclaireleighza@gmail.com"
+              href="mailto:jessica@chitchatai.co.za"
               className="px-10 py-4 rounded-xl bg-gradient-to-r from-theme-main to-theme-main text-white font-semibold hover:from-theme-main/90 hover:to-theme-main/90 transition-all duration-300 shadow-lg hover:shadow-theme-main/20 hover:scale-[1.02] active:scale-95"
             >
               Get In Touch
