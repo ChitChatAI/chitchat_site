@@ -324,7 +324,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 {useCases.map((item, index) => (
                   <motion.div
                     key={index}
-                    className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
+                    className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black z-100"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.4 }}
@@ -341,7 +341,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                       </span>
                     </button>
                     <div
-                      className={`px-6 overflow-hidden transition-all duration-300 text-base ${expandedIndex === index ? 'max-h-40 py-4' : 'max-h-0 py-0'}`}
+                      className={`z-100px-6 overflow-hidden transition-all duration-300 text-base ${expandedIndex === index ? 'max-h-40 py-4' : 'max-h-0 py-0'}`}
                     >
                       <p className="text-gray-300">{item.description}</p>
                     </div>
@@ -381,10 +381,9 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
           }}
         >  {/* Background orb 1 */}
           <motion.div
-            className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/90 blur-xl"
+            className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/90 blur-xl -z-10"
             style={{ y: bgY1, x: bgX1 }}
           />
-          {/* Background orb 2 */}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-7xl mx-auto items-start">
             {/* Image Column */}
@@ -423,7 +422,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   These features make ChitChat not just functional, but transformational — delivering emotionally intelligent automation at scale.
                 </p>
                 <motion.div
-                  className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl"
+                  className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl -z-10"
                   style={{ y: bgY2, x: bgX2 }}
                 />
 
@@ -431,7 +430,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   {features.map((feature, index) => (
                     <motion.div
                       key={index}
-                      className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-black"
+                      className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-black z-100"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index, duration: 0.4 }}
