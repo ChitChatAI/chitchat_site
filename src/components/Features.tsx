@@ -320,7 +320,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 </p>
               </motion.div>
 
-              <div className="grid grid-cols-1 gap-4 pr-2 max-h-[400px]">
+              <div className="grid grid-cols-1 gap-4 pr-2">
                 {useCases.map((item, index) => (
                   <motion.div
                     key={index}
