@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import ContactHeroSection from '../components/ContactUsHero';
 import SeoHelmet from '../components/SEOHelmet';
+import CookieConsent from '../components/ContactModal';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -394,7 +395,7 @@ const ContactUs: React.FC = () => {
       </section>
 
 
-
+      <CookieConsent />
       <Footer />
     </>
   );

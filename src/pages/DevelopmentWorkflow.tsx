@@ -156,6 +156,7 @@ const DevelopmentWorkflow: React.FC = () => {
           <p className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
             A comprehensive journey from concept to deployment, ensuring your AI persona perfectly embodies your brand.
           </p>
+          
         </div>
       </motion.section>
 
@@ -273,9 +274,8 @@ const DevelopmentWorkflow: React.FC = () => {
           </div>
         </div>
       </motion.section>
-
-      <CallToAction />
       <CookieConsent />
+      <CallToAction />
       <Footer />
     </>
   );

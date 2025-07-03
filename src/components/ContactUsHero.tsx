@@ -143,6 +143,7 @@ const ContactHeroSection: React.FC<{ id?: string }> = ({ id }) => {
         >
           We typically respond within <span className="font-semibold text-gray-200">48 hours</span>. Our team is ready to assist you with any inquiries.
         </motion.p>
+        
       </motion.div>
     </section>
   );

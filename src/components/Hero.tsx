@@ -75,7 +75,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
       </motion.div>
 
 
-       {/* Enhanced Glassmorphic Overlay */}
+      {/* Enhanced Glassmorphic Overlay */}
       <div className="absolute inset-0">
         <div
           className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
@@ -109,6 +109,8 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
           Custom-built AI personas that think, feel, and respond like real people
           – tailored for your business.
         </motion.p>
+
+
       </motion.div>
     </section>
   );

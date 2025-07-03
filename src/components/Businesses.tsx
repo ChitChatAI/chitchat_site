@@ -309,7 +309,7 @@ const Businesses: React.FC = () => {
                   }`}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-4 h-4 bg-theme-main rounded-sm transform rotate-45" />
+                  <div className="w-2 h-2 bg-theme-main rounded-sm transform rotate-45 animate-ping" />
                   <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-200">
                     {item.title}
                   </h3>

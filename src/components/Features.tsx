@@ -3,6 +3,10 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { TypeAnimation } from 'react-type-animation';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface FeatureItem {
   title: string;
@@ -13,6 +17,9 @@ interface FeatureItem {
 interface FeaturesProps {
   id?: string;
 }
+
+// Register GSAP plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const Features: React.FC<FeaturesProps> = ({ id }) => {
   const useCases: FeatureItem[] = [
@@ -69,6 +76,31 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
   const [featuresExpandedIndex, setFeaturesExpandedIndex] = useState<number | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    // Select panels within our component's scope
+    const panels = gsap.utils.toArray(".outer", containerRef.current) as HTMLElement[];
+
+    panels.forEach((panel, i) => {
+      gsap.to(panel, {
+        scrollTrigger: {
+          trigger: panel,
+          start: "top top",
+          pin: i !== panels.length - 1, 
+          pinSpacing: i === panels.length - 1,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          markers: false 
+        },
+        scale: 1.15
+      });
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, { scope: containerRef });
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start end', 'end start']
@@ -101,189 +133,199 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
     <>
 
 
-      {/* WHY CHITCHAT */}
-      <section id="why-chitchat" className="bg-gradient-to-br from-gray-950 to-gray-950
+      <div className='relative overflow-hidden'>
+        {/* WHY CHITCHAT */}
+        <section id="why-chitchat" className="bg-gradient-to-br from-gray-950 to-gray-950
  text-white px-4 sm:px-10 lg:px-24 py-24 relative overflow-hidden">
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        />
-
-        {/* Background orb 1 */}
-        <motion.div
-          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/20 blur-xl"
-          style={{ y: bgY1, x: bgX1 }}
-        />
-        {/* Background orb 2 */}
-        <motion.div
-          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl"
-          style={{ y: bgY2, x: bgX2 }}
-        />
-
-        <div className="max-w-6xl mx-auto relative">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center gap-2 text-sm uppercase tracking-widest text-theme-main font-medium mb-6">
-              <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
-              WHY US?
-            </div>
-          </motion.div>
+            className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          />
 
-          <motion.h2
-            className="text-4xl sm:text-5xl font-bold leading-tight max-w-4xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Forget robotic, lifeless AI agents — we're here to <span className="font-medium">revolutionise</span> customer service with <span className="italic font-medium">AI that feels real</span>.
-          </motion.h2>
-
+          {/* Background orb 1 */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-8 max-w-3xl text-gray-200 leading-relaxed">
-              Our intelligent, <span className="text-white font-semibold text-white">human-like agents</span> handle customer inquiries effortlessly, keeping conversations engaging, natural, and persuasive.
-            </p>
+            className="absolute top-20 left-20 w-40 h-40 rounded-full bg-theme-main/20 blur-xl"
+            style={{ y: bgY1, x: bgX1 }}
+          />
+          {/* Background orb 2 */}
+          <motion.div
+            className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main blur-xl"
+            style={{ y: bgY2, x: bgX2 }}
+          />
 
-            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-6 max-w-3xl text-gray-200 leading-relaxed">
-              <span className="text-white font-medium">Faster</span> than human support, <span className="text-white font-medium">smarter</span> than traditional AI — <span className="text-white font-semibold text-white">ChitChat AI builds relationships</span>, not just answers.
-            </p>
-
-            <div className="mt-10">
-              <Link
-                to="/contactus"
-                className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 rounded-md text-white hover:bg-gradient-to-br from-gray-950 to-gray-950
-/10 transition-all duration-300 hover:gap-3"
-              >
-                Request Demo
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* WHY US */}
-      <section
-        id="why-us"
-        className="relative bg-gradient-to-br from-gray-950 to-gray-950
- py-24 px-4 sm:px-10 lg:px-24 text-white overflow-hidden"
-      >
-        {/* Background orb 1 */}
-        <motion.div
-          className="absolute top-20 left-20 w-40 h-40 rounded-full bg-black blur-xl"
-          style={{ y: bgY1, x: bgX1 }}
-        />
-        {/* Background orb 2 */}
-        <motion.div
-          className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main/20 blur-xl"
-          style={{ y: bgY2, x: bgX2 }}
-        />
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_4.2fr] gap-16 items-start">
+          <div className="max-w-6xl mx-auto relative">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-2 text-sm uppercase tracking-widest text-theme-main font-medium mb-6">
-                <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
-                WHY US?
+                <div className="w-2 h-2 bg-theme-main rounded-sm animate-ping"></div>
+                <TypeAnimation
+                  sequence={['WHY US?', 1000]}
+                  speed={60}
+                  wrapper="span"
+                  cursor={false}
+                  repeat={0}
+                  className="inline-block"
+                />
+
               </div>
             </motion.div>
 
-            <motion.div
-              className="space-y-10 text-[1.25rem] sm:text-[1.3125rem] leading-relaxed font-normal"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+            <motion.h2
+              className="text-4xl sm:text-5xl font-bold leading-tight max-w-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <motion.h2
-                className="text-4xl md:text-5xl font-bold leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                No more shallow AI. Just real <span className="font-medium">emotional</span> intelligence.
-              </motion.h2>
+              Forget robotic, lifeless AI agents — we're here to <span className="font-medium">revolutionise</span> customer service with <span className="italic font-medium">AI that feels real</span>.
+            </motion.h2>
 
-              <motion.p
-                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                We have an <span className="font-semibold text-white">extensive background in psychology</span>, with training in behavioural science, emotional theory, and cognitive development.
-                We have <span className="font-semibold text-white">studied real human conversations</span> – what makes people feel heard, connected, safe, and understood.
-              </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-8 max-w-3xl text-gray-200 leading-relaxed">
+                Our intelligent, <span className="text-white font-semibold text-white">human-like agents</span> handle customer inquiries effortlessly, keeping conversations engaging, natural, and persuasive.
+              </p>
 
-              <motion.p
-                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                We have used our training to <span className="font-semibold text-white">design agents</span> that replicate personality layers, emotional triggers, and conversational flow.
-                Most dev teams try to humanise AI through surface-level engineering.<br />
-                <span className="italic font-medium">We build the person first – then the logic.</span>
-              </motion.p>
+              <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-6 max-w-3xl text-gray-200 leading-relaxed">
+                <span className="text-white font-medium">Faster</span> than human support, <span className="text-white font-medium">smarter</span> than traditional AI — <span className="text-white font-semibold text-white">ChitChat AI builds relationships</span>, not just answers.
+              </p>
 
-              <motion.div
-                className="flex flex-wrap gap-4 pt-8"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                {[
-                  'PERSONALITY',
-                  'DECISION-MAKING',
-                  'EMOTIONAL INTELLIGENCE',
-                  'TEXT FLOW',
-                  'CONTEXT AWARENESS',
-                  'MORAL COMPASS',
-                  'HABITS & QUIRKS',
-                  'ADAPTING TO SITUATIONS'
-                ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="bg-gray-800 text-gray-100 px-5 py-3 rounded-md text-sm font-medium shadow-sm hover:bg-theme-main/20 hover:text-gray-400 transition-colors duration-300 border border-gray-700"
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "#1e293b", // slate-800
-                      borderColor: "#3b82f6" // theme-main blue-500
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {item}
-                  </motion.div>
-                ))}
-              </motion.div>
+              <div className="mt-10">
+                <Link
+                  to="/contactus"
+                  className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 rounded-md text-white hover:bg-gradient-to-br from-gray-950 to-gray-950
+/10 transition-all duration-300 hover:gap-3"
+                >
+                  Request Demo
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* WHY US */}
+        <section
+          id="why-us"
+          className="relative bg-gradient-to-br from-gray-950 to-gray-950
+ py-24 px-4 sm:px-10 lg:px-24 text-white overflow-hidden"
+        >
+          {/* Background orb 1 */}
+          <motion.div
+            className="absolute top-20 left-20 w-40 h-40 rounded-full bg-black blur-xl"
+            style={{ y: bgY1, x: bgX1 }}
+          />
+          {/* Background orb 2 */}
+          <motion.div
+            className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-theme-main/20 blur-xl"
+            style={{ y: bgY2, x: bgX2 }}
+          />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          />
+
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_4.2fr] gap-16 items-start">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="flex items-center gap-2 text-sm uppercase tracking-widest text-theme-main font-medium mb-6">
+                  <div className="w-2 h-2 bg-theme-main rounded-sm animate-ping"></div>
+                  WHY US?
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="space-y-10 text-[1.25rem] sm:text-[1.3125rem] leading-relaxed font-normal"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <motion.h2
+                  className="text-4xl md:text-5xl font-bold leading-tight"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  No more shallow AI. Just real <span className="font-medium">emotional</span> intelligence.
+                </motion.h2>
+
+                <motion.p
+                  className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  We have an <span className="font-semibold text-white">extensive background in psychology</span>, with training in behavioural science, emotional theory, and cognitive development.
+                  We have <span className="font-semibold text-white">studied real human conversations</span> – what makes people feel heard, connected, safe, and understood.
+                </motion.p>
+
+                <motion.p
+                  className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  We have used our training to <span className="font-semibold text-white">design agents</span> that replicate personality layers, emotional triggers, and conversational flow.
+                  Most dev teams try to humanise AI through surface-level engineering.<br />
+                  <span className="italic font-medium">We build the person first – then the logic.</span>
+                </motion.p>
+
+                <motion.div
+                  className="flex flex-wrap gap-4 pt-8"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  {[
+                    'PERSONALITY',
+                    'DECISION-MAKING',
+                    'EMOTIONAL INTELLIGENCE',
+                    'TEXT FLOW',
+                    'CONTEXT AWARENESS',
+                    'MORAL COMPASS',
+                    'HABITS & QUIRKS',
+                    'ADAPTING TO SITUATIONS'
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="bg-gray-800 text-gray-100 px-5 py-3 rounded-md text-sm font-medium shadow-sm hover:bg-theme-main/20 hover:text-gray-400 transition-colors duration-300 border border-gray-700"
+                      whileHover={{
+                        scale: 1.05,
+                        backgroundColor: "#1e293b", // slate-800
+                        borderColor: "#3b82f6" // theme-main blue-500
+                      }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      {item}
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* USE CASES */}
-      <div ref={containerRef} className="relative overflow-x-hidden">
+      <div className="wrapper overflow-x-hidden" ref={containerRef}>
         <motion.section
           id="use-cases"
-          className="relative z-20 bg-gradient-to-br from-gray-950 to-gray-950
+          className="outer relative z-20 bg-gradient-to-br from-gray-950 to-gray-950
  text-white px-4 sm:px-8 lg:px-20 py-24"
           style={{
             y: topSectionY,
@@ -309,7 +351,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 transition={{ duration: 0.6 }}
               >
                 <div className="mb-6 flex items-center gap-2 text-sm tracking-widest uppercase text-theme-main font-medium">
-                  <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
+                  <div className="w-2 h-2 bg-theme-main rounded-sm animate-ping"></div>
                   Why ChitChat AI?
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white mb-6">
@@ -373,7 +415,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
         {/* WHAT SETS US APART */}
         <motion.section
           id={id}
-          className="relative z-10 bg-gradient-to-br from-gray-950 to-gray-950
+          className="outer relative z-10 bg-gradient-to-br from-gray-950 to-gray-950
  px-4 sm:px-8 lg:px-20 py-24"
           style={{
             y: bottomSectionY,
@@ -412,7 +454,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 transition={{ duration: 0.6 }}
               >
                 <div className="mb-6 flex items-center gap-2 text-sm tracking-widest uppercase text-theme-main font-medium">
-                  <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
+                  <div className="w-2 h-2 bg-theme-main rounded-sm animate-ping"></div>
                   Why ChitChat AI?
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white mb-6">
