@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import CallToAction from '../components/CallToAction';
-import CookieConsent from '../components/ContactModal';
+import CookieConsent from '../components/ChatModal';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import SeoHelmet from '../components/SEOHelmet';
 

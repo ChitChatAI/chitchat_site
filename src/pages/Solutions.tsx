@@ -6,7 +6,7 @@ import sales from '../assets/lottie/sales.json';
 import healthcare from '../assets/lottie/healthCare.json';
 import education from '../assets/lottie/education.json';
 import CallToAction from '../components/CallToAction';
-import CookieConsent from '../components/ContactModal';
+import CookieConsent from '../components/ChatModal';
 import Footer from '../components/Footer';
 import { useScroll, motion, useTransform, AnimatePresence } from 'framer-motion';
 import Hero from '../components/SolutionsHero';

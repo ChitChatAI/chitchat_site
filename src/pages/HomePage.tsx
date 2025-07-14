@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
 import Hero from '../components/Hero';
+import CookieConsent from '../components/ChatModal';
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -30,6 +31,7 @@ const HomePage: React.FC = () => {
         <Businesses />
         <Community />
       </main>
+      <CookieConsent />
       <Footer />
 
       <style>{`

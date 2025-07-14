@@ -1,152 +1,75 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Typewriter } from "react-simple-typewriter";
 
 const ContactHeroSection: React.FC<{ id?: string }> = ({ id }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const fadeInVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
-  useEffect(() => {
-    if (!canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resizeCanvas();
-
-    const dots = [];
-    const dotCount = 120;
-    const connectionDistance = 180;
-    const dotRadius = 2.5;
-    const dotSpeed = 0.3;
-    const purpleHues = [270, 280, 290];
-
-    for (let i = 0; i < dotCount; i++) {
-      dots.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * dotSpeed * (0.7 + Math.random() * 0.6),
-        vy: (Math.random() - 0.5) * dotSpeed * (0.7 + Math.random() * 0.6),
-        radius: dotRadius * (0.8 + Math.random() * 0.4),
-        hue: purpleHues[Math.floor(Math.random() * purpleHues.length)],
-        saturation: 70 + Math.random() * 30,
-        lightness: 50 + Math.random() * 30,
-        alpha: 0.7 + Math.random() * 0.3,
-      });
-    }
-
-    let animationId: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, "hsla(270, 20%, 10%, 1)");
-      gradient.addColorStop(1, "rgb(79, 7, 114)");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      dots.forEach(dot => {
-        dot.x += dot.vx;
-        dot.y += dot.vy;
-
-        if (dot.x < 0 || dot.x > canvas.width) dot.vx *= -1 * (0.9 + Math.random() * 0.2);
-        if (dot.y < 0 || dot.y > canvas.height) dot.vy *= -1 * (0.9 + Math.random() * 0.2);
-
-        const glow = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 3);
-        glow.addColorStop(0, `hsla(${dot.hue}, ${dot.saturation}%, ${dot.lightness}%, ${dot.alpha})`);
-        glow.addColorStop(1, `hsla(${dot.hue}, ${dot.saturation}%, ${dot.lightness}%, 0)`);
-
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.radius * 3, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = `hsla(${dot.hue}, ${dot.saturation}%, ${dot.lightness}%, ${dot.alpha})`;
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      for (let i = 0; i < dots.length; i++) {
-        for (let j = i + 1; j < dots.length; j++) {
-          const dx = dots[i].x - dots[j].x;
-          const dy = dots[i].y - dots[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < connectionDistance) {
-            const opacity = 1 - distance / connectionDistance;
-            const midHue = (dots[i].hue + dots[j].hue) / 2;
-
-            ctx.strokeStyle = `hsla(${midHue}, 60%, 70%, ${opacity * 0.3})`;
-            ctx.lineWidth = 0.5 + opacity * 1.5;
-
-            ctx.beginPath();
-            ctx.moveTo(dots[i].x, dots[i].y);
-            ctx.lineTo(dots[j].x, dots[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-    window.addEventListener("resize", resizeCanvas);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resizeCanvas);
-    };
-  }, []);
+  const { scrollYProgress } = useScroll();
+  const yHeading = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const yText = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.02]);
+  const bgY1 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const bgY2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const bgX1 = useTransform(scrollYProgress, [0, 1], [0, 20]);
+  const bgX2 = useTransform(scrollYProgress, [0, 1], [0, -15]);
 
   return (
-    <section
-      id={id}
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden text-white"
+    <motion.section
+      id={id || "contact-hero"}
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 to-black text-white px-4 sm:px-6"
+      style={{ scale }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      {/* Canvas background */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-gray-950 z-10" />
+      {/* Grid Background */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none z-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBkPSJNMCAzMEg2ME0zMCAwVjYwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIgLz48L3N2Zz4=')]" />
 
-      {/* Main content */}
+      {/* Blur Blobs */}
       <motion.div
-        className="relative z-20 w-full max-w-4xl mx-auto px-6 text-center"
-        initial="hidden"
-        animate="visible"
-        variants={fadeInVariants}
-      >
-        <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
-           Get in Touch With <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Us</span>
+        className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-theme-main/10 blur-3xl opacity-30 -z-10"
+        style={{ y: bgY1, x: bgX1 }}
+      />
+      <motion.div
+        className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-600/10 blur-3xl opacity-30 -z-10"
+        style={{ y: bgY2, x: bgX2 }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl text-center px-4 sm:px-6">
+        <motion.h1
+          className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
+          style={{ y: yHeading, opacity }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          <Typewriter
+            words={["Get in Touch With Us"]}
+            loop={1}
+            cursor={false}
+            typeSpeed={40}
+            deleteSpeed={0}
+            delaySpeed={1200}
+          />
         </motion.h1>
 
         <motion.p
           className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
+          style={{ y: yText, opacity }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
         >
-          We typically respond within <span className="font-semibold text-gray-200">48 hours</span>. Our team is ready to assist you with any inquiries.
+          We typically respond within{" "}
+          <span className="font-semibold text-gray-200">48 hours</span>. Our team
+          is ready to assist you with any inquiries.
         </motion.p>
-      </motion.div>
-    </section>
+      </div>
+    </motion.section>
   );
 };
-
 
 export default ContactHeroSection;
