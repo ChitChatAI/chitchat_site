@@ -375,7 +375,7 @@ const Businesses: React.FC = () => {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-4 h-4 bg-theme-main rounded-full flex-shrink-0" />
-                  <h3 className="text-lg font-semibold uppercase tracking-wider text-gray-300">
+                  <h3 className="text-lg font-semibold uppercase tracking-wider text-white">
                     {item.title}
                   </h3>
                 </div>

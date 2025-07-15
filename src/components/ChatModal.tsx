@@ -14,13 +14,10 @@ const ChatModal: React.FC = () => {
   const [unreadCount, setUnreadCount] = useState(0);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollToBottom = () => chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
-
     const now = formatTime(new Date());
     const newMessage: Message = { from: 'user', text: input.trim(), timestamp: now };
     const updatedMessages = [...messages, newMessage];
@@ -34,49 +31,46 @@ const ChatModal: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: input.trim(),
-          history: updatedMessages.map((m) => ({
-            role: m.from === 'user' ? 'user' : 'assistant',
-            content: m.text,
-          })),
-        }),
+          history: updatedMessages.map((m) => ({ role: m.from === 'user' ? 'user' : 'assistant', content: m.text }))
+        })
       });
 
       if (!res.ok) throw new Error('Bad response from server');
       const data = await res.json();
       if (!data?.reply) throw new Error('No reply in response');
 
-      const botMessage: Message = {
-        from: 'bot',
-        text: data.reply,
-        timestamp: formatTime(new Date()),
-      };
+      const botMessage: Message = { from: 'bot', text: data.reply, timestamp: formatTime(new Date()) };
       setMessages((prev) => [...prev, botMessage]);
       if (!open) setUnreadCount((c) => c + 1);
-    } catch (err) {
-      setMessages((prev) => [...prev, {
-        from: 'bot',
-        text: '⚠️ Something went wrong. Please try again later.',
-        timestamp: now,
-      }]);
+    } catch {
+      setMessages((prev) => [...prev, { from: 'bot', text: '⚠️ Something went wrong. Please try again later.', timestamp: now }]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (open) setUnreadCount(0);
+    const body = document.body;
+    const html = document.documentElement;
+    if (open) {
+      body.style.overflow = 'hidden';
+      html.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = '';
+      html.style.overflow = '';
+    }
+    return () => {
+      body.style.overflow = '';
+      html.style.overflow = '';
+    };
   }, [open]);
+
+  useEffect(() => { if (open) setUnreadCount(0); }, [open]);
 
   useEffect(() => {
     if (open && messages.length === 0) {
       const now = formatTime(new Date());
-      setMessages([
-        {
-          from: 'bot',
-          text: "Howzit! I’m Nova from ChitChat AI 🤗 Just a quick heads-up — this is not a preview or demo of our AI persona experience.",
-          timestamp: now,
-        }
-      ]);
+      setMessages([{ from: 'bot', text: "Hi there! I'm Nova 👋 your personal assistant from ChitChat AI, here to help you.", timestamp: now }]);
     }
   }, [open, messages.length]);
 
@@ -84,13 +78,10 @@ const ChatModal: React.FC = () => {
 
   return (
     <>
-      {/* Floating button */}
       <div className="fixed bottom-6 right-6 z-50">
         <div className="relative group">
           <span className="absolute -top-3 -right-3 block sm:hidden w-3 h-3 rounded-full bg-theme-main animate-ping opacity-80" />
           <span className="absolute -top-3 -right-3 block sm:hidden w-3 h-3 rounded-full bg-theme-main" />
-
-          {/* Animated prompt (desktop only) */}
           <motion.div
             className="absolute bottom-14 right-0 text-xs text-center px-2 py-1 rounded w-max hidden sm:block"
             initial={{ opacity: 0, y: 5 }}
@@ -106,8 +97,6 @@ const ChatModal: React.FC = () => {
               <span>Reach</span><span>the</span><span>support</span><span>team 👋</span>
             </motion.div>
           </motion.div>
-
-          {/* Chat Button */}
           <button
             onClick={() => setOpen((prev) => !prev)}
             className="bg-transparent p-3 rounded-full shadow-lg border border-gray-700 hover:scale-110 transition relative"
@@ -123,8 +112,6 @@ const ChatModal: React.FC = () => {
         </div>
       </div>
 
-
-      {/* Chat modal */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -135,11 +122,8 @@ const ChatModal: React.FC = () => {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3 }}
             className={`fixed z-50 flex flex-col border border-gray-700 shadow-xl bg-black rounded-lg overflow-hidden
-              ${fullscreen
-                ? 'top-4 left-4 right-4 bottom-4'
-                : 'bottom-20 right-4 left-4 sm:right-8 sm:left-auto w-full sm:w-[440px] max-h-[85vh]'}`}
+              ${fullscreen ? 'top-4 left-4 right-4 bottom-4' : 'bottom-20 right-4 left-4 sm:right-8 sm:left-auto w-full sm:w-[440px] max-h-[100dvh] h-[100dvh] sm:max-h-[85vh] sm:h-auto'}`}
           >
-            {/* Header */}
             <div className="bg-black text-white p-3 font-semibold flex justify-between items-center">
               <span>Nova | Live Support</span>
               <div className="flex gap-2 items-center">
@@ -149,8 +133,6 @@ const ChatModal: React.FC = () => {
                 <button onClick={() => setOpen(false)}><X size={18} /></button>
               </div>
             </div>
-
-            {/* Messages */}
             <div className="flex-1 p-3 overflow-y-auto space-y-3 text-sm text-gray-200 bg-black">
               {messages.map((msg, idx) => (
                 <motion.div
@@ -162,8 +144,7 @@ const ChatModal: React.FC = () => {
                   className={`flex items-start gap-2 ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {msg.from === 'bot' && <Bot size={18} className="mt-1 text-white" />}
-                  <div className={`relative p-2 rounded-lg max-w-[70%] leading-relaxed ${msg.from === 'user' ? 'bg-gray-800 text-white' : 'bg-theme-light text-black'
-                    }`}>
+                  <div className={`relative p-2 rounded-lg max-w-[70%] leading-relaxed ${msg.from === 'user' ? 'bg-gray-800 text-white' : 'bg-theme-light text-black'}`}>
                     {msg.text}
                     <div className="text-[10px] text-gray-400 mt-1 text-right">{msg.timestamp}</div>
                   </div>
@@ -171,21 +152,12 @@ const ChatModal: React.FC = () => {
                 </motion.div>
               ))}
               {loading && (
-                <motion.div
-                  key="typing"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-xs text-theme-light animate-pulse"
-                >
+                <motion.div key="typing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="text-xs text-theme-light animate-pulse">
                   Typing...
                 </motion.div>
               )}
               <div ref={chatEndRef} />
             </div>
-
-            {/* Input */}
             <div className="border-t border-gray-700 p-2 bg-black flex gap-2">
               <input
                 value={input}
@@ -203,8 +175,6 @@ const ChatModal: React.FC = () => {
                 Send
               </button>
             </div>
-
-            {/* Footer */}
             <div className="text-center text-xs text-gray-500 bg-black py-2 border-t border-gray-800">
               Powered by <span className="text-theme-light font-semibold">ChitChat AI</span>
             </div>
