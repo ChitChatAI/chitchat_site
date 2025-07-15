@@ -19,12 +19,11 @@ const ChatModal: React.FC = () => {
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
     const now = formatTime(new Date());
-    const newMessage: Message = { from: 'user', text: input.trim(), timestamp: now };
-    const updated = [...messages, newMessage];
+    const userMsg: Message = { from: 'user', text: input.trim(), timestamp: now };
+    const updated = [...messages, userMsg];
     setMessages(updated);
     setLoading(true);
     setInput('');
-
     try {
       const res = await fetch('/api/agent', {
         method: 'POST',
@@ -34,7 +33,6 @@ const ChatModal: React.FC = () => {
           history: updated.map((m) => ({ role: m.from === 'user' ? 'user' : 'assistant', content: m.text }))
         })
       });
-
       const data = await res.json();
       const reply = data?.reply || '⚠️ Something went wrong. Please try again later.';
       setMessages((prev) => [...prev, { from: 'bot', text: reply, timestamp: formatTime(new Date()) }]);
@@ -52,10 +50,11 @@ const ChatModal: React.FC = () => {
   }, [open]);
 
   useEffect(() => { if (open) setUnreadCount(0); }, [open]);
+
   useEffect(() => {
     if (open && messages.length === 0) {
       const now = formatTime(new Date());
-      setMessages([{ from: 'bot', text: "Hi there! I'm Nova 👋 your personal assistant from ChitChat AI, here to help you.", timestamp: now }]);
+      setMessages([{ from: 'bot', text: "Hi there! I'm Nova 👋 your assistant from ChitChat AI.", timestamp: now }]);
     }
   }, [open, messages.length]);
 
@@ -67,7 +66,6 @@ const ChatModal: React.FC = () => {
         <button
           onClick={() => setOpen((prev) => !prev)}
           className="bg-transparent p-3 rounded-full shadow-lg border border-gray-700 hover:scale-110 transition relative"
-          aria-label="Toggle Chat"
         >
           <MessageCircle size={22} className="text-gray-300" />
           {unreadCount > 0 && (
@@ -143,8 +141,8 @@ const ChatModal: React.FC = () => {
               </button>
             </div>
 
-            <div className="text-center text-xs text-gray-500 bg-black py-2 border-t border-gray-800">
-              Powered by <span className="text-theme-light font-semibold">ChitChat AI</span>
+            <div className="text-center text-[10px] sm:text-xs text-gray-500 bg-black py-2 border-t border-gray-800">
+              Powered by <span className="text-theme-light font-semibold text-[10px] sm:text-xs">ChitChat AI</span>
             </div>
           </motion.div>
         )}
