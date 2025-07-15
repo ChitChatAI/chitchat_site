@@ -54,7 +54,7 @@ const ChatModal: React.FC = () => {
   useEffect(() => {
     if (open && messages.length === 0) {
       const now = formatTime(new Date());
-      setMessages([{ from: 'bot', text: "Hi there! I'm Nova 👋 your assistant from ChitChat AI.", timestamp: now }]);
+      setMessages([{ from: 'bot', text: "Howzit! I’m Nova from ChitChat AI 🤗 Just a quick heads-up — this is not a preview or demo of our AI persona experience.", timestamp: now }]);
     }
   }, [open, messages.length]);
 
@@ -76,8 +76,9 @@ const ChatModal: React.FC = () => {
               animate={{ color: ['#D1D5DB', '#ffffff', '#D1D5DB'] }}
               transition={{ duration: 1.8, repeat: Infinity }}
             >
-              <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>👋</motion.span>
+             
               <span>Reach</span><span>the</span><span>support</span><span>team</span>
+              <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>👋</motion.span>
             </motion.div>
           </motion.div>
 
