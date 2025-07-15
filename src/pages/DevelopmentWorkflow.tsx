@@ -146,9 +146,16 @@ const DevelopmentWorkflow: React.FC = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-full h-full backdrop-blur-[5px] bg-[hsla(270,80%,30%,0.25)] shadow-[inset_0_0_0.5px_rgba(255,255,255,0.1)]" />
-        </div>
+        <div className="absolute inset-0">
+        <div
+          className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
+            boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
+          }}
+        />
+      </div>
         <div className="relative z-20 max-w-5xl w-full px-6 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
             Development <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Workflow</span>

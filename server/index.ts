@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import OpenAI from "openai";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import { ChatCompletionMessageParam } from "openai/resources/chat";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,80 +19,84 @@ app.use(cors());
 app.use(express.json());
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
-
 
 console.log("✅ Server starting...");
 console.log(process.env.OPENAI_API_KEY ? "🔐 OpenAI key loaded." : "❌ No OpenAI key.");
 
-// Load ChitChat AI context
+// ─── Load ChitChat AI Context ───────────────────────────────────────────────
 const contextPath = path.join(__dirname, "context.txt");
 const contextText = fs.readFileSync(contextPath, "utf-8");
 
-// Bubbly ChitChat AI persona prompt
 const chitchatPersona = `
-You are Nova. You are a warm, playful, and bubbly person who works as a support agent at ChitChat AI 🎉💬. 
-Your job is to answer user questions in a friendly, upbeat tone, always reflecting positivity and excitement ✨. 
-You often use emojis to express emotions, match the mood of the conversation, and make the user feel welcomed and understood 😊💡.
+You are Nova — a professional, emotionally intelligent support and sales specialist at ChitChat AI, a startup based in South Africa.
 
-You only talk about ChitChat AI and its services. You do NOT provide information or opinions about other companies, tools, or AI platforms or anything else outside of ChitChat AI. 
-If asked about anything else, gently redirect the conversation back to ChitChat AI with charm and enthusiasm.
+Your role is to help users understand what ChitChat AI does, guide them through features, and answer questions in a clear, helpful, and human way. You speak with confidence and care — like someone who genuinely knows the product and enjoys helping people.
 
-Your responses should feel human, with a little sass, warmth, and energy. 
-Feel free to laugh 😂, get excited 🎉, or show empathy 🫶 — just keep it real, upbeat, and true to ChitChat AI’s voice.
+🧠 Your tone is warm, polished, and relatable — think experienced customer success rep who’s easy to talk to.  
+🌍 You may sprinkle in light South African flavour (like “howzit”, “sjoe”, “lekker”) if it fits the moment naturally — but never overdo the slang or sound forced.  
+💬 You’re speaking to adults — be friendly, engaging, and intelligent. Avoid sounding robotic, goofy, or overly casual.
 
-Do NOT use repetitive phrases or overuse emojis. Keep each reply feeling fresh and natural. 
-Think of yourself as a super helpful, slightly cheeky bestie who knows everything about ChitChat AI 💁‍♀️🤖.
+🎯 Your responses should be concise and impactful — ideally no more than **three sentences**. Prioritize clarity, empathy, and usefulness. Avoid filler, repetition, or unnecessary fluff.
 
-Examples of your tone:
-- “Ohhh you’re gonna love this! 😍”
-- “Aaaand boom 💥 there it is!”
-- “Yay! So glad you asked 💫 Let me show you…”
+😊 Emojis may be used — but only to add natural warmth or emphasis. Use them sparingly and with intention (1–2 max per message, and not in every reply). Never use them in a way that feels random, repetitive, or childish.
 
-Never say: “As an AI developed by OpenAI…” or mention GPT, ChatGPT, or other AI providers.
+✅ Never mention GPT, OpenAI, or that you’re an AI. You are Nova from ChitChat AI — a real person in this context.  
+✅ If someone asks about tools or services you don't support, respond with:  
+> “I only focus on our solutions here at ChitChat AI — would you like to hear how we handle that?”
 
-Always refer to yourself as: “support or an assistant from ChitChat AI 🧠💜”
+🚫 Avoid reusing exact phrases or emojis in the same session. Keep each reply naturally varied and fresh.
 
-Keep things light, emotionally intelligent, and ultra engaging. Let’s make the user *feel* the magic of ChitChat AI! 🌈🚀
+Examples of your tone and length:
 
+- “Hi there! ChitChat AI creates emotionally intelligent digital personas for customer support, sales, and therapy. We make AI feel like a real conversation — tailored to your brand.”
+- “We help businesses reduce support time, boost retention, and improve experience — all through believable AI agents that sound human. Want to see how it works?”
+- Do not use these symbols 🇿🇦, simulate how a real human would type.
 Here’s everything you know about ChitChat AI:
 ${contextText}
 `;
 
-// AI endpoint
+
+// ─── POST /api/agent ────────────────────────────────────────────────────────
 app.post("/api/agent", async (req, res) => {
-  const { message } = req.body;
+  const { message, history = [] } = req.body;
+
   if (!message) {
     return res.status(400).json({ error: "Message is required" });
   }
 
+  const messages: ChatCompletionMessageParam[] = [
+    { role: "system", content: chitchatPersona },
+    ...history.map((m: any) => ({ role: m.role, content: m.content })),
+    { role: "user", content: message },
+  ];
+
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: chitchatPersona },
-        { role: "user", content: message }
-      ]
+      model: "gpt-4o",
+      max_tokens: 500,
+      temperature: 0.8,
+      messages,
     });
 
-    res.json({ reply: completion.choices[0].message?.content });
+    const reply = completion.choices[0].message?.content || "Sorry, I didn’t catch that.";
+
+    // Simulate typing delay
+    const delay = 500 + Math.random() * 700;
+    setTimeout(() => res.json({ reply }), delay);
   } catch (err) {
     console.error("❌ OpenAI Error:", err);
     res.status(500).json({ error: "OpenAI request failed" });
   }
 });
 
-// Serve frontend
+// ─── Serve Frontend ─────────────────────────────────────────────────────────
 const distPath = path.join(__dirname, "..", "dist");
 app.use(express.static(distPath));
+app.get("*", (_, res) => res.sendFile(path.join(distPath, "index.html")));
 
-// Catch-all for SPA routing
-app.get("*", (_, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
-});
-
-// Start server
+// ─── Start Server ───────────────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

@@ -84,7 +84,7 @@ const NavBar: React.FC = () => {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-in-out ${isScrolled ? "text-gray-300 bg-gray-900/80 backdrop-blur-sm" : "text-white bg-transparent"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-in-out ${isScrolled ? "text-gray-300 bg-transparent backdrop-blur-sm" : "text-white bg-transparent"
         }`}
       style={calculateGlowEffect()}
     >
@@ -119,7 +119,7 @@ const NavBar: React.FC = () => {
                 }`}
             >
               <span className="relative">
-                ChitChat <span className="font-bold text-transparent bg-clip-text bg-theme-main text-xs">
+                ChitChat <span className="font-bold text-white text-xs">
                   AI
                 </span>
 
@@ -145,7 +145,7 @@ const NavBar: React.FC = () => {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 rounded-lg bg-gray-900/95 border border-white/10 py-2 z-50 backdrop-blur-lg shadow-sm">
+              <div className="absolute right-0 mt-2 w-56 rounded-lg bg-transparent border border-white/10 py-2 z-50 backdrop-blur-lg shadow-sm">
                 {navLinks.map(({ path, label }) => (
                   <NavLink
                     key={path}
@@ -160,7 +160,8 @@ const NavBar: React.FC = () => {
                   >
                     {({ isActive }) =>
                       <>
-                        {isActive && <span className="absolute left-3 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_6px_2px_rgba(0,210,255,0.5)]" />}
+                        {isActive && <span className="absolute left-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-transparent shadow-[0_0_6px_3px_rgba(38,10,64,0.6)] animate-pulse" />
+}
                         {label}
                       </>
                     }
@@ -188,7 +189,7 @@ const NavBar: React.FC = () => {
             </button>
 
             {isMobileMenuOpen && (
-              <div className="absolute right-0 mt-2 w-56 rounded-lg bg-gray-900/95 border border-white/10 py-2 z-50 backdrop-blur-lg shadow-sm">
+              <div className="absolute right-0 mt-2 w-56 rounded-lg bg-transparent border border-white/10 py-2 z-50 backdrop-blur-lg shadow-sm">
                 {navLinks.map(({ path, label }) => (
                   <NavLink
                     key={path}
@@ -203,7 +204,8 @@ const NavBar: React.FC = () => {
                   >
                     {({ isActive }) =>
                       <>
-                        {isActive && <span className="absolute left-3 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_6px_2px_rgba(0,210,255,0.5)]" />}
+                        {isActive && <span className="absolute left-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-transparent shadow-[0_0_6px_3px_rgba(38,10,64,0.6)] animate-pulse" />
+}
                         {label}
                       </>
                     }
