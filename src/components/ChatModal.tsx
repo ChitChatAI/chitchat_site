@@ -45,8 +45,8 @@ const ChatModal: React.FC = () => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    document.body.style.overflowY = open ? 'scroll' : '';
+    return () => { document.body.style.overflowY = ''; };
   }, [open]);
 
   useEffect(() => { if (open) setUnreadCount(0); }, [open]);
@@ -63,17 +63,38 @@ const ChatModal: React.FC = () => {
   return (
     <>
       <div className="fixed bottom-6 right-6 z-[9999]">
-        <button
-          onClick={() => setOpen((prev) => !prev)}
-          className="bg-transparent p-3 rounded-full shadow-lg border border-gray-700 hover:scale-110 transition relative"
-        >
-          <MessageCircle size={22} className="text-gray-300" />
-          {unreadCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-gradient-to-r from-theme-main to-theme-light rounded-full border-2 border-black flex items-center justify-center text-[10px] text-black font-bold">
-              {unreadCount}
-            </span>
-          )}
-        </button>
+        <div className="relative group">
+          {/* 👋 Animated Reach Text */}
+          <motion.div
+            className="absolute bottom-14 right-0 text-xs text-center px-2 py-1 rounded w-max hidden sm:block"
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+          >
+            <motion.div
+              className="flex flex-col items-center font-medium text-gray-400"
+              animate={{ color: ['#D1D5DB', '#ffffff', '#D1D5DB'] }}
+              transition={{ duration: 1.8, repeat: Infinity }}
+            >
+              <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>👋</motion.span>
+              <span>Reach</span><span>the</span><span>support</span><span>team</span>
+            </motion.div>
+          </motion.div>
+
+          {/* 🟣 Toggle Button */}
+          <button
+            onClick={() => setOpen((prev) => !prev)}
+            className="bg-transparent p-3 rounded-full shadow-lg border border-gray-700 hover:scale-110 transition relative"
+            aria-label="Toggle Chat"
+          >
+            <MessageCircle size={22} className="text-gray-300" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-gradient-to-r from-theme-main to-theme-light rounded-full border-2 border-black flex items-center justify-center text-[10px] text-black font-bold">
+                {unreadCount}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -87,6 +108,7 @@ const ChatModal: React.FC = () => {
             className={`fixed z-[9999] flex flex-col border border-gray-700 shadow-xl bg-black rounded-lg overflow-hidden
               ${fullscreen ? 'inset-4 h-[calc(100dvh-2rem)]' : 'bottom-20 right-4 w-[95vw] sm:w-[440px] max-h-[100dvh] sm:max-h-[85vh] sm:h-auto'}`}
           >
+            {/* 🧠 Header */}
             <div className="bg-black text-white p-3 font-semibold flex justify-between items-center">
               <span>Nova | Live Support</span>
               <div className="flex gap-2 items-center">
@@ -97,6 +119,7 @@ const ChatModal: React.FC = () => {
               </div>
             </div>
 
+            {/* 💬 Messages */}
             <div className="flex-1 p-3 overflow-y-auto space-y-3 text-sm text-gray-200 bg-black">
               {messages.map((msg, idx) => (
                 <motion.div
@@ -123,6 +146,7 @@ const ChatModal: React.FC = () => {
               <div ref={chatEndRef} />
             </div>
 
+            {/* 📝 Input */}
             <div className="border-t border-gray-700 p-2 bg-black flex gap-2">
               <input
                 value={input}
@@ -141,6 +165,7 @@ const ChatModal: React.FC = () => {
               </button>
             </div>
 
+            {/* 🦶 Footer */}
             <div className="text-center text-[10px] sm:text-xs text-gray-500 bg-black py-2 border-t border-gray-800">
               Powered by <span className="text-theme-light font-semibold text-[10px] sm:text-xs">ChitChat AI</span>
             </div>
