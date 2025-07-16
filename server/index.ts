@@ -6,6 +6,7 @@ import OpenAI from "openai";
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { ChatCompletionMessageParam } from "openai/resources/chat";
+import nodemailer from "nodemailer";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,6 +58,7 @@ Here’s everything you know about ChitChat AI:
 ${contextText}
 `;
 
+app.use('/branding', express.static(path.join(__dirname, 'public/branding')));
 
 // ─── POST /api/agent ────────────────────────────────────────────────────────
 app.post("/api/agent", async (req, res) => {
@@ -88,6 +90,63 @@ app.post("/api/agent", async (req, res) => {
   } catch (err) {
     console.error("❌ OpenAI Error:", err);
     res.status(500).json({ error: "OpenAI request failed" });
+  }
+});
+
+app.post("/api/send-email", async (req, res) => {
+  const { name, email, subject = "No subject", message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true, // use SSL
+      auth: {
+        user: process.env.SMTP_EMAIL,
+        pass: process.env.SMTP_PASSWORD,
+      },
+    });
+
+    // Internal email to you
+    await transporter.sendMail({
+      from: `"ChitChat AI Contact" <${process.env.SMTP_EMAIL}>`,
+      to: process.env.SMTP_EMAIL,
+      subject: `📨 New Contact Message from ${name}`,
+      html: `
+        <h2>New Contact Form Message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong><br/>${message.replace(/\n/g, "<br>")}</p>
+      `,
+    });
+
+    // 🔹 Auto-reply to user
+    await transporter.sendMail({
+      from: `"ChitChat AI" <${process.env.SMTP_EMAIL}>`,
+      to: email,
+      subject: `We've received your message ✔`,
+      html: `
+        <div style="font-family: Arial, sans-serif; background: #fff; padding: 20px; border-radius: 8px; max-width: 600px; margin: auto;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <img src="https://chitchatai.co.za/branding/Logo.png" alt="ChitChat AI Logo" style="max-height: 60px;">
+          </div>
+          <h2 style="color: #260a40;">Hi ${name},</h2>
+          <p>Thanks for reaching out to <strong>ChitChat AI</strong>! We’ve received your message and will be in touch soon.</p>
+          <p style="margin-top: 24px; font-size: 14px; color: #777;">This is an automated message. Please do not reply.</p>
+          <p style="margin-top: 32px; font-size: 13px; color: #aaa;">— The ChitChat AI Support Team</p>
+        </div>
+      `,
+    });
+
+    res.status(200).json({ success: true, message: "Email sent successfully." });
+  } catch (error) {
+    console.error("❌ Email sending error:", error);
+    res.status(500).json({ error: "Failed to send email." });
   }
 });
 

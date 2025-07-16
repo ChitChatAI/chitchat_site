@@ -84,11 +84,13 @@ const NavBar: React.FC = () => {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-in-out ${isScrolled ? "text-gray-300 bg-transparent backdrop-blur-sm" : "text-white bg-transparent"
-        }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-in-out ${
+        isScrolled
+          ? "text-gray-300 bg-black/50 backdrop-blur-md"
+          : "text-white bg-black/20 backdrop-blur-md"
+      }`}
       style={calculateGlowEffect()}
     >
-      {/* Holographic grid overlay */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,_0)_var(--y,_0),rgba(100,200,255,0.1)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute inset-0 border-t border-b border-white/10" />
@@ -97,32 +99,41 @@ const NavBar: React.FC = () => {
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <NavLink to="/" className="flex items-center space-x-2 group overflow-hidden relative">
+          {/* Logo with scroll-to-top */}
+          <NavLink
+            to="/"
+            onClick={(e) => {
+              if (location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="flex items-center space-x-2 group overflow-hidden relative"
+          >
             <div className="relative w-8 h-8">
               <img
                 src="/branding/chitchatAILite.png"
                 alt="Logo"
-                className={`w-full h-full rounded-full transition-all duration-700 ease-in-out ${isScrolled ? "opacity-0 scale-90" : "opacity-100 scale-100"
-                  }`}
+                className={`w-full h-full rounded-full transition-all duration-700 ease-in-out ${
+                  isScrolled ? "opacity-0 scale-90" : "opacity-100 scale-100"
+                }`}
               />
               <img
                 src="/branding/chitchatAILite.png"
                 alt="Logo"
-                className={`absolute top-0 left-0 w-full h-full rounded-full transition-all duration-700 ease-in-out ${isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90"
-                  }`}
+                className={`absolute top-0 left-0 w-full h-full rounded-full transition-all duration-700 ease-in-out ${
+                  isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90"
+                }`}
               />
               <div className="absolute inset-0 rounded-full bg-blue-400/10 blur-[6px] scale-110 opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
             </div>
             <span
-              className={`ml-2 text-lg font-medium transition-all duration-700 ease-in-out whitespace-nowrap overflow-hidden ${isScrolled ? "opacity-0 w-0 scale-90" : "opacity-100 w-auto scale-100"
-                }`}
+              className={`ml-2 text-lg font-medium transition-all duration-700 ease-in-out whitespace-nowrap overflow-hidden ${
+                isScrolled ? "opacity-0 w-0 scale-90" : "opacity-100 w-auto scale-100"
+              }`}
             >
               <span className="relative">
-                ChitChat <span className="font-bold text-white text-xs">
-                  AI
-                </span>
-
+                ChitChat <span className="font-bold text-white text-xs">AI</span>
               </span>
             </span>
           </NavLink>
@@ -131,15 +142,25 @@ const NavBar: React.FC = () => {
           <div className="hidden md:block relative" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className={`flex items-center px-4 py-2 font-medium transition-all duration-300 group ${isScrolled ? "text-gray-300 hover:text-white" : "text-white hover:text-white/90"
-                }`}
+              className={`flex items-center px-4 py-2 font-medium transition-all duration-300 group ${
+                isScrolled ? "text-gray-300 hover:text-white" : "text-white hover:text-white/90"
+              }`}
             >
-              <span className={`transition-all duration-700 ease-in-out whitespace-nowrap overflow-hidden ${isScrolled ? "opacity-0 w-0 scale-90" : "opacity-100 w-auto scale-100"
-                }`}>
+              <span
+                className={`transition-all duration-700 ease-in-out whitespace-nowrap overflow-hidden ${
+                  isScrolled ? "opacity-0 w-0 scale-90" : "opacity-100 w-auto scale-100"
+                }`}
+              >
                 {getCurrentPageName()}
               </span>
-              <svg className={`ml-2 w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
-                }`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                className={`ml-2 w-4 h-4 transition-transform duration-200 ${
+                  isDropdownOpen ? "rotate-180" : ""
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
@@ -152,19 +173,21 @@ const NavBar: React.FC = () => {
                     to={path}
                     onClick={() => setIsDropdownOpen(false)}
                     className={({ isActive }) =>
-                      `block px-4 py-2 text-sm relative transition-all duration-300 ${isActive
-                        ? "bg-[linear-gradient(90deg,rgba(38,10,64,0.2),rgba(91,42,157,0.2))] text-white pl-6"
-                        : "text-gray-300 hover:text-white hover:bg-white/5 hover:pl-6"
+                      `block px-4 py-2 text-sm relative transition-all duration-300 ${
+                        isActive
+                          ? "bg-[linear-gradient(90deg,rgba(38,10,64,0.2),rgba(91,42,157,0.2))] text-white pl-6"
+                          : "text-gray-300 hover:text-white hover:bg-white/5 hover:pl-6"
                       }`
                     }
                   >
-                    {({ isActive }) =>
+                    {({ isActive }) => (
                       <>
-                        {isActive && <span className="absolute left-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-transparent shadow-[0_0_6px_3px_rgba(38,10,64,0.6)] animate-pulse" />
-}
+                        {isActive && (
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-transparent shadow-[0_0_6px_3px_rgba(38,10,64,0.6)] animate-pulse" />
+                        )}
                         {label}
                       </>
-                    }
+                    )}
                   </NavLink>
                 ))}
               </div>
@@ -175,7 +198,9 @@ const NavBar: React.FC = () => {
           <div className="md:hidden relative" ref={mobileMenuRef}>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 rounded-md ${isScrolled ? "text-gray-300 hover:text-white" : "text-white hover:text-white/90"}`}
+              className={`p-2 rounded-md ${
+                isScrolled ? "text-gray-300 hover:text-white" : "text-white hover:text-white/90"
+              }`}
             >
               {isMobileMenuOpen ? (
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -196,19 +221,21 @@ const NavBar: React.FC = () => {
                     to={path}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={({ isActive }) =>
-                      `block px-4 py-2 text-sm relative transition-all duration-300 ${isActive
-                        ? "bg-[linear-gradient(90deg,rgba(0,210,255,0.2),rgba(58,123,213,0.2))] text-white pl-6"
-                        : "text-gray-300 hover:text-white hover:bg-white/5 hover:pl-6"
+                      `block px-4 py-2 text-sm relative transition-all duration-300 ${
+                        isActive
+                          ? "bg-[linear-gradient(90deg,rgba(0,210,255,0.2),rgba(58,123,213,0.2))] text-white pl-6"
+                          : "text-gray-300 hover:text-white hover:bg-white/5 hover:pl-6"
                       }`
                     }
                   >
-                    {({ isActive }) =>
+                    {({ isActive }) => (
                       <>
-                        {isActive && <span className="absolute left-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-transparent shadow-[0_0_6px_3px_rgba(38,10,64,0.6)] animate-pulse" />
-}
+                        {isActive && (
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-transparent shadow-[0_0_6px_3px_rgba(38,10,64,0.6)] animate-pulse" />
+                        )}
                         {label}
                       </>
-                    }
+                    )}
                   </NavLink>
                 ))}
               </div>
