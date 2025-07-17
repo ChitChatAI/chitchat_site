@@ -93,7 +93,6 @@ const NavBar: React.FC = () => {
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,_0)_var(--y,_0),rgba(100,200,255,0.1)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute inset-0 border-t border-b border-white/10" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(100,220,255,0.05)_50%,transparent_100%)] opacity-20" />
       </div>
 

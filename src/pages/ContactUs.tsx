@@ -190,7 +190,7 @@ const ContactUs: React.FC = () => {
           </div>
         </div>
       </section>
-      <CookieConsent />
+     <CookieConsent />
       <Footer />
     </div>
   );
