@@ -43,7 +43,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
       </motion.h2>
 
       <motion.p
-        className="text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed"
+        className="text-xl text-white max-w-2xl mx-auto mb-10 leading-relaxed"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -60,7 +60,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
         viewport={{ once: true }}
       >
         <a
-          href="mailto:jessica@chitchatai.co.za"
+          href="mailto:chitchatai.co.za@gmail.com"
           className="px-10 py-4 rounded-xl bg-gradient-to-r from-theme-main to-theme-main text-white font-semibold hover:from-theme-main/90 hover:to-theme-main/90 transition-all duration-300 shadow-lg hover:shadow-theme-main/20 hover:scale-[1.02] active:scale-95"
         >
           Get In Touch

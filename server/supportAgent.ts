@@ -76,7 +76,7 @@ ${contextText}`;
     tools: [],
     memory,
     verbose: true,
-    returnIntermediateSteps: false, // Disable intermediate steps if not using tools
+    returnIntermediateSteps: false, 
   });
 
   return executor;

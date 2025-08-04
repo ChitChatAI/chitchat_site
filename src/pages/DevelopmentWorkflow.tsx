@@ -131,8 +131,6 @@ const DevelopmentWorkflow: React.FC = () => {
         path={seoConfig.path}
       />
 
-      <NavBar />
-
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
@@ -160,7 +158,7 @@ const DevelopmentWorkflow: React.FC = () => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
             Development <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Workflow</span>
           </h1>
-          <p className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+          <p className="text-white text-lg md:text-xl text-white max-w-3xl mx-auto mb-10">
             A comprehensive journey from concept to deployment, ensuring your AI persona perfectly embodies your brand.
           </p>
         </div>
@@ -282,7 +280,6 @@ const DevelopmentWorkflow: React.FC = () => {
       </motion.section>
 
       <CallToAction />
-      <CookieConsent />
       <Footer />
     </>
   );

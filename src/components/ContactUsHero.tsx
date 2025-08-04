@@ -39,25 +39,20 @@ const ContactHeroSection: React.FC<{ id?: string }> = ({ id }) => {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl text-center px-4 sm:px-6">
-        <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
-          style={{ y: yHeading, opacity }}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
+          style={{ y: yHeading, opacity }}
         >
-          <Typewriter
-            words={["Get in Touch With Us"]}
-            loop={1}
-            cursor={false}
-            typeSpeed={40}
-            deleteSpeed={0}
-            delaySpeed={1200}
-          />
-        </motion.h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
+            Get In Touch with <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Us</span>
+          </h1>
+        </motion.div>
+
 
         <motion.p
-          className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10"
+          className="text-white text-lg md:text-xl text-white max-w-3xl mx-auto mb-10"
           style={{ y: yText, opacity }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

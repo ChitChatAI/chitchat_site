@@ -23,15 +23,13 @@ const HomePage: React.FC = () => {
         keywords="ChitChat AI, ChitChat, ChitChat AI South Africa, AI personas, psychology-driven AI, digital humans, customer service AI, sales AI assistant, emotionally intelligent chatbots, South Africa AI technology"
         path="/"
       />
-
-      <Navbar />
       <main className="relative overflow-hidden w-full min-h-screen bg-gray-950">
         <Hero />
         <Features />
         <Businesses />
         <Community />
       </main>
-      <CookieConsent />
+  
       <Footer />
 
       <style>{`

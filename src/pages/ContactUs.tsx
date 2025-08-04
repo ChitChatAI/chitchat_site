@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
@@ -6,6 +6,7 @@ import ContactHeroSection from '../components/ContactUsHero';
 import SeoHelmet from '../components/SEOHelmet';
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
+import { useInView } from 'framer-motion';
 import CookieConsent from '../components/ChatModal';
 
 const ContactUs: React.FC = () => {
@@ -14,6 +15,10 @@ const ContactUs: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
+  const typewriterRef = useRef(null);
+  const isInView = useInView(typewriterRef, { once: true, margin: '-50px' });
+
+
 
   const seoConfig = {
     title: 'Contact ChitChat AI | AI Solutions Inquiry & Support',
@@ -43,68 +48,98 @@ const ContactUs: React.FC = () => {
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/send-email", {
+      const formDataPayload = new FormData();
+
+      // Construct one full message string from all fields
+      const combinedMessage = `
+From: ${formData.name}
+Subject: ${formData.subject}
+
+${formData.message}
+    `.trim();
+
+      formDataPayload.append("email", formData.email);     // Still used by Formspree for reply-to
+      formDataPayload.append("message", combinedMessage);  // All data combined
+
+      const res = await fetch("https://formspree.io/f/mnnzpely", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: formDataPayload,
+        headers: {
+          Accept: "application/json",
+        },
       });
 
       const data = await res.json();
       if (res.ok) {
-        setToast({ type: 'success', message: data.message });
+        setToast({ type: "success", message: "Message sent successfully!" });
+        setFormData({ name: "", email: "", subject: "", message: "" });
         setTimeout(() => {
           setToast(null);
-          navigate('/');
+          navigate("/");
         }, 2000);
       } else {
-        setToast({ type: 'error', message: data.error || 'Something went wrong.' });
+        setToast({
+          type: "error",
+          message: data?.errors?.[0]?.message || "Submission failed. Try again.",
+        });
       }
     } catch (err) {
       console.error(err);
-      setToast({ type: 'error', message: 'Network error. Please try again.' });
+      setToast({ type: "error", message: "Network error. Please try again." });
     } finally {
       setSubmitting(false);
     }
   };
 
+
+
   return (
     <div className='overflow-x-hidden'>
       <SeoHelmet {...seoConfig} />
-      <NavBar />
       {toast && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
-          className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-md text-white shadow-lg ${
-            toast.type === 'success' ? 'bg-emerald-500' : 'bg-rose-500'
-          }`}
+          className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 px-6 py-3 mt-14 mx-auto rounded-md text-white shadow-lg flex items-center justify-between gap-4 max-w-md w-full
+      ${toast.type === 'success' ? 'bg-emerald-500' : 'bg-rose-500'}`}
         >
-          {toast.message}
+          <span className="flex-1">{toast.message}</span>
+          <button
+            onClick={() => setToast(null)}
+            className="ml-4 text-white/80 hover:text-white text-xl font-bold focus:outline-none"
+            aria-label="Close"
+          >
+            &times;
+          </button>
         </motion.div>
       )}
+
       <ContactHeroSection />
 
       <section className="py-16 py-28 px-4 sm:px-8 lg:px-20 bg-gray-950">
         <div className="max-w-4xl mx-auto">
           <div className="md:flex md:space-x-8">
             <motion.div
+              ref={typewriterRef}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5 }}
-              className="md:w-2/5 p-8 border border-gray-700 py-28 px-4 sm:px-8 lg:px-20 bg-gray-950 text-gray-300"
+              className="md:w-2/5 p-8 border border-gray-700 py-28 px-4 sm:px-8 lg:px-20 bg-gray-950 text-white"
             >
               <h3 className="text-white text-2xl font-bold mb-4">
-                <Typewriter
-                  words={['Unlock the power of human-augmented AI']}
-                  loop={1}
-                  cursor
-                  cursorStyle="|"
-                  typeSpeed={40}
-                  deleteSpeed={0}
-                  delaySpeed={2000}
-                />
+                {isInView && (
+                  <Typewriter
+                    words={['Unlock the power of human-augmented AI']}
+                    loop={1}
+                    cursor
+                    cursorStyle="|"
+                    typeSpeed={40}
+                    deleteSpeed={0}
+                    delaySpeed={2000}
+                  />
+                )}
               </h3>
               <p className="mb-6 opacity-90">
                 Our team specializes in AI solutions that enhance—not replace—human interactions.
@@ -112,13 +147,14 @@ const ContactUs: React.FC = () => {
               </p>
             </motion.div>
 
+
             <motion.div
               key="contact-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5 }}
-              className="mt-10 md:mt-0 md:w-3/5 p-10 border border-gray-700 rounded-lg bg-black text-gray-300"
+              className="mt-10 md:mt-0 md:w-3/5 p-10 border border-gray-700 rounded-lg bg-black text-white"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-4 h-4 bg-theme-main rounded-full" />
@@ -159,9 +195,8 @@ const ContactUs: React.FC = () => {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg bg-black text-gray-200 placeholder-gray-500 transition ${
-                      errors.message ? 'border-rose-500' : 'border-gray-700 focus:ring-2 focus:ring-theme-main'
-                    }`}
+                    className={`w-full px-4 py-3 border rounded-lg bg-black text-gray-200 placeholder-gray-500 transition ${errors.message ? 'border-rose-500' : 'border-gray-700 focus:ring-2 focus:ring-theme-main'
+                      }`}
                     placeholder="Tell us about your project..."
                   />
                   {errors.message && <p className="mt-1 text-sm text-rose-500">{errors.message}</p>}
@@ -190,7 +225,6 @@ const ContactUs: React.FC = () => {
           </div>
         </div>
       </section>
-     <CookieConsent />
       <Footer />
     </div>
   );
@@ -222,9 +256,8 @@ const InputField = ({
       name={name}
       value={value}
       onChange={onChange}
-      className={`w-full px-4 py-3 border rounded-lg transition ${
-        error ? 'border-rose-500' : 'border-gray-700 focus:ring-2 focus:ring-theme-main'
-      } ${dark ? 'bg-black text-gray-200 placeholder-gray-500' : 'bg-white text-black'}`}
+      className={`w-full px-4 py-3 border rounded-lg transition ${error ? 'border-rose-500' : 'border-gray-700 focus:ring-2 focus:ring-theme-main'
+        } ${dark ? 'bg-black text-gray-200 placeholder-gray-500' : 'bg-white text-black'}`}
       placeholder={placeholder}
     />
     {error && <p className="mt-1 text-sm text-rose-500">{error}</p>}

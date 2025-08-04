@@ -104,7 +104,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
 
         <motion.p
           variants={itemVariants}
-          className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10"
+          className="text-white text-lg md:text-xl text-white max-w-3xl mx-auto mb-10"
         >
          Experience cutting-edge AI that streamlines operations and enhances customer interactions, delivering a truly humanized digital experience.
         </motion.p>

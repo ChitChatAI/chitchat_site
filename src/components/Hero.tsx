@@ -50,7 +50,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <section
       id={id}
-      className="relative w-full min-h-screen flex items-center justify-center bg-gray-900 text-white"
+      className="relative w-full min-h-screen flex items-center justify-center bg-gray-900 text-white pt-24"
       aria-label="ChitChat AI Hero Section"
     >
       {/* Background Image */}
@@ -104,7 +104,7 @@ const Hero: React.FC<{ id?: string }> = ({ id }) => {
 
         <motion.p
           variants={itemVariants}
-          className="text-white text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10"
+          className="text-white text-lg md:text-xl text-white max-w-3xl mx-auto mb-10"
         >
           Custom-built AI personas that think, feel, and respond like real people
           – tailored for your business.

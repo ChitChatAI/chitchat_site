@@ -88,7 +88,7 @@ const ChatModal: React.FC = () => {
             className="bg-transparent p-3 rounded-full shadow-lg border border-gray-700 hover:scale-110 transition relative"
             aria-label="Toggle Chat"
           >
-            <MessageCircle size={22} className="text-gray-300" />
+            <MessageCircle size={22} className="text-white" />
             {unreadCount > 0 && (
               <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-gradient-to-r from-theme-main to-theme-light rounded-full border-2 border-black flex items-center justify-center text-[10px] text-black font-bold">
                 {unreadCount}

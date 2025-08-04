@@ -129,7 +129,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
 
       {/* WHY CHITCHAT */}
       <section id="why-chitchat" className="bg-gradient-to-br from-gray-950 to-gray-950
- text-white px-4 sm:px-10 lg:px-24 py-24 relative overflow-hidden">
+ text-white px-4 sm:px-10 lg:px-24 pt-24 relative overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
           initial={{ opacity: 0 }}
@@ -181,19 +181,6 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
             <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-6 max-w-3xl text-gray-200 leading-relaxed">
               <span className="text-white font-medium">Faster</span> than human support, <span className="text-white font-medium">smarter</span> than traditional AI — <span className="text-white font-semibold text-white">ChitChat AI builds relationships</span>, not just answers.
             </p>
-
-            <div className="mt-10">
-              <Link
-                to="/contactus"
-                className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 rounded-md text-white hover:bg-gradient-to-br from-gray-950 to-gray-950
-/10 transition-all duration-300 hover:gap-3"
-              >
-                Request Demo
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -364,13 +351,13 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                     <div className="p-6 flex flex-col h-full">
                       <div className="flex items-center gap-4 mb-4">
                         {IconComponent && (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-theme-main/20 text-white">
+                          <div className="p-3 rounded-lg bg-white/10 backdrop-blur-sm">
                             <IconComponent className="w-6 h-6" />
                           </div>
                         )}
                         <h3 className="text-xl font-bold text-white">{item.title}</h3>
                       </div>
-                      <p className="text-gray-300">{item.description}</p>
+                      <p className="text-white">{item.description}</p>
                     </div>
                   </motion.div>
                 );
@@ -437,13 +424,13 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                     <div className="p-6 flex flex-col h-full">
                       <div className="flex items-center gap-4 mb-4">
                         {IconComponent && (
-                          <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-theme-main/20 text-white">
+                          <div className="p-3 rounded-lg bg-white/10 backdrop-blur-sm text-white">
                             <IconComponent className="w-6 h-6" />
                           </div>
                         )}
                         <h3 className="text-xl font-bold text-white">{feature.title}</h3>
                       </div>
-                      <p className="text-gray-300">{feature.description}</p>
+                      <p className="text-white">{feature.description}</p>
                     </div>
                   </motion.div>
                 );

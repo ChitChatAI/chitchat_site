@@ -81,7 +81,7 @@ const AIComparisonSection = () => {
                             whileTap={{ scale: 0.98 }}
                             className={`px-6 py-3.5 rounded-full border-2 text-lg font-medium transition-colors ${activeIndex === index
                                     ? 'bg-purple-600 border-purple-600 text-white shadow-lg shadow-purple-600/30'
-                                    : 'bg-gray-900 border-gray-700 text-gray-300 hover:bg-gray-800 hover:border-gray-600'
+                                    : 'bg-gray-900 border-gray-700 text-white hover:bg-gray-800 hover:border-gray-600'
                                 }`}
                         >
                             {item.question}
@@ -103,7 +103,7 @@ const AIComparisonSection = () => {
                                 <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center">
                                     <span className="text-xl">✖</span>
                                 </div>
-                                <h3 className="text-3xl font-bold text-gray-300">Generic Chatbot</h3>
+                                <h3 className="text-3xl font-bold text-white">Generic Chatbot</h3>
                             </div>
                             <div className="pl-2 border-l-4 border-gray-700">
                                 <p className="text-xl text-gray-400 italic mb-6">
@@ -132,7 +132,7 @@ const AIComparisonSection = () => {
                                 <h3 className="text-3xl font-bold text-white">Persona-Driven AI</h3>
                             </div>
                             <div className="pl-2 border-l-4 border-purple-600">
-                                <p className="text-xl text-gray-300 italic mb-6">
+                                <p className="text-xl text-white italic mb-6">
                                     "{comparisonData[activeIndex].question}"
                                 </p>
                                 <p className="text-xl text-white leading-relaxed">

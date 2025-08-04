@@ -157,8 +157,6 @@ const Solutions: React.FC = () => {
         keywords={seoConfig.keywords}
         path={seoConfig.path}
       />
-      
-      <Navbar />
 
       <main className="bg-gradient-to-br from-gray-950 to-gray-950" ref={containerRef}>
         {/* Hero Section with Parallax */}
@@ -389,7 +387,6 @@ const Solutions: React.FC = () => {
         </motion.section>
       </main>
 
-      <CookieConsent />
       <CallToAction />
       <Footer />
     </>
