@@ -69,7 +69,7 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
           transition={{ delay: 0.7, duration: 0.6 }}
         >
           <a
-            href="mailto:chitchatai.co.za@gmail.com"
+            href="mailto:info@chitchatai.co.za"
             className="px-10 py-4 rounded-xl bg-gradient-to-r from-theme-main to-theme-main text-white font-semibold hover:from-theme-main/90 hover:to-theme-main/90 transition-all duration-300 shadow-lg hover:shadow-theme-main/20 hover:scale-[1.02] active:scale-95"
           >
             Get In Touch

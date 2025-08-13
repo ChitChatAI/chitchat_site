@@ -11,6 +11,12 @@ import Footer from '../components/Footer';
 import { useScroll, motion, useTransform, AnimatePresence } from 'framer-motion';
 import Hero from '../components/SolutionsHero';
 import SeoHelmet from '../components/SEOHelmet';
+import {
+  Headphones,
+  ShoppingCart,
+  Stethoscope,
+  GraduationCap,
+} from 'lucide-react';
 
 const Solutions: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -110,7 +116,7 @@ const Solutions: React.FC = () => {
     {
       title: 'Telecommunications',
       description: 'Automate SIM support, router setups, and billing issues through AI that understands frustration and responds with human-like empathy.',
-      icon: customerService,
+      icon: Headphones,
       features: [
         "24/7 tone-aware virtual agents",
         "Context-aware troubleshooting",
@@ -120,7 +126,7 @@ const Solutions: React.FC = () => {
     {
       title: 'E-Commerce',
       description: 'Convert browsers to buyers with AI that remembers preferences, suggests products, and guides customers like your best salesperson.',
-      icon: sales,
+      icon: ShoppingCart,
       features: [
         "Hyper-personalized recommendations",
         "Abandoned cart recovery",
@@ -130,7 +136,7 @@ const Solutions: React.FC = () => {
     {
       title: 'Healthcare',
       description: 'Deliver 24/7 healthcare assistance with AI that shows empathy, handles appointments, and provides medication reminders.',
-      icon: healthcare,
+      icon: Stethoscope,
       features: [
         "HIPAA-compliant interactions",
         "Personalized health reminders",
@@ -140,7 +146,7 @@ const Solutions: React.FC = () => {
     {
       title: 'Education',
       description: 'Personalized tutoring and educational support that adapts to each student\'s learning style and emotional needs.',
-      icon: education,
+      icon: GraduationCap,
       features: [
         "Learning style adaptation",
         "Real-time progress feedback",
@@ -185,62 +191,61 @@ const Solutions: React.FC = () => {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {industries.map((industry, index) => (
-                <motion.div
-                  key={index}
-                  className="p-10 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -5, borderColor: "rgba(var(--theme-main), 0.3)" }}
-                >
-                  <div className="flex items-start mb-6">
-                    <div className="w-16 h-16 flex-shrink-0 flex items-center justify-center mr-6 rounded-lg bg-theme-main/10 p-3">
-                      <Lottie
-                        animationData={industry.icon}
-                        loop
-                        autoplay
-                        style={{ height: '40px', width: '40px' }}
-                      />
+              {industries.map((industry, index) => {
+                const IconComponent = industry.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    className="p-10 border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    whileHover={{ y: -5, borderColor: "rgba(var(--theme-main), 0.3)" }}
+                  >
+                    <div className="flex items-start mb-6">
+                      <div className="w-16 h-16 flex-shrink-0 flex items-center justify-center mr-6 rounded-lg bg-theme-main/10 p-3">
+                        {IconComponent && (
+                          <IconComponent className="w-10 h-10 text-white" />
+                        )}
+                      </div>
+                      <div>
+                        <span className="inline-block bg-theme-main/10 text-gray-200 text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full mb-3">
+                          {industry.title}
+                        </span>
+                        <h3 className="text-xl font-semibold text-gray-100 mb-2">
+                          {industry.title === 'Telecommunications' ? 'Intelligent Customer Support' :
+                            industry.title === 'E-Commerce' ? 'Personalized Shopping Assistant' :
+                              industry.title === 'Healthcare' ? 'Compassionate Patient Support' :
+                                'Adaptive Learning Companion'}
+                        </h3>
+                      </div>
                     </div>
-                    <div>
-                      <span className="inline-block bg-theme-main/10 text-gray-200 text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full mb-3">
-                        {industry.title}
-                      </span>
-                      <h3 className="text-xl font-semibold text-gray-100 mb-2">
-                        {industry.title === 'Telecommunications' ? 'Intelligent Customer Support' :
-                          industry.title === 'E-Commerce' ? 'Personalized Shopping Assistant' :
-                            industry.title === 'Healthcare' ? 'Compassionate Patient Support' :
-                              'Adaptive Learning Companion'}
-                      </h3>
-                    </div>
-                  </div>
-                  <p className="text-gray-100 mb-6 leading-relaxed">
-                    {industry.description}
-                  </p>
-                  <ul className="space-y-3">
-                    {industry.features.map((feature, i) => (
-                      <motion.li
-                        key={i}
-                        className="flex items-start"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.05 + index * 0.1 }}
-                      >
-                        <div className="w-5 h-5 rounded-full bg-theme-main/10 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                          <svg className="w-3 h-3 text-gray-200
-" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        <span className="text-gray-200">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+                    <p className="text-gray-100 mb-6 leading-relaxed">
+                      {industry.description}
+                    </p>
+                    <ul className="space-y-3">
+                      {industry.features.map((feature, i) => (
+                        <motion.li
+                          key={i}
+                          className="flex items-start"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.05 + index * 0.1 }}
+                        >
+                          <div className="w-5 h-5 rounded-full bg-theme-main/10 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                            <svg className="w-3 h-3 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                          <span className="text-gray-200">{feature}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>

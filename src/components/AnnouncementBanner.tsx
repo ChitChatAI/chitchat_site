@@ -34,7 +34,7 @@ const AnnouncementBanner: React.FC = () => {
   ));
 
   return (
-    <div className="fixed top-0 left-0 w-full h-14 sm:h-14 z-[60] bg-gradient-to-r from-[#502c7a]/70 to-[#260a40]/70 text-white font-medium shadow-md backdrop-blur-md overflow-hidden">
+    <div className="announcement-banner fixed top-0 left-0 w-full h-14 sm:h-14 z-[60] bg-gradient-to-r from-[#502c7a]/70 to-[#260a40]/70 text-white font-medium shadow-md backdrop-blur-md overflow-hidden">
       <div className="flex items-center justify-between h-full max-w-screen-xl mx-auto">
 
         {/* Desktop (horizontal) */}

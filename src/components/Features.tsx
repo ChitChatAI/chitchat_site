@@ -128,8 +128,10 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
 
 
       {/* WHY CHITCHAT */}
-      <section id="why-chitchat" className="bg-gradient-to-br from-gray-950 to-gray-950
- text-white px-4 sm:px-10 lg:px-24 pt-24 relative overflow-hidden">
+      <section
+        id="why-chitchat"
+        className="bg-gradient-to-br from-gray-950 to-gray-950 text-white px-4 sm:px-10 lg:px-24 pt-24 relative overflow-hidden"
+      >
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-theme-main/5 to-transparent -z-10"
           initial={{ opacity: 0 }}
@@ -149,37 +151,53 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
         />
 
         <div className="max-w-6xl mx-auto relative">
+          {/* Kicker */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center gap-2 text-sm uppercase tracking-widest text-theme-main font-medium mb-6">
-              <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
-              WHY US?
+            <div className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-theme-main/90 font-medium mb-5">
+              <div className="w-2 h-2 bg-theme-main rounded-sm" />
+              Why us?
             </div>
           </motion.div>
 
+          {/* Headline */}
           <motion.h2
-            className="text-4xl sm:text-5xl font-bold leading-tight max-w-4xl"
+            className="text-[2.25rem] sm:text-5xl font-bold leading-[1.25] tracking-tight max-w-5xl"
+            /* use 700-ish weight feel; keep bold but not shouty */
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Forget robotic, lifeless AI agents — we're here to <span className="font-medium">revolutionise</span> customer service with <span className="italic font-medium">AI that feels real</span>.
+            Forget robotic, lifeless AI agents, we’re here to{" "}
+            <span className="font-semibold text-white">revolutionise</span> customer
+            service with{" "}
+            <span className="italic font-medium text-white">AI that feels real</span>.
           </motion.h2>
 
+          {/* Copy */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-8 max-w-3xl text-gray-200 leading-relaxed">
-              Our intelligent, <span className="text-white font-semibold text-white">human-like agents</span> handle customer inquiries effortlessly, keeping conversations engaging, natural, and persuasive.
+            <p className="text-[1.125rem] sm:text-[1.25rem] mt-8 max-w-3xl text-white/90 leading-8">
+              Our intelligent,{" "}
+              <span className="font-bold">human-like agents</span>{" "}
+              handle customer inquiries effortlessly, keeping conversations engaging,
+              natural, and persuasive.
             </p>
 
-            <p className="text-[1.25rem] sm:text-[1.3125rem] font-normal mt-6 max-w-3xl text-gray-200 leading-relaxed">
-              <span className="text-white font-medium">Faster</span> than human support, <span className="text-white font-medium">smarter</span> than traditional AI — <span className="text-white font-semibold text-white">ChitChat AI builds relationships</span>, not just answers.
+            <p className="text-[1.125rem] sm:text-[1.25rem] mt-6 max-w-3xl text-white/90 leading-8">
+              <span className="text-white font-medium">Faster</span> than human
+              support, <span className="text-white font-bold">smarter</span> than
+              traditional AI, {" "}
+              <span className="font-semibold">
+                ChitChat AI builds relationships
+              </span>
+              , not just answers.
             </p>
           </motion.div>
         </div>
@@ -188,8 +206,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
       {/* WHY US */}
       <section
         id="why-us"
-        className="relative bg-gradient-to-br from-gray-950 to-gray-950
- py-24 px-4 sm:px-10 lg:px-24 text-white overflow-hidden"
+        className="relative bg-gradient-to-br from-gray-950 to-gray-950 py-24 px-4 sm:px-10 lg:px-24 text-white overflow-hidden"
       >
         {/* Background orb 1 */}
         <motion.div
@@ -210,78 +227,87 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_4.2fr] gap-16 items-start">
+            {/* Kicker */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex items-center gap-2 text-sm uppercase tracking-widest text-theme-main font-medium mb-6">
-                <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
-                WHY US?
+              <div className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-theme-main/90 font-medium mb-5">
+                <div className="w-2 h-2 bg-theme-main rounded-sm" />
+                Why us?
               </div>
             </motion.div>
 
+            {/* Copy block */}
             <motion.div
-              className="space-y-10 text-[1.25rem] sm:text-[1.3125rem] leading-relaxed font-normal"
+              className="space-y-10"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
+              {/* Headline */}
               <motion.h2
-                className="text-4xl md:text-5xl font-bold leading-tight"
+                className="text-[2.25rem] md:text-5xl font-bold leading-[1.25] tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                No more shallow AI. Just real <span className="font-medium">emotional</span> intelligence.
+                No more shallow AI. Just real{" "}
+                <span className="font-semibold ">emotional</span> intelligence.
               </motion.h2>
 
+              {/* Para 1 */}
               <motion.p
-                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
+                className="text-[1.125rem] sm:text-[1.25rem] text-white/90 leading-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                We have an <span className="font-semibold text-white">extensive background in psychology</span>, with training in behavioural science, emotional theory, and cognitive development.
-                We have <span className="font-semibold text-white">studied real human conversations</span> – what makes people feel heard, connected, safe, and understood.
+                We have an{" "}
+                <span className="font-bold">extensive background in psychology</span>,
+                with training in behavioural science, emotional theory, and cognitive development. We have{" "}
+                <span className="font-bold">studied real human conversations</span> — what
+                makes people feel heard, connected, safe, and understood.
               </motion.p>
 
+              {/* Para 2 */}
               <motion.p
-                className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 leading-relaxed"
+                className="text-[1.125rem] sm:text-[1.25rem] text-white/90 leading-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                We have used our training to <span className="font-semibold text-white">design agents</span> that replicate personality layers, emotional triggers, and conversational flow.
-                Most dev teams try to humanise AI through surface-level engineering.<br />
-                <span className="italic font-medium">We build the person first – then the logic.</span>
+                We’ve used our training to{" "}
+                <span className="font-bold">design agents</span> that replicate
+                personality layers, emotional triggers, and conversational flow. Most dev teams try to
+                humanise AI through surface-level engineering.
+                <br />
+                <span className="italic font-medium">We build the person first, then the logic.</span>
               </motion.p>
 
+              {/* Tags */}
               <motion.div
-                className="flex flex-wrap gap-4 pt-8"
+                className="flex flex-wrap gap-3 pt-6"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 {[
-                  'PERSONALITY',
-                  'DECISION-MAKING',
-                  'EMOTIONAL INTELLIGENCE',
-                  'TEXT FLOW',
-                  'CONTEXT AWARENESS',
-                  'MORAL COMPASS',
-                  'HABITS & QUIRKS',
-                  'ADAPTING TO SITUATIONS'
+                  "PERSONALITY",
+                  "DECISION-MAKING",
+                  "EMOTIONAL INTELLIGENCE",
+                  "TEXT FLOW",
+                  "CONTEXT AWARENESS",
+                  "MORAL COMPASS",
+                  "HABITS & QUIRKS",
+                  "ADAPTING TO SITUATIONS",
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
-                    className="bg-gray-800 text-gray-100 px-5 py-3 rounded-md text-sm font-medium shadow-sm hover:bg-theme-main/20 hover:text-gray-400 transition-colors duration-300 border border-gray-700"
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "#1e293b", // slate-800
-                      borderColor: "#3b82f6" // theme-main blue-500
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="bg-gray-900/70 text-white/90 px-4 py-2.5 rounded-md text-xs sm:text-sm font-medium border border-white/10 hover:border-theme-main/60 transition-colors duration-300"
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 12 }}
                   >
                     {item}
                   </motion.div>
@@ -291,6 +317,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
           </div>
         </div>
       </section>
+
 
       {/* USE CASES */}
       <div ref={containerRef} className="relative overflow-x-hidden">
@@ -323,8 +350,8 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
               <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white mb-6">
                 How Businesses Use ChitChat AI
               </h2>
-              <p className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 mx-auto max-w-2xl leading-relaxed">
-                Our platform transforms powerful LLMs into emotionally intelligent AI agents, helping businesses deliver personalized, human-like customer interactions at scale.
+              <p className="text-[1.125rem] sm:text-[1.25rem] text-white/90 mx-auto max-w-3xl leading-8">
+                Our platform transforms powerful LLMs into <span className="font-bold">emotionally intelligent AI agents</span>, helping businesses deliver personalized, human-like customer interactions at scale.
               </p>
             </motion.div>
 
@@ -351,7 +378,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                     <div className="p-6 flex flex-col h-full">
                       <div className="flex items-center gap-4 mb-4">
                         {IconComponent && (
-                          <div className="p-3 rounded-lg bg-white/10 backdrop-blur-sm">
+                          <div className="p-3 rounded-lg bg-theme-main/10 ">
                             <IconComponent className="w-6 h-6" />
                           </div>
                         )}
@@ -388,18 +415,25 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <div className="mb-6 flex items-center justify-center gap-2 text-sm tracking-widest uppercase text-theme-main font-medium">
+              {/* Kicker */}
+              <div className="mb-5 flex items-center justify-center gap-2 text-xs sm:text-sm tracking-[0.18em] uppercase text-theme-main/90 font-medium">
                 <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
                 Why ChitChat AI?
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold leading-snug text-white mb-6">
+
+              {/* Headline */}
+              <h2 className="text-[2.25rem] md:text-5xl font-bold tracking-tight leading-[1.2] text-white mb-6">
                 What Sets Us Apart
               </h2>
-              <p className="text-[1.25rem] sm:text-[1.3125rem] text-gray-200 mx-auto max-w-2xl leading-relaxed">
-                These features make ChitChat not just functional, but transformational — delivering emotionally intelligent automation at scale.
+
+              {/* Subheadline */}
+              <p className="text-[1.125rem] sm:text-[1.25rem] text-white/90 mx-auto max-w-3xl leading-8">
+                These features make ChitChat not just functional, but transformational —
+                delivering <span className="font-bold">emotionally intelligent automation</span> at scale.
               </p>
             </motion.div>
 
+            {/* Feature Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => {
                 const IconComponent = {
@@ -414,7 +448,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                 return (
                   <motion.div
                     key={index}
-                    className="border border-gray-700 rounded-xl overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-black z-100 h-full"
+                    className="border border-white/10 rounded-xl overflow-hidden shadow-sm transition-all duration-300 flex flex-col bg-black/90 z-100 h-full"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index, duration: 0.4 }}
@@ -422,15 +456,17 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                     whileHover={{ y: -5 }}
                   >
                     <div className="p-6 flex flex-col h-full">
-                      <div className="flex items-center gap-4 mb-4">
+                      <div className="flex items-center gap-4 mb-3">
                         {IconComponent && (
-                          <div className="p-3 rounded-lg bg-white/10 backdrop-blur-sm text-white">
+                          <div className="p-3 rounded-lg bg-theme-main/10 text-white">
                             <IconComponent className="w-6 h-6" />
                           </div>
                         )}
-                        <h3 className="text-xl font-bold text-white">{feature.title}</h3>
+                        <h3 className="text-lg sm:text-xl font-semibold tracking-tight leading-snug text-white">
+                          {feature.title}
+                        </h3>
                       </div>
-                      <p className="text-white">{feature.description}</p>
+                      <p className="text-white/90 leading-7">{feature.description}</p>
                     </div>
                   </motion.div>
                 );
@@ -438,6 +474,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
             </div>
           </div>
         </motion.section>
+
       </div>
 
     </>

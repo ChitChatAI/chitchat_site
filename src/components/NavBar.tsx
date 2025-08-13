@@ -51,7 +51,15 @@ const NavBar: React.FC = () => {
             aria-label="ChitChat AI Home"
           >
             <img src="/branding/chitchatAILite.png" alt="ChitChat Logo" className="w-8 h-8 rounded-full" />
-            <span className="hidden sm:inline">ChitChat</span>
+            <span className="hidden sm:inline relative">
+              ChitChat
+              <span
+                className="absolute -right-5 top-1 text-xs text-white font-bold"
+                style={{ fontSize: '0.7em', lineHeight: 1 }}
+              >
+                AI
+              </span>
+            </span>
           </NavLink>
 
           {/* Desktop Menu */}
