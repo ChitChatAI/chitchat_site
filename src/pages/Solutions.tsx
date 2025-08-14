@@ -178,14 +178,14 @@ const Solutions: React.FC = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-sm font-semibold tracking-wider text-gray-200 uppercase">
+              <span className="text-sm font-semibold tracking-wider text-white uppercase">
                 Industry Solutions
               </span>
-              <h2 className="text-gray-200 text-3xl sm:text-4xl font-bold mt-4 mb-6">
+              <h2 className="text-white text-3xl sm:text-4xl font-bold mt-4 mb-6">
                 AI That Understands Humans
               </h2>
               <div className="mx-auto h-1 w-20 bg-gray-600 mb-8 rounded-full" />
-              <p className="text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg text-white max-w-3xl mx-auto leading-relaxed">
                 Emotionally intelligent AI designed to deliver exceptional customer experiences across every industry vertical.
               </p>
             </motion.div>
@@ -210,7 +210,7 @@ const Solutions: React.FC = () => {
                         )}
                       </div>
                       <div>
-                        <span className="inline-block bg-theme-main/10 text-gray-200 text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full mb-3">
+                        <span className="inline-block bg-theme-main/10 text-white text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full mb-3">
                           {industry.title}
                         </span>
                         <h3 className="text-xl font-semibold text-gray-100 mb-2">
@@ -235,11 +235,11 @@ const Solutions: React.FC = () => {
                           transition={{ delay: i * 0.05 + index * 0.1 }}
                         >
                           <div className="w-5 h-5 rounded-full bg-theme-main/10 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                            <svg className="w-3 h-3 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                             </svg>
                           </div>
-                          <span className="text-gray-200">{feature}</span>
+                          <span className="text-white">{feature}</span>
                         </motion.li>
                       ))}
                     </ul>
@@ -260,7 +260,7 @@ const Solutions: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-sm font-semibold tracking-wider text-gray-200
+              <span className="text-sm font-semibold tracking-wider text-white
  uppercase">
                 Expanded Offerings
               </span>
@@ -268,7 +268,7 @@ const Solutions: React.FC = () => {
                 More Industries We Serve
               </h2>
               <div className="mx-auto h-1 w-20 bg-black mb-8 rounded-full" />
-              <p className="text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg text-white max-w-3xl mx-auto leading-relaxed">
                 Our AI solutions adapt to the specific needs of various industries, providing personalized experiences that feel human.
               </p>
             </motion.div>
@@ -286,7 +286,7 @@ const Solutions: React.FC = () => {
                 >
                   <div className="w-10 h-10 rounded-lg bg-theme-main/10 flex items-center justify-center mb-4">
                     <svg
-                      className="w-5 h-5 text-gray-200"
+                      className="w-5 h-5 text-white"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
@@ -296,7 +296,7 @@ const Solutions: React.FC = () => {
                   <h3 className="text-xl font-semibold text-gray-100 mb-3">
                     {solution.title}
                   </h3>
-                  <p className="text-gray-200 leading-relaxed"> {/* Slightly lighter gray */}
+                  <p className="text-white leading-relaxed"> {/* Slightly lighter gray */}
                     {solution.text}
                   </p>
                 </motion.div>
@@ -315,7 +315,7 @@ const Solutions: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-sm font-semibold tracking-wider text-gray-200
+              <span className="text-sm font-semibold tracking-wider text-white
  uppercase">
                 Implementation Scenarios
               </span>
@@ -341,15 +341,15 @@ const Solutions: React.FC = () => {
                   <div className="flex items-start">
                     <div className="flex-shrink-0 mr-6">
                       <div className="w-12 h-12 rounded-full overflow-hidden shadow-smbg-black flex items-center justify-center group-hover:bg-theme-main/20 transition-colors">
-                        <span className="text-gray-200
+                        <span className="text-white
  font-bold text-lg">{index + 1}</span>
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-200 mb-3">
+                      <h3 className="text-xl font-semibold text-white mb-3">
                         {useCase.title}
                       </h3>
-                      <p className="text-gray-200 leading-relaxed">
+                      <p className="text-white leading-relaxed">
                         {useCase.description}
                       </p>
                     </div>
@@ -362,7 +362,7 @@ const Solutions: React.FC = () => {
 
         {/* Stats Section */}
         <motion.section
-          className="py-16 bg-gradient-to-br from-gray-950 to-gray-950/30 text-gray-200"
+          className="py-16 bg-gradient-to-br from-gray-950 to-gray-950/30 text-white"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

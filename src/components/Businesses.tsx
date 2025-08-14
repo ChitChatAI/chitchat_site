@@ -85,122 +85,153 @@ const Businesses: React.FC = () => {
   ];
 
   return (
-    <div className="overflow-hidden relative" ref={containerRef}>
+    <div className="relative overflow-hidden" ref={containerRef}>
       {/* Value Proposition Section */}
       <motion.section
         id="value"
         initial={{ opacity: 0 }}
         animate={controls}
-        className="py-20 px-4 sm:px-8 lg:px-12 xl:px-20 relative"
+        className="relative px-4 py-16 sm:px-6 md:px-8 lg:px-12 xl:px-20"
+        aria-labelledby="value-heading"
       >
-        {/* Decorative elements */}
+        {/* Decorative elements (kept subtle for contrast/AA) */}
         <motion.div
-          className="absolute top-20 left-20 w-60 h-60 rounded-full bg-purple-500/20 blur-[100px] -z-10"
+          className="absolute -z-10 top-20 left-10 h-56 w-56 rounded-full bg-purple-500/15 blur-[100px]"
           style={{ y: bgY1, x: bgX1 }}
+          aria-hidden="true"
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-80 h-80 rounded-full bg-blue-500/20 blur-[100px] -z-10"
+          className="absolute -z-10 bottom-20 right-10 h-72 w-72 rounded-full bg-blue-500/15 blur-[110px]"
           style={{ y: bgY2, x: bgX2 }}
+          aria-hidden="true"
         />
 
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto max-w-7xl">
           {/* Section header */}
-          <div className="text-center mb-16">
+          <div className="mb-12 text-center sm:mb-14 md:mb-16">
             <motion.h2
+              id="value-heading"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold leading-snug text-white mb-6"
+              className="mb-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl"
             >
               How ChitChat Adds Value
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-[1.125rem] sm:text-[1.25rem] text-white/90 mx-auto max-w-3xl leading-8"
+              transition={{ delay: 0.25 }}
+              className="mx-auto max-w-3xl text-base leading-7 text-white/90 sm:text-[1.0625rem] md:text-[1.125rem]"
             >
               {headerText}
-              <span className="animate-pulse"></span>
+              <span className="animate-pulse" />
             </motion.p>
           </div>
 
-          {/* Value cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Value cards grid (mobile-first) */}
+          <div
+            role="list"
+            className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7"
+          >
             {businessValues.map((item, index) => {
               const IconComponent = item.icon;
               return (
-                <motion.div
+                <motion.article
+                  role="listitem"
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className={`rounded-2xl p-8 ${item.color} backdrop-blur-sm border border-white/10 hover:border-theme-main/50 transition-all flex flex-col h-full shadow-sm hover:shadow-lg`}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  whileHover={{ y: -4 }}
+                  className={[
+                    // Container
+                    "group relative flex h-full flex-col justify-start rounded-2xl",
+                    "border border-white/10 bg-black/30 backdrop-blur-sm",
+                    "p-6 sm:p-7 md:p-8",
+                    "shadow-sm transition-all hover:shadow-lg",
+                    "focus-within:ring-1 focus-within:ring-theme-main/60",
+                    item.color, // preserve incoming themed background
+                  ].join(" ")}
                 >
                   {/* Icon + Title */}
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-lg bg-theme-main/10 flex items-center justify-center">
+                  <div className="mb-3 flex items-start gap-3 sm:gap-4">
+                    <div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-theme-main/10"
+                      aria-hidden="true"
+                    >
                       {IconComponent && (
-                        <IconComponent className="text-white w-6 h-6" />
+                        <IconComponent className="h-6 w-6 text-white/95" />
                       )}
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold tracking-tight leading-snug text-white mt-1">
+                    <h3 className="mt-1 text-[1.0625rem] font-semibold leading-snug tracking-tight text-white sm:text-[1.125rem] md:text-xl">
                       {item.title}
                     </h3>
                   </div>
 
-                  {/* Description */}
-                  <div className="text-white/90 mb-6 text-base sm:text-lg leading-7 flex-grow min-h-[120px]">
+                  {/* Description (equalized height for tidy rows) */}
+                  <div className="mb-5 min-h-[96px] flex-grow text-sm leading-6 text-white/90 sm:text-base sm:leading-7">
                     <p>{item.description}</p>
                   </div>
 
-                  {/* Metric (if present) */}
+                  {/* Metric / CTA-like pill */}
                   {item.metric && (
-                    <div className="flex justify-center mt-auto">
-                      <div className="text-white/90 text-xs font-medium tracking-wide px-4 py-2 rounded-full bg-white/10 inline-block whitespace-nowrap leading-none">
+                    <div className="mt-auto">
+                      <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-2 text-xs font-semibold leading-none tracking-wide text-white/95 sm:text-sm">
                         {item.metric}
                       </div>
                     </div>
                   )}
-                </motion.div>
+
+                  {/* Hover micro-interaction accent */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 ring-1 ring-theme-main/30 transition-opacity duration-200 group-hover:opacity-100"
+                  />
+                </motion.article>
               );
             })}
           </div>
 
-
           {/* Stats section */}
-          <motion.div
+          <motion.section
+            aria-label="Key performance stats"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="mt-24 bg-black rounded-2xl p-8 md:p-12 "
+            transition={{ delay: 0.25 }}
+            className="mt-16 rounded-2xl bg-black/50 p-6 shadow-sm sm:p-8 md:mt-20 md:p-12"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+            <div className="grid grid-cols-2 gap-6 text-center text-white sm:gap-8 md:grid-cols-4">
               {[
                 { value: "24/7", label: "Availability" },
                 { value: "90%+", label: "Satisfaction" },
-                { value: "10x", label: "Faster Response" },
-                { value: "5M+", label: "Daily Interactions" }
+                { value: "10×", label: "Faster Response" },
+                { value: "5M+", label: "Daily Interactions" },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
+                  transition={{ delay: index * 0.08 + 0.2, duration: 0.45 }}
+                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-5"
                 >
-                  <div className="text-4xl font-bold mb-2">{stat.value}</div>
-                  <div className="text-sm uppercase tracking-wider opacity-80">{stat.label}</div>
+                  <div className="mb-1 text-3xl font-bold sm:text-4xl">
+                    {stat.value}
+                  </div>
+                  <div className="text-[0.75rem] uppercase tracking-wider text-white/80 sm:text-sm">
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </motion.section>
         </div>
       </motion.section>
     </div>
+
   );
 };
 

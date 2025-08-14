@@ -156,7 +156,7 @@ const DevelopmentWorkflow: React.FC = () => {
       </div>
         <div className="relative z-20 max-w-5xl w-full px-6 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
-            Development <span className="text-gray-100 text-4xl md:text-5xl lg:text-6xl">Workflow</span>
+            Development <span className="text-white text-4xl md:text-5xl lg:text-6xl">Workflow</span>
           </h1>
           <p className="text-white text-lg md:text-xl text-white max-w-3xl mx-auto mb-10">
             A comprehensive journey from concept to deployment, ensuring your AI persona perfectly embodies your brand.
@@ -174,14 +174,14 @@ const DevelopmentWorkflow: React.FC = () => {
 "
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-gray-100 text-3xl font-bold text-center mb-12">Tools We Work With</h2>
+          <h2 className="text-white text-3xl font-bold text-center mb-12">Tools We Work With</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             {tools.map((tool, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-full mb-4">
                   <img src={`/workflow/${tool.icon}`} alt={tool.name} className="w-10 h-10" />
                 </div>
-                <p className="text-lg font-medium text-gray-200">{tool.name}</p>
+                <p className="text-lg font-medium text-white">{tool.name}</p>
               </div>
             ))}
           </div>
@@ -198,8 +198,8 @@ const DevelopmentWorkflow: React.FC = () => {
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-gray-100 text-3xl font-bold mb-4">Our Development Workflow</h2>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+            <h2 className="text-white text-3xl font-bold mb-4">Our Development Workflow</h2>
+            <p className="text-xl text-white max-w-3xl mx-auto">
               From discovery to deployment, here's how we craft AI personas that don't just function — they resonate.
             </p>
           </div>
@@ -217,19 +217,19 @@ const DevelopmentWorkflow: React.FC = () => {
                   <div className="w-12 h-12 bg-theme-main/40 text-white rounded-full flex items-center justify-center mr-4">
                     <span className="font-bold text-lg">{index + 1}</span>
                   </div>
-                  <h3 className="text-2xl font-semibold text-gray-100">{step.name}</h3>
+                  <h3 className="text-2xl font-semibold text-white">{step.name}</h3>
                 </div>
-                <p className="text-lg text-gray-200 mb-4">{step.description}</p>
-                <p className="text-gray-200 mb-6">{step.story}</p>
+                <p className="text-lg text-white mb-4">{step.description}</p>
+                <p className="text-white mb-6">{step.story}</p>
                 <ul className="space-y-3">
                   {step.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
-                      <div className="flex-shrink-0 h-5 w-5 text-gray-200 mt-0.5 mr-3">
+                      <div className="flex-shrink-0 h-5 w-5 text-white mt-0.5 mr-3">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span className="text-gray-200">{feature}</span>
+                      <span className="text-white">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -250,8 +250,8 @@ const DevelopmentWorkflow: React.FC = () => {
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-gray-100 text-3xl font-bold mb-4">Common Questions</h2>
-            <p className="text-gray-200">
+            <h2 className="text-white text-3xl font-bold mb-4">Common Questions</h2>
+            <p className="text-white">
               Have more questions? <Link to="/contactus" className="text-white hover:underline">Contact our team</Link>
             </p>
           </div>
@@ -262,15 +262,15 @@ const DevelopmentWorkflow: React.FC = () => {
                   onClick={() => toggleFAQ(idx)}
                   className="w-full px-6 py-4 text-left flex justify-between items-center"
                 >
-                  <h4 className="text-lg font-medium text-gray-200">{faq.question}</h4>
-                  <svg className={`w-5 h-5 text-gray-100 transition-transform ${openFAQ === idx ? 'transform rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <h4 className="text-lg font-medium text-white">{faq.question}</h4>
+                  <svg className={`w-5 h-5 text-white transition-transform ${openFAQ === idx ? 'transform rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 {openFAQ === idx && (
                   <div className="px-6 py-4 bg-gradient-to-br from-gray-950 to-gray-950
 ">
-                    <p className="text-gray-200">{faq.answer}</p>
+                    <p className="text-white">{faq.answer}</p>
                   </div>
                 )}
               </div>
