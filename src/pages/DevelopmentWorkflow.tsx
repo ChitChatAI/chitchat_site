@@ -7,6 +7,13 @@ import CookieConsent from '../components/ChatModal';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import SeoHelmet from '../components/SEOHelmet';
 
+/*
+  Current setup:
+  - Restored original Tools grid (no marquee), using local /workflow/*.svg icons.
+  - Kept padding/spacing consistent with the rest of the page.
+  - Kept workflow/FAQ structure and the agent implementation‑focused FAQs from your latest version.
+*/
+
 const DevelopmentWorkflow: React.FC = () => {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const toggleFAQ = (index: number) => setOpenFAQ(openFAQ === index ? null : index);
@@ -14,9 +21,11 @@ const DevelopmentWorkflow: React.FC = () => {
   // SEO Configuration
   const seoConfig = {
     title: "ChitChat AI | Our AI Development Process - Psychology + Technology",
-    description: "Discover our comprehensive AI persona development workflow from concept to deployment. Psychology-driven approach for creating emotionally intelligent digital humans.",
-    keywords: "Persona, Persona Development, Personas, AI development process, psychology-driven AI, persona creation workflow, AI deployment, continuous AI optimization, digital human development",
-    path: "/development-workflow"
+    description:
+      "Discover our comprehensive AI persona development workflow from concept to deployment. Psychology-driven approach for creating emotionally intelligent digital humans.",
+    keywords:
+      "Persona, Persona Development, Personas, AI development process, psychology-driven AI, persona creation workflow, AI deployment, continuous AI optimization, digital human development",
+    path: "/development-workflow",
   };
 
   const workflowSteps = [
@@ -72,31 +81,38 @@ const DevelopmentWorkflow: React.FC = () => {
 
   const faqs = [
     {
-      question: 'How long does the development process typically take?',
-      answer: 'The initial persona development typically takes 4-6 weeks, followed by a 3-month integration phase.',
+      question: "What exactly is agent implementation?",
+      answer:
+        "Agent implementation is the process of deploying AI agents that can reason, plan, and interact in human-like ways. Ours are grounded in psychology and emotional intelligence — meaning they don’t just complete tasks, they build rapport, adapt to emotions, and create trust in every interaction."
     },
     {
-      question: 'Can the AI persona be customized for multiple use cases?',
-      answer: 'Yes, we can develop multiple personality variants for different contexts while maintaining your core brand identity.',
+      question: "How long does it take to launch an agent?",
+      answer:
+        "Most implementations are ready within 4–8 weeks. We balance technical integration with psychological modeling, ensuring the agent not only works but also feels emotionally intelligent, authentic, and aligned with your brand voice from day one."
     },
     {
-      question: 'What level of technical expertise do we need?',
-      answer: "Our team handles all technical aspects. You'll need basic platform access and the ability to provide feedback.",
+      question: "Can agents be customized to our workflows?",
+      answer:
+        "Yes. Each agent is tailored to your workflows with the right tools, memory, and reasoning. Beyond functionality, we embed emotional intelligence — empathy, tone awareness, conversational pacing — so the agent resonates with your customers like a real human teammate would."
     },
     {
-      question: 'How do you ensure the AI stays aligned with our brand?',
-      answer: 'We implement strict guardrails and continuous monitoring systems, plus regular review cycles to maintain brand alignment.',
+      question: "Do we need technical expertise to run them?",
+      answer:
+        "Not at all. We handle orchestration, deployment, and optimization. Your input focuses more on personality and psychology — guiding tone, empathy, and customer alignment — while we manage the complex technical layers."
     },
     {
-      question: 'What kind of support is included in the enhancement phase?',
-      answer: 'Continuous monitoring, regular updates, performance optimization, and proactive improvements based on usage analytics.',
+      question: "How do you keep agents on-brand and trustworthy?",
+      answer:
+        "We embed strict guardrails for tone and behavior, layered with psychological and emotional intelligence frameworks. Combined with observability tools like Grafana and Prometheus, we ensure agents remain safe, empathetic, and consistent with your brand values."
     },
     {
-      question: 'What industries can benefit from AI personas?',
-      answer: 'AI personas can be tailored for industries such as healthcare, education, customer service, retail, and more.'
-    },
+      question: "What support do we get after launch?",
+      answer:
+        "We provide continuous support that goes beyond maintenance. Through retraining, feedback loops, and psychological fine-tuning, we ensure your agent grows more emotionally intelligent and aligned with your customers over time."
+    }
   ];
 
+  // ORIGINAL tools grid (local SVGs)
   const tools = [
     { name: 'Chatbot', icon: 'chatbot.svg' },
     { name: 'Claude', icon: 'claude.svg' },
@@ -123,7 +139,6 @@ const DevelopmentWorkflow: React.FC = () => {
 
   return (
     <>
-    
       <SeoHelmet
         title={seoConfig.title}
         description={seoConfig.description}
@@ -145,33 +160,31 @@ const DevelopmentWorkflow: React.FC = () => {
           </video>
         </div>
         <div className="absolute inset-0">
-        <div
-          className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
-          style={{
-            background:
-              'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
-            boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
-          }}
-        />
-      </div>
+          <div
+            className="w-full h-full backdrop-blur-[10px] border-t border-white/10"
+            style={{
+              background: 'linear-gradient(135deg, rgba(120,80,200,0.15) 0%, rgba(60,30,120,0.1) 100%)',
+              boxShadow: 'inset 0 0 1px rgba(255, 255, 255, 0.3)',
+            }}
+          />
+        </div>
         <div className="relative z-20 max-w-5xl w-full px-6 text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
             Development <span className="text-white text-4xl md:text-5xl lg:text-6xl">Workflow</span>
           </h1>
-          <p className="text-white text-lg md:text-xl text-white max-w-3xl mx-auto mb-10">
+          <p className="text-white text-lg md:text-xl max-w-3xl mx-auto mb-10">
             A comprehensive journey from concept to deployment, ensuring your AI persona perfectly embodies your brand.
           </p>
         </div>
       </motion.section>
 
-      {/* Tools Section */}
+      {/* Tools Section — ORIGINAL GRID */}
       <motion.section
         ref={toolsRef}
         initial={{ opacity: 0, y: 60 }}
         animate={isInViewTools ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="py-16 bg-gradient-to-br from-gray-950 to-gray-950
-"
+        className="py-16 bg-gradient-to-br from-gray-950 to-gray-950"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-white text-3xl font-bold text-center mb-12">Tools We Work With</h2>
@@ -188,13 +201,13 @@ const DevelopmentWorkflow: React.FC = () => {
         </div>
       </motion.section>
 
-      {/* Workflow Steps Section */}
+      {/* Workflow Steps Section (cards untouched) */}
       <motion.section
         ref={workflowRef}
         initial={{ opacity: 0, y: 60 }}
         animate={isInViewWorkflow ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="py-16 bg-gradient-to-br from-gray-950 to-gray-950"
+        className="py-24 bg-gradient-to-br from-gray-950 to-gray-950"
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -236,17 +249,64 @@ const DevelopmentWorkflow: React.FC = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Agent Implementation (kept, non-card bullets) */}
+          {/* Agent Implementation (psychology-driven, emotionally intelligent) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="mt-16 border border-white/10 rounded-2xl bg-gradient-to-br from-gray-950 to-black/80 p-10 shadow-lg"
+          >
+            <h3 className="text-white text-3xl font-bold mb-4 tracking-tight">
+              AI Orchestration
+            </h3>
+            <p className="text-white/85 text-lg mb-8 max-w-3xl">
+              We don’t just deploy bots — we craft <span className="text-white font-semibold">psychology-driven digital agents</span>
+              that combine emotional intelligence with powerful tooling.
+              Each agent is wired with memory, reasoning, and guardrails to act like a trustworthy teammate,
+              not just a script.
+            </p>
+
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-5 text-white/90 text-base leading-relaxed">
+              <li>
+                <span className="font-semibold text-white font-semibold">Tooling & Knowledge: </span>
+                Webhooks, function calling, retrieval (RAG), and structured outputs for precise task execution.
+              </li>
+              <li>
+                <span className="font-semibold text-white font-semibold">Memory & Context: </span>
+                Short + long-term recall using vector stores (Pinecone, Weaviate, Milvus) for continuity and personalization.
+              </li>
+              <li>
+                <span className="font-semibold text-white font-semibold">Orchestration: </span>
+                LangGraph, AutoGen, and crewAI orchestrators to plan, reason, and hand off tasks seamlessly.
+              </li>
+              <li>
+                <span className="font-semibold text-white font-semibold">Evaluation & Safety: </span>
+                Shadow testing, guardrail red-teaming, and psychology-based safety checks to ensure alignment.
+              </li>
+              <li>
+                <span className="font-semibold text-white font-semibold">Observability: </span>
+                Real-time metrics and traces in Grafana, with proactive alerts via Prometheus.
+              </li>
+              <li>
+                <span className="font-semibold text-white font-semibold">Deployment: </span>
+                Containerized/serverless rollouts with blue-green strategies, graceful fallbacks, and constant uptime.
+              </li>
+            </ul>
+          </motion.div>
+
         </div>
       </motion.section>
 
-      {/* FAQ Section */}
+      {/* FAQ Section (cards untouched) */}
       <motion.section
         ref={faqRef}
         initial={{ opacity: 0, y: 60 }}
         animate={isInViewFAQ ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="py-16 bg-gradient-to-br from-gray-950 to-gray-950
-"
+        className="py-24 bg-gradient-to-br from-gray-950 to-gray-950"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -258,18 +318,14 @@ const DevelopmentWorkflow: React.FC = () => {
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div key={idx} className="border border-gray-700 rounded-lg overflow-hidden shadow-sm transition-all duration-300 flex flex-col hover:shadow-md bg-black">
-                <button
-                  onClick={() => toggleFAQ(idx)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center"
-                >
+                <button onClick={() => toggleFAQ(idx)} className="w-full px-6 py-4 text-left flex justify-between items-center">
                   <h4 className="text-lg font-medium text-white">{faq.question}</h4>
-                  <svg className={`w-5 h-5 text-white transition-transform ${openFAQ === idx ? 'transform rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className={`w-5 h-5 text-white transition-transform ${openFAQ === idx ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 {openFAQ === idx && (
-                  <div className="px-6 py-4 bg-gradient-to-br from-gray-950 to-gray-950
-">
+                  <div className="px-6 py-4 bg-gradient-to-br from-gray-950 to-gray-950">
                     <p className="text-white">{faq.answer}</p>
                   </div>
                 )}

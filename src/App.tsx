@@ -14,27 +14,13 @@ import useScrollAnimation from './hooks/useScrollAnimation';
 
 const App: React.FC = () => {
   useScrollAnimation();
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Simulate loading completion (or use actual loading logic)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000); // Adjust time as needed
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <HelmetProvider>
       <Router>
         <ScrollToTop />
 
-        {/* Show loader while loading */}
-        {isLoading && <Loader />}
-
-        {/* Main app content - hidden while loading */}
-        <div style={{ display: isLoading ? 'none' : 'block' }}>
+        <div>
           {/* Persistent components */}
           <AnnouncementBanner />
           <NavBar />

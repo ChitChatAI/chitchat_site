@@ -1,24 +1,13 @@
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+/* Vertical slide: from bottom → pause in center → slide out top */
+@keyframes verticalSlide {
+  0%   { transform: translateY(100%); opacity: 0; }
+  10%  { transform: translateY(0);    opacity: 1; }   /* slide in */
+  50%  { transform: translateY(0);    opacity: 1; }   /* pause (stay visible) */
+  60%  { transform: translateY(-100%);opacity: 0; }   /* slide out */
+  100% { transform: translateY(-100%);opacity: 0; }
 }
 
-.animate-marquee {
-  animation: marquee 1800s linear infinite;
-  animation-play-state: running;
-  will-change: transform;
+.animate-vertical {
+  animation: verticalSlide 10s ease-in-out infinite;
+  will-change: transform, opacity;
 }
-
-/* ✅ Only pause on hover-capable devices */
-@media (hover: hover) {
-  .announcement-banner:hover .animate-marquee {
-    animation-play-state: paused;
-    cursor: grab;
-  }
-}
-
-

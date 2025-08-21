@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import SeoHelmet from '../components/SEOHelmet';
-import Navbar from '../components/NavBar';
 import Features from '../components/Features';
 import Community from '../components/Community';
 import Footer from '../components/Footer';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
 import Hero from '../components/Hero';
-import CookieConsent from '../components/ChatModal';
+import CapabilitiesStripHorizontal from '../components/CapabilitiesStrip';
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -25,6 +24,7 @@ const HomePage: React.FC = () => {
       />
       <main className="relative overflow-hidden w-full min-h-screen bg-gray-950">
         <Hero />
+        <CapabilitiesStripHorizontal />
         <Features />
         <Businesses />
         <Community />

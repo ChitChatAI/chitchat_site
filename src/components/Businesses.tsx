@@ -1,5 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useAnimation, useInView, useTransform, useScroll } from 'framer-motion';
+"use client";
+
+import React, { useEffect, useState, useRef } from "react";
+import {
+  motion,
+  useTransform,
+  useScroll,
+  useReducedMotion,
+} from "framer-motion";
 import {
   PiggyBank,
   TrendingUp,
@@ -7,80 +14,140 @@ import {
   Award,
   Smile,
   Hourglass,
-} from 'lucide-react';
+} from "lucide-react";
+
+/* ================================
+   Motion presets (sleek + smooth)
+================================== */
+
+// Page-level fade + slight lift
+const fadeUp = {
+  hidden: { opacity: 0, y: 14 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1], // smooth cubic-bezier
+    },
+  },
+};
+
+// Container stagger (cards/stat tiles)
+const stagger = {
+  hidden: {},
+  show: (delay = 0) => ({
+    transition: {
+      delay,
+      staggerChildren: 0.08,
+      delayChildren: delay,
+    },
+  }),
+};
+
+// Card reveal (slightly slower, tiny scale for polish)
+const cardReveal = {
+  hidden: { opacity: 0, y: 22, scale: 0.98 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+// Stat tile reveal
+const tileReveal = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 const Businesses: React.FC = () => {
-  const [headerText, setHeaderText] = useState('');
+  const [headerText, setHeaderText] = useState("");
   const fullText = "AI That Fits Seamlessly\nInto Your Operations";
 
-  // Animation controls
-  const controls = useAnimation();
+  const prefersReduced = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll/parallax for background accents
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start']
+    offset: ["start end", "end start"],
   });
 
-  // Background blob animations
-  const bgY1 = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const bgY2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const bgX1 = useTransform(scrollYProgress, [0, 1], [0, 20]);
-  const bgX2 = useTransform(scrollYProgress, [0, 1], [0, -15]);
+  // Subtle background blob motion
+  const bgY1 = useTransform(scrollYProgress, [0, 1], [0, 20]);
+  const bgY2 = useTransform(scrollYProgress, [0, 1], [0, -16]);
+  const bgX1 = useTransform(scrollYProgress, [0, 1], [0, 10]);
+  const bgX2 = useTransform(scrollYProgress, [0, 1], [0, -8]);
 
-  // Typing effect
+  // Gentle opacity fade on scroll for the whole section background
+  const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.7]);
+
+  // Typing effect (kept calm + fast enough)
   useEffect(() => {
+    if (prefersReduced) {
+      setHeaderText(fullText);
+      return;
+    }
     let i = 0;
-    const typingInterval = setInterval(() => {
+    const typing = setInterval(() => {
       setHeaderText(fullText.substring(0, i + 1));
       i++;
-      if (i > fullText.length) clearInterval(typingInterval);
-    }, 50);
-
-    return () => clearInterval(typingInterval);
-  }, [fullText]);
+      if (i > fullText.length) clearInterval(typing);
+    }, 28);
+    return () => clearInterval(typing);
+  }, [fullText, prefersReduced]);
 
   const businessValues = [
     {
-      title: 'Reduce Support Costs',
-      description: 'Replace call center agents or scale your operations without new hires.',
+      title: "Reduce Support Costs",
+      description:
+        "Replace call center agents or scale your operations without new hires.",
       icon: PiggyBank,
-      metric: 'Up to 40% cost reduction',
-      color: 'bg-black'
+      metric: "Up to 40% cost reduction",
     },
     {
-      title: 'Boost Retention & Upsells',
-      description: 'Drive revenue through nuanced conversations, not generic sales scripts.',
+      title: "Boost Retention & Upsells",
+      description:
+        "Drive revenue through nuanced conversations, not generic sales scripts.",
       icon: TrendingUp,
-      metric: '20% increase in customer retention',
-      color: 'bg-black'
+      metric: "20% increase in customer retention",
     },
     {
-      title: 'Save Valuable Time',
-      description: 'No writing prompts or managing AI yourself - we handle everything.',
+      title: "Save Valuable Time",
+      description:
+        "No writing prompts or managing AI yourself — we handle everything.",
       icon: Clock,
-      metric: '30% faster response times',
-      color: 'bg-black'
+      metric: "30% faster response times",
     },
     {
-      title: 'Gain Competitive Edge',
-      description: 'Stand out by offering truly believable AI support before your competitors.',
+      title: "Gain Competitive Edge",
+      description:
+        "Stand out by offering truly believable AI support before your competitors.",
       icon: Award,
-      metric: '15% higher customer satisfaction',
-      color: 'bg-black'
+      metric: "15% higher customer satisfaction",
     },
     {
-      title: 'Improve Customer Experience',
-      description: 'Create human-like interactions that feel personal and emotionally intelligent.',
+      title: "Improve Customer Experience",
+      description:
+        "Create human-like interactions that feel personal and emotionally intelligent.",
       icon: Smile,
-      metric: '95% positive feedback from users',
-      color: 'bg-black'
+      metric: "95% positive feedback from users",
     },
     {
-      title: 'Unlock 24/7 Availability',
-      description: 'Offer round-the-clock support without burnout, delays, or staffing overhead.',
+      title: "Unlock 24/7 Availability",
+      description:
+        "Offer round-the-clock support without burnout, delays, or staffing overhead.",
       icon: Hourglass,
-      metric: '100% uptime across all channels',
-      color: 'bg-black'
+      metric: "100% uptime across all channels",
     },
   ];
 
@@ -89,119 +156,120 @@ const Businesses: React.FC = () => {
       {/* Value Proposition Section */}
       <motion.section
         id="value"
-        initial={{ opacity: 0 }}
-        animate={controls}
-        className="relative px-4 py-16 sm:px-6 md:px-8 lg:px-12 xl:px-20"
+        className="relative bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-24"
         aria-labelledby="value-heading"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        variants={fadeUp}
+        style={{
+          willChange: "opacity, transform",
+        }}
       >
-        {/* Decorative elements (kept subtle for contrast/AA) */}
+        {/* Subtle decorative elements */}
         <motion.div
-          className="absolute -z-10 top-20 left-10 h-56 w-56 rounded-full bg-purple-500/15 blur-[100px]"
-          style={{ y: bgY1, x: bgX1 }}
+          className="absolute -z-10 top-24 left-12 h-56 w-56 rounded-full bg-theme-main/20 blur-[90px]"
+          style={{ y: bgY1, x: bgX1, opacity: bgOpacity, willChange: "transform, opacity" }}
           aria-hidden="true"
         />
         <motion.div
-          className="absolute -z-10 bottom-20 right-10 h-72 w-72 rounded-full bg-blue-500/15 blur-[110px]"
-          style={{ y: bgY2, x: bgX2 }}
+          className="absolute -z-10 bottom-24 right-12 h-72 w-72 rounded-full bg-[#260a40]/35 blur-[100px]"
+          style={{ y: bgY2, x: bgX2, opacity: bgOpacity, willChange: "transform, opacity" }}
           aria-hidden="true"
         />
 
         <div className="mx-auto max-w-7xl">
-          {/* Section header */}
-          <div className="mb-12 text-center sm:mb-14 md:mb-16">
+          {/* Header */}
+          <div className="mb-14 text-center">
+            <motion.div
+              variants={fadeUp}
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-theme-main/90 font-medium mb-5"
+            >
+              <div className="text-center w-2 h-2 bg-theme-main rounded-sm" />
+              Our Edge
+            </motion.div>
+
             <motion.h2
               id="value-heading"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl"
+              variants={fadeUp}
+              className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight"
             >
               How ChitChat Adds Value
             </motion.h2>
+
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.25 }}
-              className="mx-auto max-w-3xl text-base leading-7 text-white/90 sm:text-[1.0625rem] md:text-[1.125rem]"
-            >
+              variants={fadeUp}
+              className="inline-block mx-auto max-w-3xl  text-base sm:text-[1.0625rem] md:text-[1.125rem] leading-7 sm:leading-8 text-white/90">
               {headerText}
-              <span className="animate-pulse" />
             </motion.p>
           </div>
 
-          {/* Value cards grid (mobile-first) */}
-          <div
+          {/* Value cards grid with stagger */}
+          <motion.div
             role="list"
-            className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7"
+            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            custom={0.1}
+            variants={stagger}
           >
             {businessValues.map((item, index) => {
-              const IconComponent = item.icon;
+              const Icon = item.icon;
               return (
                 <motion.article
                   role="listitem"
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.45, delay: index * 0.08 }}
-                  whileHover={{ y: -4 }}
+                  variants={cardReveal}
                   className={[
-                    // Container
-                    "group relative flex h-full flex-col justify-start rounded-2xl",
-                    "border border-white/10 bg-black/30 backdrop-blur-sm",
-                    "p-6 sm:p-7 md:p-8",
-                    "shadow-sm transition-all hover:shadow-lg",
-                    "focus-within:ring-1 focus-within:ring-theme-main/60",
-                    item.color, // preserve incoming themed background
+                    "group relative flex h-full flex-col justify-start",
+                    "rounded-xl border border-white/10 bg-black/80 shadow-[0_6px_30px_rgba(0,0,0,0.35)] backdrop-blur",
+                    "p-6 sm:p-7 transition-transform duration-300",
                   ].join(" ")}
+                  style={{ willChange: "transform, opacity" }}
+                  whileHover={{ y: -4 }}
                 >
                   {/* Icon + Title */}
-                  <div className="mb-3 flex items-start gap-3 sm:gap-4">
+                  <div className="mb-3 flex items-start gap-3">
                     <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-theme-main/10"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-theme-main/12"
                       aria-hidden="true"
                     >
-                      {IconComponent && (
-                        <IconComponent className="h-6 w-6 text-white/95" />
-                      )}
+                      {Icon && <Icon className="h-6 w-6 text-white/95" />}
                     </div>
-                    <h3 className="mt-1 text-[1.0625rem] font-semibold leading-snug tracking-tight text-white sm:text-[1.125rem] md:text-xl">
+                    <h3 className="mt-1 text-[1.0625rem] sm:text-[1.125rem] md:text-xl font-semibold leading-snug tracking-tight text-white">
                       {item.title}
                     </h3>
                   </div>
 
-                  {/* Description (equalized height for tidy rows) */}
-                  <div className="mb-5 min-h-[96px] flex-grow text-sm leading-6 text-white/90 sm:text-base sm:leading-7">
+                  {/* Description */}
+                  <div className="mb-5 flex-grow leading-6 sm:leading-7 text-white/90">
                     <p>{item.description}</p>
                   </div>
 
-                  {/* Metric / CTA-like pill */}
+                  {/* Metric pill */}
                   {item.metric && (
                     <div className="mt-auto">
-                      <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-2 text-xs font-semibold leading-none tracking-wide text-white/95 sm:text-sm">
+                      <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-2 text-xs sm:text-sm font-semibold leading-none tracking-wide text-white/95">
                         {item.metric}
                       </div>
                     </div>
                   )}
-
-                  {/* Hover micro-interaction accent */}
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 ring-1 ring-theme-main/30 transition-opacity duration-200 group-hover:opacity-100"
-                  />
                 </motion.article>
               );
             })}
-          </div>
+          </motion.div>
 
-          {/* Stats section */}
+          {/* Stats (staggered tiles) */}
           <motion.section
             aria-label="Key performance stats"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25 }}
-            className="mt-16 rounded-2xl bg-black/50 p-6 shadow-sm sm:p-8 md:mt-20 md:p-12"
+            className="mt-20 rounded-xl border border-white/10 bg-black/80 p-6 sm:p-8 md:p-10 shadow-[0_6px_30px_rgba(0,0,0,0.35)] backdrop-blur"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={stagger}
+            custom={0.2}
+            style={{ willChange: "transform, opacity" }}
           >
             <div className="grid grid-cols-2 gap-6 text-center text-white sm:gap-8 md:grid-cols-4">
               {[
@@ -212,16 +280,13 @@ const Businesses: React.FC = () => {
               ].map((stat, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 + 0.2, duration: 0.45 }}
-                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-5"
+                  variants={tileReveal}
+                  className="rounded-lg border border-white/10 bg-white/5 px-4 py-5"
                 >
-                  <div className="mb-1 text-3xl font-bold sm:text-4xl">
+                  <div className="mb-1 text-3xl sm:text-4xl font-bold">
                     {stat.value}
                   </div>
-                  <div className="text-[0.75rem] uppercase tracking-wider text-white/80 sm:text-sm">
+                  <div className="text-[0.75rem] sm:text-sm uppercase tracking-wider text-white/80">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -231,7 +296,6 @@ const Businesses: React.FC = () => {
         </div>
       </motion.section>
     </div>
-
   );
 };
 
