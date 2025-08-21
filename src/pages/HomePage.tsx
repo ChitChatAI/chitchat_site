@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import SeoHelmet from '../components/SEOHelmet';
 import Features from '../components/Features';
-import Community from '../components/Community';
+import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
 import { initCustomCursor } from '../utils/cursorEffects';
 import Businesses from '../components/Businesses';
@@ -27,7 +27,7 @@ const HomePage: React.FC = () => {
         <CapabilitiesStripHorizontal />
         <Features />
         <Businesses />
-        <Community />
+        <CallToAction />
       </main>
   
       <Footer />

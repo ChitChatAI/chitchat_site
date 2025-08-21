@@ -156,7 +156,7 @@ const Businesses: React.FC = () => {
       {/* Value Proposition Section */}
       <motion.section
         id="value"
-        className="relative bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-24"
+        className="relative bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-16"
         aria-labelledby="value-heading"
         initial="hidden"
         whileInView="show"
@@ -183,7 +183,7 @@ const Businesses: React.FC = () => {
           <div className="mb-14 text-center">
             <motion.div
               variants={fadeUp}
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-theme-main/90 font-medium mb-5"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
             >
               <div className="text-center w-2 h-2 bg-theme-main rounded-sm" />
               Our Edge
@@ -192,7 +192,7 @@ const Businesses: React.FC = () => {
             <motion.h2
               id="value-heading"
               variants={fadeUp}
-              className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight"
+              className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-white"
             >
               How ChitChat Adds Value
             </motion.h2>
@@ -200,7 +200,7 @@ const Businesses: React.FC = () => {
             <motion.p
               variants={fadeUp}
               className="inline-block mx-auto max-w-3xl  text-base sm:text-[1.0625rem] md:text-[1.125rem] leading-7 sm:leading-8 text-white/90">
-              {headerText}
+              "AI That Fits Seamlessly Into Your Operations
             </motion.p>
           </div>
 

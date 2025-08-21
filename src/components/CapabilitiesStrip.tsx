@@ -191,7 +191,7 @@ const CapabilitiesStripHorizontal = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           {/* Left: label + title (left-aligned) */}
           <div className="text-left">
-            <div className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-theme-main/90 font-medium mb-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
               <div className="w-2 h-2 bg-theme-main/90 rounded-sm" />
               Integrations
             </div>

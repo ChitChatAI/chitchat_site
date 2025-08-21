@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const Community: React.FC<{ id?: string }> = ({ id }) => {
   const { scrollYProgress } = useScroll();
@@ -8,7 +8,7 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
   const yHeading = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const yText = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const yButton = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.85]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.02]);
 
   // Floating blur blobs
@@ -20,60 +20,63 @@ const Community: React.FC<{ id?: string }> = ({ id }) => {
   return (
     <motion.section
       id={id || "community"}
-      className="relative py20 md:py-28 overflow-hidden bg-gradient-to-br from-gray-900 to-black text-white px-4 sm:px-6"
+      className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-black text-white px-4 sm:px-6 py-20 md:py-28"
       style={{ scale }}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {/* Subtle grid pattern overlay */}
       <div className="absolute inset-0 opacity-5 pointer-events-none z-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBkPSJNMCAzMEg2ME0zMCAwVjYwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIgLz48L3N2Zz4=')]" />
 
       {/* Floating blobs */}
       <motion.div
-        className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-theme-main/10 blur-3xl opacity-30 -z-10"
+        className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-theme-main/10 blur-3xl opacity-30 -z-10"
         style={{ y: bgY1, x: bgX1 }}
       />
       <motion.div
-        className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-600/10 blur-3xl opacity-30 -z-10"
+        className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-blue-600/10 blur-3xl opacity-30 -z-10"
         style={{ y: bgY2, x: bgX2 }}
       />
 
       {/* Main content */}
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
         <motion.h2
-          className="text-4xl sm:text-5xl font-bold text-white leading-tight pt-10"
+          className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-balance"
           style={{ y: yHeading, opacity }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.25, duration: 0.6 }}
         >
           Be Part of Our AI Revolution
         </motion.h2>
 
         <motion.p
-          className="text-xl text-white max-w-2xl mx-auto leading-relaxed"
+          className="mx-auto max-w-[62ch] text-base sm:text-lg leading-relaxed md:leading-[1.6] text-white/80 text-pretty"
           style={{ y: yText, opacity }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
         >
           Join us in shaping the future of AI. Collaborate and innovate together.
         </motion.p>
 
         <motion.div
-          className="flex justify-center"
+          className="mt-8 flex justify-center"
           style={{ y: yButton }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
+          transition={{ delay: 0.55, duration: 0.6 }}
         >
-          <a
+          <motion.a
             href="mailto:info@chitchatai.co.za"
-            className="px-10 py-4 rounded-xl bg-gradient-to-r from-theme-main to-theme-main text-white font-semibold hover:from-theme-main/90 hover:to-theme-main/90 transition-all duration-300 shadow-lg hover:shadow-theme-main/20 hover:scale-[1.02] active:scale-95"
+            className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-theme-main to-theme-main px-8 md:px-10 h-12 md:h-14 text-sm md:text-base font-semibold text-white shadow-lg shadow-theme-main/20 transition-all duration-300 hover:from-theme-main/90 hover:to-theme-main/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-main/50 active:scale-[0.98]"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            aria-label="Get in touch with ChitChat AI"
           >
             Get In Touch
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </motion.section>

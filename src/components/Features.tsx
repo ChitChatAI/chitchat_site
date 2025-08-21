@@ -137,13 +137,18 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
       {/* WHY CHITCHAT */}
       <section
         id="why-chitchat"
-        className="bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-24 relative overflow-hidden"
+        className="bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-16 relative overflow-hidden"
       >
+          {/* soft gradient wash */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_50%_0%,var(--brand)/18%,transparent_60%)]"
+      />
         <div className="max-w-6xl mx-auto relative">
           <ScrollAnimation>
             <motion.div
               variants={fadeInUp}
-              className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-theme-main/90 font-medium mb-5"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
             >
               <div className="w-2 h-2 bg-theme-main rounded-sm" />
               Our Edge
@@ -153,7 +158,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
           <ScrollAnimation>
             <motion.h2
               variants={fadeInUp}
-              className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight max-w-5xl"
+              className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight"
             >
               Forget robotic, lifeless AI agents, we're here to{" "}
               <span className="font-semibold text-white">revolutionise</span> customer
@@ -187,12 +192,12 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
       {/* WHY US */}
       <section
         id="why-us"
-        className="relative bg-gradient-to-br from-gray-950 to-gray-950 px-6 sm:px-10 lg:px-24 py-24 text-white overflow-hidden"
+        className="relative bg-gradient-to-br from-gray-950 to-gray-950 px-6 sm:px-10 lg:px-24 py-16 text-white overflow-hidden"
       >
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-[0.8fr_4.2fr] gap-16">
           <ScrollAnimation>
             <motion.div variants={fadeInUp}>
-              <div className="flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-theme-main/90 font-medium mb-5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                 <div className="w-2 h-2 bg-theme-main rounded-sm" />
                 Our Edge
               </div>
@@ -204,7 +209,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
               variants={fadeInUp}
               className="space-y-8"
             >
-              <h2 className="text-3xl md:text-5xl font-bold leading-tight tracking-tight">
+              <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight">
                 No more shallow AI. Just real{" "}
                 <span className="font-semibold">emotional</span> intelligence.
               </h2>
@@ -257,16 +262,16 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
       {/* USE CASES */}
       <section
         id="use-cases"
-        className="relative z-20 bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-24"
+        className="relative z-20 bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-16"
       >
         <div className="max-w-7xl mx-auto text-center mb-16">
           <ScrollAnimation>
             <motion.div variants={fadeInUp}>
-              <div className="mb-4 flex items-center justify-center gap-2 text-sm tracking-widest uppercase text-theme-main font-medium">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                 <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
                 Why ChitChat AI?
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold leading-snug mb-6">
+              <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight">
                 How Businesses Use ChitChat AI
               </h2>
               <p className="text-lg sm:text-xl text-white/90 mx-auto max-w-3xl leading-relaxed">
@@ -333,16 +338,16 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
       {/* WHAT SETS US APART */}
       <section
         id={id}
-        className="relative z-10 bg-gradient-to-br from-gray-950 to-gray-950 px-6 sm:px-10 lg:px-24 py-24"
+        className="relative z-10 bg-gradient-to-br from-gray-950 to-gray-950 px-6 sm:px-10 lg:px-24 py-16"
       >
         <div className="max-w-7xl mx-auto text-center mb-16">
           <ScrollAnimation>
             <motion.div variants={fadeInUp}>
-              <div className="mb-4 flex items-center justify-center gap-2 text-xs sm:text-sm tracking-[0.18em] uppercase text-theme-main/90 font-medium">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
                 <div className="w-2 h-2 bg-theme-main rounded-sm"></div>
                 Why ChitChat AI?
               </div>
-              <h2 className="text-3xl text-white md:text-5xl font-bold tracking-tight leading-snug mb-6">
+              <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
                 What Sets Us Apart
               </h2>
               <p className="text-lg sm:text-xl text-white/90 mx-auto max-w-3xl leading-relaxed">

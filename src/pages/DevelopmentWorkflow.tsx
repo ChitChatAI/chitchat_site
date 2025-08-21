@@ -207,7 +207,7 @@ const DevelopmentWorkflow: React.FC = () => {
         initial={{ opacity: 0, y: 60 }}
         animate={isInViewWorkflow ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="py-24 bg-gradient-to-br from-gray-950 to-gray-950"
+        className="py-16 bg-gradient-to-br from-gray-950 to-gray-950"
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -306,7 +306,7 @@ const DevelopmentWorkflow: React.FC = () => {
         initial={{ opacity: 0, y: 60 }}
         animate={isInViewFAQ ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="py-24 bg-gradient-to-br from-gray-950 to-gray-950"
+        className="py-16 bg-gradient-to-br from-gray-950 to-gray-950"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">

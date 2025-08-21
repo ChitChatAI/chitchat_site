@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Lottie from 'lottie-react';
 import { useScroll, motion, useTransform, useReducedMotion } from 'framer-motion';
 import SeoHelmet from '../components/SEOHelmet';
-import Hero from '../components/SolutionsHero';
+import Hero from '../components/IndustriesHero';
 import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
 import {
@@ -131,7 +131,7 @@ const SectionHeader: React.FC<{ eyebrow?: string; title: string; desc?: string }
   </motion.div>
 );
 
-const Solutions: React.FC = () => {
+const Industries: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
@@ -143,7 +143,7 @@ const Solutions: React.FC = () => {
       'We build psychology-driven AI personas that speak with empathy, adapt to user emotion, and resolve tasks across support, sales, healthcare, and education.',
     keywords:
       'psychology-driven AI, emotionally intelligent chatbots, AI personas, customer service AI, sales AI, healthcare AI, education AI, digital humans',
-    path: '/solutions',
+    path: '/industries',
   };
 
   // Scroll-linked motion
@@ -295,7 +295,7 @@ const Solutions: React.FC = () => {
 
         {/* INDUSTRIES — spacing matched to Businesses */}
         <motion.section
-          className="px-6 sm:px-10 lg:px-24 py-24"
+          className="px-6 sm:px-10 lg:px-24 py-16"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
@@ -327,7 +327,7 @@ const Solutions: React.FC = () => {
 
         {/* ADDITIONAL SOLUTIONS — symmetrical grid */}
         <motion.section
-          className="px-6 sm:px-10 lg:px-24 py-24"
+          className="px-6 sm:px-10 lg:px-24 py-16"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
@@ -358,7 +358,7 @@ const Solutions: React.FC = () => {
 
         {/* USE CASES — cards with Businesses geometry */}
         <motion.section
-          className="px-6 sm:px-10 lg:px-24 py-24"
+          className="px-6 sm:px-10 lg:px-24 py-16"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
@@ -411,4 +411,4 @@ const Solutions: React.FC = () => {
   );
 };
 
-export default Solutions;
+export default Industries;

@@ -23,7 +23,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
     
     <div className="max-w-4xl mx-auto text-center relative z-10">
       <motion.div
-        className="inline-block mb-6 px-5 py-1.5 bg-theme-main/60 text-white rounded-full text-sm font-medium tracking-wide shadow-lg"
+        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -33,7 +33,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
       </motion.div>
 
       <motion.h2
-        className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight"
+        className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
@@ -43,7 +43,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
       </motion.h2>
 
       <motion.p
-        className="text-xl text-white max-w-2xl mx-auto mb-10 leading-relaxed"
+        className="mt-4 text-white/80 leading-relaxed"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -61,7 +61,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
       >
         <a
           href="mailto:info@chitchatai.co.za"
-          className="px-10 py-4 rounded-xl bg-gradient-to-r from-theme-main to-theme-main text-white font-semibold hover:from-theme-main/90 hover:to-theme-main/90 transition-all duration-300 shadow-lg hover:shadow-theme-main/20 hover:scale-[1.02] active:scale-95"
+          className="mr-2 sm:mr-4 bg-white text-[#260a40] text-[0.9rem] sm:text-sm font-semibold px-4 sm:px-4 py-2.5 rounded hover:bg-gray-200 transition whitespace-nowrap z-10"
         >
           Get In Touch
         </a>
