@@ -4,8 +4,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import {
   LayoutGrid,            // Platform Overview
   MessageSquareDashed,   // Omnichannel
-  Bot,                   // Virtual Worker
-  BookOpen,              // Knowledge Library
+  Bot,                   // AI Employee
+  BookOpen,              // Knowledge Base
   Plug,                  // Integrations (overview)
   Brain,                 // LLM Integration
   Cable,                 // API Integration
@@ -168,12 +168,12 @@ const NavBar: React.FC = () => {
                         </li>
                         <li>
                           <NavLink
-                            to="/platform/virtual-worker"
+                            to="/integrations/ai-employee"
                             className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
                           >
                             <Bot size={18} className="mt-[2px] opacity-80 text-white/80" />
                             <div>
-                              <div className="text-sm text-white">Virtual Worker</div>
+                              <div className="text-sm text-white">AI Employee</div>
                               <p className="text-xs text-white/60">
                                 Simulate human actions for efficient execution
                               </p>
@@ -182,12 +182,12 @@ const NavBar: React.FC = () => {
                         </li>
                         <li>
                           <NavLink
-                            to="/platform/knowledge"
+                            to="/integrations/knowledge-base"
                             className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
                           >
                             <BookOpen size={18} className="mt-[2px] opacity-80 text-white/80" />
                             <div>
-                              <div className="text-sm text-white">Knowledge Library</div>
+                              <div className="text-sm text-white">Knowledge Base</div>
                               <p className="text-xs text-white/60">
                                 Centralized knowledge for smart decisions
                               </p>
@@ -196,7 +196,7 @@ const NavBar: React.FC = () => {
                         </li>
                         <li>
                           <NavLink
-                            to="/platform/integrations"
+                            to="/integrations/integrations"
                             className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
                           >
                             <Plug size={18} className="mt-[2px] opacity-80 text-white/80" />
@@ -325,11 +325,11 @@ const NavBar: React.FC = () => {
               <div className="pl-2 sm:pl-4">
                 <h5 className="text-[10px] uppercase tracking-widest text-white/50 mt-2">Overview</h5>
                 <div className="space-y-2 mb-3">
-                  {renderLink("/platform/overview", "Platform Overview", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/platform/omnichannel", "Omnichannel Communication", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/platform/virtual-worker", "Virtual Worker", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/platform/knowledge", "Knowledge Library", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/platform/integrations", "Integrations", () => setIsMobileMenuOpen(false))}
+                  {renderLink("/integrations/overview", "Overview", () => setIsMobileMenuOpen(false))}
+                  {renderLink("/integrations/omnichannel", "Omnichannel Communication", () => setIsMobileMenuOpen(false))}
+                  {renderLink("/integrations/ai-employee", "AI Employee", () => setIsMobileMenuOpen(false))}
+                  {renderLink("/integrations/knowledge", "Knowledge Base", () => setIsMobileMenuOpen(false))}
+                  {renderLink("/integrations/integrations", "Integrations", () => setIsMobileMenuOpen(false))}
                 </div>
 
                 <h5 className="text-[10px] uppercase tracking-widest text-white/50">Features</h5>

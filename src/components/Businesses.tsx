@@ -200,7 +200,7 @@ const Businesses: React.FC = () => {
             <motion.p
               variants={fadeUp}
               className="inline-block mx-auto max-w-3xl  text-base sm:text-[1.0625rem] md:text-[1.125rem] leading-7 sm:leading-8 text-white/90">
-              "AI That Fits Seamlessly Into Your Operations
+              AI That Fits Seamlessly Into Your Operations
             </motion.p>
           </div>
 
@@ -217,45 +217,38 @@ const Businesses: React.FC = () => {
             {businessValues.map((item, index) => {
               const Icon = item.icon;
               return (
-                <motion.article
-                  role="listitem"
+                <motion.div
                   key={index}
-                  variants={cardReveal}
-                  className={[
-                    "group relative flex h-full flex-col justify-start",
-                    "rounded-xl border border-white/10 bg-black/80 shadow-[0_6px_30px_rgba(0,0,0,0.35)] backdrop-blur",
-                    "p-6 sm:p-7 transition-transform duration-300",
-                  ].join(" ")}
-                  style={{ willChange: "transform, opacity" }}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="group h-full rounded-md border border-white/10 bg-black p-6 shadow-sm transition hover:shadow-lg flex flex-col"
                 >
                   {/* Icon + Title */}
-                  <div className="mb-3 flex items-start gap-3">
-                    <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-theme-main/12"
-                      aria-hidden="true"
-                    >
-                      {Icon && <Icon className="h-6 w-6 text-white/95" />}
-                    </div>
-                    <h3 className="mt-1 text-[1.0625rem] sm:text-[1.125rem] md:text-xl font-semibold leading-snug tracking-tight text-white">
+                  <div className="mb-3 flex items-center gap-3">
+                    <span className="flex p-3 items-center justify-center rounded-md bg-white/5 ring-1 ring-white/10">
+                      {Icon && <Icon className="h-5 w-5" />}
+                    </span>
+                    <h4 className="text-base font-semibold text-white leading-tight">
                       {item.title}
-                    </h3>
+                    </h4>
                   </div>
 
                   {/* Description */}
-                  <div className="mb-5 flex-grow leading-6 sm:leading-7 text-white/90">
-                    <p>{item.description}</p>
-                  </div>
+                  <p className="text-sm text-white leading-relaxed flex-grow">
+                    {item.description}
+                  </p>
 
                   {/* Metric pill */}
                   {item.metric && (
-                    <div className="mt-auto">
-                      <div className="inline-flex items-center rounded-full bg-white/10 px-3 py-2 text-xs sm:text-sm font-semibold leading-none tracking-wide text-white/95">
+                    <div className="mt-4">
+                      <span className="inline-flex items-center rounded-full px-3 py-1.5 text-xs font-semibold text-indigo-70">
                         {item.metric}
-                      </div>
+                      </span>
                     </div>
                   )}
-                </motion.article>
+                </motion.div>
+
+
               );
             })}
           </motion.div>

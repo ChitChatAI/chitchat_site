@@ -215,7 +215,7 @@ const CapabilitiesStripHorizontal = () => {
               on‑brand conversations at scale
             </p>
             <p className="mt-4 max-w-3xl text-[1.125rem] sm:text-[1.25rem] leading-8 text-white md:ml-auto text-left">
-              Empower your team by connecting<span className="font-semibold">Emotionally Intelligent</span>{" "} virtual workers
+              Empower your team by connecting<span className="font-semibold">Emotionally Intelligent</span>{" "} AI Employees
               to your existing systems—automating repetitive, error-prone tasks so your staff
               can focus on high-value work that drives growth.
             </p>

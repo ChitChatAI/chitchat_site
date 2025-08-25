@@ -314,7 +314,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   <div className="flex items-center gap-4 mb-4">
                     {IconComponent && (
                       <motion.div 
-                        className="p-3 rounded-md bg-theme-main/10 text-white"
+                        className="flex items-center justify-center rounded-md bg-white/5 ring-1 ring-white/10 p-3"
                         whileHover={{ 
                           scale: 1.05,
                           transition: { duration: 0.2 }
@@ -390,7 +390,7 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
                   <div className="flex items-center gap-4 mb-3">
                     {IconComponent && (
                       <motion.div 
-                        className="p-3 rounded-md bg-theme-main/10 text-white"
+                        className="flex items-center justify-center rounded-md bg-white/5 ring-1 ring-white/10 text-white p-3"
                         whileHover={{ 
                           scale: 1.05,
                           transition: { duration: 0.2 }

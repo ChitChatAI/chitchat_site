@@ -9,6 +9,9 @@ import DevelopmentWorkflow from './pages/DevelopmentWorkflow';
 import NavBar from './components/NavBar';
 import AnnouncementBanner from './components/AnnouncementBanner';
 import OchestrationShowcase from './pages/Overview';
+import VirtualWorker from './pages/VirtualWorker';
+import KnowledgeBase from './pages/KnowledgeBase';
+import Integrations from './pages/Integrations';
 import './App.css';
 import useScrollAnimation from './hooks/useScrollAnimation';
 import Channels from './pages/Channels';
@@ -34,6 +37,9 @@ const App: React.FC = () => {
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/industries" element={<Industries />} />
             <Route path="/development-workflow" element={<DevelopmentWorkflow />} />
+            <Route path="/integrations/ai-employee" element={<VirtualWorker />} />
+            <Route path="/integrations/knowledge-base" element={<KnowledgeBase />} />
+            <Route path="/integrations/integrations" element={<Integrations />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </div>
