@@ -12,6 +12,8 @@ import OchestrationShowcase from './pages/Overview';
 import VirtualWorker from './pages/VirtualWorker';
 import KnowledgeBase from './pages/KnowledgeBase';
 import Integrations from './pages/Integrations';
+import LLMIntegration from './pages/LLM';
+
 import './App.css';
 import useScrollAnimation from './hooks/useScrollAnimation';
 import Channels from './pages/Channels';
@@ -40,6 +42,7 @@ const App: React.FC = () => {
             <Route path="/integrations/ai-employee" element={<VirtualWorker />} />
             <Route path="/integrations/knowledge-base" element={<KnowledgeBase />} />
             <Route path="/integrations/integrations" element={<Integrations />} />
+            <Route path="/integrations/llm" element={<LLMIntegration />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </div>
