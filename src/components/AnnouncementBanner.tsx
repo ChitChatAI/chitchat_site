@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
-import "./announcementBanner.css";
+import "./AnnouncementBanner.css";
 
 const includedFeatures = [
   { title: "Custom Persona Design", description: "Psychology-driven personas that understand emotional nuance." },
