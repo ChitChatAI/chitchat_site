@@ -17,19 +17,76 @@ import {
   Mail                   // Email
 } from "lucide-react";
 
+/**
+ * Adjust this to your announcement banner height.
+ * If your banner changes per breakpoint, you can switch this
+ * to a function that reads CSS custom properties or matchMedia.
+ */
+const bannerOffset = 48; // px
+
 const NavBar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMegaOpen, setIsMegaOpen] = useState(false);
+  const [isMegaOpen, setIsMegaOpen] = useState(false);       // desktop mega
+  const [isMegaModalOpen, setIsMegaModalOpen] = useState(false); // mobile integrations modal
   const hideTimer = useRef<number | null>(null);
   const location = useLocation();
 
+  // Derived heights for correct offset math
+  const navHeight = isScrolled ? 56 : 64; // h-14 vs h-16 in px
+  const computedNavTop = bannerOffset + (isScrolled ? 0 : 12); // add the original top-3 nudge when not scrolled
+  const mobilePanelTop = bannerOffset + navHeight; // where mobile sheets should start
+
+  // --- scroll style ---
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 5);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // --- close overlays on route change ---
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsMegaOpen(false);
+    setIsMegaModalOpen(false);
+  }, [location.pathname]);
+
+  // --- close mobile overlays when resizing up to desktop ---
+  useEffect(() => {
+    const onResize = () => {
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        setIsMobileMenuOpen(false);
+        setIsMegaModalOpen(false);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // --- scroll lock when any overlay is open ---
+  useEffect(() => {
+    const anyOverlay = isMobileMenuOpen || isMegaModalOpen;
+    const root = document.documentElement;
+    if (anyOverlay) {
+      root.classList.add("overflow-hidden");
+    } else {
+      root.classList.remove("overflow-hidden");
+    }
+    return () => root.classList.remove("overflow-hidden");
+  }, [isMobileMenuOpen, isMegaModalOpen]);
+
+  // --- desktop mega hide helpers (hover-out delay) ---
+  const cancelHide = () => {
+    if (hideTimer.current) {
+      window.clearTimeout(hideTimer.current);
+      hideTimer.current = null;
+    }
+  };
+  const scheduleHide = () => {
+    cancelHide();
+    hideTimer.current = window.setTimeout(() => setIsMegaOpen(false), 120);
+  };
 
   const baseLink =
     "relative px-3 py-1 text-sm font-medium tracking-normal transition-all duration-300";
@@ -46,25 +103,164 @@ const NavBar: React.FC = () => {
     </NavLink>
   );
 
-  const cancelHide = () => {
-    if (hideTimer.current) {
-      window.clearTimeout(hideTimer.current);
-      hideTimer.current = null;
-    }
-  };
-  const scheduleHide = () => {
-    cancelHide();
-    hideTimer.current = window.setTimeout(() => setIsMegaOpen(false), 120);
-  };
+  // --- shared Integrations content (desktop mega + mobile modal) ---
+  const IntegrationsContent = ({ onNavigate }: { onNavigate?: () => void }) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+      {/* OVERVIEW */}
+      <div>
+        <h4 className="text-xs uppercase tracking-wider text-white/50 mb-3">Overview</h4>
+        <ul className="space-y-3">
+          <li>
+            <NavLink
+              to="/integrations/overview"
+              onClick={onNavigate}
+              className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
+            >
+              <LayoutGrid size={18} className="mt-[2px] opacity-80 text-white/80" />
+              <div>
+                <div className="text-sm text-white">Overview</div>
+              </div>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/integrations/channels"
+              onClick={onNavigate}
+              className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
+            >
+              <MessageSquareDashed size={18} className="mt-[2px] opacity-80 text-white/80" />
+              <div>
+                <div className="text-sm text-white">Interchannel Interactions</div>
+                <p className="text-xs text-white/60">Seamlessly connect across every channel</p>
+              </div>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/integrations/ai-employee"
+              onClick={onNavigate}
+              className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
+            >
+              <Bot size={18} className="mt-[2px] opacity-80 text-white/80" />
+              <div>
+                <div className="text-sm text-white">AI Employee</div>
+                <p className="text-xs text-white/60">Simulate human actions for efficient execution</p>
+              </div>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/integrations/knowledge-base"
+              onClick={onNavigate}
+              className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
+            >
+              <BookOpen size={18} className="mt-[2px] opacity-80 text-white/80" />
+              <div>
+                <div className="text-sm text-white">Knowledge Base</div>
+                <p className="text-xs text-white/60">Centralized knowledge for smart decisions</p>
+              </div>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/integrations/integrations"
+              onClick={onNavigate}
+              className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
+            >
+              <Plug size={18} className="mt-[2px] opacity-80 text-white/80" />
+              <div>
+                <div className="text-sm text-white">Integrations</div>
+                <p className="text-xs text-white/60">Streamline your business processes</p>
+              </div>
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+
+      {/* FEATURES */}
+      <div>
+        <h4 className="text-xs uppercase tracking-wider text-white/50 mb-3">Features</h4>
+        <ul className="space-y-2">
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <Brain size={18} className="opacity-80 text-white/80" /> LLM Integration
+            </span>
+          </li>
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <Cable size={18} className="opacity-80 text-white/80" /> API Integration
+            </span>
+          </li>
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <FileText size={18} className="opacity-80 text-white/80" /> Library Items
+            </span>
+          </li>
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <Users size={18} className="opacity-80 text-white/80" /> Live Collaboration
+            </span>
+          </li>
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <Webhook size={18} className="opacity-80 text-white/80" /> Webhooks
+            </span>
+          </li>
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <MessageSquare size={18} className="opacity-80 text-white/80" /> Webchat
+            </span>
+          </li>
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <MessageCircle size={18} className="opacity-80 text-white/80" /> WhatsApp
+            </span>
+          </li>
+          <li>
+            <span className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white">
+              <Mail size={18} className="opacity-80 text-white/80" /> Email
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+
+  // --- ESC to close overlays ---
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        setIsMegaModalOpen(false);
+        setIsMegaOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <nav
-      className={`fixed top-12 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
-        isScrolled ? "backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
+      className={[
+        "fixed left-0 w-full z-50 transition-all duration-500 ease-in-out",
+        isScrolled
+          ? "backdrop-blur-md/60 bg-black/60 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.5)]"
+          : "bg-transparent"
+      ].join(" ")}
+      style={{
+        top: computedNavTop, // pushes the nav below the banner (and keeps the non-scrolled nudge)
+        paddingTop: "env(safe-area-inset-top)"
+      }}
+      aria-label="Primary"
     >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div
+          className={[
+            "flex items-center justify-between",
+            "transition-all duration-500",
+            isScrolled ? "h-14" : "h-16"
+          ].join(" ")}
+        >
           {/* Logo */}
           <NavLink
             to="/"
@@ -74,6 +270,7 @@ const NavBar: React.FC = () => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
               setIsMobileMenuOpen(false);
+              setIsMegaModalOpen(false);
             }}
             className="flex items-center gap-2 text-white font-semibold text-xl"
             aria-label="ChitChat AI Home"
@@ -97,7 +294,7 @@ const NavBar: React.FC = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6">
             {renderLink("/", "About Us")}
-             {/* INTEGRATIONS MEGA MENU (desktop) */}
+            {/* INTEGRATIONS MEGA MENU (desktop) */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -120,170 +317,16 @@ const NavBar: React.FC = () => {
                 <div
                   onMouseEnter={cancelHide}
                   onMouseLeave={scheduleHide}
-                  // MOBILE: fixed, full-width with safe gutters; DESKTOP: absolute, right-anchored
                   className={[
-                    "z-[60] rounded-xl border border-white/10 bg-black backdrop-blur-xl shadow-2xl pt-24",
-                    "p-4 sm:p-5 md:p-6",
-                    // mobile-first container
-                    "fixed inset-x-2 top-[calc(64px+0.5rem)]",
-                    "w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)]",
-                    "max-h-[calc(100dvh-120px)] overflow-y-auto overscroll-contain mb-4",
-                    // desktop overrides
-                    "md:absolute md:top-auto md:right-0 md:left-auto md:mt-3 md:mb-0",
-                    "md:w-[720px] md:max-w-[min(720px,calc(100vw-1rem))]",
-                    "md:max-h-[min(80vh,calc(100dvh-8rem))] md:overflow-y-auto"
+                    "z-[60] rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl shadow-2xl",
+                    "p-6",
+                    // absolute to the button/nav — no need to add banner offset here
+                    "absolute top-full mt-3 right-0",
+                    "w-[720px] max-w-[min(720px,calc(100vw-1rem))]",
+                    "max-h-[min(80vh,calc(100dvh-8rem))] overflow-y-auto"
                   ].join(" ")}
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-                    {/* OVERVIEW */}
-                    <div>
-                      <h4 className="text-xs uppercase tracking-wider text-white/50 mb-3">
-                        Overview
-                      </h4>
-                      <ul className="space-y-3">
-                        <li>
-                          <NavLink
-                            to="/integrations/overview"
-                            className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
-                          >
-                            <LayoutGrid size={18} className="mt-[2px] opacity-80 text-white/80" />
-                            <div>
-                              <div className="text-sm text-white">Overview</div>
-                            </div>
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/channels"
-                            className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
-                          >
-                            <MessageSquareDashed size={18} className="mt-[2px] opacity-80 text-white/80" />
-                            <div>
-                              <div className="text-sm text-white">Interchannel Interactions</div>
-                              <p className="text-xs text-white/60">
-                                Seamlessly connect across every channel
-                              </p>
-                            </div>
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/ai-employee"
-                            className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
-                          >
-                            <Bot size={18} className="mt-[2px] opacity-80 text-white/80" />
-                            <div>
-                              <div className="text-sm text-white">AI Employee</div>
-                              <p className="text-xs text-white/60">
-                                Simulate human actions for efficient execution
-                              </p>
-                            </div>
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/knowledge-base"
-                            className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
-                          >
-                            <BookOpen size={18} className="mt-[2px] opacity-80 text-white/80" />
-                            <div>
-                              <div className="text-sm text-white">Knowledge Base</div>
-                              <p className="text-xs text-white/60">
-                                Centralized knowledge for smart decisions
-                              </p>
-                            </div>
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/integrations"
-                            className="flex items-start gap-3 rounded-lg p-3 hover:bg-white/5"
-                          >
-                            <Plug size={18} className="mt-[2px] opacity-80 text-white/80" />
-                            <div>
-                              <div className="text-sm text-white">Integrations</div>
-                              <p className="text-xs text-white/60">
-                                Streamline your business processes
-                              </p>
-                            </div>
-                          </NavLink>
-                        </li>
-                      </ul>
-                    </div>
-
-                    {/* FEATURES */}
-                    <div>
-                      <h4 className="text-xs uppercase tracking-wider text-white/50 mb-3">
-                        Features
-                      </h4>
-                      <ul className="space-y-2">
-                        <li>
-                          <NavLink
-                            to="/integrations/llm"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <Brain size={18} className="opacity-80 text-white/80" /> LLM Integration
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/api"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <Cable size={18} className="opacity-80 text-white/80" /> API Integration
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/library-items"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <FileText size={18} className="opacity-80 text-white/80" /> Library Items
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/live-collab"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <Users size={18} className="opacity-80 text-white/80" /> Live Collaboration
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/webhooks"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <Webhook size={18} className="opacity-80 text-white/80" /> Webhooks
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/webchat"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <MessageSquare size={18} className="opacity-80 text-white/80" /> Webchat
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/whatsapp"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <MessageCircle size={18} className="opacity-80 text-white/80" /> WhatsApp
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to="/integrations/email"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-white/5 text-sm text-white"
-                          >
-                            <Mail size={18} className="opacity-80 text-white/80" /> Email
-                          </NavLink>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  <IntegrationsContent onNavigate={() => setIsMegaOpen(false)} />
                 </div>
               )}
             </div>
@@ -295,8 +338,12 @@ const NavBar: React.FC = () => {
           {/* Mobile Toggle */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              onClick={() => {
+                setIsMegaModalOpen(false); // ensure no overlap
+                setIsMobileMenuOpen((prev) => !prev);
+              }}
               aria-label="Toggle mobile menu"
+              aria-expanded={isMobileMenuOpen}
               className="text-white p-2 focus:outline-none"
             >
               {isMobileMenuOpen ? (
@@ -312,44 +359,81 @@ const NavBar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu (full-screen sheet) */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full z-60 backdrop-blur-xl bg-black/80 px-4 py-6 space-y-4 text-white text-sm shadow-lg transition-all duration-300">
-            {renderLink("/", "About Us", () => setIsMobileMenuOpen(false))}
-            {renderLink("/solutions", "Solutions", () => setIsMobileMenuOpen(false))}
-            {renderLink("/development-workflow", "Development Phases", () => setIsMobileMenuOpen(false))}
+          <div
+            className="md:hidden fixed inset-x-0 bottom-0 z-[60]"
+            role="dialog"
+            aria-modal="true"
+            style={{ top: mobilePanelTop }} // respect banner + nav height
+          >
+            {/* overlay */}
+            <div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            {/* panel */}
+            <div className="absolute inset-x-0 top-0 bottom-0 bg-black/90 text-white shadow-lg px-4 py-6 space-y-4 text-sm overflow-y-auto overscroll-contain">
+              {renderLink("/", "About Us", () => setIsMobileMenuOpen(false))}
+              {renderLink("/solutions", "Solutions", () => setIsMobileMenuOpen(false))}
+              {renderLink("/development-workflow", "Development Phases", () => setIsMobileMenuOpen(false))}
 
-            {/* Mobile Integrations accordion (simple + responsive) */}
-            <details className="space-y-2">
-              <summary className="cursor-pointer">Integrations</summary>
-              <div className="pl-2 sm:pl-4">
-                <h5 className="text-[10px] uppercase tracking-widest text-white/50 mt-2">Overview</h5>
-                <div className="space-y-2 mb-3">
-                  {renderLink("/integrations/overview", "Overview", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/omnichannel", "Omnichannel Communication", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/ai-employee", "AI Employee", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/knowledge", "Knowledge Base", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/integrations", "Integrations", () => setIsMobileMenuOpen(false))}
-                </div>
+              {/* Open Integrations as its own modal */}
+              <button
+                onClick={() => {
+                  setIsMegaModalOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full text-left px-3 py-2 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] transition"
+                aria-haspopup="dialog"
+              >
+                Integrations
+              </button>
 
-                <h5 className="text-[10px] uppercase tracking-widest text-white/50">Features</h5>
-                <div className="space-y-2">
-                  {renderLink("/integrations/llm", "LLM Integration", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/api", "API Integration", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/library-items", "Library Items", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/live-collab", "Live Collaboration", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/webhooks", "Webhooks", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/webchat", "Webchat", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/whatsapp", "WhatsApp", () => setIsMobileMenuOpen(false))}
-                  {renderLink("/integrations/email", "Email", () => setIsMobileMenuOpen(false))}
-                </div>
-              </div>
-            </details>
-
-            {renderLink("/contactus", "Contact Us", () => setIsMobileMenuOpen(false))}
+              {renderLink("/contactus", "Contact Us", () => setIsMobileMenuOpen(false))}
+            </div>
           </div>
         )}
       </div>
+
+      {/* Mobile Integrations Modal (full-screen) */}
+      {isMegaModalOpen && (
+        <div
+          className="md:hidden fixed inset-x-0 bottom-0 z-[70]"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Integrations"
+          style={{ top: mobilePanelTop }} // also respect banner + nav height
+        >
+          {/* overlay */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={() => setIsMegaModalOpen(false)}
+          />
+          {/* sheet */}
+          <div
+            className={[
+              "absolute inset-x-2 sm:inset-x-4 top-0 bottom-4",
+              "rounded-xl border border-white/10 bg-black/90 shadow-2xl",
+              "p-4 sm:p-5 overflow-y-auto overscroll-contain"
+            ].join(" ")}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-white/90 font-semibold">Integrations</h3>
+              <button
+                onClick={() => setIsMegaModalOpen(false)}
+                className="p-2 rounded-md hover:bg-white/10"
+                aria-label="Close integrations"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <IntegrationsContent onNavigate={() => setIsMegaModalOpen(false)} />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -135,59 +135,132 @@ const Features: React.FC<FeaturesProps> = ({ id }) => {
   return (
     <div ref={containerRef}>
       {/* WHY CHITCHAT */}
-      <section
-        id="why-chitchat"
-        className="bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-16 relative overflow-hidden"
+<section
+  id="why-chitchat"
+  className="bg-gradient-to-br from-gray-950 to-gray-950 text-white px-6 sm:px-10 lg:px-24 py-16 relative overflow-hidden"
+  // optional: define a brand fallback for the gradient layers
+  style={{ ["--brand" as any]: "var(--brand, #260a40)" }}
+>
+  {/* === BACKGROUND LAYERS (elegant glowry) === */}
+  {/* 1) Soft radial wash (top-center) */}
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 -z-10"
+    style={{
+      background:
+        "radial-gradient(80% 60% at 50% 0%, color-mix(in oklab, var(--brand) 18%, transparent) 0%, transparent 60%)",
+    }}
+  />
+
+  {/* 2) Aurora beam (top-right), masked for feathered edge */}
+  <div
+    aria-hidden
+    className="pointer-events-none absolute -z-10 right-[-20%] top-[-20%] w-[70vw] h-[70vw] blur-3xl opacity-[0.16] mix-blend-screen"
+    style={{
+      background:
+        "conic-gradient(from 210deg at 50% 50%, var(--brand) 0deg, #9b8fd4 80deg, #ffffff 120deg, transparent 200deg)",
+      WebkitMaskImage:
+        "radial-gradient(60% 60% at 50% 50%, black 40%, transparent 75%)",
+      maskImage:
+        "radial-gradient(60% 60% at 50% 50%, black 40%, transparent 75%)",
+    }}
+  />
+
+  {/* 3) Subtle horizon glow (bottom-left) */}
+  <div
+    aria-hidden
+    className="pointer-events-none absolute -z-10 left-[-25%] bottom-[-30%] w-[75vw] h-[75vw] blur-2xl opacity-[0.14] mix-blend-screen"
+    style={{
+      background:
+        "radial-gradient(closest-side, color-mix(in oklab, var(--brand) 35%, #ffffff 10%) 0%, transparent 72%)",
+    }}
+  />
+
+  {/* 4) Floating glow orbs (minimal, slow motion) */}
+  <motion.div
+    aria-hidden
+    className="pointer-events-none absolute -z-10 left-[8%] top-[12%] w-64 sm:w-80 h-64 sm:h-80 rounded-full blur-3xl mix-blend-plus-lighter"
+    style={{
+      background:
+        "radial-gradient(closest-side, rgba(255,255,255,0.22), rgba(255,255,255,0))",
+      opacity: 0.16,
+    }}
+    initial={{ x: -10, y: 0 }}
+    animate={{ x: 10, y: 12 }}
+    transition={{ duration: 12, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+  />
+  <motion.div
+    aria-hidden
+    className="pointer-events-none absolute -z-10 right-[12%] top-[38%] w-56 sm:w-72 h-56 sm:h-72 rounded-full blur-3xl mix-blend-plus-lighter"
+    style={{
+      background:
+        "radial-gradient(closest-side, color-mix(in oklab, var(--brand) 55%, #ffffff 0%) 0%, rgba(255,255,255,0) 70%)",
+      opacity: 0.14,
+    }}
+    initial={{ x: 8, y: -6 }}
+    animate={{ x: -8, y: 6 }}
+    transition={{ duration: 14, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+  />
+
+  {/* 5) Subtle grid vignette (barely visible) */}
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 -z-10 opacity-[0.10] mix-blend-overlay"
+    style={{
+      backgroundImage: `
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
+      `,
+      backgroundSize: "48px 48px",
+      maskImage:
+        "radial-gradient(120% 90% at 50% 40%, black 55%, transparent 100%)",
+      WebkitMaskImage:
+        "radial-gradient(120% 90% at 50% 40%, black 55%, transparent 100%)",
+    }}
+  />
+
+  {/* CONTENT */}
+  <div className="max-w-6xl mx-auto relative">
+    <ScrollAnimation>
+      <motion.div
+        variants={fadeInUp}
+        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80 backdrop-blur-sm"
       >
-          {/* soft gradient wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_50%_0%,var(--brand)/18%,transparent_60%)]"
-      />
-        <div className="max-w-6xl mx-auto relative">
-          <ScrollAnimation>
-            <motion.div
-              variants={fadeInUp}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
-            >
-              <div className="w-2 h-2 bg-theme-main rounded-sm" />
-              Our Edge
-            </motion.div>
-          </ScrollAnimation>
+        <div className="w-2 h-2 bg-theme-main rounded-sm" />
+        Our Edge
+      </motion.div>
+    </ScrollAnimation>
 
-          <ScrollAnimation>
-            <motion.h2
-              variants={fadeInUp}
-              className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight"
-            >
-              Forget robotic, lifeless AI agents, we're here to{" "}
-              <span className="font-semibold text-white">revolutionise</span> customer
-              service with{" "}
-              <span className="italic font-medium text-white">AI that feels real</span>.
-            </motion.h2>
-          </ScrollAnimation>
+    <ScrollAnimation>
+      <motion.h2
+        variants={fadeInUp}
+        className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight"
+      >
+        Forget robotic, lifeless AI agents, we're here to{" "}
+        <span className="font-semibold text-white">revolutionise</span> customer
+        service with{" "}
+        <span className="italic font-medium text-white">AI that feels real</span>.
+      </motion.h2>
+    </ScrollAnimation>
 
-          <ScrollAnimation>
-            <motion.div
-              variants={fadeInUp}
-              className="mt-8 space-y-6 max-w-3xl"
-            >
-              <p className="text-lg sm:text-xl text-white/90 leading-relaxed">
-                Our intelligent, <span className="font-bold">human-like agents</span>{" "}
-                handle customer inquiries effortlessly, keeping conversations engaging,
-                natural, and persuasive.
-              </p>
-              <p className="text-lg sm:text-xl text-white/90 leading-relaxed">
-                <span className="text-white font-medium">Faster</span> than human
-                support, <span className="text-white font-bold">smarter</span> than
-                traditional AI,{" "}
-                <span className="font-semibold">ChitChat AI builds relationships</span>,
-                not just answers.
-              </p>
-            </motion.div>
-          </ScrollAnimation>
-        </div>
-      </section>
+    <ScrollAnimation>
+      <motion.div variants={fadeInUp} className="mt-8 space-y-6 max-w-3xl">
+        <p className="text-lg sm:text-xl text-white/90 leading-relaxed">
+          Our intelligent, <span className="font-bold">human-like agents</span>{" "}
+          handle customer inquiries effortlessly, keeping conversations engaging,
+          natural, and persuasive.
+        </p>
+        <p className="text-lg sm:text-xl text-white/90 leading-relaxed">
+          <span className="text-white font-medium">Faster</span> than human
+          support, <span className="text-white font-bold">smarter</span> than
+          traditional AI,{" "}
+          <span className="font-semibold">ChitChat AI builds relationships</span>,
+          not just answers.
+        </p>
+      </motion.div>
+    </ScrollAnimation>
+  </div>
+</section>
 
       {/* WHY US */}
       <section
